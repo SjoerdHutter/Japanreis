@@ -1,0 +1,222 @@
+# Startset voor Kyoto. Zie de kop van tokio.yaml: niet ter plaatse geverifieerd.
+
+- id: fushimi-inari
+  naam: Fushimi Inari Taisha
+  naamLokaal: 伏見稲荷大社
+  stad: kyoto
+  categorie: attractie
+  coordinaten: { lat: 34.9671, lon: 135.7727 }
+  beschrijving: >-
+    Duizenden oranje poorten die de berg op slingeren. Iedereen fotografeert de
+    eerste vijfhonderd meter; wie doorloopt naar de top heeft na twintig minuten
+    de berg vrijwel voor zichzelf. Reken op twee tot drie uur voor de hele lus.
+  openingstijden:
+    standaard: Dag en nacht open
+  prijs: gratis
+  tijdvakken: [nara, heian, edo]
+  attractie:
+    type: schrijn
+    bezoekduurMinuten: 150
+    regenbestendig: false
+    dagdeel: [ochtend, avond, nacht]
+    drukte:
+      besteMoment: Voor 08:00 of na 17:00. In het donker is de berg verlicht.
+      drukstMoment: 10:00 tot 16:00.
+  goshuin:
+    waar: Bij de hoofdhal, en nog een tweede bij de Okusha halverwege de poorten.
+    prijs: { bedrag: 300, valuta: JPY }
+    openingstijden: { standaard: 08:30-16:30 }
+  bronnen:
+    - naam: Fushimi Inari Taisha
+      url: https://inari.jp/
+
+- id: kinkaku-ji
+  naam: Kinkaku-ji
+  naamLokaal: 金閣寺
+  stad: kyoto
+  categorie: attractie
+  coordinaten: { lat: 35.0394, lon: 135.7292 }
+  beschrijving: >-
+    Het Gouden Paviljoen aan een vijver. Eén vaste route van een halfuur langs
+    één uitzicht, dat er bij zon en bij sneeuw compleet anders uitziet. Het
+    huidige gebouw is van 1955, nadat een monnik het oude in brand had gestoken.
+  openingstijden:
+    standaard: 09:00-17:00
+  prijs: { bedrag: 500, valuta: JPY }
+  tijdvakken: [muromachi, naoorlogs]
+  attractie:
+    type: tempel
+    bezoekduurMinuten: 45
+    regenbestendig: false
+    dagdeel: [ochtend]
+    drukte:
+      besteMoment: Bij opening. Later op de dag schuifelt de hele route.
+
+- id: kiyomizu-dera
+  naam: Kiyomizu-dera
+  naamLokaal: 清水寺
+  stad: kyoto
+  categorie: attractie
+  coordinaten: { lat: 34.9949, lon: 135.785 }
+  beschrijving: >-
+    Tempel op palen tegen de heuvel, met uitzicht over de stad. De aanloop door
+    de straatjes Sannenzaka en Ninenzaka hoort er onlosmakelijk bij en is zelf
+    het mooiste stuk oud Kyoto dat er nog is.
+  openingstijden:
+    standaard: 06:00-18:00
+    opmerking: In sommige seizoenen is er een avondopening met verlichting.
+  prijs: { bedrag: 500, valuta: JPY }
+  tijdvakken: [nara, edo]
+  attractie:
+    type: tempel
+    bezoekduurMinuten: 90
+    regenbestendig: false
+    dagdeel: [ochtend, avond]
+    drukte:
+      besteMoment: Bij openen om 06:00, dan is de heuvel leeg.
+  goshuin:
+    waar: In het kantoor bij de uitgang van de hoofdhal.
+    prijs: { bedrag: 300, valuta: JPY }
+    openingstijden: { standaard: 08:00-17:00 }
+
+- id: ryoan-ji
+  naam: Ryōan-ji
+  naamLokaal: 龍安寺
+  stad: kyoto
+  categorie: attractie
+  coordinaten: { lat: 35.0345, lon: 135.7183 }
+  beschrijving: >-
+    De beroemdste droge tuin van het land: vijftien stenen in wit grind, waarvan
+    je er vanaf de veranda altijd maar veertien tegelijk kunt zien. Werkt alleen
+    als je gaat zitten en blijft zitten.
+  openingstijden:
+    standaard: 08:00-17:00
+    opmerking: Van december tot februari 08:30 tot 16:30.
+  prijs: { bedrag: 600, valuta: JPY }
+  tijdvakken: [muromachi]
+  attractie:
+    type: tuin
+    bezoekduurMinuten: 45
+    regenbestendig: false
+    dagdeel: [ochtend]
+
+- id: arashiyama-bamboe
+  naam: Bamboebos Arashiyama
+  naamLokaal: 嵐山竹林
+  stad: kyoto
+  categorie: attractie
+  coordinaten: { lat: 35.017, lon: 135.6716 }
+  beschrijving: >-
+    Een pad van een paar honderd meter door hoog bamboe. Kort, en overdag zo vol
+    dat het geluid van de stengels wegvalt tegen de mensen. Voor zeven uur 's
+    ochtends is het een ander bos.
+  openingstijden:
+    standaard: Dag en nacht open
+  prijs: gratis
+  tijdvakken: [heian]
+  attractie:
+    type: park
+    bezoekduurMinuten: 30
+    regenbestendig: false
+    dagdeel: [ochtend]
+    drukte:
+      besteMoment: Voor 07:30.
+      drukstMoment: 10:00 tot 16:00.
+
+- id: nijo-jo
+  naam: Kasteel Nijō
+  naamLokaal: 二条城
+  stad: kyoto
+  categorie: attractie
+  coordinaten: { lat: 35.0142, lon: 135.7481 }
+  beschrijving: >-
+    Het stadspaleis van de shogun, met beschilderde schuifwanden en vloeren die
+    bij elke stap piepen als vogels, aangelegd om sluipmoordenaars te horen
+    aankomen. Hier deed de laatste shogun in 1867 afstand van de macht.
+  openingstijden:
+    standaard: 08:45-16:00
+    opmerking: >-
+      Het paleis Ninomaru is op dinsdag in januari, juli, augustus en december
+      gesloten, het terrein blijft dan open.
+  prijs: { bedrag: 1300, valuta: JPY, toelichting: Terrein plus paleis Ninomaru }
+  tijdvakken: [edo]
+  attractie:
+    type: kasteel
+    bezoekduurMinuten: 120
+    regenbestendig: true
+    dagdeel: [ochtend, middag]
+
+- id: gion
+  naam: Gion
+  naamLokaal: 祇園
+  stad: kyoto
+  categorie: attractie
+  coordinaten: { lat: 35.0037, lon: 135.7752 }
+  beschrijving: >-
+    De oude vermaakswijk met houten theehuizen. Fotograferen in de zijstraatjes
+    is verboden en dat wordt gehandhaafd; de hoofdstraat Hanamikoji mag wel.
+    Rond schemer op zijn mooist, als de lampionnen aangaan.
+  prijs: gratis
+  tijdvakken: [edo, meiji]
+  attractie:
+    type: wijk
+    bezoekduurMinuten: 60
+    regenbestendig: false
+    dagdeel: [avond]
+
+- id: nishiki-markt
+  naam: Nishiki markt
+  naamLokaal: 錦市場
+  stad: kyoto
+  categorie: eten
+  coordinaten: { lat: 35.005, lon: 135.7649 }
+  beschrijving: >-
+    Vierhonderd meter overdekte markt, de keuken van Kyoto. Ingemaakte groente,
+    yuba, gegrilde inktvis aan een stokje. Eten en lopen tegelijk wordt niet
+    gewaardeerd; er staan bankjes en de meeste kraampjes hebben een hoekje.
+  openingstijden:
+    standaard: 09:00-18:00
+    opmerking: Per kraam verschillend, veel zaken sluiten op woensdag.
+  prijs: { bedrag: 300, tot: 1500, valuta: JPY }
+  tijdvakken: [edo, naoorlogs]
+  eten:
+    keuken: streetfood
+    ontbijt: true
+    moeite: waardig-een-omweg
+
+- id: honke-owariya
+  naam: Honke Owariya
+  naamLokaal: 本家尾張屋
+  stad: kyoto
+  categorie: eten
+  coordinaten: { lat: 35.013, lon: 135.7601 }
+  beschrijving: >-
+    Sobazaak die begon als bakker van boeddhistische snoepgoed in 1465 en later
+    op noedels overging. De hoorai soba komt in vijf gestapelde bakjes met elk
+    een eigen garnering.
+  openingstijden:
+    standaard: 11:00-19:00
+    laatsteToegang: '18:30'
+  prijs: { bedrag: 1500, tot: 3500, valuta: JPY }
+  reservering: niet-nodig
+  tijdvakken: [muromachi, edo]
+  eten:
+    keuken: soba-udon
+    moeite: waardig-een-omweg
+
+- id: station-kyoto-stempel
+  naam: Eki stamp station Kyoto
+  naamLokaal: 京都駅
+  stad: kyoto
+  categorie: vervoer
+  coordinaten: { lat: 34.9858, lon: 135.7588 }
+  beschrijving: >-
+    Stempel van station Kyoto. Het station is een doolhof van elf verdiepingen,
+    dus reken op even zoeken.
+  prijs: gratis
+  tijdvakken: [naoorlogs]
+  ekiStempel:
+    waar: >-
+      Bij de centrale poortjes aan de noordkant, naast het reisbureau binnen de
+      poortjes. Er staat een tweede bij de Shinkansen-doorgang.
+    openingstijden: { standaard: 05:30-23:00 }
