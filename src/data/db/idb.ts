@@ -1,5 +1,5 @@
 import { openDB, type DBSchema, type IDBPDatabase } from 'idb';
-import type { Cachestatus } from '@/domein/schema';
+import type { Cachestatus, EigenPunt } from '@/domein/schema';
 import type { Koersen } from '@/domein/valuta/koers';
 import type { Keuze } from '@/domein/highlight/bepaal';
 
@@ -28,10 +28,12 @@ export interface SleutelWaarde {
 interface JapanreisDB extends DBSchema {
   kv: { key: keyof SleutelWaarde; value: unknown };
   cachestatus: { key: string; value: Cachestatus };
+  /** De persoonlijke laag: eigen punten uit Google Maps, Instagram of met de hand. */
+  eigenpunten: { key: string; value: EigenPunt; indexes: { stad: string } };
 }
 
 const DB_NAAM = 'japanreis';
-const DB_VERSIE = 1;
+const DB_VERSIE = 2;
 
 let dbBelofte: Promise<IDBPDatabase<JapanreisDB>> | null = null;
 
@@ -41,6 +43,12 @@ export const getDb = (): Promise<IDBPDatabase<JapanreisDB>> => {
       if (!db.objectStoreNames.contains('kv')) db.createObjectStore('kv');
       if (!db.objectStoreNames.contains('cachestatus')) {
         db.createObjectStore('cachestatus', { keyPath: 'stadId' });
+      }
+      if (!db.objectStoreNames.contains('eigenpunten')) {
+        const store = db.createObjectStore('eigenpunten', { keyPath: 'id' });
+        // Een index op stad, zodat het stadsscherm niet de hele verzameling
+        // hoeft door te lopen als er straks honderden punten in staan.
+        store.createIndex('stad', 'stadId');
       }
     },
   });
@@ -97,5 +105,52 @@ export const schrijfCachestatus = async (status: Cachestatus): Promise<void> => 
     await (await getDb()).put('cachestatus', status);
   } catch {
     /* zie hierboven */
+  }
+};
+
+/**
+ * De eigen punten. Bewust in een aparte store en niet door de redactionele
+ * content heen: die reist met de app mee en wordt bij elke update overschreven,
+ * terwijl dit van jou is en moet blijven staan.
+ */
+export const leesEigenPunten = async (stadId?: string): Promise<EigenPunt[]> => {
+  try {
+    const db = await getDb();
+    if (stadId === undefined) return await db.getAll('eigenpunten');
+    return await db.getAllFromIndex('eigenpunten', 'stad', stadId);
+  } catch {
+    return [];
+  }
+};
+
+export const bewaarEigenPunten = async (punten: EigenPunt[]): Promise<void> => {
+  try {
+    const db = await getDb();
+    const transactie = db.transaction('eigenpunten', 'readwrite');
+    await Promise.all([...punten.map((p) => transactie.store.put(p)), transactie.done]);
+  } catch {
+    /* geen opslag beschikbaar */
+  }
+};
+
+export const verwijderEigenPunt = async (id: string): Promise<void> => {
+  try {
+    await (await getDb()).delete('eigenpunten', id);
+  } catch {
+    /* geen opslag beschikbaar */
+  }
+};
+
+/** Gooit alles weg wat uit één import kwam, voor het geval het niet klopte. */
+export const verwijderEigenPuntenVanLijst = async (lijst: string): Promise<number> => {
+  try {
+    const db = await getDb();
+    const alle = await db.getAll('eigenpunten');
+    const weg = alle.filter((p) => p.lijst === lijst);
+    const transactie = db.transaction('eigenpunten', 'readwrite');
+    await Promise.all([...weg.map((p) => transactie.store.delete(p.id)), transactie.done]);
+    return weg.length;
+  } catch {
+    return 0;
   }
 };

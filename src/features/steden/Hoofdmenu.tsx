@@ -118,9 +118,12 @@ export const Hoofdmenu = () => {
         </div>
       </section>
 
-      <p className="mt-8 text-center text-xs text-inkt-zacht dark:text-papier/40">
-        Versie {__APP_VERSIE__}
-      </p>
+      <div className="mt-8 text-center">
+        <Link to="/import" className="text-sm text-zegel underline underline-offset-2">
+          Eigen punten importeren
+        </Link>
+        <p className="mt-3 text-xs text-inkt-zacht dark:text-papier/40">Versie {__APP_VERSIE__}</p>
+      </div>
     </div>
   );
 };

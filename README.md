@@ -30,14 +30,14 @@ npm install
 npm run dev
 ```
 
-| Commando            | Wat het doet                                        |
-| ------------------- | --------------------------------------------------- |
-| `npm run dev`       | Draait de app lokaal                                 |
-| `npm run build`     | Bouwt naar `dist/`                                   |
-| `npm run validate`  | Controleert alle contentbestanden tegen het schema   |
-| `npm test`          | Draait de tests                                      |
-| `npm run lint`      | Lint                                                 |
-| `npm run typecheck` | Types                                                |
+| Commando            | Wat het doet                                               |
+| ------------------- | ---------------------------------------------------------- |
+| `npm run dev`       | Draait de app lokaal                                       |
+| `npm run build`     | Bouwt naar `dist/`                                         |
+| `npm run validate`  | Controleert alle contentbestanden tegen het schema         |
+| `npm test`          | Draait de tests                                            |
+| `npm run lint`      | Lint                                                       |
+| `npm run typecheck` | Types                                                      |
 | `npm run icons`     | Hertekent de PWA-iconen (alleen nodig bij een nieuw icoon) |
 
 Een push naar `main` bouwt en publiceert automatisch naar GitHub Pages.
@@ -51,10 +51,10 @@ aanloopt.
 
 | Bestand                     | Wat erin staat                                     |
 | --------------------------- | -------------------------------------------------- |
-| `data/steden.yaml`          | De steden, hun tijdzone, valuta en kaartgebied      |
-| `data/reisschema.yaml`      | Welke stad op welke dag; voedt de highlight logica  |
-| `data/tijdlijnen.yaml`      | De historische tijdvakken van Japan en van Hanoi    |
-| `data/plaatsen/<stad>.yaml` | De punten van die stad: attracties, eten, stempels  |
+| `data/steden.yaml`          | De steden, hun tijdzone, valuta en kaartgebied     |
+| `data/reisschema.yaml`      | Welke stad op welke dag; voedt de highlight logica |
+| `data/tijdlijnen.yaml`      | De historische tijdvakken van Japan en van Hanoi   |
+| `data/plaatsen/<stad>.yaml` | De punten van die stad: attracties, eten, stempels |
 
 > **Let op:** de startset in `data/plaatsen/` is redactionele content uit
 > algemene kennis en is niet ter plaatse geverifieerd. Openingstijden en prijzen
@@ -111,6 +111,28 @@ Gebouwd:
 - Fase 1: hoofdmenu met alle steden, de volledige highlight logica uit hoofdstuk
   1, het stadsscherm met kaart, clustering en offline opslaan.
 - Een startset van 61 punten over zeven steden.
+- Uit fase 3 naar voren gehaald: de Google Maps import, inclusief het scherm om
+  een Takeout export of een geplakte lijst in te lezen.
+
+### Een Google Maps lijst importeren
+
+Google heeft geen manier om een lijst rechtstreeks op te vragen, ook geen
+gedeelde lijst van iemand anders: er is geen openbare koppeling en de
+lijstpagina is niet uit te lezen. Er moet dus een bestand aan te pas komen.
+
+1. Gaat het om de lijst van iemand anders: open de gedeelde link in Google Maps
+   en sla de lijst op, zodat hij bij je eigen opgeslagen lijsten komt te staan.
+2. Ga naar takeout.google.com, kies alleen **Maps (your places)** en **Saved**,
+   en vraag de export aan.
+3. Pak het zip-bestand uit. Lijsten staan als `.csv` onder Saved, je eigen
+   opgeslagen plaatsen als `.json` onder Maps.
+4. Kies dat bestand in de app onder "Eigen punten importeren".
+
+GeoJSON heeft de coördinaten erin en werkt het beste. Een CSV heeft ze niet, dus
+die worden uit de links gehaald en dat lukt niet altijd. Punten zonder
+coördinaten komen gewoon binnen en blijven staan tot je ze met de hand plaatst;
+er wordt nooit iets weggegooid. Lukt de export helemaal niet, dan kun je de
+namen ook plakken.
 
 Nog te doen: de filters uit hoofdstuk 2 en 3, de persoonlijke lagen uit
 hoofdstuk 5 en 6, de fotokaart, het stempelboek, de praktische modules, de

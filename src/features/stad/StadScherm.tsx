@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import type { Plaats, Stad } from '@/domein/schema';
+import type { EigenPunt, Plaats, Stad } from '@/domein/schema';
 import { laadPlaatsen, stadMet, tijdlijnVan } from '@/data/content';
 import { useApp } from '@/state/useApp';
 import { Kaartje, Knop, Label, Sectiekop } from '@/ui/basis';
@@ -9,6 +9,7 @@ import { OfflineKnop } from '@/features/kaart/OfflineKnop';
 import { VastzetKnop } from '@/features/steden/Hoofdmenu';
 import { formatteerPrijs } from '@/domein/valuta/formatteer';
 import { WEEKDAGEN } from '@/domein/schema';
+import { leesEigenPunten } from '@/data/db/idb';
 
 /**
  * Het scherm van één stad.
@@ -25,6 +26,7 @@ export const StadScherm = () => {
   const stad = stadMet(stadId);
   const { koersen, positie, onthoudBezoek } = useApp();
   const [plaatsen, setPlaatsen] = useState<Plaats[] | null>(null);
+  const [eigen, setEigen] = useState<EigenPunt[]>([]);
 
   useEffect(() => {
     if (!stad) return;
@@ -33,22 +35,39 @@ export const StadScherm = () => {
     void laadPlaatsen(stad.id).then((p) => {
       if (levend) setPlaatsen(p);
     });
+    void leesEigenPunten(stad.id).then((p) => {
+      if (levend) setEigen(p);
+    });
     return () => {
       levend = false;
     };
   }, [stad, onthoudBezoek]);
 
-  const punten = useMemo<KaartPunt[]>(
-    () =>
-      (plaatsen ?? []).map((p) => ({
+  const punten = useMemo<KaartPunt[]>(() => {
+    const redactioneel = (plaatsen ?? []).map((p) => ({
+      id: p.id,
+      naam: p.naam,
+      coordinaten: p.coordinaten,
+      laag: laagVan(p),
+      toelichting: p.prijs ? formatteerPrijs(p.prijs, koersen) : undefined,
+    }));
+
+    // De eigen punten in een eigen laag en dus in een eigen kleur. Punten die
+    // al aan een plaats gekoppeld zijn komen er niet nog een keer bovenop; die
+    // zouden elkaar op de kaart alleen maar verstoppen.
+    const persoonlijk = eigen
+      .filter((p) => p.coordinaten && !p.koppelingPlaatsId)
+      .map((p) => ({
         id: p.id,
         naam: p.naam,
-        coordinaten: p.coordinaten,
-        laag: laagVan(p),
-        toelichting: p.prijs ? formatteerPrijs(p.prijs, koersen) : undefined,
-      })),
-    [plaatsen, koersen],
-  );
+        coordinaten: p.coordinaten!,
+        laag: 'eigen' as const,
+        toelichting:
+          [p.lijst && `uit ${p.lijst}`, p.notitie].filter(Boolean).join(' · ') || undefined,
+      }));
+
+    return [...redactioneel, ...persoonlijk];
+  }, [plaatsen, eigen, koersen]);
 
   if (!stad) {
     return (
@@ -110,6 +129,8 @@ export const StadScherm = () => {
           <PlaatsLijst titel="Stempels" plaatsen={stempels} stad={stad} />
         </>
       )}
+
+      <EigenLijst punten={eigen} />
 
       {stad.geschiedenis && (
         <section className="mt-8">
@@ -284,5 +305,62 @@ const PlaatsRegel = ({ plaats, stad }: { plaats: Plaats; stad: Stad }) => {
         </div>
       )}
     </Kaartje>
+  );
+};
+
+/**
+ * De persoonlijke laag in de lijst.
+ *
+ * Apart van de redactionele content en met een eigen labelkleur, want een punt
+ * uit een Google Maps lijst weet vaak niet meer dan een naam. Doen alsof het
+ * gelijkwaardig is aan een nagekeken beschrijving zou de app minder betrouwbaar
+ * maken, niet completer.
+ */
+const EigenLijst = ({ punten }: { punten: EigenPunt[] }) => {
+  if (punten.length === 0) {
+    return (
+      <section className="mt-8">
+        <Sectiekop>Eigen punten</Sectiekop>
+        <p className="text-sm text-inkt-zacht dark:text-papier/60">
+          Nog niets van jezelf in deze stad.{' '}
+          <Link to="/import" className="text-zegel underline underline-offset-2">
+            Importeer een Google Maps lijst
+          </Link>
+          .
+        </p>
+      </section>
+    );
+  }
+
+  return (
+    <section className="mt-8">
+      <Sectiekop
+        extra={
+          <Link to="/import" className="text-xs text-zegel underline underline-offset-2">
+            importeren
+          </Link>
+        }
+      >
+        Eigen punten
+      </Sectiekop>
+      <div className="grid gap-2">
+        {punten.map((punt) => (
+          <Kaartje key={punt.id} className="p-3.5">
+            <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+              <span className="font-medium">{punt.naam}</span>
+              {punt.lijst && <Label toon="eigen">{punt.lijst}</Label>}
+              {punt.ongeverifieerd && <Label toon="let-op">ongeverifieerd</Label>}
+              {!punt.coordinaten && <Label toon="let-op">nog geen plek op de kaart</Label>}
+            </div>
+            {punt.notitie && (
+              <p className="mt-1.5 text-sm text-inkt-zacht dark:text-papier/65">{punt.notitie}</p>
+            )}
+            {punt.adres && (
+              <p className="mt-1 text-xs text-inkt-zacht/80 dark:text-papier/45">{punt.adres}</p>
+            )}
+          </Kaartje>
+        ))}
+      </div>
+    </section>
   );
 };
