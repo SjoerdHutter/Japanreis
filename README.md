@@ -42,6 +42,12 @@ npm run dev
 
 Een push naar `main` bouwt en publiceert automatisch naar GitHub Pages.
 
+> **Eenmalig instellen.** Pages moet één keer met de hand aangezet worden,
+> anders faalt de deploy met `Get Pages site failed`. Ga naar **Settings**,
+> **Pages**, en kies bij **Source** voor **GitHub Actions**. Daarna draait alles
+> vanzelf. De workflow kan dit niet zelf doen: een Pages-site aanmaken vraagt
+> beheerdersrechten die de `GITHUB_TOKEN` niet heeft.
+
 ## De content bijwerken
 
 Alle reiscontent staat in `data/` als YAML en is met de hand bij te werken, ook
