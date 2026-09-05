@@ -116,6 +116,9 @@ Gebouwd:
   markering ongeverifieerd, en het bewerken van eigen punten.
 - Fase 4: de fotokaart. EXIF uitlezen, de reis als doorlopende lijn, tijdbalk
   per dag, handmatig plaatsen met een voorstel, en het reisverslag.
+- Fase 5: het digitale stempelboek, met tellers per stad en per type.
+- Fase 6: de appgids, de JR Pass rekentool, budget met contantteller, tax free
+  en bagage.
 - Een startset van 61 punten over zeven steden.
 - Uit fase 3 naar voren gehaald: de Google Maps import, inclusief het scherm om
   een Takeout export of een geplakte lijst in te lezen.
@@ -140,8 +143,25 @@ coördinaten komen gewoon binnen en blijven staan tot je ze met de hand plaatst;
 er wordt nooit iets weggegooid. Lukt de export helemaal niet, dan kun je de
 namen ook plakken.
 
-Nog te doen: het digitale stempelboek, de praktische modules, de dagplanner en
-de Hanoi overstapplanner.
+Nog te doen: de dagplanner, de reserveringsagenda, de Hanoi overstapplanner, en
+de afronding uit fase 8.
+
+### De JR Pass rekentool
+
+De prijzen staan in `data/vervoer.yaml` en verouderen. De JR Pass werd in oktober
+2023 in één keer ongeveer zeventig procent duurder, waardoor hij op een gewone
+route van twee weken vaak niet meer uit kan terwijl bijna elke reisgids hem nog
+als vanzelfsprekend aanraadt. De rekentool zegt er daarom bij dat het een
+indicatie is met de prijzen die in de app staan.
+
+### Uitgaven en contant geld
+
+Contant en kaart worden apart geteld. Dat is niet cosmetisch: in Japan gaat veel
+met kaart, maar kleine tempels, lockers, marktkraampjes en de bus willen munten.
+Wie alleen een totaal bijhoudt staat op een dag zonder pinautomaat voor een
+tempel die geen kaart aanneemt terwijl de app zegt dat hij ruim in het budget
+zit. De contantvoorraad is een boekhouding en geen meting, en dat staat er in het
+scherm ook bij.
 
 ### De fotokaart
 

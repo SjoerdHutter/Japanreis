@@ -1,5 +1,6 @@
 import { openDB, type DBSchema, type IDBPDatabase } from 'idb';
 import type { Cachestatus, Coordinaat, EigenPunt } from '@/domein/schema';
+import type { Opname, Uitgave } from '@/domein/budget/uitgaven';
 import type { Koersen } from '@/domein/valuta/koers';
 import type { Keuze } from '@/domein/highlight/bepaal';
 
@@ -32,6 +33,32 @@ interface JapanreisDB extends DBSchema {
   eigenpunten: { key: string; value: EigenPunt; indexes: { stad: string } };
   /** De foto's van de reis. Blijven op dit toestel; zie fotos.ts. */
   fotos: { key: string; value: OpgeslagenFoto; indexes: { genomenOp: string } };
+  /** Het stempelboek: welke stempels je hebt gehaald. */
+  stempels: { key: string; value: VerzameldeStempel; indexes: { stad: string } };
+  /** Uitgaven en geldopnames; zie domein/budget. */
+  uitgaven: { key: string; value: Uitgave };
+  opnames: { key: string; value: Opname };
+}
+
+/**
+ * Een stempel die je hebt gehaald.
+ *
+ * De sleutel is de plaats plus het type, zodat je per plek één eki stamp en één
+ * goshuin kunt hebben zonder dat ze elkaar overschrijven. Bij een tempel die
+ * allebei aanbiedt zijn dat twee aparte regels, want het zijn twee aparte
+ * boekjes.
+ */
+export interface VerzameldeStempel {
+  /** `${plaatsId}:${type}` */
+  id: string;
+  plaatsId: string;
+  stadId: string;
+  type: 'eki' | 'goshuin';
+  /** Wanneer je hem hebt gehaald, als ISO-datum. */
+  gehaaldOp: string;
+  /** De foto of scan van de stempel, als je die hebt gemaakt. */
+  afbeelding?: Blob;
+  notitie?: string;
 }
 
 /**
@@ -66,7 +93,7 @@ export interface OpgeslagenFoto {
 }
 
 const DB_NAAM = 'japanreis';
-const DB_VERSIE = 3;
+const DB_VERSIE = 5;
 
 let dbBelofte: Promise<IDBPDatabase<JapanreisDB>> | null = null;
 
@@ -87,6 +114,16 @@ export const getDb = (): Promise<IDBPDatabase<JapanreisDB>> => {
         const store = db.createObjectStore('fotos', { keyPath: 'id' });
         // Op tijd, want dat is de volgorde waarin de fotokaart ze altijd wil.
         store.createIndex('genomenOp', 'genomenOp');
+      }
+      if (!db.objectStoreNames.contains('stempels')) {
+        const store = db.createObjectStore('stempels', { keyPath: 'id' });
+        store.createIndex('stad', 'stadId');
+      }
+      if (!db.objectStoreNames.contains('uitgaven')) {
+        db.createObjectStore('uitgaven', { keyPath: 'id' });
+      }
+      if (!db.objectStoreNames.contains('opnames')) {
+        db.createObjectStore('opnames', { keyPath: 'id' });
       }
     },
   });
@@ -247,4 +284,78 @@ export const verwijderFoto = async (id: string): Promise<void> => {
 export const fotoRuimteBytes = async (): Promise<number> => {
   const fotos = await leesFotos();
   return fotos.reduce((totaal, f) => totaal + f.volledig.size + f.miniatuur.size, 0);
+};
+
+/** Het stempelboek. */
+export const leesStempels = async (): Promise<VerzameldeStempel[]> => {
+  try {
+    return await (await getDb()).getAll('stempels');
+  } catch {
+    return [];
+  }
+};
+
+export const bewaarStempel = async (stempel: VerzameldeStempel): Promise<void> => {
+  try {
+    await (await getDb()).put('stempels', stempel);
+  } catch {
+    /* geen opslag beschikbaar */
+  }
+};
+
+export const verwijderStempel = async (id: string): Promise<void> => {
+  try {
+    await (await getDb()).delete('stempels', id);
+  } catch {
+    /* geen opslag beschikbaar */
+  }
+};
+
+/** Uitgaven en opnames. */
+export const leesUitgaven = async (): Promise<Uitgave[]> => {
+  try {
+    return await (await getDb()).getAll('uitgaven');
+  } catch {
+    return [];
+  }
+};
+
+export const bewaarUitgave = async (uitgave: Uitgave): Promise<void> => {
+  try {
+    await (await getDb()).put('uitgaven', uitgave);
+  } catch {
+    /* geen opslag beschikbaar */
+  }
+};
+
+export const verwijderUitgave = async (id: string): Promise<void> => {
+  try {
+    await (await getDb()).delete('uitgaven', id);
+  } catch {
+    /* geen opslag beschikbaar */
+  }
+};
+
+export const leesOpnames = async (): Promise<Opname[]> => {
+  try {
+    return await (await getDb()).getAll('opnames');
+  } catch {
+    return [];
+  }
+};
+
+export const bewaarOpname = async (opname: Opname): Promise<void> => {
+  try {
+    await (await getDb()).put('opnames', opname);
+  } catch {
+    /* geen opslag beschikbaar */
+  }
+};
+
+export const verwijderOpname = async (id: string): Promise<void> => {
+  try {
+    await (await getDb()).delete('opnames', id);
+  } catch {
+    /* geen opslag beschikbaar */
+  }
 };

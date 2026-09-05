@@ -8,3 +8,4 @@ export * from './stad';
 export * from './tijdlijn';
 export * from './reis';
 export * from './eigen';
+export * from './praktisch';

@@ -18,6 +18,7 @@ import { stedenBestandSchema } from '../src/domein/schema/stad';
 import { tijdlijnenBestandSchema } from '../src/domein/schema/tijdlijn';
 import { reisschemaSchema } from '../src/domein/schema/reis';
 import { plaatsenBestandSchema } from '../src/domein/schema/plaats';
+import { appsBestandSchema, vervoerBestandSchema } from '../src/domein/schema/praktisch';
 import { binnenGebied } from '../src/domein/geo/afstand';
 
 const DATA = 'data';
@@ -49,6 +50,13 @@ const reisschema = controleer(
   lees(join(DATA, 'reisschema.yaml')),
   'reisschema.yaml',
 );
+
+const apps = controleer(appsBestandSchema, lees(join(DATA, 'apps.yaml')), 'apps.yaml');
+const vervoer = controleer(vervoerBestandSchema, lees(join(DATA, 'vervoer.yaml')), 'vervoer.yaml');
+
+if (apps && new Set(apps.map((a) => a.id)).size !== apps.length) {
+  fouten.push('apps.yaml: dubbele app-id');
+}
 
 if (steden && tijdlijnen && reisschema) {
   const stadIds = new Set(steden.map((s) => s.id));
@@ -136,7 +144,21 @@ if (steden && tijdlijnen && reisschema) {
     }
   }
 
-  console.log(`Gecontroleerd: ${steden.length} steden, ${plaatsIds.size} plaatsen.`);
+  // De trajecten in vervoer.yaml moeten naar bestaande steden verwijzen,
+  // anders staat er straks een rekentool met een route die nergens heen gaat.
+  if (vervoer) {
+    for (const traject of vervoer.trajecten) {
+      for (const kant of [traject.van, traject.naar]) {
+        if (!stadIds.has(kant)) {
+          fouten.push(`vervoer.yaml: traject verwijst naar onbekende stad "${kant}"`);
+        }
+      }
+    }
+  }
+
+  console.log(
+    `Gecontroleerd: ${steden.length} steden, ${plaatsIds.size} plaatsen, ${apps?.length ?? 0} apps, ${vervoer?.trajecten.length ?? 0} trajecten.`,
+  );
 }
 
 for (const regel of opmerkingen) console.log(`  let op: ${regel}`);

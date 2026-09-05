@@ -1,0 +1,69 @@
+# Prijzen voor de JR Pass rekentool uit hoofdstuk 10.
+#
+# LET OP: dit zijn indicatieve bedragen. De prijs van de JR Pass is in oktober
+# 2023 met ongeveer zeventig procent verhoogd, en losse kaartjes stijgen ook.
+# Controleer beide voor je boekt; de rekentool zegt er zelf bij dat het een
+# indicatie is.
+#
+# `enkeleReis` is een gereserveerde stoel in een gewone wagon op de snelste
+# verbinding die de pas dekt. De Nozomi en de Mizuho vallen buiten de pas; op de
+# route Tokio naar Kyoto scheelt dat ongeveer een half uur per rit.
+
+passen:
+  - id: landelijk-7
+    naam: Japan Rail Pass, 7 dagen
+    dagen: 7
+    prijs: { bedrag: 50000, valuta: JPY }
+  - id: landelijk-14
+    naam: Japan Rail Pass, 14 dagen
+    dagen: 14
+    prijs: { bedrag: 80000, valuta: JPY }
+  - id: landelijk-21
+    naam: Japan Rail Pass, 21 dagen
+    dagen: 21
+    prijs: { bedrag: 100000, valuta: JPY }
+
+trajecten:
+  - van: tokio
+    naar: kyoto
+    enkeleReis: { bedrag: 14000, valuta: JPY }
+    minuten: 160
+    opmerking: Met de Hikari; de Nozomi doet er 135 minuten over maar valt buiten de pas.
+  - van: tokio
+    naar: osaka
+    enkeleReis: { bedrag: 14500, valuta: JPY }
+    minuten: 180
+  - van: tokio
+    naar: hakone
+    enkeleReis: { bedrag: 4500, valuta: JPY }
+    minuten: 100
+    opmerking: Tot Odawara met de Shinkansen; het laatste stuk is een lokale lijn buiten de pas.
+  - van: tokio
+    naar: hiroshima
+    enkeleReis: { bedrag: 19000, valuta: JPY }
+    minuten: 260
+  - van: kyoto
+    naar: osaka
+    enkeleReis: { bedrag: 600, valuta: JPY }
+    minuten: 30
+    opmerking: Lokale lijn; de Shinkansen kost hier meer dan hij oplevert.
+  - van: kyoto
+    naar: nara
+    enkeleReis: { bedrag: 720, valuta: JPY }
+    minuten: 45
+  - van: osaka
+    naar: nara
+    enkeleReis: { bedrag: 820, valuta: JPY }
+    minuten: 50
+  - van: kyoto
+    naar: hiroshima
+    enkeleReis: { bedrag: 11500, valuta: JPY }
+    minuten: 110
+  - van: osaka
+    naar: hiroshima
+    enkeleReis: { bedrag: 10500, valuta: JPY }
+    minuten: 95
+  - van: hakone
+    naar: kyoto
+    enkeleReis: { bedrag: 12000, valuta: JPY }
+    minuten: 190

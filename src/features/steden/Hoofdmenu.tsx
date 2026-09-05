@@ -147,6 +147,18 @@ export const Hoofdmenu = () => {
         <Link to="/fotos" className="text-sm text-zegel underline underline-offset-2">
           Fotokaart
         </Link>
+        <Link to="/stempels" className="text-sm text-zegel underline underline-offset-2">
+          Stempelboek
+        </Link>
+        <Link to="/apps" className="text-sm text-zegel underline underline-offset-2">
+          Handige apps
+        </Link>
+        <Link to="/vervoer" className="text-sm text-zegel underline underline-offset-2">
+          Vervoer en JR Pass
+        </Link>
+        <Link to="/budget" className="text-sm text-zegel underline underline-offset-2">
+          Budget
+        </Link>
         <Link to="/import" className="text-sm text-zegel underline underline-offset-2">
           Eigen punten importeren
         </Link>

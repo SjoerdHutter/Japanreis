@@ -1,7 +1,11 @@
 import stedenRuw from '../../../data/steden.yaml';
 import tijdlijnenRuw from '../../../data/tijdlijnen.yaml';
 import reisschemaRuw from '../../../data/reisschema.yaml';
+import appsRuw from '../../../data/apps.yaml';
+import vervoerRuw from '../../../data/vervoer.yaml';
 import {
+  appsBestandSchema,
+  vervoerBestandSchema,
   plaatsenBestandSchema,
   reisschemaSchema,
   stedenBestandSchema,
@@ -10,6 +14,8 @@ import {
   type Reisschema,
   type Stad,
   type Tijdlijn,
+  type App,
+  type VervoerContent,
 } from '@/domein/schema';
 
 /**
@@ -44,6 +50,10 @@ export const STEDEN: Stad[] = parseer(stedenBestandSchema, stedenRuw, 'steden').
 export const TIJDLIJNEN: Tijdlijn[] = parseer(tijdlijnenBestandSchema, tijdlijnenRuw, 'tijdlijnen');
 
 export const REISSCHEMA: Reisschema = parseer(reisschemaSchema, reisschemaRuw, 'reisschema');
+
+export const APPS: App[] = parseer(appsBestandSchema, appsRuw, 'apps');
+
+export const VERVOER: VervoerContent = parseer(vervoerBestandSchema, vervoerRuw, 'vervoer');
 
 export const stadMet = (id: string): Stad | undefined => STEDEN.find((s) => s.id === id);
 

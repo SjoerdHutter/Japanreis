@@ -1,0 +1,181 @@
+# De appgids uit hoofdstuk 9.
+#
+# Per app: waarvoor je hem nodig hebt, of hij offline werkt, of je hem vooraf
+# moet downloaden, en of hij geld of tijd bespaart. Dat laatste onderscheid is
+# het nuttigst: een app die tijd bespaart installeer je altijd, een app die geld
+# bespaart alleen als het bedrag de moeite waard is.
+#
+# Let op: dit is redactionele content en niet ter plaatse geverifieerd. Apps
+# veranderen, en een paar van deze zijn de afgelopen jaren van naam of eigenaar
+# gewisseld. Controleer voor vertrek of ze nog bestaan.
+
+- id: japan-transit-planner
+  naam: Japan Transit Planner (Jorudan)
+  categorie: vervoer
+  waarvoor: >-
+    Treinreizen plannen met de werkelijke dienstregeling, inclusief welk perron
+    en welke wagon. Geeft ook aan of een verbinding met de JR Pass te doen is.
+  offline: nee
+  voorafDownloaden: aanbevolen
+  bespaart: tijd
+  land: [japan]
+
+- id: navitime
+  naam: NAVITIME for Japan Travel
+  categorie: vervoer
+  waarvoor: >-
+    Zelfde soort planner, met een routekaart die ook zonder bereik nog werkt en
+    een filter op verbindingen die de JR Pass dekt.
+  offline: deels
+  voorafDownloaden: ja
+  bespaart: tijd
+  land: [japan]
+
+- id: google-maps
+  naam: Google Maps
+  categorie: vervoer
+  waarvoor: >-
+    Lopen, metro en bus. In Japan verrassend accuraat tot op het perron. Sla het
+    gebied vooraf offline op, dan werkt de kaart zonder bereik.
+  offline: deels
+  voorafDownloaden: ja
+  bespaart: tijd
+  land: [japan, vietnam]
+
+- id: suica
+  naam: Suica of Pasmo in Apple Wallet of Google Wallet
+  categorie: betalen
+  waarvoor: >-
+    De IC-kaart waarmee je door de poortjes tikt, en waarmee je in vrijwel elke
+    konbini en veel automaten betaalt. Rechtstreeks vanaf je telefoon opwaarderen
+    scheelt elke keer een rij bij de automaat.
+  offline: ja
+  voorafDownloaden: ja
+  bespaart: tijd
+  opmerking: >-
+    Zet hem al thuis op je telefoon. Een fysieke kaart kopen kan ook, maar was
+    tijdens de chiptekorten periodes niet verkrijgbaar.
+  land: [japan]
+
+- id: google-translate
+  naam: Google Translate
+  categorie: taal
+  waarvoor: >-
+    Menukaarten en verpakkingen vertalen met de camera. Werkt zonder bereik als
+    je het Japanse taalpakket hebt gedownload, en dat vergeet vrijwel iedereen.
+  offline: ja
+  voorafDownloaden: ja
+  bespaart: tijd
+  opmerking: Download het pakket Japans en het pakket Vietnamees vooraf.
+  land: [japan, vietnam]
+
+- id: yomiwa
+  naam: Yomiwa
+  categorie: taal
+  waarvoor: >-
+    Kanji herkennen door ze te tekenen of te fotograferen. Beter dan Translate
+    voor losse tekens, bijvoorbeeld op een bordje bij een tempel.
+  offline: ja
+  voorafDownloaden: ja
+  bespaart: tijd
+  land: [japan]
+
+- id: papago
+  naam: Papago
+  categorie: taal
+  waarvoor: >-
+    Vertaler die op Aziatische talen vaak natuurlijker uitkomt dan Translate,
+    zeker bij hele zinnen.
+  offline: deels
+  voorafDownloaden: aanbevolen
+  bespaart: tijd
+  land: [japan, vietnam]
+
+- id: tabelog
+  naam: Tabelog
+  categorie: eten
+  waarvoor: >-
+    De Japanse restaurantgids. De schaal loopt anders dan je gewend bent: een
+    3,5 is al goed en boven de 3,8 kom je zelden. Reserveren gaat er soms ook.
+  offline: nee
+  voorafDownloaden: nee
+  bespaart: tijd
+  land: [japan]
+
+- id: gurunavi
+  naam: GuruNavi
+  categorie: eten
+  waarvoor: Tweede restaurantgids, met meer Engelstalige informatie dan Tabelog.
+  offline: nee
+  voorafDownloaden: nee
+  bespaart: tijd
+  land: [japan]
+
+- id: klook
+  naam: Klook
+  categorie: besparen
+  waarvoor: >-
+    Tickets voor attracties, vervoerspassen en dagtrips, vaak goedkoper dan aan
+    de kassa en zonder rij. Ook handig voor tickets die ter plekke uitverkocht zijn.
+  offline: nee
+  voorafDownloaden: aanbevolen
+  bespaart: geld
+  land: [japan, vietnam]
+
+- id: ecbo-cloak
+  naam: Ecbo Cloak
+  categorie: besparen
+  waarvoor: >-
+    Bagage kwijt bij een winkel of café in de buurt, als de lockers op het
+    station vol zijn. Reserveren kan vooraf, en dat is op drukke dagen het
+    verschil tussen wel en niet doorlopen.
+  offline: nee
+  voorafDownloaden: aanbevolen
+  bespaart: tijd
+  land: [japan]
+
+- id: esim
+  naam: Ubigi of Japan Wireless eSIM
+  categorie: besparen
+  waarvoor: >-
+    Data zonder roamingkosten. Een eSIM zet je thuis al klaar en activeer je bij
+    de landing; een pocket wifi moet je ophalen en terugbrengen.
+  offline: nee
+  voorafDownloaden: ja
+  bespaart: geld
+  opmerking: Controleer of je toestel eSIM ondersteunt voordat je er een koopt.
+  land: [japan, vietnam]
+
+- id: yurekuru
+  naam: Yurekuru Call
+  categorie: overig
+  waarvoor: >-
+    Aardbevingswaarschuwing, seconden voordat je hem voelt. Japan heeft er
+    dagelijks kleine; deze app zegt hoe zwaar en waar.
+  offline: ja
+  voorafDownloaden: ja
+  bespaart: tijd
+  opmerking: Zet de meldingen aan, anders doet hij niets.
+  land: [japan]
+
+- id: toiletten-en-wifi
+  naam: Toiletten- en wifikaart
+  categorie: overig
+  waarvoor: >-
+    Openbare toiletten en gratis wifi op de kaart. In Japan zijn beide er in
+    overvloed, maar niet altijd waar je ze zoekt.
+  offline: deels
+  voorafDownloaden: aanbevolen
+  bespaart: tijd
+  land: [japan, vietnam]
+
+- id: grab
+  naam: Grab
+  categorie: vervoer
+  waarvoor: >-
+    Taxi's en scooterritten in Vietnam, met de prijs vooraf vast. Scheelt het
+    onderhandelen en de omweg die je anders krijgt.
+  offline: nee
+  voorafDownloaden: ja
+  bespaart: geld
+  land: [vietnam]

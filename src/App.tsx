@@ -5,6 +5,10 @@ import { StadScherm } from '@/features/stad/StadScherm';
 import { ImportScherm } from '@/features/import/ImportScherm';
 import { StadGeschiedenisScherm, TijdlijnScherm } from '@/features/geschiedenis/TijdlijnScherm';
 import { FotokaartScherm } from '@/features/fotos/FotokaartScherm';
+import { StempelboekScherm } from '@/features/stempels/StempelboekScherm';
+import { AppgidsScherm } from '@/features/praktisch/AppgidsScherm';
+import { VervoerScherm } from '@/features/praktisch/VervoerScherm';
+import { BudgetScherm } from '@/features/praktisch/BudgetScherm';
 
 const App = () => (
   <AppProvider>
@@ -13,6 +17,10 @@ const App = () => (
       <Route path="/stad/:stadId" element={<StadScherm />} />
       <Route path="/import" element={<ImportScherm />} />
       <Route path="/fotos" element={<FotokaartScherm />} />
+      <Route path="/stempels" element={<StempelboekScherm />} />
+      <Route path="/apps" element={<AppgidsScherm />} />
+      <Route path="/vervoer" element={<VervoerScherm />} />
+      <Route path="/budget" element={<BudgetScherm />} />
       <Route path="/tijdlijn/:tijdlijnId" element={<TijdlijnScherm />} />
       <Route path="/geschiedenis/:stadId" element={<StadGeschiedenisScherm />} />
       {/* Onbekend pad hoort niet op een lege pagina uit te komen; terug naar
