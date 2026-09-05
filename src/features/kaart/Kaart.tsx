@@ -17,13 +17,14 @@ import { TEGEL_BRONVERMELDING, TEGEL_URL } from '@/kaart/constanten';
  * content, zodat altijd zichtbaar blijft wat van jou is en wat van de app.
  */
 
-export type Laag = 'attractie' | 'eten' | 'stempel' | 'eigen' | 'overig';
+export type Laag = 'attractie' | 'eten' | 'stempel' | 'eigen' | 'foto' | 'overig';
 
 const KLEUR: Record<Laag, string> = {
   attractie: '#8c2f39',
   eten: '#b45309',
   stempel: '#2f4858',
   eigen: '#4338ca',
+  foto: '#0f766e',
   overig: '#5c554c',
 };
 
@@ -56,10 +57,17 @@ export const Kaart = ({
   gebied,
   positie,
   hoogte = '20rem',
+  lijn,
   onKies,
   onTikOpKaart,
 }: {
   punten: KaartPunt[];
+  /**
+   * De reis als doorlopende lijn. Met opzet niet per stad geknipt: dan zou de
+   * vlucht van Hanoi naar Tokio uit de kaart verdwijnen en zou de reis eruitzien
+   * als losse eilanden.
+   */
+  lijn?: Coordinaat[];
   /** Waar de kaart op begint. Meestal het kaartgebied van de stad. */
   gebied: Kaartgebied;
   positie?: Coordinaat | null;
@@ -76,6 +84,7 @@ export const Kaart = ({
   const kaart = useRef<L.Map | null>(null);
   const groep = useRef<L.MarkerClusterGroup | null>(null);
   const ikRef = useRef<L.CircleMarker | null>(null);
+  const lijnRef = useRef<L.Polyline | null>(null);
   // In een ref, zodat een nieuwe onKies de markers niet opnieuw laat bouwen.
   const kiesRef = useRef(onKies);
   useEffect(() => {
@@ -116,6 +125,7 @@ export const Kaart = ({
       kaart.current = null;
       groep.current = null;
       ikRef.current = null;
+      lijnRef.current = null;
     };
   }, []);
 
@@ -155,6 +165,18 @@ export const Kaart = ({
       g.addLayer(marker);
     }
   }, [punten]);
+
+  useEffect(() => {
+    const m = kaart.current;
+    if (!m) return;
+    lijnRef.current?.remove();
+    lijnRef.current = null;
+    if (!lijn || lijn.length < 2) return;
+    lijnRef.current = L.polyline(
+      lijn.map((p) => [p.lat, p.lon] as [number, number]),
+      { color: KLEUR.foto, weight: 2.5, opacity: 0.85, dashArray: '1 6', lineCap: 'round' },
+    ).addTo(m);
+  }, [lijn]);
 
   // Je eigen positie als apart bolletje. Geen speld, want het is geen plaats.
   useEffect(() => {

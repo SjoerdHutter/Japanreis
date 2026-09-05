@@ -68,11 +68,40 @@ const momentVanWandklok = (
   maand: number,
   dag: number,
   uur = 0,
+  minuut = 0,
+  seconde = 0,
 ): Date => {
-  const wandklok = Date.UTC(jaar, maand - 1, dag, uur);
+  const wandklok = Date.UTC(jaar, maand - 1, dag, uur, minuut, seconde);
   const eerste = wandklok - zoneOffsetMs(tijdzone, new Date(wandklok));
   const tweede = wandklok - zoneOffsetMs(tijdzone, new Date(eerste));
   return new Date(tweede);
+};
+
+/**
+ * Een wandkloktijd omzetten naar het moment waarop dat in deze zone was.
+ *
+ * Nodig voor foto's: EXIF legt de tijd vast zoals hij op de camera stond, zonder
+ * zone erbij. Een foto van 18:30 in Kyoto staat dus als 18:30, en die als UTC
+ * lezen maakt er 03:30 de volgende ochtend van. Dan schuift een avondfoto een
+ * dag op in de tijdbalk, precies waar je hem niet zoekt.
+ *
+ * Verwacht "YYYY-MM-DDTHH:mm:ss" of "YYYY-MM-DD HH:mm:ss". Geeft null bij iets
+ * anders, zodat de aanroeper kan besluiten wat te doen in plaats van een
+ * verkeerd moment te krijgen.
+ */
+export const momentInZone = (tijdzone: string, wandklok: string): Date | null => {
+  const delen = /^(\d{4})-(\d{2})-(\d{2})[T ](\d{2}):(\d{2})(?::(\d{2}))?/.exec(wandklok);
+  if (!delen) return null;
+  const [, jaar, maand, dag, uur, minuut, seconde] = delen;
+  return momentVanWandklok(
+    tijdzone,
+    Number(jaar),
+    Number(maand),
+    Number(dag),
+    Number(uur),
+    Number(minuut),
+    Number(seconde ?? '0'),
+  );
 };
 
 /**

@@ -143,11 +143,16 @@ export const Hoofdmenu = () => {
         </div>
       </section>
 
-      <div className="mt-8 text-center">
+      <div className="mt-8 flex flex-wrap justify-center gap-x-5 gap-y-2 text-center">
+        <Link to="/fotos" className="text-sm text-zegel underline underline-offset-2">
+          Fotokaart
+        </Link>
         <Link to="/import" className="text-sm text-zegel underline underline-offset-2">
           Eigen punten importeren
         </Link>
-        <p className="mt-3 text-xs text-inkt-zacht dark:text-papier/40">Versie {__APP_VERSIE__}</p>
+        <p className="w-full text-xs text-inkt-zacht dark:text-papier/40">
+          Versie {__APP_VERSIE__}
+        </p>
       </div>
     </div>
   );

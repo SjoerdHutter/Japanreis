@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { dagdeelIn, datumIn, uurIn, volgendeMiddernacht } from './zones';
+import { dagdeelIn, datumIn, momentInZone, uurIn, volgendeMiddernacht } from './zones';
 
 const TOKIO = 'Asia/Tokyo';
 const HANOI = 'Asia/Ho_Chi_Minh';
@@ -67,5 +67,36 @@ describe('uurIn en dagdeelIn', () => {
     expect(dagdeelIn(TOKIO, new Date('2026-04-10T05:00:00Z'))).toBe('middag');
     expect(dagdeelIn(TOKIO, new Date('2026-04-10T10:00:00Z'))).toBe('avond');
     expect(dagdeelIn(TOKIO, new Date('2026-04-10T18:00:00Z'))).toBe('nacht');
+  });
+});
+
+describe('momentInZone', () => {
+  it('leest een wandklok in de zone van de stad', () => {
+    // 18:30 in Tokio is 09:30 UTC, want Japan loopt negen uur voor.
+    expect(momentInZone(TOKIO, '2026-04-02T18:30:00')?.toISOString()).toBe(
+      '2026-04-02T09:30:00.000Z',
+    );
+  });
+
+  it('geeft dezelfde wandklok een ander moment in een andere zone', () => {
+    expect(momentInZone(HANOI, '2026-04-02T18:30:00')?.toISOString()).toBe(
+      '2026-04-02T11:30:00.000Z',
+    );
+  });
+
+  it('neemt genoegen met een spatie in plaats van een T, en met ontbrekende seconden', () => {
+    expect(momentInZone(TOKIO, '2026-04-02 18:30')?.toISOString()).toBe('2026-04-02T09:30:00.000Z');
+  });
+
+  it('houdt rekening met de zomertijd thuis', () => {
+    // Eind april geldt in Amsterdam UTC+2.
+    expect(momentInZone(THUIS, '2026-04-20T12:00:00')?.toISOString()).toBe(
+      '2026-04-20T10:00:00.000Z',
+    );
+  });
+
+  it('geeft niets terug bij iets dat geen wandklok is', () => {
+    expect(momentInZone(TOKIO, 'gisteravond')).toBeNull();
+    expect(momentInZone(TOKIO, '')).toBeNull();
   });
 });

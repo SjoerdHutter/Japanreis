@@ -114,6 +114,8 @@ Gebouwd:
   sluitingsdagen, en de geschiedenis op twee niveaus.
 - Fase 3: de persoonlijke lagen. Google Maps import, Instagram collectie met de
   markering ongeverifieerd, en het bewerken van eigen punten.
+- Fase 4: de fotokaart. EXIF uitlezen, de reis als doorlopende lijn, tijdbalk
+  per dag, handmatig plaatsen met een voorstel, en het reisverslag.
 - Een startset van 61 punten over zeven steden.
 - Uit fase 3 naar voren gehaald: de Google Maps import, inclusief het scherm om
   een Takeout export of een geplakte lijst in te lezen.
@@ -138,8 +140,36 @@ coördinaten komen gewoon binnen en blijven staan tot je ze met de hand plaatst;
 er wordt nooit iets weggegooid. Lukt de export helemaal niet, dan kun je de
 namen ook plakken.
 
-Nog te doen: de fotokaart, het digitale stempelboek, de praktische modules, de
-dagplanner en de Hanoi overstapplanner.
+Nog te doen: het digitale stempelboek, de praktische modules, de dagplanner en
+de Hanoi overstapplanner.
+
+### De fotokaart
+
+Je foto's blijven op je toestel, in IndexedDB. Er is geen server om ze naartoe
+te sturen en er komt er ook geen. Naast het origineel wordt een miniatuur van
+480 pixels bewaard, want een galerij die vijftig foto's van vier megabyte
+opnieuw moet decoderen legt een telefoon plat.
+
+De reis is één lijn, niet per stad geknipt: heenreis over Hanoi, Japan, en terug
+over Hanoi. Zou je per stad knippen, dan verdwijnt de vlucht uit de kaart en
+ziet de reis eruit als losse eilanden.
+
+**Over EXIF en tijdzones.** EXIF legt de tijd vast zoals hij op de camera stond,
+zonder zone erbij. Een avondfoto in Kyoto van 18:30 staat dus als 18:30. Die als
+UTC lezen maakt er 03:30 de volgende ochtend van, en dan verschijnt er een dag
+in de tijdbalk waarop je geen enkele foto hebt gemaakt. De app bewaart daarom
+twee dingen naast elkaar: de wandklok, die de dag bepaalt, en het echte moment,
+dat de volgorde bepaalt ook over een tijdzonegrens heen. Het moment wordt
+berekend met de zone van de stad waar de foto genomen is, en opnieuw berekend
+zodra je een foto zelf op de kaart zet.
+
+Een foto zonder GPS krijgt een voorstel op basis van de foto's eromheen in de
+tijd, vergeleken op de wandklok. Ligt er niets binnen anderhalf uur, dan komt er
+geen voorstel: een foto uit het midden van een vlucht van zes uur ergens
+neerzetten is geen hulp maar een verzinsel.
+
+Het reisverslag is één los HTML-bestand met de route, de dagen en de plekken, en
+zonder foto's. Zo kun je het delen zonder je fotorol mee te sturen.
 
 ### Een Instagram collectie importeren
 

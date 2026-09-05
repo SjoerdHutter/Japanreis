@@ -1,5 +1,5 @@
 import { openDB, type DBSchema, type IDBPDatabase } from 'idb';
-import type { Cachestatus, EigenPunt } from '@/domein/schema';
+import type { Cachestatus, Coordinaat, EigenPunt } from '@/domein/schema';
 import type { Koersen } from '@/domein/valuta/koers';
 import type { Keuze } from '@/domein/highlight/bepaal';
 
@@ -30,10 +30,43 @@ interface JapanreisDB extends DBSchema {
   cachestatus: { key: string; value: Cachestatus };
   /** De persoonlijke laag: eigen punten uit Google Maps, Instagram of met de hand. */
   eigenpunten: { key: string; value: EigenPunt; indexes: { stad: string } };
+  /** De foto's van de reis. Blijven op dit toestel; zie fotos.ts. */
+  fotos: { key: string; value: OpgeslagenFoto; indexes: { genomenOp: string } };
+}
+
+/**
+ * Een foto zoals hij op het toestel staat.
+ *
+ * De bytes zitten er als Blob in, twee keer: het origineel en een miniatuur.
+ * Dat laatste is nodig omdat een galerij met vijftig foto's van vier megabyte
+ * een telefoon plat legt, en het scheelt bij het scrollen door de tijdbalk
+ * telkens opnieuw decoderen.
+ *
+ * Foto's blijven lokaal. Er is geen server om ze naartoe te sturen en er komt
+ * er ook geen; delen gebeurt alleen via de export die je zelf aanzet.
+ */
+export interface OpgeslagenFoto {
+  id: string;
+  naam: string;
+  /** Wanneer de foto genomen is, als ISO-moment. */
+  genomenOp?: string;
+  /** Dezelfde tijd zoals hij op de camera stond, zonder zone. Bepaalt de dag. */
+  wandklok?: string;
+  /** Of dat uit de EXIF komt of uit de datum van het bestand. */
+  tijdstipBron?: 'exif' | 'bestand';
+  coordinaten?: Coordinaat;
+  /** Of jij de plek hebt aangewezen in plaats van de camera. */
+  handmatigGeplaatst?: boolean;
+  stadId?: string;
+  /** De attractie of het restaurant waar de foto genomen is. */
+  plaatsId?: string;
+  volledig: Blob;
+  miniatuur: Blob;
+  toegevoegdOp: string;
 }
 
 const DB_NAAM = 'japanreis';
-const DB_VERSIE = 2;
+const DB_VERSIE = 3;
 
 let dbBelofte: Promise<IDBPDatabase<JapanreisDB>> | null = null;
 
@@ -49,6 +82,11 @@ export const getDb = (): Promise<IDBPDatabase<JapanreisDB>> => {
         // Een index op stad, zodat het stadsscherm niet de hele verzameling
         // hoeft door te lopen als er straks honderden punten in staan.
         store.createIndex('stad', 'stadId');
+      }
+      if (!db.objectStoreNames.contains('fotos')) {
+        const store = db.createObjectStore('fotos', { keyPath: 'id' });
+        // Op tijd, want dat is de volgorde waarin de fotokaart ze altijd wil.
+        store.createIndex('genomenOp', 'genomenOp');
       }
     },
   });
@@ -162,4 +200,51 @@ export const verwijderEigenPuntenVanLijst = async (lijst: string): Promise<numbe
   } catch {
     return 0;
   }
+};
+
+/**
+ * De foto's van de reis.
+ *
+ * Bij het lezen komen de Blobs mee. Dat is bewust: de galerij heeft ze nodig en
+ * een tweede ronde langs de database per foto is trager dan één keer alles
+ * ophalen. Wie alleen de gegevens wil gebruikt `leesFotoGegevens`.
+ */
+export const leesFotos = async (): Promise<OpgeslagenFoto[]> => {
+  try {
+    return await (await getDb()).getAll('fotos');
+  } catch {
+    return [];
+  }
+};
+
+export const bewaarFotos = async (fotos: OpgeslagenFoto[]): Promise<void> => {
+  try {
+    const db = await getDb();
+    const transactie = db.transaction('fotos', 'readwrite');
+    await Promise.all([...fotos.map((f) => transactie.store.put(f)), transactie.done]);
+  } catch {
+    /* geen opslag beschikbaar, of de schijf zit vol */
+  }
+};
+
+export const werkFotoBij = async (foto: OpgeslagenFoto): Promise<void> => {
+  try {
+    await (await getDb()).put('fotos', foto);
+  } catch {
+    /* zie hierboven */
+  }
+};
+
+export const verwijderFoto = async (id: string): Promise<void> => {
+  try {
+    await (await getDb()).delete('fotos', id);
+  } catch {
+    /* zie hierboven */
+  }
+};
+
+/** Hoeveel ruimte de foto's innemen, voor de melding in het scherm. */
+export const fotoRuimteBytes = async (): Promise<number> => {
+  const fotos = await leesFotos();
+  return fotos.reduce((totaal, f) => totaal + f.volledig.size + f.miniatuur.size, 0);
 };

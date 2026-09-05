@@ -4,6 +4,7 @@ import { Hoofdmenu } from '@/features/steden/Hoofdmenu';
 import { StadScherm } from '@/features/stad/StadScherm';
 import { ImportScherm } from '@/features/import/ImportScherm';
 import { StadGeschiedenisScherm, TijdlijnScherm } from '@/features/geschiedenis/TijdlijnScherm';
+import { FotokaartScherm } from '@/features/fotos/FotokaartScherm';
 
 const App = () => (
   <AppProvider>
@@ -11,6 +12,7 @@ const App = () => (
       <Route path="/" element={<Hoofdmenu />} />
       <Route path="/stad/:stadId" element={<StadScherm />} />
       <Route path="/import" element={<ImportScherm />} />
+      <Route path="/fotos" element={<FotokaartScherm />} />
       <Route path="/tijdlijn/:tijdlijnId" element={<TijdlijnScherm />} />
       <Route path="/geschiedenis/:stadId" element={<StadGeschiedenisScherm />} />
       {/* Onbekend pad hoort niet op een lege pagina uit te komen; terug naar
