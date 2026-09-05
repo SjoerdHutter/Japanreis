@@ -27,7 +27,13 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      # `enablement` zet Pages aan als dat nog niet gebeurd is. Zonder deze
+      # regel faalt de eerste deploy met "Get Pages site failed", en dan moet
+      # iemand het met de hand aanzetten in de instellingen van de repo. De
+      # workflow heeft er al de rechten voor; die staan hierboven.
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
