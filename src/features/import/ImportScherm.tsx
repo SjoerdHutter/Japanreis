@@ -4,16 +4,26 @@ import type { EigenPunt, Plaats } from '@/domein/schema';
 import { STEDEN, laadAllePlaatsen } from '@/data/content';
 import { leesBestand, type RuwPunt } from '@/domein/import/googlemaps';
 import { stelVoor, type Voorstel, type Zekerheid } from '@/domein/import/koppel';
-import { bewaarEigenPunten, leesEigenPunten, verwijderEigenPuntenVanLijst } from '@/data/db/idb';
+import {
+  bewaarEigenPunten,
+  leesEigenPunten,
+  verwijderEigenPunt,
+  verwijderEigenPuntenVanLijst,
+  werkEigenPuntBij,
+} from '@/data/db/idb';
+import { leesInstagram, type InstagramTip } from '@/domein/import/instagram';
+import { PuntBewerken } from './PuntBewerken';
 import { Kaartje, Knop, Label, Sectiekop } from '@/ui/basis';
 
 /**
- * Een Google Maps lijst in de app krijgen.
+ * Een Google Maps lijst of een Instagram collectie in de app krijgen.
  *
  * Google heeft geen manier om een lijst rechtstreeks op te vragen, ook geen
  * gedeelde lijst van iemand anders: er is geen openbare koppeling en de
- * lijstpagina zelf is niet uit te lezen. Wat wel werkt is een bestand, en
- * daarom vraagt dit scherm om een bestand of om geplakte tekst.
+ * lijstpagina zelf is niet uit te lezen. Instagram levert van opgeslagen
+ * berichten alleen een link en een tijdstip, zonder bijschrift of locatie. In
+ * beide gevallen moet er dus een bestand aan te pas komen, en daarom vraagt dit
+ * scherm om een bestand of om geplakte tekst.
  *
  * Niets wordt zonder bevestiging opgeslagen. Je ziet eerst wat er uit het
  * bestand komt, wat er aan een bestaande plaats gekoppeld zou worden en wat er
@@ -26,6 +36,21 @@ const NIEUWE_ID = () =>
   // crypto.randomUUID bestaat niet overal; de terugval is goed genoeg voor ids
   // die alleen op dit toestel hoeven te kloppen.
   globalThis.crypto?.randomUUID?.() ?? `punt-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+
+/**
+ * Een Instagram-tip als ruw punt, zodat hij door dezelfde matcher gaat als een
+ * Google Maps punt. De tip zelf wordt de notitie; die hoort bij het punt en
+ * niet in de naam, anders staat je hele kaart vol met zinnen.
+ */
+const alsRuwPunt =
+  (lijst: string) =>
+  (tip: InstagramTip): RuwPunt => ({
+    naam: tip.locatie,
+    coordinaten: tip.coordinaten,
+    notitie: [tip.tip, tip.bron && `via ${tip.bron}`].filter(Boolean).join(' · ') || undefined,
+    url: tip.url,
+    lijst: lijst || undefined,
+  });
 
 const KLEUR: Record<Zekerheid, 'gewoon' | 'let-op' | 'gratis'> = {
   zeker: 'gratis',
@@ -40,6 +65,7 @@ const WOORD: Record<Zekerheid, string> = {
 };
 
 export const ImportScherm = () => {
+  const [bron, setBron] = useState<'google-maps' | 'instagram'>('google-maps');
   const [plaatsen, setPlaatsen] = useState<Plaats[]>([]);
   const [lijstnaam, setLijstnaam] = useState('');
   const [plaktekst, setPlaktekst] = useState('');
@@ -48,6 +74,7 @@ export const ImportScherm = () => {
   const [fout, setFout] = useState<string | null>(null);
   const [bewaard, setBewaard] = useState<number | null>(null);
   const [bestaande, setBestaande] = useState<EigenPunt[]>([]);
+  const [bewerken, setBewerken] = useState<string | null>(null);
 
   useEffect(() => {
     void laadAllePlaatsen().then(setPlaatsen);
@@ -59,7 +86,10 @@ export const ImportScherm = () => {
       setFout(null);
       setBewaard(null);
       try {
-        const ruwe: RuwPunt[] = leesBestand(tekst, naam || undefined);
+        const ruwe: RuwPunt[] =
+          bron === 'instagram'
+            ? leesInstagram(tekst).map(alsRuwPunt(naam))
+            : leesBestand(tekst, naam || undefined);
         if (ruwe.length === 0) {
           setFout('Er stond geen enkel punt in dit bestand.');
           setVoorstellen(null);
@@ -77,7 +107,7 @@ export const ImportScherm = () => {
         setFout(e instanceof Error ? e.message : 'Dit bestand kon ik niet lezen.');
       }
     },
-    [plaatsen],
+    [plaatsen, bron],
   );
 
   const kiesBestand = async (bestand: File) => {
@@ -100,7 +130,11 @@ export const ImportScherm = () => {
       url: v.ruw.url,
       stadId: v.stadId,
       koppelingPlaatsId: koppelen.has(i) ? v.plaatsId : undefined,
-      bron: 'google-maps',
+      bron,
+      // Tips uit Instagram zijn per definitie niet door de app nagekeken. Reels
+      // noemen geregeld zaken die inmiddels gesloten of betaald zijn, en dat
+      // verschil met de redactionele content moet zichtbaar blijven.
+      ongeverifieerd: bron === 'instagram' ? true : undefined,
       toegevoegdOp: nu,
     }));
     await bewaarEigenPunten(punten);
@@ -110,12 +144,25 @@ export const ImportScherm = () => {
     setBestaande(await leesEigenPunten());
   };
 
+  const bewaarBewerking = async (punt: EigenPunt) => {
+    await werkEigenPuntBij(punt);
+    setBestaande(await leesEigenPunten());
+    setBewerken(null);
+  };
+
+  const gooiPuntWeg = async (id: string) => {
+    await verwijderEigenPunt(id);
+    setBestaande(await leesEigenPunten());
+    setBewerken(null);
+  };
+
   const gooiLijstWeg = async (lijst: string) => {
     await verwijderEigenPuntenVanLijst(lijst);
     setBestaande(await leesEigenPunten());
   };
 
   const lijsten = [...new Set(bestaande.map((p) => p.lijst ?? 'zonder naam'))];
+  const zonderPlekBestaand = bestaande.filter((p) => !p.coordinaten).length;
   const telling = (z: Zekerheid) => voorstellen?.filter((v) => v.zekerheid === z).length ?? 0;
   const zonderPlek = voorstellen?.filter((v) => !v.ruw.coordinaten).length ?? 0;
 
@@ -132,6 +179,44 @@ export const ImportScherm = () => {
       </p>
 
       <Kaartje className="mb-5 p-4">
+        <fieldset className="mb-4">
+          <legend className="mb-1.5 text-sm font-medium">Waar komt dit vandaan?</legend>
+          <div className="flex flex-wrap gap-1.5">
+            {(
+              [
+                ['google-maps', 'Google Maps'],
+                ['instagram', 'Instagram'],
+              ] as const
+            ).map(([id, naam]) => (
+              <button
+                key={id}
+                type="button"
+                onClick={() => {
+                  setBron(id);
+                  setVoorstellen(null);
+                  setFout(null);
+                }}
+                aria-pressed={bron === id}
+                className={`rounded-full border px-3 py-1.5 text-sm transition ${
+                  bron === id
+                    ? 'border-zegel bg-zegel text-white'
+                    : 'border-black/10 bg-white/70 dark:border-white/15 dark:bg-nacht-diep/70'
+                }`}
+              >
+                {naam}
+              </button>
+            ))}
+          </div>
+          {bron === 'instagram' && (
+            <p className="mt-2 text-xs leading-relaxed text-inkt-zacht dark:text-papier/55">
+              Let op: de officiële Instagram export bevat van opgeslagen berichten alleen een link
+              en een tijdstip. Geen bijschrift, geen locatie. Die punten komen binnen zonder plek en
+              wacht je hieronder af om zelf af te maken. Heb je de tips al uitgeschreven, plak ze
+              dan als <code>plek | tip | account</code>, één per regel.
+            </p>
+          )}
+        </fieldset>
+
         <label className="mb-1.5 block text-sm font-medium" htmlFor="lijstnaam">
           Naam van de lijst
         </label>
@@ -169,7 +254,11 @@ export const ImportScherm = () => {
           value={plaktekst}
           onChange={(e) => setPlaktekst(e.target.value)}
           rows={5}
-          placeholder={'Fushimi Inari\nNishiki markt; 35.0050; 135.7649\nGion'}
+          placeholder={
+            bron === 'instagram'
+              ? 'Fushimi Inari | ga bij zonsopgang, dan is de berg leeg | kyotowalks\nBun cha Huong Lien | voor 11 uur, daarna vol | hanoistreets'
+              : 'Fushimi Inari\nNishiki markt; 35.0050; 135.7649\nGion'
+          }
           className="w-full rounded-lg border border-black/10 bg-white px-3 py-2 font-mono text-sm dark:border-white/15 dark:bg-nacht"
         />
         <div className="mt-3">
@@ -248,10 +337,20 @@ export const ImportScherm = () => {
         </section>
       )}
 
-      {lijsten.length > 0 && (
+      {bestaande.length > 0 && (
         <section>
-          <Sectiekop>Wat er al binnen is</Sectiekop>
-          <div className="grid gap-2">
+          <Sectiekop extra={<span className="text-xs">{bestaande.length} punten</span>}>
+            Wat er al binnen is
+          </Sectiekop>
+
+          {zonderPlekBestaand > 0 && (
+            <p className="mb-3 rounded-xl bg-amber-50 p-3 text-sm text-amber-950 dark:bg-amber-950/40 dark:text-amber-100">
+              {zonderPlekBestaand} punten hebben nog geen plek op de kaart. Tik erop om ze te
+              plaatsen; ze verdwijnen niet vanzelf.
+            </p>
+          )}
+
+          <div className="mb-4 grid gap-2">
             {lijsten.map((lijst) => (
               <Kaartje key={lijst} className="flex items-center gap-3 p-3">
                 <span className="min-w-0 flex-1">
@@ -261,10 +360,49 @@ export const ImportScherm = () => {
                   </span>
                 </span>
                 <Knop klein soort="stil" onClick={() => void gooiLijstWeg(lijst)}>
-                  Verwijder
+                  Verwijder lijst
                 </Knop>
               </Kaartje>
             ))}
+          </div>
+
+          <div className="grid gap-2">
+            {bestaande.map((punt) =>
+              bewerken === punt.id ? (
+                <PuntBewerken
+                  key={punt.id}
+                  punt={punt}
+                  steden={STEDEN}
+                  plaatsen={plaatsen}
+                  onBewaar={(p) => void bewaarBewerking(p)}
+                  onVerwijder={(id) => void gooiPuntWeg(id)}
+                  onSluit={() => setBewerken(null)}
+                />
+              ) : (
+                <Kaartje key={punt.id} className="p-3">
+                  <button
+                    type="button"
+                    onClick={() => setBewerken(punt.id)}
+                    className="w-full text-left"
+                  >
+                    <span className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                      <span className="font-medium">{punt.naam}</span>
+                      <Label toon="eigen">
+                        {punt.bron === 'instagram' ? 'Instagram' : 'Google Maps'}
+                      </Label>
+                      {punt.ongeverifieerd && <Label toon="let-op">ongeverifieerd</Label>}
+                      {!punt.coordinaten && <Label toon="let-op">geen plek</Label>}
+                      {punt.koppelingPlaatsId && <Label toon="gratis">gekoppeld</Label>}
+                    </span>
+                    {punt.notitie && (
+                      <span className="mt-1 block text-sm text-inkt-zacht dark:text-papier/65">
+                        {punt.notitie}
+                      </span>
+                    )}
+                  </button>
+                </Kaartje>
+              ),
+            )}
           </div>
         </section>
       )}
@@ -291,6 +429,12 @@ export const ImportScherm = () => {
         <p className="mt-3 leading-relaxed">
           Lukt de export niet, plak dan de namen. Punten zonder coördinaten komen gewoon binnen en
           blijven staan tot je ze op de kaart zet.
+        </p>
+        <p className="mt-3 leading-relaxed">
+          Voor Instagram: ga in de app naar Instellingen, Je activiteit, Je informatie downloaden,
+          en vraag je gegevens op. In de export zit <code>saved_posts.json</code>. Daar staan alleen
+          links en tijdstippen in, dus reken erop dat je de plek en de tip zelf toevoegt. Dat gaat
+          sneller als je de tips meteen uitschrijft en ze hier plakt.
         </p>
       </details>
     </div>

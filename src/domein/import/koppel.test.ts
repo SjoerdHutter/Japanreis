@@ -50,6 +50,17 @@ describe('normaliseer en naamGelijkenis', () => {
     expect(naamGelijkenis('Kinkaku-ji', 'Ginkaku-ji')).toBeLessThan(0.6);
     expect(naamGelijkenis('Fushimi Inari', 'Sensō-ji')).toBe(0);
   });
+
+  it('laat korte woorden niet op een deelreeks matchen', () => {
+    // "een" zit in "en", en zonder ondergrens stelde de app daardoor Shukkei-en
+    // voor bij een zaak waarvan alleen bekend was dat hij ergens in Osaka lag.
+    expect(naamGelijkenis('Een zaak zonder plek', 'Shukkei-en')).toBe(0);
+    expect(naamGelijkenis('De tuin', 'Deuren')).toBe(0);
+  });
+
+  it('blijft wel matchen op woorden die lang genoeg zijn', () => {
+    expect(naamGelijkenis('Senso', 'Sensoji')).toBeGreaterThanOrEqual(0.8);
+  });
 });
 
 describe('stadVoorPunt', () => {

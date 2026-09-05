@@ -133,6 +133,15 @@ export const bewaarEigenPunten = async (punten: EigenPunt[]): Promise<void> => {
   }
 };
 
+/** Werkt één punt bij: een plek erbij zetten, koppelen of de notitie wijzigen. */
+export const werkEigenPuntBij = async (punt: EigenPunt): Promise<void> => {
+  try {
+    await (await getDb()).put('eigenpunten', punt);
+  } catch {
+    /* geen opslag beschikbaar */
+  }
+};
+
 export const verwijderEigenPunt = async (id: string): Promise<void> => {
   try {
     await (await getDb()).delete('eigenpunten', id);

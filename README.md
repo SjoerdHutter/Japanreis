@@ -112,6 +112,8 @@ Gebouwd:
   1, het stadsscherm met kaart, clustering en offline opslaan.
 - Fase 2: de filters uit hoofdstuk 2 en 3, de waarschuwing bij vaste
   sluitingsdagen, en de geschiedenis op twee niveaus.
+- Fase 3: de persoonlijke lagen. Google Maps import, Instagram collectie met de
+  markering ongeverifieerd, en het bewerken van eigen punten.
 - Een startset van 61 punten over zeven steden.
 - Uit fase 3 naar voren gehaald: de Google Maps import, inclusief het scherm om
   een Takeout export of een geplakte lijst in te lezen.
@@ -136,8 +138,24 @@ coördinaten komen gewoon binnen en blijven staan tot je ze met de hand plaatst;
 er wordt nooit iets weggegooid. Lukt de export helemaal niet, dan kun je de
 namen ook plakken.
 
-Nog te doen: de Instagram collectie uit hoofdstuk 6, de fotokaart, het digitale
-stempelboek, de praktische modules, de dagplanner en de Hanoi overstapplanner.
+Nog te doen: de fotokaart, het digitale stempelboek, de praktische modules, de
+dagplanner en de Hanoi overstapplanner.
+
+### Een Instagram collectie importeren
+
+De officiële export van Instagram bevat van opgeslagen berichten alleen een link
+en een tijdstip. Geen bijschrift, geen locatie, geen tip. Dat is geen
+tekortkoming van de importer maar van het bestand; wie beweert die gegevens er
+wel uit te halen, verzint ze.
+
+Er zijn dus twee wegen. De ruwe `saved_posts.json` uit de export levert de links
+op met het account erbij; die punten komen binnen zonder plek en wacht je af om
+zelf af te maken. Sneller is het om de tips uit te schrijven en te plakken als
+`plek | tip | account`, één per regel. Dat werkt ook als CSV met kolommen voor
+locatie, tip, bron en link.
+
+Alles uit Instagram krijgt de markering ongeverifieerd, want reels noemen
+geregeld zaken die inmiddels gesloten of betaald zijn.
 
 ### Wat fase 2 toevoegt
 

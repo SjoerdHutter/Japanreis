@@ -57,6 +57,7 @@ export const Kaart = ({
   positie,
   hoogte = '20rem',
   onKies,
+  onTikOpKaart,
 }: {
   punten: KaartPunt[];
   /** Waar de kaart op begint. Meestal het kaartgebied van de stad. */
@@ -64,6 +65,12 @@ export const Kaart = ({
   positie?: Coordinaat | null;
   hoogte?: string;
   onKies?: (id: string) => void;
+  /**
+   * Een tik op de kaart zelf, voor het handmatig plaatsen van een punt of een
+   * foto zonder GPS. Tikken en niet slepen: op een telefoon is een speld van
+   * zestien pixels lastig te pakken, en het resultaat is hetzelfde.
+   */
+  onTikOpKaart?: (plek: Coordinaat) => void;
 }) => {
   const houder = useRef<HTMLDivElement>(null);
   const kaart = useRef<L.Map | null>(null);
@@ -74,6 +81,10 @@ export const Kaart = ({
   useEffect(() => {
     kiesRef.current = onKies;
   }, [onKies]);
+  const tikRef = useRef(onTikOpKaart);
+  useEffect(() => {
+    tikRef.current = onTikOpKaart;
+  }, [onTikOpKaart]);
 
   useEffect(() => {
     if (!houder.current || kaart.current) return;
@@ -95,6 +106,9 @@ export const Kaart = ({
       },
     });
     m.addLayer(groep.current);
+    m.on('click', (gebeurtenis) => {
+      tikRef.current?.({ lat: gebeurtenis.latlng.lat, lon: gebeurtenis.latlng.lng });
+    });
     kaart.current = m;
 
     return () => {

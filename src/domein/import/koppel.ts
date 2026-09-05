@@ -59,6 +59,8 @@ const RUISWOORDEN = new Set([
   'dera',
   'jinja',
   'taisha',
+  'een',
+  'en',
 ]);
 
 export const normaliseer = (naam: string): string =>
@@ -82,6 +84,24 @@ const woorden = (naam: string): string[] =>
  * namen uiteenlopen: "Sensō-ji" tegenover "Sensoji Temple, Asakusa" verschilt
  * in vrijwel elke letter maar deelt het enige woord dat ertoe doet.
  */
+/**
+ * Twee woorden die hetzelfde aanduiden.
+ *
+ * Gelijk is altijd goed. Het een in het ander laten passen mag alleen bij
+ * woorden van enige lengte: zonder die ondergrens telt "een" als treffer op
+ * "en", en dan stelt de app "Shukkei-en" voor bij "Een zaak zonder plek". Vier
+ * letters is genoeg om "Senso" op "Sensoji" te laten matchen en te weinig om
+ * lidwoorden en voorzetsels mee te laten doen.
+ */
+const KORTSTE_DEELWOORD = 4;
+
+const raakt = (a: string, b: string): boolean => {
+  if (a === b) return true;
+  const kort = a.length <= b.length ? a : b;
+  const lang = a.length <= b.length ? b : a;
+  return kort.length >= KORTSTE_DEELWOORD && lang.includes(kort);
+};
+
 export const naamGelijkenis = (a: string, b: string): number => {
   const na = normaliseer(a);
   const nb = normaliseer(b);
@@ -94,7 +114,7 @@ export const naamGelijkenis = (a: string, b: string): number => {
     return na.includes(nb) || nb.includes(na) ? 0.75 : 0;
   }
 
-  const gedeeld = wa.filter((w) => wb.some((v) => v === w || v.includes(w) || w.includes(v)));
+  const gedeeld = wa.filter((w) => wb.some((v) => raakt(w, v)));
   return gedeeld.length / Math.min(wa.length, wb.length);
 };
 
