@@ -49,8 +49,29 @@ export const weekdagSchema = z.enum([
 ]);
 export type Weekdag = z.infer<typeof weekdagSchema>;
 
-/** De volgorde die `Date.getDay()` aanhoudt, zodat omrekenen één opzoeking is. */
+/**
+ * De week zoals je hem opschrijft en leest: van maandag tot zondag. Gebruik
+ * deze overal waar dagen op het scherm komen of gesorteerd worden.
+ */
 export const WEEKDAGEN: readonly Weekdag[] = [
+  'maandag',
+  'dinsdag',
+  'woensdag',
+  'donderdag',
+  'vrijdag',
+  'zaterdag',
+  'zondag',
+];
+
+/**
+ * Dezelfde dagen, maar in de volgorde die `Date.getDay()` aanhoudt.
+ *
+ * Apart van de lijst hierboven omdat de twee volgordes verschillen: JavaScript
+ * begint de week op zondag en wij op maandag. Eén lijst voor allebei gebruiken
+ * levert dagen op die een plaats opschuiven, en dat merk je pas als je op de
+ * verkeerde dag voor een dichte deur staat.
+ */
+export const WEEKDAGEN_VANAF_ZONDAG: readonly Weekdag[] = [
   'zondag',
   'maandag',
   'dinsdag',

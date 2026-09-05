@@ -5,6 +5,7 @@ import { Keuzebalk } from './Keuzebalk';
 import { StadKaartje } from './StadKaartje';
 import { Kaartje, Knop, Label, Sectiekop } from '@/ui/basis';
 import { leesCachestatus } from '@/data/db/idb';
+import { TIJDLIJNEN } from '@/data/content';
 import type { Reden } from '@/domein/highlight/bepaal';
 
 /**
@@ -114,6 +115,30 @@ export const Hoofdmenu = () => {
         <div className="grid gap-2">
           {rest.map((stad) => (
             <StadKaartje key={stad.id} stad={stad} offline={offlineSteden.has(stad.id)} />
+          ))}
+        </div>
+      </section>
+
+      <section className="mt-8">
+        <Sectiekop>Geschiedenis</Sectiekop>
+        <div className="grid gap-2">
+          {TIJDLIJNEN.map((tijdlijn) => (
+            <Link
+              key={tijdlijn.id}
+              to={`/tijdlijn/${tijdlijn.id}`}
+              className="flex items-center gap-3 rounded-xl border border-black/5 bg-white/60 px-3.5 py-3 transition hover:bg-white dark:border-white/10 dark:bg-nacht-diep/60 dark:hover:bg-nacht-diep"
+            >
+              <span className="min-w-0 flex-1">
+                <span className="block font-medium">Tijdlijn {tijdlijn.naam}</span>
+                <span className="block text-sm text-inkt-zacht dark:text-papier/60">
+                  {tijdlijn.tijdvakken[0].naam} tot{' '}
+                  {tijdlijn.tijdvakken[tijdlijn.tijdvakken.length - 1].naam}
+                </span>
+              </span>
+              <span className="text-xs text-inkt-zacht dark:text-papier/50">
+                {tijdlijn.tijdvakken.length} tijdvakken
+              </span>
+            </Link>
           ))}
         </div>
       </section>

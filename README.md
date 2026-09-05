@@ -110,6 +110,8 @@ Gebouwd:
   centrale valutahelper.
 - Fase 1: hoofdmenu met alle steden, de volledige highlight logica uit hoofdstuk
   1, het stadsscherm met kaart, clustering en offline opslaan.
+- Fase 2: de filters uit hoofdstuk 2 en 3, de waarschuwing bij vaste
+  sluitingsdagen, en de geschiedenis op twee niveaus.
 - Een startset van 61 punten over zeven steden.
 - Uit fase 3 naar voren gehaald: de Google Maps import, inclusief het scherm om
   een Takeout export of een geplakte lijst in te lezen.
@@ -134,6 +136,28 @@ coördinaten komen gewoon binnen en blijven staan tot je ze met de hand plaatst;
 er wordt nooit iets weggegooid. Lukt de export helemaal niet, dan kun je de
 namen ook plakken.
 
-Nog te doen: de filters uit hoofdstuk 2 en 3, de persoonlijke lagen uit
-hoofdstuk 5 en 6, de fotokaart, het stempelboek, de praktische modules, de
-dagplanner en de Hanoi overstapplanner.
+Nog te doen: de Instagram collectie uit hoofdstuk 6, de fotokaart, het digitale
+stempelboek, de praktische modules, de dagplanner en de Hanoi overstapplanner.
+
+### Wat fase 2 toevoegt
+
+Het stadsscherm heeft vier tabbladen (attracties, eten, stempels, eigen punten)
+die samen één kaart delen. De kaart toont wat het filter overlaat, zodat "ramen
+onder EUR 9 binnen tien minuten lopen" niet alleen een lijst is maar ook laat
+zien welke kant je op moet. Elk tabblad houdt zijn eigen filter bij: één gedeeld
+filter neemt een keuze als "tempel" mee naar het tabblad Eten, waar de lijst dan
+leeg is zonder dat je ziet waardoor.
+
+Het afstandsfilter heeft je locatie nodig. Zonder vertrekpunt is een looptijd
+betekenisloos, dus dan staat er een knop om de locatie aan te zetten in plaats
+van een filter dat stilletjes niets doet.
+
+De waarschuwing bij sluitingsdagen rekent met de weekdag in de tijdzone van de
+stad. Plan je vanaf de bank een dag in Kyoto, dan is het daar al morgen, en dan
+telt de sluitingsdag van morgen.
+
+De geschiedenis loopt twee kanten op, zoals hoofdstuk 4 vraagt. Vanaf een
+attractie brengt het tijdvaklabel je naar dat tijdvak in de landtijdlijn; vanaf
+een tijdvak brengt de stadsnaam je terug naar die stad, gefilterd op dat
+tijdvak. Dat filter komt uit de link (`?tijdvak=edo`) en niet uit de
+schermtoestand, zodat een gedeelde link hetzelfde laat zien.
