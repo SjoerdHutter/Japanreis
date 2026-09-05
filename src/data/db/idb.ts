@@ -38,6 +38,44 @@ interface JapanreisDB extends DBSchema {
   /** Uitgaven en geldopnames; zie domein/budget. */
   uitgaven: { key: string; value: Uitgave };
   opnames: { key: string; value: Opname };
+  /** Reserveringen en opgeslagen overstapplannen; zie domein/planning. */
+  reserveringen: { key: string; value: Reservering };
+  overstappen: { key: string; value: OpgeslagenOverstap };
+}
+
+/**
+ * Een reservering: restaurant, ryokan, of een ticket dat op een vast moment in
+ * de verkoop gaat.
+ *
+ * Dat laatste is waarom dit meer is dan een lijstje. Het Ghibli Museum verkoopt
+ * op de tiende van de maand ervoor en is binnen minuten weg; teamLab werkt met
+ * tijdvakken. Wie dat moment mist, mist het bezoek.
+ */
+export interface Reservering {
+  id: string;
+  wat: string;
+  /** Datum van het bezoek zelf, als YYYY-MM-DD. */
+  datum?: string;
+  /** Tijd van het bezoek als HH:MM. */
+  tijd?: string;
+  /** Wanneer de kaartverkoop opengaat, als YYYY-MM-DD. */
+  verkoopVanaf?: string;
+  stadId?: string;
+  plaatsId?: string;
+  status: 'te-regelen' | 'geboekt';
+  notitie?: string;
+}
+
+/** Een opgeslagen overstapplan voor Hanoi, heen of terug. */
+export interface OpgeslagenOverstap {
+  /** 'heenreis' of 'terugreis'; twee plannen die los van elkaar staan. */
+  id: 'heenreis' | 'terugreis';
+  landing: string;
+  vertrek: string;
+  bagageOphalen: boolean;
+  /** De punten die je voor dit dagdeel hebt gekozen. */
+  plaatsIds: string[];
+  bewaardOp: string;
 }
 
 /**
@@ -93,7 +131,7 @@ export interface OpgeslagenFoto {
 }
 
 const DB_NAAM = 'japanreis';
-const DB_VERSIE = 5;
+const DB_VERSIE = 6;
 
 let dbBelofte: Promise<IDBPDatabase<JapanreisDB>> | null = null;
 
@@ -124,6 +162,12 @@ export const getDb = (): Promise<IDBPDatabase<JapanreisDB>> => {
       }
       if (!db.objectStoreNames.contains('opnames')) {
         db.createObjectStore('opnames', { keyPath: 'id' });
+      }
+      if (!db.objectStoreNames.contains('reserveringen')) {
+        db.createObjectStore('reserveringen', { keyPath: 'id' });
+      }
+      if (!db.objectStoreNames.contains('overstappen')) {
+        db.createObjectStore('overstappen', { keyPath: 'id' });
       }
     },
   });
@@ -355,6 +399,48 @@ export const bewaarOpname = async (opname: Opname): Promise<void> => {
 export const verwijderOpname = async (id: string): Promise<void> => {
   try {
     await (await getDb()).delete('opnames', id);
+  } catch {
+    /* geen opslag beschikbaar */
+  }
+};
+
+/** Reserveringen. */
+export const leesReserveringen = async (): Promise<Reservering[]> => {
+  try {
+    return await (await getDb()).getAll('reserveringen');
+  } catch {
+    return [];
+  }
+};
+
+export const bewaarReservering = async (reservering: Reservering): Promise<void> => {
+  try {
+    await (await getDb()).put('reserveringen', reservering);
+  } catch {
+    /* geen opslag beschikbaar */
+  }
+};
+
+export const verwijderReservering = async (id: string): Promise<void> => {
+  try {
+    await (await getDb()).delete('reserveringen', id);
+  } catch {
+    /* geen opslag beschikbaar */
+  }
+};
+
+/** Opgeslagen overstapplannen, heen en terug apart. */
+export const leesOverstappen = async (): Promise<OpgeslagenOverstap[]> => {
+  try {
+    return await (await getDb()).getAll('overstappen');
+  } catch {
+    return [];
+  }
+};
+
+export const bewaarOverstap = async (overstap: OpgeslagenOverstap): Promise<void> => {
+  try {
+    await (await getDb()).put('overstappen', overstap);
   } catch {
     /* geen opslag beschikbaar */
   }

@@ -9,6 +9,8 @@ import { StempelboekScherm } from '@/features/stempels/StempelboekScherm';
 import { AppgidsScherm } from '@/features/praktisch/AppgidsScherm';
 import { VervoerScherm } from '@/features/praktisch/VervoerScherm';
 import { BudgetScherm } from '@/features/praktisch/BudgetScherm';
+import { DagplannerScherm } from '@/features/planning/DagplannerScherm';
+import { OverstapScherm } from '@/features/planning/OverstapScherm';
 
 const App = () => (
   <AppProvider>
@@ -21,6 +23,8 @@ const App = () => (
       <Route path="/apps" element={<AppgidsScherm />} />
       <Route path="/vervoer" element={<VervoerScherm />} />
       <Route path="/budget" element={<BudgetScherm />} />
+      <Route path="/dagplanner" element={<DagplannerScherm />} />
+      <Route path="/overstap" element={<OverstapScherm />} />
       <Route path="/tijdlijn/:tijdlijnId" element={<TijdlijnScherm />} />
       <Route path="/geschiedenis/:stadId" element={<StadGeschiedenisScherm />} />
       {/* Onbekend pad hoort niet op een lege pagina uit te komen; terug naar

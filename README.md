@@ -119,6 +119,7 @@ Gebouwd:
 - Fase 5: het digitale stempelboek, met tellers per stad en per type.
 - Fase 6: de appgids, de JR Pass rekentool, budget met contantteller, tax free
   en bagage.
+- Fase 7: de dagplanner, de reserveringsagenda en de Hanoi overstapplanner.
 - Een startset van 61 punten over zeven steden.
 - Uit fase 3 naar voren gehaald: de Google Maps import, inclusief het scherm om
   een Takeout export of een geplakte lijst in te lezen.
@@ -143,8 +144,29 @@ coördinaten komen gewoon binnen en blijven staan tot je ze met de hand plaatst;
 er wordt nooit iets weggegooid. Lukt de export helemaal niet, dan kun je de
 namen ook plakken.
 
-Nog te doen: de dagplanner, de reserveringsagenda, de Hanoi overstapplanner, en
-de afronding uit fase 8.
+Nog te doen: de afronding uit fase 8.
+
+### De dagplanner en de overstapplanner
+
+De dagplanner zet je gekozen punten in een looproute (naaste buur vanaf het
+eerste punt) en schuift elke stop op tot hij binnen de openingstijden past. Wat
+die dag gesloten is gaat eruit met de reden erbij, en wat niet meer past komt
+apart te staan in plaats van stilletjes te verdwijnen.
+
+Wat de planner niet doet is doen alsof hij het weet. Openingstijden in de content
+zijn vrije tekst; waar er geen klok uit te halen valt ("Dag en nacht open") komt
+er geen tijdvenster maar de opmerking dat je ze zelf moet nakijken.
+
+De Hanoi overstapplanner rekent met 45 minuten tussen Noi Bai en het centrum,
+elke kant op, een uur op de luchthaven bij aankomst en drie uur incheck voor
+vertrek. Heenreis en terugreis zijn twee losse plannen met elk hun eigen punten:
+op de heenreis ben je fris en wil je de oude wijk in, op de terugreis is een
+koffie aan het meer genoeg.
+
+De datum is optioneel, want vaak plan je dit voordat de vlucht vaststaat. Vul je
+hem in, dan gaat het voorstel door de dagplanner en houdt het rekening met
+openingstijden en sluitingsdagen. Dat scheelt: het Ho Chi Minh mausoleum sluit om
+10:30 en is op maandag en vrijdag dicht.
 
 ### De JR Pass rekentool
 
