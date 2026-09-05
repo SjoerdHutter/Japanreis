@@ -165,6 +165,9 @@ export const Hoofdmenu = () => {
         <Link to="/overstap" className="text-sm text-zegel underline underline-offset-2">
           Overstap Hanoi
         </Link>
+        <Link to="/context" className="text-sm text-zegel underline underline-offset-2">
+          Etiquette en taal
+        </Link>
         <Link to="/import" className="text-sm text-zegel underline underline-offset-2">
           Eigen punten importeren
         </Link>

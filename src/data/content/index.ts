@@ -3,9 +3,15 @@ import tijdlijnenRuw from '../../../data/tijdlijnen.yaml';
 import reisschemaRuw from '../../../data/reisschema.yaml';
 import appsRuw from '../../../data/apps.yaml';
 import vervoerRuw from '../../../data/vervoer.yaml';
+import etiquetteRuw from '../../../data/etiquette.yaml';
+import zinnenRuw from '../../../data/zinnen.yaml';
+import seizoenRuw from '../../../data/seizoen.yaml';
 import {
   appsBestandSchema,
   vervoerBestandSchema,
+  etiquetteBestandSchema,
+  zinnenBestandSchema,
+  seizoenBestandSchema,
   plaatsenBestandSchema,
   reisschemaSchema,
   stedenBestandSchema,
@@ -16,6 +22,9 @@ import {
   type Tijdlijn,
   type App,
   type VervoerContent,
+  type Etiquette,
+  type Zin,
+  type SeizoenContent,
 } from '@/domein/schema';
 
 /**
@@ -54,6 +63,12 @@ export const REISSCHEMA: Reisschema = parseer(reisschemaSchema, reisschemaRuw, '
 export const APPS: App[] = parseer(appsBestandSchema, appsRuw, 'apps');
 
 export const VERVOER: VervoerContent = parseer(vervoerBestandSchema, vervoerRuw, 'vervoer');
+
+export const ETIQUETTE: Etiquette[] = parseer(etiquetteBestandSchema, etiquetteRuw, 'etiquette');
+
+export const ZINNEN: Zin[] = parseer(zinnenBestandSchema, zinnenRuw, 'zinnen');
+
+export const SEIZOEN: SeizoenContent = parseer(seizoenBestandSchema, seizoenRuw, 'seizoen');
 
 export const stadMet = (id: string): Stad | undefined => STEDEN.find((s) => s.id === id);
 

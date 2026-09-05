@@ -1,0 +1,157 @@
+# Offline zinnen met schrift, uit hoofdstuk 13.
+#
+# Het schrift staat erbij zodat je het kunt tonen aan iemand die geen Engels
+# spreekt. Dat is het hele punt: wijzen werkt, uitspreken vaak niet.
+#
+# De uitspraak staat er in het Nederlands bij, niet in officiële romaji. "Sumimasen"
+# lees je als Nederlander anders dan een Engelsman, en het gaat erom dat het
+# aankomt.
+
+- id: sorry-excuseer
+  categorie: basis
+  land: japan
+  nederlands: Sorry, mag ik u iets vragen
+  lokaal: すみません
+  uitspraak: soemiemasen
+  wanneer: Werkt als sorry, pardon en ober tegelijk. De nuttigste zin die er is.
+
+- id: dank
+  categorie: basis
+  land: japan
+  nederlands: Dank u wel
+  lokaal: ありがとうございます
+  uitspraak: arigatoo gozaimas
+
+- id: engels
+  categorie: basis
+  land: japan
+  nederlands: Spreekt u Engels
+  lokaal: 英語は話せますか
+  uitspraak: eego wa hanasemas ka
+
+- id: begrijp-niet
+  categorie: basis
+  land: japan
+  nederlands: Ik begrijp het niet
+  lokaal: わかりません
+  uitspraak: wakarimasen
+
+- id: rekening
+  categorie: eten
+  land: japan
+  nederlands: De rekening graag
+  lokaal: お会計をお願いします
+  uitspraak: okaikee o onegai sjimas
+
+- id: lekker
+  categorie: eten
+  land: japan
+  nederlands: Het was heerlijk
+  lokaal: ごちそうさまでした
+  uitspraak: gotsjisoosama desjita
+  wanneer: Zeg je bij het weggaan. Wordt zeer gewaardeerd.
+
+- id: vegetarisch
+  categorie: eten
+  land: japan
+  nederlands: Ik eet geen vlees en geen vis
+  lokaal: 肉と魚は食べられません
+  uitspraak: nikoe to sakana wa taberaremasen
+  wanneer: >-
+    Let op: dashi, de bouillon die vrijwel overal in zit, is van vis gemaakt.
+    Vraag er apart naar met de zin hieronder.
+
+- id: dashi
+  categorie: eten
+  land: japan
+  nederlands: Zit hier vissenbouillon in
+  lokaal: これに出汁（魚）は入っていますか
+  uitspraak: kore ni dasji wa haitte imas ka
+
+- id: allergie-noten
+  categorie: allergie
+  land: japan
+  nederlands: Ik ben allergisch voor noten. Zit dit erin?
+  lokaal: ナッツアレルギーがあります。これに入っていますか
+  uitspraak: nattsoe arerugii ga arimas. kore ni haitte imas ka
+  wanneer: Toon dit scherm aan het personeel; wijzen werkt beter dan uitspreken.
+
+- id: allergie-schaaldieren
+  categorie: allergie
+  land: japan
+  nederlands: Ik ben allergisch voor schaal- en schelpdieren
+  lokaal: 甲殻類アレルギーがあります
+  uitspraak: kookakoeroei arerugii ga arimas
+
+- id: allergie-ei-melk
+  categorie: allergie
+  land: japan
+  nederlands: Ik ben allergisch voor ei en melk
+  lokaal: 卵と乳製品のアレルギーがあります
+  uitspraak: tamago to njoeuseehin no arerugii ga arimas
+
+- id: ziekenhuis
+  categorie: nood
+  land: japan
+  nederlands: Ik heb een dokter nodig
+  lokaal: 医者が必要です
+  uitspraak: isja ga hitsoejoo des
+
+- id: station
+  categorie: onderweg
+  land: japan
+  nederlands: Waar is het station
+  lokaal: 駅はどこですか
+  uitspraak: eki wa doko des ka
+
+- id: hoeveel
+  categorie: onderweg
+  land: japan
+  nederlands: Hoeveel kost dit
+  lokaal: いくらですか
+  uitspraak: ikoera des ka
+
+- id: hallo-vn
+  categorie: basis
+  land: vietnam
+  nederlands: Hallo
+  lokaal: Xin chào
+  uitspraak: sin tsjaao
+
+- id: dank-vn
+  categorie: basis
+  land: vietnam
+  nederlands: Dank u wel
+  lokaal: Cảm ơn
+  uitspraak: kaam un
+
+- id: hoeveel-vn
+  categorie: onderweg
+  land: vietnam
+  nederlands: Hoeveel kost dit
+  lokaal: Bao nhiêu tiền
+  uitspraak: bao njieuw tien
+
+- id: vegetarisch-vn
+  categorie: eten
+  land: vietnam
+  nederlands: Ik eet vegetarisch
+  lokaal: Tôi ăn chay
+  uitspraak: toi aan tsjaai
+  wanneer: >-
+    Ook hier zit vissaus (nuoc mam) in vrijwel alles, ook in gerechten die
+    vegetarisch heten. Vraag er apart naar.
+
+- id: geen-vissaus-vn
+  categorie: eten
+  land: vietnam
+  nederlands: Zonder vissaus alstublieft
+  lokaal: Không nước mắm
+  uitspraak: kong nuuk mam
+
+- id: allergie-vn
+  categorie: allergie
+  land: vietnam
+  nederlands: Ik ben allergisch voor pinda's
+  lokaal: Tôi bị dị ứng với đậu phộng
+  uitspraak: toi bie zie ung voi dauw fong

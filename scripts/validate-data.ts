@@ -19,6 +19,11 @@ import { tijdlijnenBestandSchema } from '../src/domein/schema/tijdlijn';
 import { reisschemaSchema } from '../src/domein/schema/reis';
 import { plaatsenBestandSchema } from '../src/domein/schema/plaats';
 import { appsBestandSchema, vervoerBestandSchema } from '../src/domein/schema/praktisch';
+import {
+  etiquetteBestandSchema,
+  seizoenBestandSchema,
+  zinnenBestandSchema,
+} from '../src/domein/schema/context';
 import { binnenGebied } from '../src/domein/geo/afstand';
 
 const DATA = 'data';
@@ -53,6 +58,20 @@ const reisschema = controleer(
 
 const apps = controleer(appsBestandSchema, lees(join(DATA, 'apps.yaml')), 'apps.yaml');
 const vervoer = controleer(vervoerBestandSchema, lees(join(DATA, 'vervoer.yaml')), 'vervoer.yaml');
+const etiquette = controleer(
+  etiquetteBestandSchema,
+  lees(join(DATA, 'etiquette.yaml')),
+  'etiquette.yaml',
+);
+const zinnen = controleer(zinnenBestandSchema, lees(join(DATA, 'zinnen.yaml')), 'zinnen.yaml');
+const seizoen = controleer(seizoenBestandSchema, lees(join(DATA, 'seizoen.yaml')), 'seizoen.yaml');
+
+if (zinnen && new Set(zinnen.map((z) => z.id)).size !== zinnen.length) {
+  fouten.push('zinnen.yaml: dubbele zin-id');
+}
+if (etiquette && new Set(etiquette.map((e) => e.id)).size !== etiquette.length) {
+  fouten.push('etiquette.yaml: dubbele etiquette-id');
+}
 
 if (apps && new Set(apps.map((a) => a.id)).size !== apps.length) {
   fouten.push('apps.yaml: dubbele app-id');
@@ -156,8 +175,26 @@ if (steden && tijdlijnen && reisschema) {
     }
   }
 
+  // Elke stad hoort in een seizoensregio te vallen, anders staat er bij die
+  // stad geen woord over bloesem, herfstblad of tyfoonseizoen.
+  if (seizoen) {
+    const inRegio = new Set(seizoen.regios.flatMap((r) => r.steden));
+    for (const stad of steden) {
+      if (!inRegio.has(stad.id)) {
+        opmerkingen.push(`seizoen.yaml: ${stad.id} valt in geen enkele regio`);
+      }
+    }
+    for (const regio of seizoen.regios) {
+      for (const stadId of regio.steden) {
+        if (!stadIds.has(stadId)) {
+          fouten.push(`seizoen.yaml: regio ${regio.id} noemt onbekende stad "${stadId}"`);
+        }
+      }
+    }
+  }
+
   console.log(
-    `Gecontroleerd: ${steden.length} steden, ${plaatsIds.size} plaatsen, ${apps?.length ?? 0} apps, ${vervoer?.trajecten.length ?? 0} trajecten.`,
+    `Gecontroleerd: ${steden.length} steden, ${plaatsIds.size} plaatsen, ${apps?.length ?? 0} apps, ${vervoer?.trajecten.length ?? 0} trajecten, ${etiquette?.length ?? 0} etiquettekaarten, ${zinnen?.length ?? 0} zinnen.`,
   );
 }
 

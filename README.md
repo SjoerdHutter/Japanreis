@@ -120,6 +120,11 @@ Gebouwd:
 - Fase 6: de appgids, de JR Pass rekentool, budget met contantteller, tax free
   en bagage.
 - Fase 7: de dagplanner, de reserveringsagenda en de Hanoi overstapplanner.
+- Fase 8: etiquette, offline zinnen met schrift, seizoen en weer, de Hanoi
+  visumcheck, je lijst delen, en de volledige offline test.
+
+De app is daarmee compleet volgens de functiespecificatie.
+
 - Een startset van 61 punten over zeven steden.
 - Uit fase 3 naar voren gehaald: de Google Maps import, inclusief het scherm om
   een Takeout export of een geplakte lijst in te lezen.
@@ -144,7 +149,38 @@ coördinaten komen gewoon binnen en blijven staan tot je ze met de hand plaatst;
 er wordt nooit iets weggegooid. Lukt de export helemaal niet, dan kun je de
 namen ook plakken.
 
-Nog te doen: de afronding uit fase 8.
+### Etiquette, taal en seizoen
+
+Het schrift staat groot bij elke zin, want dat is het punt: je laat het zien aan
+iemand die geen Engels spreekt. De uitspraak staat er in Nederlandse spelling
+bij en niet in officiële romaji, omdat een Nederlander "sumimasen" anders leest
+dan een Engelsman en het erom gaat dat het aankomt. De allergiezinnen staan apart,
+inclusief de vraag naar dashi en nuoc mam, die in vrijwel alles zitten ook waar
+het gerecht vegetarisch heet.
+
+De seizoensdata zijn langjarige gemiddelden en geen voorspelling. De bloei
+schuift elk jaar met de winter mee, soms tien dagen. De officiële voorspelling
+verschijnt in januari en wordt tot in maart bijgesteld; die haalt de app niet op,
+want offline werken gaat voor. Dat staat er in het scherm ook zo bij.
+
+### De offline test
+
+Er is een scripted test die de gebouwde app laadt, de service worker laat
+installeren, daarna het netwerk uitzet en alle veertien schermen langsloopt met
+een volledige herlaadbeurt per scherm. Hij controleert ook of de bedragen zonder
+netwerk nog het euro-equivalent tonen en of iets dat je offline opslaat een
+herlaadbeurt overleeft.
+
+Draaien:
+
+```bash
+npm run build
+npx http-server <map met een symlink Japanreis naar dist> -p 4174
+node offline.mjs   # zie de scratchpad; het script staat niet in de repo
+```
+
+Uitkomst bij de laatste run: veertien van de veertien schermen openden zonder
+netwerk, zonder paginafouten.
 
 ### De dagplanner en de overstapplanner
 

@@ -12,6 +12,7 @@ import {
   werkEigenPuntBij,
 } from '@/data/db/idb';
 import { leesInstagram, type InstagramTip } from '@/domein/import/instagram';
+import { alsCsv } from '@/domein/import/deel';
 import { PuntBewerken } from './PuntBewerken';
 import { Kaartje, Knop, Label, Sectiekop } from '@/ui/basis';
 
@@ -160,6 +161,26 @@ export const ImportScherm = () => {
     await verwijderEigenPuntenVanLijst(lijst);
     setBestaande(await leesEigenPunten());
   };
+
+  /**
+   * Je lijst delen met iemand die later gaat, uit hoofdstuk 15.
+   *
+   * Als CSV in precies het formaat dat deze app zelf leest, zodat de ontvanger
+   * het bestand hier kan openen en meteen jouw punten heeft. Er gaat alleen in
+   * wat over de plek gaat; foto's, uitgaven en stempels zijn van jou.
+   */
+  const [deelUrl, setDeelUrl] = useState<string | null>(null);
+  const maakDeelbestand = () => {
+    if (deelUrl) URL.revokeObjectURL(deelUrl);
+    const csv = alsCsv(bestaande);
+    setDeelUrl(URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8' })));
+  };
+  useEffect(
+    () => () => {
+      if (deelUrl) URL.revokeObjectURL(deelUrl);
+    },
+    [deelUrl],
+  );
 
   const lijsten = [...new Set(bestaande.map((p) => p.lijst ?? 'zonder naam'))];
   const zonderPlekBestaand = bestaande.filter((p) => !p.coordinaten).length;
@@ -364,6 +385,25 @@ export const ImportScherm = () => {
                 </Knop>
               </Kaartje>
             ))}
+          </div>
+
+          <div className="mb-4 flex flex-wrap items-center gap-2">
+            <Knop klein onClick={maakDeelbestand}>
+              Deel je lijst
+            </Knop>
+            {deelUrl && (
+              <a
+                href={deelUrl}
+                download="mijn-punten.csv"
+                className="text-sm text-zegel underline underline-offset-2"
+              >
+                mijn-punten.csv opslaan
+              </a>
+            )}
+            <span className="w-full text-xs leading-relaxed text-inkt-zacht dark:text-papier/50">
+              Een bestand met je punten en tips, dat iemand die later gaat hier kan openen. Zonder
+              je foto's, uitgaven of stempels.
+            </span>
           </div>
 
           <div className="grid gap-2">
