@@ -1,0 +1,23 @@
+# Het reisschema. Dit is de tweede bron voor de highlight logica, naast GPS.
+#
+# De datums staan bewust leeg tot de reis geboekt is. Zolang ze leeg zijn valt
+# de highlight terug op GPS, en zonder GPS op de laatst bekeken stad. Vul per
+# segment `van` en `tot` in als YYYY-MM-DD; allebei of geen van beide.
+#
+# Een stad mag meerdere keren voorkomen. Hanoi staat er twee keer in, want de
+# overstap op de heenreis en die op de terugreis zijn aparte dagen met andere
+# plannen.
+
+naam: Japan en Hanoi
+segmenten:
+  - stad: hanoi
+    opmerking: Overstap heenreis, zie de overstapplanner.
+  - stad: tokio
+  - stad: hakone
+  - stad: kyoto
+  - stad: nara
+    opmerking: Dagtrip, met Kyoto of Osaka als basis.
+  - stad: osaka
+  - stad: hiroshima
+  - stad: hanoi
+    opmerking: Overstap terugreis.

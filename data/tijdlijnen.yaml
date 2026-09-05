@@ -1,0 +1,134 @@
+# De tijdlijnen op landniveau. Elke plaats verwijst met `tijdvakken` naar de
+# ids hieronder, en elke stad geeft aan welke tijdvakken daar te zien zijn.
+
+- id: japan
+  naam: Japan
+  tijdvakken:
+    - id: nara
+      naam: Nara
+      van: 710
+      tot: 794
+      samenvatting: >-
+        De eerste vaste hoofdstad, met een hof naar Chinees model en een
+        boeddhisme dat rechtstreeks van het vasteland kwam. Grootschalig,
+        symmetrisch en met staatssteun gebouwd.
+      herkenbaarAan: >-
+        Enorme houten hallen met rechte, zware daken en weinig versiering.
+
+    - id: heian
+      naam: Heian
+      van: 794
+      tot: 1185
+      samenvatting: >-
+        Het hof verhuist naar Kyoto en keert zich naar binnen. Een eeuwenlange
+        bloei van hofcultuur, poëzie en verfijning, terwijl de macht op het
+        platteland langzaam naar krijgersfamilies verschuift.
+      herkenbaarAan: >-
+        Tuinen met vijvers om in te varen, en tempels die eerder op een paleis
+        lijken dan op een klooster.
+
+    - id: kamakura
+      naam: Kamakura
+      van: 1185
+      tot: 1333
+      samenvatting: >-
+        De eerste shogun neemt de macht over en regeert vanuit Kamakura. Zen
+        komt binnen uit China en past bij de soberheid van de krijgersklasse.
+      herkenbaarAan: >-
+        Strakke zenhallen, houten beelden met een realistische, gespierde stijl.
+
+    - id: muromachi
+      naam: Muromachi
+      van: 1336
+      tot: 1573
+      samenvatting: >-
+        De shogun regeert weer vanuit Kyoto. Theeceremonie, no-theater en de
+        droge tuin ontstaan, terwijl het land uiteenvalt in oorlog tussen
+        krijgsheren.
+      herkenbaarAan: >-
+        Droge tuinen van grind en steen, theehuizen, en het contrast tussen
+        Gouden en Zilveren Paviljoen.
+
+    - id: edo
+      naam: Edo
+      van: 1603
+      tot: 1868
+      samenvatting: >-
+        Tweeënhalve eeuw vrede onder de Tokugawa, met het land vrijwel gesloten
+        voor buitenlanders. Steden groeien, een burgerlijke cultuur van theater,
+        prenten en pleziervierken bloeit op.
+      herkenbaarAan: >-
+        Kasteelsteden, houten koopmanshuizen met smalle gevels, en de resten van
+        de oude doorgaande wegen.
+
+    - id: meiji
+      naam: Meiji
+      van: 1868
+      tot: 1912
+      samenvatting: >-
+        Het land gaat in één generatie open en industrialiseert in razend tempo.
+        Westerse techniek, kleding en architectuur worden overgenomen, het
+        shintoisme wordt staatsgodsdienst.
+      herkenbaarAan: >-
+        Bakstenen stationsgebouwen, westerse banken en scholen, en schrijnen die
+        in deze tijd zijn opgewaardeerd of nieuw gebouwd.
+
+    - id: naoorlogs
+      naam: Naoorlogs
+      van: 1945
+      samenvatting: >-
+        Herbouw uit de as, snelle economische groei en een stedelijk landschap
+        van beton dat in de jaren tachtig zijn hoogtepunt bereikt. Het meeste
+        van wat je in de grote steden ziet komt hiervandaan.
+      herkenbaarAan: >-
+        Betonnen wederopbouw van oude kastelen, brede spoorviaducten en
+        winkelstraten onder het spoor.
+
+- id: hanoi
+  naam: Hanoi
+  tijdvakken:
+    - id: thang-long
+      naam: Thang Long
+      van: 1010
+      tot: 1802
+      samenvatting: >-
+        De stad van de opstijgende draak, keizerlijke hoofdstad van
+        opeenvolgende Vietnamese dynastieën. De citadel, de literatuurtempel en
+        de pagodes rond het meer stammen uit deze eeuwen.
+      herkenbaarAan: >-
+        Poorten en binnenhoven van de citadel, en de gildestraten van de oude
+        wijk die nog steeds naar hun handelswaar heten.
+
+    - id: frans-koloniaal
+      naam: Franse koloniale periode
+      van: 1883
+      tot: 1945
+      samenvatting: >-
+        Hanoi wordt het bestuurscentrum van Frans Indochina. Brede boulevards,
+        een operagebouw naar Parijs model en villa's met luiken worden dwars
+        door de oude stad aangelegd.
+      herkenbaarAan: >-
+        Okergele gevels met groene luiken, en een straatplan dat plots recht
+        wordt.
+
+    - id: onafhankelijkheid
+      naam: Onafhankelijkheid en oorlog
+      van: 1945
+      tot: 1975
+      samenvatting: >-
+        Uitroeping van de onafhankelijkheid, de oorlog met Frankrijk en daarna
+        met de Verenigde Staten. Hanoi is hoofdstad van het noorden en wordt
+        gebombardeerd.
+      herkenbaarAan: >-
+        Mausoleum en musea uit de socialistische periode, en de resten van
+        schuilplaatsen in het centrum.
+
+    - id: modern
+      naam: Moderne stad
+      van: 1986
+      samenvatting: >-
+        Na de economische hervormingen groeit de stad hard. Scooters, cafés en
+        nieuwbouw aan de rand, met een oude wijk die vrijwel intact blijft omdat
+        er niet doorheen te bouwen valt.
+      herkenbaarAan: >-
+        Smalle hoge huizen van vier tot zes lagen, en koffiezaken op elke hoek.

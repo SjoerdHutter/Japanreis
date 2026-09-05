@@ -1,0 +1,141 @@
+# Startset voor Nara. Zie de kop van tokio.yaml: niet ter plaatse geverifieerd.
+
+- id: todai-ji
+  naam: Tōdai-ji
+  naamLokaal: 東大寺
+  stad: nara
+  categorie: attractie
+  coordinaten: { lat: 34.689, lon: 135.8398 }
+  beschrijving: >-
+    De Grote Boeddhahal, eeuwenlang het grootste houten gebouw ter wereld, en de
+    huidige is nog maar twee derde van het origineel. Binnen een bronzen Boeddha
+    van vijftien meter. Achterin zit een gat in een pilaar, even groot als het
+    neusgat van het beeld; wie erdoor kruipt heeft geluk.
+  openingstijden:
+    standaard: 07:30-17:30
+    opmerking: Van november tot maart 08:00 tot 17:00.
+  prijs: { bedrag: 800, valuta: JPY, toelichting: Alleen de Grote Boeddhahal }
+  tijdvakken: [nara, edo]
+  attractie:
+    type: tempel
+    bezoekduurMinuten: 90
+    regenbestendig: false
+    dagdeel: [ochtend]
+  goshuin:
+    waar: In de Grote Boeddhahal zelf, rechtsachter naast de uitgang.
+    prijs: { bedrag: 300, valuta: JPY }
+    openingstijden: { standaard: 08:00-16:30 }
+
+- id: kasuga-taisha
+  naam: Kasuga Taisha
+  naamLokaal: 春日大社
+  stad: nara
+  categorie: attractie
+  coordinaten: { lat: 34.6815, lon: 135.8484 }
+  beschrijving: >-
+    Schrijn aan het eind van een bospad met drieduizend stenen lantaarns, groen
+    uitgeslagen van het mos. Het binnenterrein hangt vol bronzen lantaarns die
+    twee keer per jaar allemaal worden aangestoken.
+  openingstijden:
+    standaard: 06:30-17:30
+    opmerking: Het binnenterrein heeft kortere tijden dan het bospad.
+  prijs: { bedrag: 500, valuta: JPY, toelichting: Binnenterrein; het pad is gratis }
+  tijdvakken: [nara, heian]
+  attractie:
+    type: schrijn
+    bezoekduurMinuten: 60
+    regenbestendig: false
+    dagdeel: [ochtend, middag]
+  goshuin:
+    waar: Bij de zuidelijke poort van het binnenterrein.
+    prijs: { bedrag: 500, valuta: JPY }
+    openingstijden: { standaard: 09:00-16:00 }
+
+- id: nara-park
+  naam: Nara park
+  naamLokaal: 奈良公園
+  stad: nara
+  categorie: attractie
+  coordinaten: { lat: 34.6851, lon: 135.843 }
+  beschrijving: >-
+    Twaalfhonderd herten die vrij rondlopen en buigen voor een koekje. Het zijn
+    wilde dieren: ze duwen, bijten in tassen en trekken aan kleding zodra ze
+    papier ruiken. Koop de koekjes pas als je ze meteen kwijt wilt.
+  prijs: gratis
+  tijdvakken: [nara]
+  attractie:
+    type: park
+    bezoekduurMinuten: 60
+    regenbestendig: false
+    dagdeel: [ochtend, middag]
+
+- id: kofuku-ji
+  naam: Kōfuku-ji
+  naamLokaal: 興福寺
+  stad: nara
+  categorie: attractie
+  coordinaten: { lat: 34.6832, lon: 135.8319 }
+  beschrijving: >-
+    Vijf verdiepingen hoge pagode aan de rand van het park, en een schathuis met
+    beelden uit de achtste eeuw die tot de beste van het land horen. Het
+    klooster hier had zoveel macht dat het hof uit Nara vertrok.
+  openingstijden:
+    standaard: 09:00-17:00
+  prijs: { bedrag: 700, valuta: JPY, toelichting: Schathuis }
+  tijdvakken: [nara, kamakura]
+  attractie:
+    type: tempel
+    bezoekduurMinuten: 60
+    regenbestendig: true
+    dagdeel: [ochtend, middag]
+
+- id: naramachi
+  naam: Naramachi
+  naamLokaal: ならまち
+  stad: nara
+  categorie: attractie
+  coordinaten: { lat: 34.6785, lon: 135.8281 }
+  beschrijving: >-
+    Het oude koopmanskwartier ten zuiden van het park: smalle houten huizen met
+    tralievensters, kleine cafés en werkplaatsen. Rustig, ook als het park vol
+    staat.
+  prijs: gratis
+  tijdvakken: [edo, meiji]
+  attractie:
+    type: wijk
+    bezoekduurMinuten: 75
+    regenbestendig: false
+    dagdeel: [middag]
+
+- id: nakatanidou
+  naam: Nakatanidou
+  naamLokaal: 中谷堂
+  stad: nara
+  categorie: eten
+  coordinaten: { lat: 34.6829, lon: 135.8283 }
+  beschrijving: >-
+    Mochiwinkel waar het deeg met twee grote hamers in hoog tempo wordt geslagen
+    en er een menigte omheen staat. De verse yomogi mochi met rode bonen kost
+    een paar honderd yen en is binnen een minuut gemaakt.
+  openingstijden:
+    standaard: 10:00-19:00
+  prijs: { bedrag: 200, valuta: JPY }
+  tijdvakken: [naoorlogs]
+  eten:
+    keuken: streetfood
+    moeite: snelle-bak
+
+- id: station-nara-stempel
+  naam: Eki stamp station Kintetsu Nara
+  naamLokaal: 近鉄奈良駅
+  stad: nara
+  categorie: vervoer
+  coordinaten: { lat: 34.6844, lon: 135.8296 }
+  beschrijving: >-
+    Stempel met een hert erop, op het station waar je vanuit Kyoto of Osaka
+    aankomt.
+  prijs: gratis
+  tijdvakken: [naoorlogs]
+  ekiStempel:
+    waar: Bij het informatiekantoor naast de poortjes, op de begane grond.
+    openingstijden: { standaard: 09:00-19:00 }

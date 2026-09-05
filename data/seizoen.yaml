@@ -1,0 +1,99 @@
+# Seizoen en weer per regio, uit hoofdstuk 13.
+#
+# LET OP: dit zijn langjarige gemiddelden en geen voorspelling. De bloei
+# verschuift elk jaar met de winter mee, soms een week of tien dagen. De
+# officiele voorspelling verschijnt in januari en wordt tot in maart bijgesteld;
+# deze app haalt die niet op, want offline werken gaat voor.
+#
+# `regio` groepeert de steden zoals de bloeivoorspelling dat ook doet.
+
+regios:
+  - id: kanto
+    naam: Kanto (Tokio en omgeving)
+    steden: [tokio, hakone]
+    kersenbloesem:
+      begintTypisch: 03-24
+      hoogtepuntTypisch: 03-30
+      duurDagen: 10
+    herfstblad:
+      begintTypisch: 11-15
+      hoogtepuntTypisch: 11-28
+    opmerking: >-
+      Hakone ligt hoger dan Tokio; de bloei is er ruwweg een week later en het
+      herfstblad een week vroeger.
+
+  - id: kansai
+    naam: Kansai (Kyoto, Osaka, Nara)
+    steden: [kyoto, osaka, nara]
+    kersenbloesem:
+      begintTypisch: 03-26
+      hoogtepuntTypisch: 04-02
+      duurDagen: 10
+    herfstblad:
+      begintTypisch: 11-10
+      hoogtepuntTypisch: 11-25
+    opmerking: >-
+      Kyoto is in bloesem- en herfstseizoen het drukst van heel Japan. Reserveer
+      dan maanden vooruit, en reken op wachtrijen bij de bekende tempels.
+
+  - id: chugoku
+    naam: Chugoku (Hiroshima)
+    steden: [hiroshima]
+    kersenbloesem:
+      begintTypisch: 03-25
+      hoogtepuntTypisch: 04-01
+      duurDagen: 10
+    herfstblad:
+      begintTypisch: 11-10
+      hoogtepuntTypisch: 11-22
+    opmerking: Miyajima heeft in november een eigen, latere piek in de vallei.
+
+  - id: noord-vietnam
+    naam: Noord-Vietnam (Hanoi)
+    steden: [hanoi]
+    herfstblad:
+      begintTypisch: 10-01
+      hoogtepuntTypisch: 10-20
+    opmerking: >-
+      Geen bloesemseizoen. Oktober en november zijn de aangenaamste maanden:
+      droog en rond de 25 graden. Van mei tot september is het heet en vochtig
+      met dagelijkse buien.
+
+waarschuwingen:
+  - id: tyfoon
+    naam: Tyfoonseizoen
+    land: japan
+    vanaf: 08-01
+    tot: 10-15
+    wat: >-
+      Vooral augustus en september. Een tyfoon legt het treinverkeer een dag
+      plat en vluchten worden geschrapt. Ze zijn dagen vooruit bekend, dus
+      houd het nieuws in de gaten en plan geen strakke aansluitingen.
+
+  - id: hitte
+    naam: Hitte en vochtigheid
+    land: japan
+    vanaf: 07-01
+    tot: 09-10
+    wat: >-
+      Boven de 35 graden met een luchtvochtigheid van tachtig procent. Tempels
+      bezoeken doe je dan voor tien uur of na vier uur; daartussen is het
+      binnen. Drink meer dan je denkt nodig te hebben.
+
+  - id: regentijd
+    naam: Regentijd
+    land: japan
+    vanaf: 06-05
+    tot: 07-20
+    wat: >-
+      De tsuyu. Niet de hele dag regen, maar wel elke dag kans erop. Tuinen en
+      mosbedden staan er dan op hun mooist bij.
+
+  - id: moesson-vn
+    naam: Moesson in Noord-Vietnam
+    land: vietnam
+    vanaf: 05-01
+    tot: 09-30
+    wat: >-
+      Heet en vochtig met korte, hevige buien, meestal in de middag. De ochtend
+      is het beste dagdeel om iets te doen.

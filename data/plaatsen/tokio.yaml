@@ -1,0 +1,258 @@
+# Startset voor Tokio.
+#
+# Let op: dit is redactionele startcontent, samengesteld uit algemene kennis en
+# niet ter plaatse geverifieerd. Openingstijden en prijzen in Japan schuiven
+# regelmatig. Controleer alles wat je echt nodig hebt via de bron die eronder
+# staat, en zet dan `gecontroleerdOp` bij die bron.
+
+- id: senso-ji
+  naam: Sensō-ji
+  naamLokaal: 浅草寺
+  stad: tokio
+  categorie: attractie
+  coordinaten: { lat: 35.7148, lon: 139.7967 }
+  beschrijving: >-
+    De oudste tempel van Tokio, en de drukste. De aanloopstraat Nakamise staat
+    vol kraampjes en is overdag schouder aan schouder; vroeg in de ochtend of
+    na zonsondergang loop je er zo doorheen en is de poort verlicht.
+  adres: 2-3-1 Asakusa, Taito
+  openingstijden:
+    standaard: 06:00-17:00
+    opmerking: Het terrein zelf is dag en nacht open, alleen de hoofdhal sluit.
+  prijs: gratis
+  tijdvakken: [edo, naoorlogs]
+  attractie:
+    type: tempel
+    bezoekduurMinuten: 60
+    regenbestendig: false
+    dagdeel: [ochtend, avond]
+    drukte:
+      besteMoment: Voor 08:00 of na 18:00.
+      drukstMoment: 11:00 tot 16:00, en het hele weekend.
+  goshuin:
+    waar: Rechts van de hoofdhal, in het kantoor naast de Yogodo-hal.
+    prijs: { bedrag: 500, valuta: JPY }
+    openingstijden: { standaard: 09:00-16:00 }
+  bronnen:
+    - naam: Sensō-ji
+      url: https://www.senso-ji.jp/
+
+- id: meiji-jingu
+  naam: Meiji Jingū
+  naamLokaal: 明治神宮
+  stad: tokio
+  categorie: attractie
+  coordinaten: { lat: 35.6764, lon: 139.6993 }
+  beschrijving: >-
+    Schrijn in een bos van honderdduizend bomen die er allemaal zijn geplant,
+    midden tussen Harajuku en Yoyogi. De wandeling er naartoe onder de houten
+    poorten is het halve bezoek.
+  openingstijden:
+    standaard: Zonsopgang tot zonsondergang
+    opmerking: De tijden verschuiven per maand mee met het licht.
+  prijs: gratis
+  tijdvakken: [meiji, naoorlogs]
+  attractie:
+    type: schrijn
+    bezoekduurMinuten: 75
+    regenbestendig: false
+    dagdeel: [ochtend]
+    drukte:
+      besteMoment: Vlak na openen, dan is het bos nog stil.
+  goshuin:
+    waar: In het kantoor rechts van de hoofdhal.
+    prijs: { bedrag: 500, valuta: JPY }
+    openingstijden: { standaard: 09:00-16:30 }
+  bronnen:
+    - naam: Meiji Jingū
+      url: https://www.meijijingu.or.jp/
+
+- id: tokyo-national-museum
+  naam: Tokyo National Museum
+  naamLokaal: 東京国立博物館
+  stad: tokio
+  categorie: attractie
+  coordinaten: { lat: 35.7188, lon: 139.7766 }
+  beschrijving: >-
+    Het grootste museum van het land, in het park van Ueno. De Honkan-vleugel
+    geeft in één rondgang een overzicht van de Japanse kunstgeschiedenis en is
+    daarmee de beste voorbereiding op alle tempels die nog komen.
+  openingstijden:
+    standaard: 09:30-17:00
+    perDag: { maandag: gesloten }
+    laatsteToegang: 16:30
+  geslotenOpmerking: >-
+    Valt een feestdag op maandag, dan is het museum die maandag open en de
+    dinsdag erna dicht.
+  prijs: { bedrag: 1000, valuta: JPY }
+  tijdvakken: [nara, heian, kamakura, muromachi, edo, meiji]
+  attractie:
+    type: museum
+    bezoekduurMinuten: 150
+    regenbestendig: true
+    dagdeel: [ochtend, middag]
+  bronnen:
+    - naam: Tokyo National Museum
+      url: https://www.tnm.jp/
+
+- id: shinjuku-gyoen
+  naam: Shinjuku Gyoen
+  naamLokaal: 新宿御苑
+  stad: tokio
+  categorie: attractie
+  coordinaten: { lat: 35.6852, lon: 139.71 }
+  beschrijving: >-
+    Een oude keizerlijke tuin met een Japans, een Engels en een Frans deel. In
+    het kersenbloesemseizoen een van de betrouwbaarste plekken van de stad,
+    doordat er vroege en late soorten door elkaar staan.
+  openingstijden:
+    standaard: 09:00-16:30
+    perDag: { maandag: gesloten }
+    laatsteToegang: '16:00'
+  prijs: { bedrag: 500, valuta: JPY }
+  tijdvakken: [edo, meiji]
+  attractie:
+    type: tuin
+    bezoekduurMinuten: 90
+    regenbestendig: false
+    dagdeel: [ochtend, middag]
+  bronnen:
+    - naam: Shinjuku Gyoen
+      url: https://www.env.go.jp/garden/shinjukugyoen/
+
+- id: metropolitan-government-uitzicht
+  naam: Uitkijk Tokyo Metropolitan Government
+  naamLokaal: 東京都庁展望室
+  stad: tokio
+  categorie: attractie
+  coordinaten: { lat: 35.6896, lon: 139.6921 }
+  beschrijving: >-
+    Het beste gratis uitzicht van de stad, op 202 meter. Bij helder weer aan het
+    eind van de middag staat de Fuji in de verte. Neem de noordelijke toren als
+    de zuidelijke een rij heeft.
+  openingstijden:
+    standaard: 09:30-22:00
+    opmerking: De twee torens hebben elk hun eigen sluitingsdag; kijk vooraf.
+  prijs: gratis
+  tijdvakken: [naoorlogs]
+  attractie:
+    type: uitzichtpunt
+    bezoekduurMinuten: 45
+    regenbestendig: true
+    dagdeel: [middag, avond]
+    drukte:
+      besteMoment: Een uur voor zonsondergang, dan zie je licht en nacht allebei.
+
+- id: yanaka
+  naam: Yanaka
+  naamLokaal: 谷中
+  stad: tokio
+  categorie: attractie
+  coordinaten: { lat: 35.7276, lon: 139.766 }
+  beschrijving: >-
+    Wijk die de aardbeving en de bombardementen grotendeels heeft overleefd, met
+    lage houten huizen, een begraafplaats vol kersenbomen en een winkelstraatje
+    dat nog echt van de buurt is.
+  prijs: gratis
+  tijdvakken: [edo, meiji]
+  attractie:
+    type: wijk
+    bezoekduurMinuten: 120
+    regenbestendig: false
+    dagdeel: [ochtend, middag]
+
+- id: shibuya-crossing
+  naam: Shibuya Crossing
+  naamLokaal: 渋谷スクランブル交差点
+  stad: tokio
+  categorie: attractie
+  coordinaten: { lat: 35.6595, lon: 139.7005 }
+  beschrijving: >-
+    De kruising waar iedereen tegelijk oversteekt. Van bovenaf indrukwekkender
+    dan van beneden: de eerste verdieping van het station of een koffiezaak aan
+    de overkant geeft het overzicht.
+  prijs: gratis
+  tijdvakken: [naoorlogs]
+  attractie:
+    type: wijk
+    bezoekduurMinuten: 30
+    regenbestendig: false
+    dagdeel: [avond, nacht]
+
+- id: tsukiji-buitenmarkt
+  naam: Tsukiji buitenmarkt
+  naamLokaal: 築地場外市場
+  stad: tokio
+  categorie: eten
+  coordinaten: { lat: 35.6654, lon: 139.7707 }
+  beschrijving: >-
+    De vishal is naar Toyosu verhuisd, de buitenmarkt is gebleven. Rond een uur
+    of acht 's ochtends op zijn best: tamagoyaki aan een stokje, gegrilde
+    sint-jakobsschelpen en sushi aan de toonbank.
+  openingstijden:
+    standaard: 05:00-14:00
+    perDag: { zondag: gesloten }
+    opmerking: Veel zaken sluiten al rond het middaguur en ook op woensdag.
+  prijs: { bedrag: 1000, tot: 4000, valuta: JPY }
+  tijdvakken: [naoorlogs]
+  eten:
+    keuken: sushi
+    ontbijt: true
+    moeite: waardig-een-omweg
+
+- id: omoide-yokocho
+  naam: Omoide Yokocho
+  naamLokaal: 思い出横丁
+  stad: tokio
+  categorie: eten
+  coordinaten: { lat: 35.6935, lon: 139.6994 }
+  beschrijving: >-
+    Twee steegjes vol zaken met zes krukken, naast station Shinjuku. Rook,
+    yakitori en bier. Ga vroeg, want na achten staat er een rij en zit je met
+    zeven man op een plek voor vijf.
+  openingstijden:
+    standaard: 17:00-23:30
+    opmerking: Per zaak verschillend; sommige gaan al om 12:00 open.
+  prijs: { bedrag: 2000, tot: 4000, valuta: JPY }
+  tijdvakken: [naoorlogs]
+  eten:
+    keuken: izakaya
+    lateNight: true
+    moeite: waardig-een-omweg
+
+- id: isetan-depachika
+  naam: Depachika Isetan Shinjuku
+  naamLokaal: 伊勢丹新宿店 デパ地下
+  stad: tokio
+  categorie: eten
+  coordinaten: { lat: 35.6917, lon: 139.7044 }
+  beschrijving: >-
+    De voedselkelder van een warenhuis is de goedkoopste manier om dure dingen
+    te proeven. Het laatste uur voor sluitingstijd gaan bento's en gebak met
+    korting weg.
+  openingstijden:
+    standaard: 10:00-20:00
+  prijs: { bedrag: 800, tot: 3000, valuta: JPY }
+  tijdvakken: [naoorlogs]
+  eten:
+    keuken: depachika
+    moeite: snelle-bak
+
+- id: station-tokio-stempel
+  naam: Eki stamp station Tokio
+  naamLokaal: 東京駅
+  stad: tokio
+  categorie: vervoer
+  coordinaten: { lat: 35.6812, lon: 139.7671 }
+  beschrijving: >-
+    De stempel van station Tokio, met de bakstenen gevel van het Marunouchi-
+    gebouw erop. Het eerste stempeltje van de reis, en meteen een goede oefening
+    in zoeken: hij staat niet in het zicht.
+  prijs: gratis
+  tijdvakken: [meiji, naoorlogs]
+  ekiStempel:
+    waar: >-
+      Aan de Marunouchi-kant, bij de noordelijke doorgang binnen de
+      toegangspoortjes, naast het informatiekantoor. Vraag ernaar bij de balie
+      als je hem niet ziet staan; het personeel wijst hem zonder morren aan.
+    openingstijden: { standaard: 06:00-22:00 }

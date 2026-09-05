@@ -1,0 +1,71 @@
+@import 'tailwindcss';
+
+/* De donkere modus volgt de klasse op <html>, die het scriptje in index.html
+   zet voordat er iets getekend wordt. Zonder deze regel kijkt Tailwind alleen
+   naar de systeemvoorkeur en werkt de eigen schakelaar niet. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Warm papier als ondergrond, met een zegelrood als accent. Rustig genoeg om
+     er een dag lang op te kijken, en met genoeg contrast om in fel zonlicht
+     leesbaar te blijven. */
+  --color-papier: #faf7f2;
+  --color-papier-diep: #f0ebe2;
+  --color-inkt: #24201c;
+  --color-inkt-zacht: #5c554c;
+  --color-zegel: #8c2f39;
+  --color-zegel-diep: #6d2029;
+  --color-indigo-reis: #2f4858;
+  --color-nacht: #17150f;
+  --color-nacht-diep: #211e17;
+
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background: var(--color-papier);
+  color: var(--color-inkt);
+  /* Ademruimte onder de notch en boven de thuisbalk van de telefoon. */
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom)
+    env(safe-area-inset-left);
+}
+
+.dark body {
+  background: var(--color-nacht);
+  color: var(--color-papier);
+}
+
+/* Leaflet levert zijn eigen opmaak; deze regels zetten hem in de huisstijl en
+   zorgen dat de kaart in de donkere modus niet als een lamp in je gezicht staat. */
+.leaflet-container {
+  font: inherit;
+  background: var(--color-papier-diep);
+}
+
+.dark .leaflet-tile-pane {
+  filter: brightness(0.75) contrast(1.05) saturate(0.8);
+}
+
+.leaflet-container a.leaflet-popup-close-button {
+  padding: 6px 8px 0 0;
+}
+
+/* De clusterbollen van markercluster, in dezelfde kleuren als de rest. */
+.reis-cluster {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  color: white;
+  font-weight: 600;
+  font-size: 12px;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 1px 4px rgb(0 0 0 / 0.35);
+}

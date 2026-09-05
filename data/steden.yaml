@@ -1,0 +1,183 @@
+# De steden van de reis.
+#
+# Pas dit bestand aan als de route verandert. `volgorde` bepaalt de plek in het
+# hoofdmenu, `straalKm` bepaalt vanaf welke afstand je GPS-locatie op deze stad
+# matcht, en `kaartgebied` is het rechthoekje dat offline wordt opgeslagen.
+# Houd dat gebied klein: elk zoomniveau erbij is vier keer zoveel tegels.
+
+- id: tokio
+  naam: Tokio
+  naamLokaal: 東京
+  land: japan
+  tijdzone: Asia/Tokyo
+  valuta: JPY
+  centrum: { lat: 35.6812, lon: 139.7671 }
+  straalKm: 30
+  kaartgebied:
+    zuidwest: { lat: 35.58, lon: 139.6 }
+    noordoost: { lat: 35.78, lon: 139.85 }
+  tijdlijn: japan
+  tijdvakken: [edo, meiji, naoorlogs]
+  volgorde: 1
+  korteBeschrijving: >-
+    Geen stad met één centrum maar een reeks steden aan elkaar geregen door de
+    Yamanote-lijn. Elke wijk heeft een eigen karakter en een eigen tempo.
+  geschiedenis: >-
+    Tokio heette Edo en was tot 1868 een vissersplaats die uitgroeide tot de
+    grootste stad ter wereld, terwijl de keizer in Kyoto zat en de shogun hier.
+    Bij de Meiji-restauratie verhuisde de keizer mee en werd Edo omgedoopt tot
+    Tokio, oostelijke hoofdstad. De aardbeving van 1923 en de bombardementen van
+    1945 hebben het oude Edo vrijwel volledig weggevaagd, waardoor de stad die
+    je nu ziet grotendeels naoorlogs is. Wie het oude Edo zoekt moet naar de
+    stratenpatronen kijken, niet naar de gebouwen.
+
+- id: hakone
+  naam: Hakone
+  naamLokaal: 箱根
+  land: japan
+  tijdzone: Asia/Tokyo
+  valuta: JPY
+  centrum: { lat: 35.2324, lon: 139.1069 }
+  straalKm: 15
+  kaartgebied:
+    zuidwest: { lat: 35.17, lon: 139.0 }
+    noordoost: { lat: 35.29, lon: 139.17 }
+  tijdlijn: japan
+  tijdvakken: [edo, meiji]
+  volgorde: 2
+  korteBeschrijving: >-
+    Bergen, zwavel en warm water op twee uur van Tokio. Bekend om de onsen, het
+    uitzicht op de Fuji als het weer meewerkt, en de rondgang met kabelbaan,
+    boot en bergtrein.
+  geschiedenis: >-
+    Hakone lag op de Tokaido, de weg tussen Edo en Kyoto, en had een van de
+    strengste controleposten van het land. Reizigers werden er gefouilleerd op
+    wapens die de hoofdstad in gingen en op vrouwen die eruit ontsnapten, want
+    de families van de daimyo werden in Edo als onderpand gehouden. De post is
+    herbouwd en te bezoeken.
+
+- id: kyoto
+  naam: Kyoto
+  naamLokaal: 京都
+  land: japan
+  tijdzone: Asia/Tokyo
+  valuta: JPY
+  centrum: { lat: 35.0116, lon: 135.7681 }
+  straalKm: 20
+  kaartgebied:
+    zuidwest: { lat: 34.93, lon: 135.66 }
+    noordoost: { lat: 35.08, lon: 135.83 }
+  tijdlijn: japan
+  tijdvakken: [heian, kamakura, muromachi, edo, meiji]
+  volgorde: 3
+  korteBeschrijving: >-
+    Duizend jaar hoofdstad en het enige grote Japanse stadscentrum dat de oorlog
+    heeft doorstaan. Tempels, tuinen en een strak geometrisch stratenplan uit de
+    achtste eeuw.
+  geschiedenis: >-
+    Kyoto werd in 794 gesticht als Heian-kyo en bleef tot 1868 de zetel van de
+    keizer. Het rechthoekige raster van de straten is een kopie van de Chinese
+    hoofdstad Chang'an en ligt er nog steeds. De stad is meerdere keren
+    afgebrand, het ergst in de Onin-oorlog van de vijftiende eeuw, maar werd
+    telkens herbouwd op hetzelfde plan. In 1945 stond Kyoto op de lijst van
+    doelen voor de atoombom en werd er om cultuurhistorische redenen weer
+    afgehaald; daarom staat er nog zoveel overeind.
+
+- id: nara
+  naam: Nara
+  naamLokaal: 奈良
+  land: japan
+  tijdzone: Asia/Tokyo
+  valuta: JPY
+  centrum: { lat: 34.6851, lon: 135.8048 }
+  straalKm: 12
+  kaartgebied:
+    zuidwest: { lat: 34.64, lon: 135.76 }
+    noordoost: { lat: 34.72, lon: 135.87 }
+  tijdlijn: japan
+  tijdvakken: [nara, heian]
+  volgorde: 4
+  korteBeschrijving: >-
+    De hoofdstad voor Kyoto, nu een overzichtelijke stad met een park vol herten
+    en de grootste houten gebouwen van het land. Als dagtrip vanuit Kyoto of
+    Osaka in een halve dag te doen.
+  geschiedenis: >-
+    Nara was van 710 tot 794 hoofdstad, de eerste vaste hoofdstad van Japan. De
+    boeddhistische kloosters kregen er zoveel invloed op het hof dat de keizer
+    uiteindelijk vertrok en verderop opnieuw begon. Doordat de stad daarna
+    politiek onbelangrijk werd, is er veel achtste eeuws hout blijven staan dat
+    elders zou zijn opgeslokt.
+
+- id: osaka
+  naam: Osaka
+  naamLokaal: 大阪
+  land: japan
+  tijdzone: Asia/Tokyo
+  valuta: JPY
+  centrum: { lat: 34.6937, lon: 135.5023 }
+  straalKm: 20
+  kaartgebied:
+    zuidwest: { lat: 34.6, lon: 135.42 }
+    noordoost: { lat: 34.75, lon: 135.56 }
+  tijdlijn: japan
+  tijdvakken: [muromachi, edo, meiji, naoorlogs]
+  volgorde: 5
+  korteBeschrijving: >-
+    Handelsstad met een directe inslag en het beste straatvoedsel van het land.
+    Minder tempels, meer eten, en 's avonds het drukste neon van Japan.
+  geschiedenis: >-
+    Osaka was de keuken van het land: hier kwam de rijst binnen die als
+    belasting werd geheven en hier werd hij verhandeld. Dat maakte de stad rijk
+    en koopmansachtig in plaats van adellijk, en dat hoor je nog in het dialect
+    en de omgangsvormen. Het kasteel van Toyotomi Hideyoshi is meerdere keren
+    verwoest en staat er nu als betonnen wederopbouw uit 1931.
+
+- id: hiroshima
+  naam: Hiroshima
+  naamLokaal: 広島
+  land: japan
+  tijdzone: Asia/Tokyo
+  valuta: JPY
+  centrum: { lat: 34.3853, lon: 132.4553 }
+  straalKm: 25
+  kaartgebied:
+    zuidwest: { lat: 34.24, lon: 132.29 }
+    noordoost: { lat: 34.42, lon: 132.5 }
+  tijdlijn: japan
+  tijdvakken: [edo, meiji, naoorlogs]
+  volgorde: 6
+  korteBeschrijving: >-
+    Een moderne, ruim opgezette stad rond een herdenkingspark, met het eiland
+    Miyajima op een half uur varen.
+  geschiedenis: >-
+    Hiroshima was een kasteelstad en later een garnizoensstad, wat het in 1945
+    tot doelwit maakte. Op 6 augustus van dat jaar viel de eerste atoombom op de
+    stad. De koepel die bleef staan is bewaard zoals hij die ochtend werd
+    achtergelaten. De rest is opnieuw opgebouwd met brede lanen, en het
+    vredespark is bewust op de plek van de zwaarst getroffen wijk gelegd.
+
+- id: hanoi
+  naam: Hanoi
+  naamLokaal: Hà Nội
+  land: vietnam
+  tijdzone: Asia/Ho_Chi_Minh
+  valuta: VND
+  centrum: { lat: 21.0285, lon: 105.8542 }
+  straalKm: 20
+  kaartgebied:
+    zuidwest: { lat: 20.97, lon: 105.78 }
+    noordoost: { lat: 21.09, lon: 105.9 }
+  tijdlijn: hanoi
+  tijdvakken: [thang-long, frans-koloniaal, onafhankelijkheid, modern]
+  volgorde: 7
+  korteBeschrijving: >-
+    Overstapstad op de heenreis en de terugreis, en een volwaardige bestemming
+    op zichzelf. Het centrum ligt op ongeveer 45 minuten van de luchthaven Noi
+    Bai, dus met een lange overstap is een stadsbezoek goed te doen.
+  geschiedenis: >-
+    Hanoi heette Thang Long, de opstijgende draak, en was vanaf 1010 de
+    hoofdstad van het Vietnamese rijk. De Fransen maakten er in de negentiende
+    eeuw het bestuurscentrum van Indochina van en legden de brede boulevards en
+    het operagebouw aan die nu naast de smalle straatjes van de oude wijk
+    liggen. Na 1945 was de stad de hoofdstad van Noord-Vietnam en na 1976 van
+    het herenigde land.

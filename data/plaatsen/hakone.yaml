@@ -1,0 +1,126 @@
+# Startset voor Hakone. Zie de kop van tokio.yaml: niet ter plaatse geverifieerd.
+
+- id: hakone-openluchtmuseum
+  naam: Openluchtmuseum Hakone
+  naamLokaal: 彫刻の森美術館
+  stad: hakone
+  categorie: attractie
+  coordinaten: { lat: 35.2447, lon: 139.0501 }
+  beschrijving: >-
+    Beeldenpark tegen een berghelling, met een paviljoen vol Picasso's en een
+    glazen toren waar je doorheen klimt. Er is een voetenbad met warm bronwater
+    aan het eind van de route.
+  openingstijden:
+    standaard: 09:00-17:00
+    laatsteToegang: '16:30'
+  prijs: { bedrag: 2000, valuta: JPY }
+  tijdvakken: [naoorlogs]
+  attractie:
+    type: museum
+    bezoekduurMinuten: 150
+    regenbestendig: false
+    dagdeel: [ochtend, middag]
+
+- id: owakudani
+  naam: Ōwakudani
+  naamLokaal: 大涌谷
+  stad: hakone
+  categorie: attractie
+  coordinaten: { lat: 35.2444, lon: 139.0197 }
+  beschrijving: >-
+    Dampende zwavelvallei op de flank van een vulkaan, bereikbaar met de
+    kabelbaan. Er worden eieren zwart gekookt in het bronwater; elk ei zou zeven
+    jaar aan je leven toevoegen. Bij verhoogde vulkanische activiteit gaat de
+    kabelbaan dicht, soms weken achter elkaar.
+  openingstijden:
+    standaard: 09:00-16:00
+    opmerking: Tijden van de kabelbaan. Kijk vooraf of hij rijdt.
+  prijs: gratis
+  tijdvakken: [naoorlogs]
+  attractie:
+    type: uitzichtpunt
+    bezoekduurMinuten: 60
+    regenbestendig: false
+    dagdeel: [ochtend, middag]
+
+- id: hakone-jinja
+  naam: Hakone schrijn
+  naamLokaal: 箱根神社
+  stad: hakone
+  categorie: attractie
+  coordinaten: { lat: 35.2049, lon: 139.0255 }
+  beschrijving: >-
+    Schrijn in het bos aan het meer, met een rode poort die in het water staat.
+    Voor die poort staat vrijwel altijd een rij van een halfuur voor een foto;
+    het schrijn zelf een paar honderd meter verderop is stil.
+  openingstijden:
+    standaard: Dag en nacht open
+  prijs: gratis
+  tijdvakken: [kamakura, edo]
+  attractie:
+    type: schrijn
+    bezoekduurMinuten: 60
+    regenbestendig: false
+    dagdeel: [ochtend]
+  goshuin:
+    waar: In het kantoor rechts onderaan de trap naar de hoofdhal.
+    prijs: { bedrag: 500, valuta: JPY }
+    openingstijden: { standaard: 08:00-16:00 }
+
+- id: hakone-sekisho
+  naam: Controlepost Hakone
+  naamLokaal: 箱根関所
+  stad: hakone
+  categorie: attractie
+  coordinaten: { lat: 35.1922, lon: 139.0246 }
+  beschrijving: >-
+    Herbouwde controlepost aan de oude Tokaido, waar reizigers werden
+    gefouilleerd op wapens die Edo in gingen en vrouwen die eruit wilden. Naast
+    de post loopt nog een stuk originele weg onder cederbomen.
+  openingstijden:
+    standaard: 09:00-17:00
+    laatsteToegang: '16:30'
+    opmerking: Van december tot februari tot 16:30.
+  prijs: { bedrag: 500, valuta: JPY }
+  tijdvakken: [edo]
+  attractie:
+    type: monument
+    bezoekduurMinuten: 60
+    regenbestendig: true
+    dagdeel: [middag]
+
+- id: ashinoko
+  naam: Meer Ashi
+  naamLokaal: 芦ノ湖
+  stad: hakone
+  categorie: attractie
+  coordinaten: { lat: 35.2049, lon: 139.0086 }
+  beschrijving: >-
+    Kratermeer met een boot in de vorm van een piratenschip. Bij helder weer
+    staat de Fuji recht achter de rode poort van het schrijn; dat lukt vaker in
+    de winter dan in de zomer.
+  prijs: { bedrag: 1200, valuta: JPY, toelichting: Enkele overtocht met de boot }
+  tijdvakken: [edo, naoorlogs]
+  attractie:
+    type: water
+    bezoekduurMinuten: 45
+    regenbestendig: false
+    dagdeel: [ochtend, middag]
+
+- id: hakone-soba
+  naam: Soba in Hakone-Yumoto
+  naamLokaal: 箱根湯本
+  stad: hakone
+  categorie: eten
+  coordinaten: { lat: 35.2325, lon: 139.1053 }
+  beschrijving: >-
+    De winkelstraat vanaf het station staat vol met sobazaken en kraampjes met
+    manju. Handig als eerste of laatste stop van de dag, want hier begint en
+    eindigt de rondgang.
+  openingstijden:
+    standaard: 11:00-18:00
+  prijs: { bedrag: 900, tot: 2000, valuta: JPY }
+  tijdvakken: [edo, naoorlogs]
+  eten:
+    keuken: soba-udon
+    moeite: snelle-bak

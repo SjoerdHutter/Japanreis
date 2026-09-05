@@ -1,0 +1,177 @@
+# Startset voor Osaka. Zie de kop van tokio.yaml: niet ter plaatse geverifieerd.
+
+- id: osaka-jo
+  naam: Kasteel Osaka
+  naamLokaal: 大阪城
+  stad: osaka
+  categorie: attractie
+  coordinaten: { lat: 34.6873, lon: 135.5259 }
+  beschrijving: >-
+    De toren is een betonnen wederopbouw uit 1931 met een lift erin, dus binnen
+    voelt het als een museum en niet als een kasteel. De muren en grachten
+    eromheen zijn wel echt, en die zijn indrukwekkender dan de toren.
+  openingstijden:
+    standaard: 09:00-17:00
+    laatsteToegang: '16:30'
+  prijs: { bedrag: 600, valuta: JPY }
+  tijdvakken: [muromachi, edo, naoorlogs]
+  attractie:
+    type: kasteel
+    bezoekduurMinuten: 90
+    regenbestendig: true
+    dagdeel: [ochtend, middag]
+
+- id: dotonbori
+  naam: Dōtonbori
+  naamLokaal: 道頓堀
+  stad: osaka
+  categorie: attractie
+  coordinaten: { lat: 34.6687, lon: 135.5013 }
+  beschrijving: >-
+    De kanaalstraat met de rennende Glico-man en een gevel vol bewegend neon.
+    Overdag valt het tegen, na het donker is het het drukste en luidruchtigste
+    stuk van West-Japan.
+  prijs: gratis
+  tijdvakken: [edo, naoorlogs]
+  attractie:
+    type: wijk
+    bezoekduurMinuten: 60
+    regenbestendig: false
+    dagdeel: [avond, nacht]
+
+- id: kuromon-ichiba
+  naam: Kuromon Ichiba
+  naamLokaal: 黒門市場
+  stad: osaka
+  categorie: eten
+  coordinaten: { lat: 34.6653, lon: 135.5062 }
+  beschrijving: >-
+    Overdekte markt van zeshonderd meter waar je je ontbijt bij elkaar loopt:
+    gegrilde kamsteek, oesters, fugu en fruit. De prijzen zijn de laatste jaren
+    op toeristen afgestemd, dus kijk voor je bestelt.
+  openingstijden:
+    standaard: 09:00-18:00
+    opmerking: Veel kramen sluiten op zondag.
+  prijs: { bedrag: 500, tot: 3000, valuta: JPY }
+  tijdvakken: [meiji, naoorlogs]
+  eten:
+    keuken: streetfood
+    ontbijt: true
+    moeite: waardig-een-omweg
+
+- id: shinsekai
+  naam: Shinsekai en Tsūtenkaku
+  naamLokaal: 新世界・通天閣
+  stad: osaka
+  categorie: attractie
+  coordinaten: { lat: 34.6524, lon: 135.5063 }
+  beschrijving: >-
+    Wijk die in 1912 werd aangelegd als een toekomstvisioen en daarna zestig
+    jaar stil is blijven staan. Kushikatsu aan het spit, en de regel dat je maar
+    één keer in de gedeelde saus mag dopen wordt echt gehandhaafd.
+  openingstijden:
+    standaard: 10:00-20:00
+    opmerking: Tijden van de toren; de wijk zelf is altijd open.
+  prijs: { bedrag: 900, valuta: JPY, toelichting: Uitkijk Tsūtenkaku }
+  tijdvakken: [meiji, naoorlogs]
+  attractie:
+    type: wijk
+    bezoekduurMinuten: 90
+    regenbestendig: false
+    dagdeel: [avond]
+
+- id: umeda-sky-building
+  naam: Umeda Sky Building
+  naamLokaal: 梅田スカイビル
+  stad: osaka
+  categorie: attractie
+  coordinaten: { lat: 34.7053, lon: 135.4897 }
+  beschrijving: >-
+    Twee torens met bovenin een zwevende ring, waar je via een roltrap door de
+    open lucht naartoe gaat. Het dak is open, dus bij wind is het koud en bij
+    zonsondergang precies goed.
+  openingstijden:
+    standaard: 09:30-22:30
+    laatsteToegang: '22:00'
+  prijs: { bedrag: 2000, valuta: JPY }
+  tijdvakken: [naoorlogs]
+  attractie:
+    type: uitzichtpunt
+    bezoekduurMinuten: 75
+    regenbestendig: false
+    dagdeel: [avond]
+
+- id: sumiyoshi-taisha
+  naam: Sumiyoshi Taisha
+  naamLokaal: 住吉大社
+  stad: osaka
+  categorie: attractie
+  coordinaten: { lat: 34.6122, lon: 135.4933 }
+  beschrijving: >-
+    Een van de oudste schrijnen van het land, gebouwd in een stijl die ouder is
+    dan de Chinese invloed: rechte daken, geen rode verf. Ervoor ligt een steile
+    boogbrug die je op handen en voeten oversteekt.
+  openingstijden:
+    standaard: 06:00-17:00
+  prijs: gratis
+  tijdvakken: [nara, edo]
+  attractie:
+    type: schrijn
+    bezoekduurMinuten: 60
+    regenbestendig: false
+    dagdeel: [ochtend]
+  goshuin:
+    waar: In het kantoor rechts van de hoofdhal.
+    prijs: { bedrag: 300, valuta: JPY }
+    openingstijden: { standaard: 09:00-16:00 }
+
+- id: okonomiyaki-dotonbori
+  naam: Okonomiyaki in Dōtonbori
+  naamLokaal: お好み焼き
+  stad: osaka
+  categorie: eten
+  coordinaten: { lat: 34.6692, lon: 135.5017 }
+  beschrijving: >-
+    De Osakaanse variant is gemengd: kool en beslag gaan door elkaar en dan de
+    plaat op. Bijna elke zaak in de straat bakt hem voor je neus. Reken op een
+    rij tussen 18:00 en 20:00.
+  openingstijden:
+    standaard: 11:00-23:00
+  prijs: { bedrag: 1000, tot: 2500, valuta: JPY }
+  tijdvakken: [naoorlogs]
+  eten:
+    keuken: okonomiyaki
+    moeite: waardig-een-omweg
+
+- id: tsuruhashi-yakiniku
+  naam: Yakiniku in Tsuruhashi
+  naamLokaal: 鶴橋
+  stad: osaka
+  categorie: eten
+  coordinaten: { lat: 34.6656, lon: 135.5313 }
+  beschrijving: >-
+    De Koreaanse wijk rond station Tsuruhashi ruikt al naar houtskool zodra je
+    uit de trein stapt. Tientallen zaken waar je zelf grilt, van eenvoudig tot
+    duur.
+  openingstijden:
+    standaard: 17:00-23:00
+    opmerking: Veel zaken zijn ook tussen de middag open.
+  prijs: { bedrag: 3000, tot: 8000, valuta: JPY }
+  reservering: aanbevolen
+  tijdvakken: [naoorlogs]
+  eten:
+    keuken: yakiniku
+    moeite: waardig-een-omweg
+
+- id: station-osaka-stempel
+  naam: Eki stamp station Osaka
+  naamLokaal: 大阪駅
+  stad: osaka
+  categorie: vervoer
+  coordinaten: { lat: 34.7025, lon: 135.4959 }
+  beschrijving: Stempel van station Osaka, het knooppunt van heel West-Japan.
+  prijs: gratis
+  tijdvakken: [naoorlogs]
+  ekiStempel:
+    waar: Bij de centrale doorgang binnen de poortjes, naast het servicekantoor.
+    openingstijden: { standaard: 06:00-22:00 }

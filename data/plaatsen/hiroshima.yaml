@@ -1,0 +1,143 @@
+# Startset voor Hiroshima. Zie de kop van tokio.yaml: niet ter plaatse geverifieerd.
+
+- id: genbaku-dome
+  naam: Atoomkoepel
+  naamLokaal: 原爆ドーム
+  stad: hiroshima
+  categorie: attractie
+  coordinaten: { lat: 34.3955, lon: 132.4536 }
+  beschrijving: >-
+    De ruïne van de tentoonstellingshal, vrijwel recht onder het punt waar de
+    bom op 6 augustus 1945 ontplofte. Het skelet is bewust gelaten zoals het die
+    ochtend achterbleef. Van buitenaf te bekijken, dag en nacht.
+  prijs: gratis
+  tijdvakken: [meiji, naoorlogs]
+  attractie:
+    type: monument
+    bezoekduurMinuten: 20
+    regenbestendig: false
+    dagdeel: [ochtend, middag, avond]
+
+- id: vredesmuseum
+  naam: Vredesmuseum Hiroshima
+  naamLokaal: 広島平和記念資料館
+  stad: hiroshima
+  categorie: attractie
+  coordinaten: { lat: 34.3915, lon: 132.4519 }
+  beschrijving: >-
+    Het museum vertelt de dag vanuit de mensen die hem meemaakten, met
+    persoonlijke voorwerpen en getuigenissen. Zwaar en zorgvuldig gedaan. Neem
+    er ruim de tijd voor en plan er niets belastends achteraan.
+  openingstijden:
+    standaard: 08:30-18:00
+    laatsteToegang: '17:30'
+    opmerking: In augustus tot 19:00, van december tot februari tot 17:00.
+  prijs: { bedrag: 200, valuta: JPY }
+  tijdvakken: [naoorlogs]
+  attractie:
+    type: museum
+    bezoekduurMinuten: 120
+    regenbestendig: true
+    dagdeel: [ochtend, middag]
+  bronnen:
+    - naam: Hiroshima Peace Memorial Museum
+      url: https://hpmmuseum.jp/
+
+- id: vredespark
+  naam: Vredespark
+  naamLokaal: 平和記念公園
+  stad: hiroshima
+  categorie: attractie
+  coordinaten: { lat: 34.3933, lon: 132.4526 }
+  beschrijving: >-
+    Het park ligt op de plek van de wijk die volledig werd weggevaagd. De
+    cenotaaf, de kinderklokken en de eeuwige vlam staan in één lijn met de
+    koepel; dat is met opzet zo ontworpen.
+  prijs: gratis
+  tijdvakken: [naoorlogs]
+  attractie:
+    type: park
+    bezoekduurMinuten: 60
+    regenbestendig: false
+    dagdeel: [ochtend, middag]
+
+- id: itsukushima
+  naam: Itsukushima schrijn, Miyajima
+  naamLokaal: 厳島神社
+  stad: hiroshima
+  categorie: attractie
+  coordinaten: { lat: 34.296, lon: 132.3199 }
+  beschrijving: >-
+    De schrijn staat op palen in zee, met de rode poort ervoor. Bij vloed lijkt
+    alles te drijven, bij eb loop je er tussen de schelpen naartoe. Kijk vooraf
+    het getij op, want dat bepaalt volledig wat je ziet.
+  openingstijden:
+    standaard: 06:30-18:00
+    opmerking: Sluitingstijd verschuift per seizoen tussen 17:00 en 18:30.
+  prijs: { bedrag: 300, valuta: JPY, toelichting: Plus 100 yen bezoekersheffing op het eiland }
+  tijdvakken: [heian, muromachi]
+  attractie:
+    type: schrijn
+    bezoekduurMinuten: 180
+    regenbestendig: false
+    dagdeel: [ochtend, middag]
+    drukte:
+      besteMoment: Eerste boot of laat in de middag, als de dagtrips weg zijn.
+  goshuin:
+    waar: Bij de uitgang van de schrijn, in het kantoor links.
+    prijs: { bedrag: 300, valuta: JPY }
+    openingstijden: { standaard: 08:00-16:30 }
+
+- id: shukkei-en
+  naam: Shukkei-en
+  naamLokaal: 縮景園
+  stad: hiroshima
+  categorie: attractie
+  coordinaten: { lat: 34.4013, lon: 132.4661 }
+  beschrijving: >-
+    Wandeltuin uit 1620 die een heel landschap in het klein nabootst: bergen,
+    een vallei en een meer met eilandjes. Verwoest in 1945 en daarna
+    gereconstrueerd. Rustig, en op tien minuten lopen van het centrum.
+  openingstijden:
+    standaard: 09:00-18:00
+    opmerking: Van oktober tot maart tot 17:00.
+  prijs: { bedrag: 260, valuta: JPY }
+  tijdvakken: [edo, naoorlogs]
+  attractie:
+    type: tuin
+    bezoekduurMinuten: 60
+    regenbestendig: false
+    dagdeel: [ochtend, middag]
+
+- id: okonomimura
+  naam: Okonomimura
+  naamLokaal: お好み村
+  stad: hiroshima
+  categorie: eten
+  coordinaten: { lat: 34.3924, lon: 132.4602 }
+  beschrijving: >-
+    Drie verdiepingen met niets dan okonomiyaki-kraampjes. De Hiroshima-variant
+    wordt gelaagd in plaats van gemengd, met een berg kool en een laag
+    gebakken noedels ertussen. Ga zitten aan de plaat, niet aan een tafel.
+  openingstijden:
+    standaard: 11:00-23:00
+    opmerking: Per kraam verschillend; de meeste zijn tot laat open.
+  prijs: { bedrag: 1000, tot: 2000, valuta: JPY }
+  tijdvakken: [naoorlogs]
+  eten:
+    keuken: okonomiyaki
+    lateNight: true
+    moeite: waardig-een-omweg
+
+- id: station-hiroshima-stempel
+  naam: Eki stamp station Hiroshima
+  naamLokaal: 広島駅
+  stad: hiroshima
+  categorie: vervoer
+  coordinaten: { lat: 34.3977, lon: 132.4757 }
+  beschrijving: Stempel van station Hiroshima, met de koepel erop.
+  prijs: gratis
+  tijdvakken: [naoorlogs]
+  ekiStempel:
+    waar: Bij de Shinkansen-doorgang, naast het informatiekantoor binnen de poortjes.
+    openingstijden: { standaard: 06:00-22:00 }

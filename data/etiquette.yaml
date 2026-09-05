@@ -1,0 +1,74 @@
+# Etiquette per situatie, uit hoofdstuk 13.
+#
+# Kort gehouden: op straat lees je geen alinea. Per situatie de paar dingen die
+# je werkelijk anders doet dan thuis, en het misverstand dat het vaakst misgaat.
+
+- id: onsen
+  situatie: Onsen en sento
+  land: [japan]
+  regels:
+    - Je wast je vooraf zittend bij de kraantjes, grondig, en spoelt alle zeep weg.
+      Het bad is om in te weken, niet om in te wassen.
+    - Je gaat naakt het water in. Zwemkleding is niet toegestaan en badhanddoeken
+      gaan niet mee het water in; het kleine handdoekje leg je op je hoofd of aan de kant.
+    - Niet duiken, niet zwemmen, geen luide gesprekken. Het is een badhuis, geen zwembad.
+    - Haar boven het water houden, ook lang haar.
+  letOp: >-
+    Tatoeages zijn op veel plekken nog steeds een probleem, omdat ze met de
+    onderwereld geassocieerd worden. Sommige badhuizen weigeren je, andere
+    vragen om een pleister eroverheen. Kijk vooraf of het huis tatoeages
+    toestaat, of zoek een privébad.
+
+- id: tempel
+  situatie: Tempel en schrijn
+  land: [japan]
+  regels:
+    - Bij een schrijn buig je licht voor je door de poort loopt, en je loopt niet
+      precies door het midden; dat pad is voor de goden.
+    - Was je handen en mond bij het waterbekken. Het schepje raakt je mond niet aan,
+      je giet het water in je hand.
+    - Bij een schrijn is het twee keer buigen, twee keer klappen, bidden, één keer buigen.
+      Bij een boeddhistische tempel klap je niet.
+    - Schoenen uit waar een verhoging of een rek staat. Sokken houd je aan.
+  letOp: >-
+    Fotograferen mag meestal buiten en vaak niet binnen de hoofdhal. Waar een
+    bordje staat is dat geen suggestie.
+
+- id: trein
+  situatie: In de trein
+  land: [japan]
+  regels:
+    - Niet bellen, en je telefoon op stil. In de trein wordt niet getelefoneerd, punt.
+    - Rugzak af en voor je houden of in het rek, zeker in de spits.
+    - In de rij staan bij de markering op het perron, en eerst laten uitstappen.
+    - Eten mag in de Shinkansen en op lange trajecten, niet in de forensentrein.
+  letOp: >-
+    De stoelen in de Shinkansen draaien; op het eindpunt draait het personeel ze
+    allemaal om. Ga niet zelf aan een stoel zitten draaien in een rijdende trein.
+
+- id: restaurant
+  situatie: In een restaurant
+  land: [japan]
+  regels:
+    - Geen fooi. Fooi geven is niet beleefd maar verwarrend, en wordt soms teruggegeven.
+    - Eetstokjes nooit rechtop in de rijst zetten en geen eten van stokje naar
+      stokje doorgeven; beide horen bij een begrafenis.
+    - Slurpen bij noedels is normaal en zelfs een compliment. Neus snuiten aan tafel niet.
+    - Betalen gaat meestal bij de kassa aan de uitgang, niet aan tafel.
+  letOp: >-
+    Bij veel kleine zaken bestel je aan een automaat bij de deur en geef je het
+    bonnetje af aan de toonbank. Als je binnenkomt en niemand komt naar je toe,
+    zoek dan de automaat.
+
+- id: hanoi
+  situatie: Op straat in Hanoi
+  land: [vietnam]
+  regels:
+    - Oversteken doe je in een constant, langzaam tempo zonder te stoppen. De
+      scooters rijden om je heen; stilstaan of terugrennen is juist gevaarlijk.
+    - Prijzen op markten zijn onderhandelbaar, in restaurants met een kaart niet.
+    - Bij tempels schouders en knieën bedekt, net als in Japan.
+    - Twee handen bij het aannemen of geven van iets, zeker bij ouderen.
+  letOp: >-
+    Reken op contant geld. Kleine zaken, markten en veel straatkeukens nemen geen
+    kaart aan, en briefjes van 500.000 dong zijn bij een kraampje vaak niet te wisselen.

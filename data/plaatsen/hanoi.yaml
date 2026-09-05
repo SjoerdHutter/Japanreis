@@ -1,0 +1,219 @@
+# Startset voor Hanoi. Zie de kop van tokio.yaml: niet ter plaatse geverifieerd.
+#
+# Hanoi is in deze app een volwaardige stad en geen bijlage. De punten hieronder
+# liggen vrijwel allemaal binnen een halfuur lopen van het Hoan Kiem-meer, zodat
+# ze ook met een korte overstap haalbaar zijn.
+
+- id: hoan-kiem
+  naam: Hoan Kiem meer
+  naamLokaal: Hồ Hoàn Kiếm
+  stad: hanoi
+  categorie: attractie
+  coordinaten: { lat: 21.0287, lon: 105.8524 }
+  beschrijving: >-
+    Het meer in het hart van de stad, met de rode brug naar het tempeltje op het
+    eilandje. Rondom loopt iedereen 's ochtends vroeg te sporten. In het weekend
+    gaan de straten eromheen dicht voor verkeer.
+  prijs: gratis
+  tijdvakken: [thang-long, frans-koloniaal, modern]
+  attractie:
+    type: water
+    bezoekduurMinuten: 45
+    regenbestendig: false
+    dagdeel: [ochtend, avond]
+
+- id: ngoc-son
+  naam: Ngoc Son tempel
+  naamLokaal: Đền Ngọc Sơn
+  stad: hanoi
+  categorie: attractie
+  coordinaten: { lat: 21.0308, lon: 105.8525 }
+  beschrijving: >-
+    Tempel op het eilandje in het meer, bereikbaar over de rode houten brug. Er
+    ligt een opgezette reuzenschildpad uit het meer, het dier uit de legende van
+    het teruggegeven zwaard.
+  openingstijden:
+    standaard: 08:00-18:00
+  prijs: { bedrag: 50000, valuta: VND }
+  tijdvakken: [thang-long]
+  attractie:
+    type: tempel
+    bezoekduurMinuten: 30
+    regenbestendig: false
+    dagdeel: [ochtend, middag]
+
+- id: oude-wijk
+  naam: Oude wijk
+  naamLokaal: Phố cổ
+  stad: hanoi
+  categorie: attractie
+  coordinaten: { lat: 21.0345, lon: 105.85 }
+  beschrijving: >-
+    Zesendertig gildestraten die nog steeds naar hun handelswaar heten: een
+    straat met alleen mandwerk, een met alleen grafstenen, een met blik. Smalle
+    hoge huizen, scooters over de stoep en overal plastic krukjes.
+  prijs: gratis
+  tijdvakken: [thang-long, frans-koloniaal, modern]
+  attractie:
+    type: wijk
+    bezoekduurMinuten: 120
+    regenbestendig: false
+    dagdeel: [ochtend, middag, avond]
+
+- id: literatuurtempel
+  naam: Literatuurtempel
+  naamLokaal: Văn Miếu
+  stad: hanoi
+  categorie: attractie
+  coordinaten: { lat: 21.0287, lon: 105.8355 }
+  beschrijving: >-
+    De eerste universiteit van het land, gesticht in 1070. Vijf binnenhoven
+    achter elkaar, met tweeëntachtig stenen schildpadden die de namen dragen van
+    wie de keizerlijke examens haalde. De rustigste plek in het centrum.
+  openingstijden:
+    standaard: 08:00-17:00
+  prijs: { bedrag: 70000, valuta: VND }
+  tijdvakken: [thang-long]
+  attractie:
+    type: tempel
+    bezoekduurMinuten: 60
+    regenbestendig: false
+    dagdeel: [ochtend, middag]
+
+- id: hoa-lo
+  naam: Hoa Lo gevangenis
+  naamLokaal: Nhà tù Hỏa Lò
+  stad: hanoi
+  categorie: attractie
+  coordinaten: { lat: 21.0257, lon: 105.8465 }
+  beschrijving: >-
+    Koloniale gevangenis, later gebruikt voor Amerikaanse piloten die hem
+    spottend het Hanoi Hilton noemden. De tentoonstelling is nadrukkelijk vanuit
+    Vietnamees perspectief verteld; dat is op zichzelf leerzaam.
+  openingstijden:
+    standaard: 08:00-17:00
+  prijs: { bedrag: 50000, valuta: VND }
+  tijdvakken: [frans-koloniaal, onafhankelijkheid]
+  attractie:
+    type: museum
+    bezoekduurMinuten: 75
+    regenbestendig: true
+    dagdeel: [ochtend, middag]
+
+- id: ho-chi-minh-mausoleum
+  naam: Ho Chi Minh mausoleum
+  naamLokaal: Lăng Chủ tịch Hồ Chí Minh
+  stad: hanoi
+  categorie: attractie
+  coordinaten: { lat: 21.0367, lon: 105.8347 }
+  beschrijving: >-
+    Het gebalsemde lichaam ligt in een marmeren zaal waar je in stilte langs
+    loopt. Strenge kledingregels, geen tassen, geen handen in de zakken. In
+    september en oktober vaak dicht voor onderhoud.
+  openingstijden:
+    standaard: 07:30-10:30
+    perDag: { maandag: gesloten, vrijdag: gesloten }
+  geslotenOpmerking: >-
+    Jaarlijks meerdere weken gesloten voor onderhoud, meestal in het najaar.
+  prijs: gratis
+  tijdvakken: [onafhankelijkheid]
+  attractie:
+    type: monument
+    bezoekduurMinuten: 60
+    regenbestendig: false
+    dagdeel: [ochtend]
+    drukte:
+      besteMoment: Ruim voor 09:00, want de rij loopt snel op en het sluit om 10:30.
+
+- id: train-street
+  naam: Train Street
+  naamLokaal: Phố đường tàu
+  stad: hanoi
+  categorie: attractie
+  coordinaten: { lat: 21.0287, lon: 105.8442 }
+  beschrijving: >-
+    Een spoorlijn die rakelings langs de huizen loopt, met cafés tussen de
+    rails. De toegang wordt periodiek afgesloten door de politie en gaat daarna
+    weer open; ga ervan uit dat het onzeker is tot je er staat.
+  prijs: gratis
+  tijdvakken: [frans-koloniaal, modern]
+  attractie:
+    type: wijk
+    bezoekduurMinuten: 45
+    regenbestendig: false
+    dagdeel: [middag, avond]
+
+- id: pho-bat-dan
+  naam: Pho aan Bat Dan
+  naamLokaal: Phở Bát Đàn
+  stad: hanoi
+  categorie: eten
+  coordinaten: { lat: 21.0338, lon: 105.8475 }
+  beschrijving: >-
+    Rundvleespho waar je in de rij staat, zelf je kom naar je krukje draagt en
+    binnen tien minuten weer buiten staat. Alleen 's ochtends en 's avonds, en
+    op is op.
+  openingstijden:
+    standaard: 06:00-10:00, 18:00-20:30
+  prijs: { bedrag: 50000, tot: 70000, valuta: VND }
+  tijdvakken: [modern]
+  eten:
+    keuken: pho
+    ontbijt: true
+    moeite: waardig-een-omweg
+
+- id: bun-cha-huong-lien
+  naam: Bun cha bij Huong Lien
+  naamLokaal: Bún chả Hương Liên
+  stad: hanoi
+  categorie: eten
+  coordinaten: { lat: 21.0142, lon: 105.8506 }
+  beschrijving: >-
+    Gegrild varkensvlees in een kom zoetzure bouillon, met noedels en kruiden
+    ernaast. Deze zaak werd bekend doordat Obama en Anthony Bourdain er aten;
+    het eten is goed en de zaak is er niet duurder van geworden.
+  openingstijden:
+    standaard: 10:00-20:00
+  prijs: { bedrag: 60000, tot: 100000, valuta: VND }
+  tijdvakken: [modern]
+  eten:
+    keuken: bun-cha
+    moeite: waardig-een-omweg
+
+- id: ca-phe-trung
+  naam: Eiwitkoffie bij Giang
+  naamLokaal: Cà phê trứng
+  stad: hanoi
+  categorie: eten
+  coordinaten: { lat: 21.0334, lon: 105.8524 }
+  beschrijving: >-
+    Koffie met een geklopte dooier erop, bedacht toen er in de jaren veertig
+    geen melk te krijgen was. Warm gedronken, en dikker dan je verwacht. De zaak
+    zit aan het eind van een steeg die er dichtgetimmerd uitziet.
+  openingstijden:
+    standaard: 07:00-22:00
+  prijs: { bedrag: 30000, tot: 50000, valuta: VND }
+  tijdvakken: [onafhankelijkheid, modern]
+  eten:
+    keuken: koffie
+    ontbijt: true
+    moeite: waardig-een-omweg
+
+- id: banh-mi-25
+  naam: Banh mi in de oude wijk
+  naamLokaal: Bánh mì
+  stad: hanoi
+  categorie: eten
+  coordinaten: { lat: 21.0362, lon: 105.8489 }
+  beschrijving: >-
+    Stokbrood met paté, vlees, komkommer en koriander, in twee minuten gemaakt.
+    Het beste ontbijt voor onderweg naar de luchthaven, en overal in de wijk te
+    krijgen voor een habbekrats.
+  openingstijden:
+    standaard: 07:00-21:00
+  prijs: { bedrag: 30000, tot: 60000, valuta: VND }
+  tijdvakken: [frans-koloniaal, modern]
+  eten:
+    keuken: banh-mi
+    ontbijt: true
+    moeite: snelle-bak
