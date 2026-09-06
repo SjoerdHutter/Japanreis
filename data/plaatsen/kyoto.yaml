@@ -6,6 +6,7 @@
   stad: kyoto
   categorie: attractie
   coordinaten: { lat: 34.9671, lon: 135.7727 }
+  adres: 68 Fukakusa Yabunouchicho, Fushimi Ward, Kyoto, 612-0882
   beschrijving: >-
     Duizenden oranje poorten die de berg op slingeren. Iedereen fotografeert de
     eerste vijfhonderd meter; wie doorloopt naar de top heeft na twintig minuten
@@ -29,6 +30,7 @@
   bronnen:
     - naam: Fushimi Inari Taisha
       url: https://inari.jp/
+  tags: [google-maps-lijst]
 
 - id: kinkaku-ji
   naam: Kinkaku-ji
@@ -36,6 +38,7 @@
   stad: kyoto
   categorie: attractie
   coordinaten: { lat: 35.0394, lon: 135.7292 }
+  adres: 1 Kinkakujicho, Kita Ward, Kyoto, 603-8361
   beschrijving: >-
     Het Gouden Paviljoen aan een vijver. Eén vaste route van een halfuur langs
     één uitzicht, dat er bij zon en bij sneeuw compleet anders uitziet. Het
@@ -51,6 +54,11 @@
     dagdeel: [ochtend]
     drukte:
       besteMoment: Bij opening. Later op de dag schuifelt de hele route.
+  bronnen:
+    - naam: Kinkaku-ji, Shokoku-ji
+      url: https://www.shokoku-ji.jp/kinkakuji/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]
 
 - id: kiyomizu-dera
   naam: Kiyomizu-dera
@@ -58,6 +66,7 @@
   stad: kyoto
   categorie: attractie
   coordinaten: { lat: 34.9949, lon: 135.785 }
+  adres: 1 Chome-294 Kiyomizu, Higashiyama Ward, Kyoto, 605-0862
   beschrijving: >-
     Tempel op palen tegen de heuvel, met uitzicht over de stad. De aanloop door
     de straatjes Sannenzaka en Ninenzaka hoort er onlosmakelijk bij en is zelf
@@ -78,6 +87,11 @@
     waar: In het kantoor bij de uitgang van de hoofdhal.
     prijs: { bedrag: 300, valuta: JPY }
     openingstijden: { standaard: 08:00-17:00 }
+  bronnen:
+    - naam: Kiyomizu-dera
+      url: https://www.kiyomizudera.or.jp/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]
 
 - id: ryoan-ji
   naam: Ryōan-ji
@@ -85,6 +99,7 @@
   stad: kyoto
   categorie: attractie
   coordinaten: { lat: 35.0345, lon: 135.7183 }
+  adres: 13 Ryoanji Goryonoshitacho, Ukyo Ward, Kyoto, 616-8001
   beschrijving: >-
     De beroemdste droge tuin van het land: vijftien stenen in wit grind, waarvan
     je er vanaf de veranda altijd maar veertien tegelijk kunt zien. Werkt alleen
@@ -99,6 +114,11 @@
     bezoekduurMinuten: 45
     regenbestendig: false
     dagdeel: [ochtend]
+  bronnen:
+    - naam: Ryōan-ji
+      url: http://www.ryoanji.jp/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]
 
 - id: arashiyama-bamboe
   naam: Bamboebos Arashiyama
@@ -106,6 +126,7 @@
   stad: kyoto
   categorie: attractie
   coordinaten: { lat: 35.017, lon: 135.6716 }
+  adres: Sagaogurayama Tabuchiyamacho, Ukyo Ward, Kyoto, 616-8394
   beschrijving: >-
     Een pad van een paar honderd meter door hoog bamboe. Kort, en overdag zo vol
     dat het geluid van de stengels wegvalt tegen de mensen. Voor zeven uur 's
@@ -122,6 +143,7 @@
     drukte:
       besteMoment: Voor 07:30.
       drukstMoment: 10:00 tot 16:00.
+  tags: [google-maps-lijst]
 
 - id: nijo-jo
   naam: Kasteel Nijō
@@ -129,6 +151,7 @@
   stad: kyoto
   categorie: attractie
   coordinaten: { lat: 35.0142, lon: 135.7481 }
+  adres: 541 Nijojocho, Nakagyo Ward, Kyoto, 604-8301
   beschrijving: >-
     Het stadspaleis van de shogun, met beschilderde schuifwanden en vloeren die
     bij elke stap piepen als vogels, aangelegd om sluipmoordenaars te horen
@@ -145,6 +168,11 @@
     bezoekduurMinuten: 120
     regenbestendig: true
     dagdeel: [ochtend, middag]
+  bronnen:
+    - naam: Kasteel Nijō
+      url: https://nijo-jocastle.city.kyoto.lg.jp/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]
 
 - id: gion
   naam: Gion
@@ -152,6 +180,7 @@
   stad: kyoto
   categorie: attractie
   coordinaten: { lat: 35.0037, lon: 135.7752 }
+  adres: Gion, Higashiyama Ward, Kyoto
   beschrijving: >-
     De oude vermaakswijk met houten theehuizen. Fotograferen in de zijstraatjes
     is verboden en dat wordt gehandhaafd; de hoofdstraat Hanamikoji mag wel.
@@ -163,6 +192,7 @@
     bezoekduurMinuten: 60
     regenbestendig: false
     dagdeel: [avond]
+  tags: [google-maps-lijst]
 
 - id: nishiki-markt
   naam: Nishiki markt
@@ -170,6 +200,7 @@
   stad: kyoto
   categorie: eten
   coordinaten: { lat: 35.005, lon: 135.7649 }
+  adres: Nakagyo Ward, Kyoto, 604-8055
   beschrijving: >-
     Vierhonderd meter overdekte markt, de keuken van Kyoto. Ingemaakte groente,
     yuba, gegrilde inktvis aan een stokje. Eten en lopen tegelijk wordt niet
@@ -183,6 +214,11 @@
     keuken: streetfood
     ontbijt: true
     moeite: waardig-een-omweg
+  bronnen:
+    - naam: Nishiki markt
+      url: https://www.kyoto-nishiki.or.jp/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]
 
 - id: honke-owariya
   naam: Honke Owariya
@@ -220,3 +256,444 @@
       Bij de centrale poortjes aan de noordkant, naast het reisbureau binnen de
       poortjes. Er staat een tweede bij de Shinkansen-doorgang.
     openingstijden: { standaard: 05:30-23:00 }
+
+# Hieronder de punten uit de gedeelde Google Maps lijst, opgehaald op
+# 6 september 2026. Fushimi Inari, Kinkaku-ji, Kiyomizu-dera, Ryoan-ji, het
+# bamboebos, Nijo, Gion en de Nishiki markt stonden er al in en zijn hierboven
+# aangevuld in plaats van dubbel opgenomen.
+
+- id: ginkaku-ji
+  naam: Ginkaku-ji
+  naamLokaal: 銀閣寺
+  stad: kyoto
+  categorie: attractie
+  coordinaten: { lat: 35.027, lon: 135.7982 }
+  adres: 2 Ginkakujicho, Sakyo Ward, Kyoto, 606-8402
+  beschrijving: >-
+    Het Zilveren Paviljoen, dat nooit verzilverd is: het geld was op toen de
+    shogun stierf. Juist daardoor is het het tegendeel van Kinkaku-ji, en voor
+    veel mensen de mooiere van de twee. De zandtuin met de kegel en de
+    geharkte zee ervoor wordt elke ochtend opnieuw gelegd. Achter de tempel loopt
+    een pad de heuvel op met uitzicht over de stad.
+  openingstijden:
+    standaard: 08:30-17:00
+    opmerking: >-
+      Google Maps vermeldt geen tijden. December tot februari 09:00-16:30.
+  prijs: { bedrag: 500, valuta: JPY }
+  tijdvakken: [muromachi]
+  attractie:
+    type: tempel
+    bezoekduurMinuten: 60
+    regenbestendig: false
+    dagdeel: [ochtend]
+    drukte:
+      besteMoment: Bij opening. Combineer daarna met het Filosofenpad.
+  goshuin:
+    waar: Bij de uitgang, rechts van het pad terug.
+    prijs: { bedrag: 300, valuta: JPY }
+  bronnen:
+    - naam: Ginkaku-ji, Shokoku-ji
+      url: https://www.shokoku-ji.jp/ginkakuji/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]
+
+- id: filosofenpad
+  naam: Filosofenpad, noordelijk begin
+  naamLokaal: 哲学の道
+  stad: kyoto
+  categorie: attractie
+  coordinaten: { lat: 35.027, lon: 135.7947 }
+  adres: Shishigatani Teranomaecho, Sakyo Ward, Kyoto, 606-8426
+  beschrijving: >-
+    Twee kilometer langs een kanaal met kersenbomen, van Ginkaku-ji naar het
+    zuiden. Vernoemd naar de filosoof Nishida Kitaro die er zijn dagelijkse
+    wandeling deed. Buiten het bloesemseizoen is het er vooral stil, en het is de
+    natuurlijke verbinding tussen Ginkaku-ji en de tempels verderop.
+  openingstijden:
+    standaard: Dag en nacht open
+  prijs: gratis
+  tijdvakken: [meiji]
+  attractie:
+    type: park
+    bezoekduurMinuten: 45
+    regenbestendig: false
+    dagdeel: [ochtend, middag]
+  bronnen:
+    - naam: Tetsugaku no Michi
+      url: https://tetsugakunomichi.jp/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]
+
+- id: kyoto-gosho
+  naam: Keizerlijk Paleis Kyoto
+  naamLokaal: 京都御所
+  stad: kyoto
+  categorie: attractie
+  coordinaten: { lat: 35.0254, lon: 135.7621 }
+  adres: Kyotogyoen, Kamigyo Ward, Kyoto, 602-0811
+  beschrijving: >-
+    Waar de keizer woonde tot de hofhouding in 1869 naar Tokio verhuisde. Het
+    paleis is gratis en zonder reservering te bezoeken, wat weinig mensen weten.
+    Je loopt een vaste route langs de buitenkant van de gebouwen; naar binnen kun
+    je niet. Het omliggende park is enorm en dag en nacht open.
+  openingstijden:
+    standaard: 09:00-15:50
+    perDag: { maandag: gesloten }
+    laatsteToegang: '15:20'
+  prijs: gratis
+  tijdvakken: [heian, edo, meiji]
+  attractie:
+    type: monument
+    bezoekduurMinuten: 60
+    regenbestendig: false
+    dagdeel: [ochtend, middag]
+  bronnen:
+    - naam: Keizerlijk Paleis Kyoto
+      url: https://kyoto-gosho.kunaicho.go.jp/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]
+
+- id: tenryu-ji
+  naam: Tenryū-ji
+  naamLokaal: 天龍寺
+  stad: kyoto
+  categorie: attractie
+  coordinaten: { lat: 35.0159, lon: 135.6738 }
+  adres: 68 Sagatenryuji Susukinobabacho, Ukyo Ward, Kyoto, 616-8385
+  beschrijving: >-
+    De hoofdtempel van Arashiyama, met een tuin uit de veertiende eeuw die nooit
+    is herlegd. De achterste uitgang van de tuin komt rechtstreeks in het
+    bamboebos uit, dus dit is de logische eerste stop van je ochtend daar. Tuin
+    en gebouwen kosten apart entree.
+  openingstijden:
+    standaard: 08:30-17:00
+    laatsteToegang: '16:50'
+  prijs: { bedrag: 500, tot: 800, valuta: JPY, toelichting: Tuin, met de gebouwen erbij duurder }
+  tijdvakken: [muromachi]
+  attractie:
+    type: tempel
+    bezoekduurMinuten: 60
+    regenbestendig: false
+    dagdeel: [ochtend]
+    drukte:
+      besteMoment: Bij opening, en dan door de achteruitgang het bamboebos in.
+  goshuin:
+    waar: Bij de hoofdhal.
+    prijs: { bedrag: 300, valuta: JPY }
+  bronnen:
+    - naam: Tenryū-ji
+      url: https://www.tenryuji.com/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]
+
+- id: adashino-bamboe
+  naam: Bamboebos Adashino
+  naamLokaal: 化野の竹林
+  stad: kyoto
+  categorie: attractie
+  coordinaten: { lat: 35.023, lon: 135.666 }
+  coordinaatGeschat: true
+  adres: 17 Sagatoriimoto Adashinocho, Ukyo Ward, Kyoto, 616-8436
+  beschrijving: >-
+    Een tweede bamboepad, bij Adashino in het noorden van Arashiyama, een halfuur
+    lopen voorbij het bekende bos. Kleiner, maar je staat er meestal alleen. Op de
+    Google Maps lijst staat het met de notitie "rustiger", en dat is precies het
+    punt: hetzelfde beeld zonder de rij.
+  openingstijden:
+    standaard: 09:00-16:30
+  tijdvakken: [heian]
+  attractie:
+    type: tuin
+    bezoekduurMinuten: 30
+    regenbestendig: false
+    dagdeel: [ochtend, middag]
+  tags: [google-maps-lijst]
+
+- id: yasaka-jinja
+  naam: Yasaka schrijn
+  naamLokaal: 八坂神社
+  stad: kyoto
+  categorie: attractie
+  coordinaten: { lat: 35.0036, lon: 135.7785 }
+  adres: 625 Gionmachi Kitagawa, Higashiyama Ward, Kyoto, 605-0073
+  beschrijving: >-
+    De schrijn aan het eind van Shijo, tussen Gion en het Maruyama park, en dag
+    en nacht open. 's Avonds branden er honderden lantaarns met de namen van de
+    zaken die ze betaald hebben. Dit is het startpunt van het Gion Matsuri in
+    juli, en het handigste ankerpunt om je route door Higashiyama op te hangen.
+  openingstijden:
+    standaard: Dag en nacht open
+    opmerking: Google Maps vermeldt geen tijden. Het kantoor voor de goshuin is ruwweg 09:00-17:00.
+  prijs: gratis
+  tijdvakken: [heian, edo]
+  attractie:
+    type: schrijn
+    bezoekduurMinuten: 30
+    regenbestendig: false
+    dagdeel: [ochtend, avond, nacht]
+    drukte:
+      besteMoment: In het donker, als de lantaarns aan zijn.
+  goshuin:
+    waar: Bij het kantoor rechts van de hoofdhal.
+    prijs: { bedrag: 500, valuta: JPY }
+    openingstijden: { standaard: 09:00-17:00 }
+  bronnen:
+    - naam: Yasaka schrijn
+      url: https://www.yasaka-jinja.or.jp/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]
+
+- id: maruyama-park
+  naam: Maruyama park
+  naamLokaal: 円山公園
+  stad: kyoto
+  categorie: attractie
+  coordinaten: { lat: 35.0038, lon: 135.781 }
+  adres: Maruyamacho, Higashiyama Ward, Kyoto, 605-0071
+  beschrijving: >-
+    Het oudste stadspark van Kyoto, direct achter de Yasaka schrijn. Overdag een
+    doorloop naar de tempels van Higashiyama, in bloesemtijd het drukste
+    hanami-terrein van de stad, met de grote treurkers in het midden verlicht.
+  openingstijden:
+    standaard: Dag en nacht open
+  prijs: gratis
+  tijdvakken: [meiji]
+  attractie:
+    type: park
+    bezoekduurMinuten: 30
+    regenbestendig: false
+    dagdeel: [ochtend, middag, avond]
+  bronnen:
+    - naam: Maruyama park
+      url: https://kyoto-maruyama-park.jp/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]
+
+- id: kodai-ji
+  naam: Kōdai-ji
+  naamLokaal: 高台寺
+  stad: kyoto
+  categorie: attractie
+  coordinaten: { lat: 34.9995, lon: 135.7808 }
+  adres: 526 Kodaiji Shimokawaracho, Higashiyama Ward, Kyoto, 605-0825
+  beschrijving: >-
+    Gesticht door de weduwe van Toyotomi Hideyoshi ter nagedachtenis aan hem, met
+    een bamboepad en twee theehuisjes van Sen no Rikyu's school. In het najaar en
+    het voorjaar is de tuin 's avonds verlicht, en dat is hier geen goedkope truc:
+    de vijver weerspiegelt het hele tafereel.
+  openingstijden:
+    standaard: 09:00-17:30
+    opmerking: >-
+      Google Maps vermeldt geen tijden. In de avondopenstellingen tot 22:00,
+      controleer de site voor de data.
+  prijs: { bedrag: 600, valuta: JPY }
+  tijdvakken: [edo]
+  attractie:
+    type: tempel
+    bezoekduurMinuten: 50
+    regenbestendig: false
+    dagdeel: [middag, avond]
+  goshuin:
+    waar: Bij de ingang, links van de kassa.
+    prijs: { bedrag: 300, valuta: JPY }
+  bronnen:
+    - naam: Kōdai-ji
+      url: https://www.kodaiji.com/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]
+
+- id: hokan-ji
+  naam: Hōkan-ji, de Yasaka pagode
+  naamLokaal: 法観寺
+  stad: kyoto
+  categorie: attractie
+  coordinaten: { lat: 34.9981, lon: 135.78 }
+  adres: 388 Yasaka Kamimachi, Higashiyama Ward, Kyoto, 605-0862
+  beschrijving: >-
+    De pagode van vijf verdiepingen die op vrijwel elke foto van Kyoto staat, aan
+    het eind van een aflopende straat met houten huizen. Van buiten altijd te
+    zien; naar binnen kan alleen in het weekend en alleen als het weer het
+    toelaat. Voor de foto hoef je niet naar binnen.
+  openingstijden:
+    standaard: gesloten
+    perDag: { zaterdag: 10:00-15:00, zondag: 10:00-15:00 }
+    opmerking: Doordeweeks alleen van buiten te zien. Bij slecht weer ook in het weekend dicht.
+  prijs: { bedrag: 400, valuta: JPY }
+  tijdvakken: [heian, muromachi]
+  attractie:
+    type: tempel
+    bezoekduurMinuten: 20
+    regenbestendig: false
+    dagdeel: [ochtend, avond]
+    drukte:
+      besteMoment: Voor 08:00. Daarna staat de hele straat vol met mensen die dezelfde foto maken.
+  tags: [google-maps-lijst]
+
+- id: ninenzaka
+  naam: Ninenzaka
+  naamLokaal: 二年坂
+  stad: kyoto
+  categorie: attractie
+  coordinaten: { lat: 34.997, lon: 135.7815 }
+  adres: 2 Chome-363-12 Kiyomizu, Higashiyama Ward, Kyoto, 605-0826
+  beschrijving: >-
+    Geplaveide helling met houten winkelpanden, tussen Kōdai-ji en Kiyomizu-dera.
+    Samen met Sannenzaka de bekendste straat van Higashiyama. De naam betekent
+    tweejaarshelling, en volgens het bijgeloof betekent struikelen hier twee jaar
+    ongeluk; kijk dus waar je loopt, wat op de gladde stenen sowieso verstandig is.
+  openingstijden:
+    standaard: Straat dag en nacht open
+    opmerking: De winkels zelf ruwweg 10:00-17:00.
+  prijs: gratis
+  tijdvakken: [edo]
+  attractie:
+    type: wijk
+    bezoekduurMinuten: 30
+    regenbestendig: false
+    dagdeel: [ochtend, avond]
+    drukte:
+      besteMoment: Voor 08:00 of na 18:00.
+      drukstMoment: 10:00 tot 17:00, schouder aan schouder.
+  bronnen:
+    - naam: Ninenzaka
+      url: http://www.2nenzaka.ne.jp/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]
+
+- id: sannenzaka
+  naam: Sannenzaka
+  naamLokaal: 三年坂
+  stad: kyoto
+  categorie: attractie
+  coordinaten: { lat: 34.9962, lon: 135.7808 }
+  adres: 2 Chome-211 Kiyomizu, Higashiyama Ward, Kyoto, 605-0862
+  beschrijving: >-
+    De trap direct onder Kiyomizu-dera, in het verlengde van Ninenzaka. Samen
+    lopen ze in een kwartier, maar met winkels erbij ben je zo een uur verder.
+  openingstijden:
+    standaard: Straat dag en nacht open
+  prijs: gratis
+  tijdvakken: [edo]
+  attractie:
+    type: wijk
+    bezoekduurMinuten: 30
+    regenbestendig: false
+    dagdeel: [ochtend, avond]
+    drukte:
+      besteMoment: Voor 08:00, samen met Ninenzaka en de pagode.
+  tags: [google-maps-lijst]
+
+- id: hanamikoji
+  naam: Hanamikoji-dori
+  naamLokaal: 花見小路通
+  stad: kyoto
+  categorie: attractie
+  coordinaten: { lat: 35.0009, lon: 135.7752 }
+  adres: Hanamikoji-dori, Gion, Higashiyama Ward, Kyoto
+  beschrijving: >-
+    De hoofdstraat van Gion, met ochaya achter houten hekken. Tegen zessen lopen
+    hier geiko en maiko naar hun afspraken. Fotograferen in de zijstraten is
+    verboden en er staat een boete op; op de hoofdstraat mag het wel, maar houd
+    afstand. Dit zijn mensen op weg naar hun werk, geen attractie.
+  openingstijden:
+    standaard: Straat dag en nacht open
+  prijs: gratis
+  tijdvakken: [edo, meiji]
+  attractie:
+    type: wijk
+    bezoekduurMinuten: 30
+    regenbestendig: false
+    dagdeel: [avond]
+    drukte:
+      besteMoment: Rond 18:00, als het net donker wordt.
+  tags: [google-maps-lijst]
+
+- id: pontocho
+  naam: Pontocho
+  naamLokaal: 先斗町
+  stad: kyoto
+  categorie: attractie
+  coordinaten: { lat: 35.0075, lon: 135.771 }
+  coordinaatGeschat: true
+  adres: 145 Umenokicho, Nakagyo Ward, Kyoto, 604-8012
+  beschrijving: >-
+    Een steeg van nog geen twee meter breed langs de Kamo, vol restaurants met
+    lantaarns. In de zomer bouwen de zaken aan de rivierkant terrassen op palen
+    boven het water, de kawadoko. In oktober zijn die meestal net afgebroken.
+  openingstijden:
+    standaard: Straat dag en nacht open
+  prijs: gratis
+  tijdvakken: [edo]
+  attractie:
+    type: wijk
+    bezoekduurMinuten: 30
+    regenbestendig: false
+    dagdeel: [avond, nacht]
+  tags: [google-maps-lijst]
+
+- id: kawaramachi-dori
+  naam: Kawaramachi-dori
+  naamLokaal: 河原町通
+  stad: kyoto
+  categorie: attractie
+  coordinaten: { lat: 35.004, lon: 135.769 }
+  coordinaatGeschat: true
+  adres: Kawaramachi-dori, Kyoto
+  beschrijving: >-
+    De winkelstraat van Kyoto, van Shijo naar het noorden. Warenhuizen, ketens en
+    overdekte arcades die haaks weglopen. Vooral nuttig als je iets moet hebben en
+    als schuilplek bij regen; de Nishiki markt komt er aan de westkant op uit.
+  openingstijden:
+    standaard: Straat dag en nacht open
+    opmerking: De winkels ruwweg 10:00-20:00.
+  prijs: gratis
+  attractie:
+    type: wijk
+    bezoekduurMinuten: 45
+    regenbestendig: true
+    dagdeel: [middag, avond]
+  tags: [google-maps-lijst]
+
+- id: maikoya-gion
+  naam: Theeceremonie en geishavoorstelling MAIKOYA Gion
+  stad: kyoto
+  categorie: eten
+  coordinaten: { lat: 34.9973, lon: 135.7773 }
+  coordinaatGeschat: true
+  adres: 100 Rokurocho, Higashiyama Ward, Kyoto, 605-0813
+  beschrijving: >-
+    Theeceremonie met uitleg in het Engels, met de mogelijkheid er een
+    voorstelling met een maiko aan vast te knopen. Van tevoren boeken. Dit is de
+    toegankelijke versie: bij een echte ochaya kom je zonder introductie niet
+    binnen.
+  openingstijden:
+    standaard: 09:00-19:30
+  reservering: verplicht
+  eten:
+    keuken: thee
+    moeite: waardig-een-omweg
+  bronnen:
+    - naam: MAIKOYA
+      url: https://mai-ko.com/geisha/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]
+
+- id: noru-fietstour
+  naam: NORU Kyoto fietstochten
+  stad: kyoto
+  categorie: vervoer
+  coordinaten: { lat: 35.029, lon: 135.753 }
+  coordinaatGeschat: true
+  adres: 429-22 Takigahanacho, Kamigyo Ward, Kyoto, 602-8336
+  beschrijving: >-
+    Fietsverhuur en begeleide tochten in Kamigyo. Kyoto is vlak en compact, en
+    per fiets haal je op een dag meer dan met bus en metro, waar je telkens op
+    staat te wachten.
+  openingstijden:
+    standaard: 09:00-17:00
+  reservering: aanbevolen
+  bronnen:
+    - naam: NORU
+      url: http://www.noru.cc/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]

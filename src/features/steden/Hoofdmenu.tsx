@@ -5,8 +5,10 @@ import { Keuzebalk } from './Keuzebalk';
 import { StadKaartje } from './StadKaartje';
 import { Kaartje, Knop, Label, Sectiekop } from '@/ui/basis';
 import { leesCachestatus } from '@/data/db/idb';
-import { TIJDLIJNEN } from '@/data/content';
+import { TIJDLIJNEN, REISSCHEMA } from '@/data/content';
 import type { Reden } from '@/domein/highlight/bepaal';
+import { bepaalReisstatus, type Reisstatus } from '@/domein/highlight/reisstatus';
+import { datumIn } from '@/domein/tijd/zones';
 
 /**
  * Het hoofdmenu: één highlight bovenaan, alle andere steden eronder.
@@ -26,6 +28,49 @@ const UITLEG: Record<Reden, string> = {
   vastgezet: 'Vastgezet, dus de automatische keuze staat uit.',
   'laatst-bekeken': 'Dit was de stad die je het laatst open had.',
   eerste: 'Nog geen locatie en nog geen datums in het reisschema.',
+};
+
+/**
+ * De uitleg bij de laatste terugval, die iets moet zeggen dat ook echt klopt.
+ *
+ * Bij `eerste` weet de app niet waar je bent en wijst het schema niets aan. Dat
+ * kan drie verschillende dingen betekenen, en ze door elkaar halen levert een
+ * regel op die de lezer naar een bestand stuurt waar niets mis mee is.
+ */
+const MAANDEN = [
+  'januari',
+  'februari',
+  'maart',
+  'april',
+  'mei',
+  'juni',
+  'juli',
+  'augustus',
+  'september',
+  'oktober',
+  'november',
+  'december',
+];
+
+/** 2026-10-04 wordt "4 oktober". Een datum in een zin hoort geen streepjes te hebben. */
+const alsDatum = (isoDatum: string): string => {
+  const [, maand, dag] = isoDatum.split('-');
+  return `${Number(dag)} ${MAANDEN[Number(maand) - 1]}`;
+};
+
+const uitlegBij = (reden: Reden, status: Reisstatus): string => {
+  if (reden !== 'eerste') return UITLEG[reden];
+  if (status.fase === 'voor-vertrek') {
+    const dagen = status.dagenTot ?? 0;
+    return `Nog geen locatie. De reis begint ${dagen === 1 ? 'morgen' : `over ${dagen} dagen`}, op ${alsDatum(status.vertrek ?? '')}.`;
+  }
+  if (status.fase === 'afgelopen') {
+    return `Nog geen locatie, en de reis is afgelopen op ${alsDatum(status.terug ?? '')}.`;
+  }
+  if (status.fase === 'onderweg') {
+    return 'Nog geen locatie, en voor vandaag staat er geen stad in het reisschema.';
+  }
+  return UITLEG.eerste;
 };
 
 export const Hoofdmenu = () => {
@@ -153,6 +198,9 @@ export const Hoofdmenu = () => {
         <Link to="/apps" className="text-sm text-zegel underline underline-offset-2">
           Handige apps
         </Link>
+        <Link to="/tips" className="text-sm text-zegel underline underline-offset-2">
+          Tips uit je collectie
+        </Link>
         <Link to="/vervoer" className="text-sm text-zegel underline underline-offset-2">
           Vervoer en JR Pass
         </Link>
@@ -184,29 +232,44 @@ const HighlightKaart = ({
   vastgezet,
   reden,
 }: {
-  stad: { id: string; naam: string; naamLokaal?: string; land: string; korteBeschrijving: string };
+  stad: {
+    id: string;
+    naam: string;
+    naamLokaal?: string;
+    land: string;
+    tijdzone: string;
+    korteBeschrijving: string;
+  };
   vastgezet: boolean;
   reden: Reden;
-}) => (
-  <Kaartje className="overflow-hidden">
-    <Link to={`/stad/${stad.id}`} className="block p-4">
-      <div className="mb-1 flex items-center gap-2">
-        <span className="text-xl" aria-hidden>
-          {stad.land === 'japan' ? '🇯🇵' : '🇻🇳'}
-        </span>
-        <h3 className="text-xl font-semibold">{stad.naam}</h3>
-        {stad.naamLokaal && (
-          <span className="text-sm text-inkt-zacht dark:text-papier/50">{stad.naamLokaal}</span>
-        )}
-        {vastgezet && <Label toon="let-op">vastgezet</Label>}
-      </div>
-      <p className="text-[15px] leading-relaxed text-inkt-zacht dark:text-papier/70">
-        {stad.korteBeschrijving}
-      </p>
-      <p className="mt-3 text-xs text-inkt-zacht/80 dark:text-papier/45">{UITLEG[reden]}</p>
-    </Link>
-  </Kaartje>
-);
+}) => {
+  // Vandaag in de tijdzone van deze stad, net als de rest van de highlight
+  // logica: op de vlucht naar Tokio springt de telefoon om en dan zou de teller
+  // tot vertrek een dag verkeerd staan.
+  const reisstatus = bepaalReisstatus(REISSCHEMA, datumIn(stad.tijdzone, new Date()));
+  return (
+    <Kaartje className="overflow-hidden">
+      <Link to={`/stad/${stad.id}`} className="block p-4">
+        <div className="mb-1 flex items-center gap-2">
+          <span className="text-xl" aria-hidden>
+            {stad.land === 'japan' ? '🇯🇵' : '🇻🇳'}
+          </span>
+          <h3 className="text-xl font-semibold">{stad.naam}</h3>
+          {stad.naamLokaal && (
+            <span className="text-sm text-inkt-zacht dark:text-papier/50">{stad.naamLokaal}</span>
+          )}
+          {vastgezet && <Label toon="let-op">vastgezet</Label>}
+        </div>
+        <p className="text-[15px] leading-relaxed text-inkt-zacht dark:text-papier/70">
+          {stad.korteBeschrijving}
+        </p>
+        <p className="mt-3 text-xs text-inkt-zacht/80 dark:text-papier/45">
+          {uitlegBij(reden, reisstatus)}
+        </p>
+      </Link>
+    </Kaartje>
+  );
+};
 
 export const VastzetKnop = ({ stadId }: { stadId: string }) => {
   const { kiesStad, highlight, laatLos } = useApp();

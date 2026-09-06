@@ -36,6 +36,54 @@ regios:
       Kyoto is in bloesem- en herfstseizoen het drukst van heel Japan. Reserveer
       dan maanden vooruit, en reken op wachtrijen bij de bekende tempels.
 
+  - id: hokuriku
+    naam: Hokuriku (Kanazawa)
+    steden: [kanazawa]
+    kersenbloesem:
+      begintTypisch: 04-01
+      hoogtepuntTypisch: 04-07
+      duurDagen: 9
+    herfstblad:
+      begintTypisch: 11-10
+      hoogtepuntTypisch: 11-25
+    opmerking: >-
+      Aan de kant van de Japanse Zee, en dat merk je aan de regen: Kanazawa is
+      een van de natste steden van Japan en er gaat zelden een dag voorbij
+      zonder bui. Neem een paraplu mee, ook bij een blauwe lucht in de ochtend.
+
+  - id: hida
+    naam: Hida (Takayama en Shirakawa-go)
+    steden: [takayama, shirakawa-go]
+    kersenbloesem:
+      begintTypisch: 04-12
+      hoogtepuntTypisch: 04-18
+      duurDagen: 8
+    herfstblad:
+      begintTypisch: 10-25
+      hoogtepuntTypisch: 11-05
+    opmerking: >-
+      Bergstreek, dus alles loopt hier uit de pas met de rest van Japan: de
+      bloei komt twee weken later en het herfstblad twee weken vroeger dan in
+      Kyoto. Half oktober zit je net voor de verkleuring, met hooguit de eerste
+      tinten hoog tegen de hellingen. Het scheelt daar ook flink in temperatuur,
+      's nachts kan het richting het vriespunt.
+
+  - id: fuji
+    naam: Fuji (Fujikawaguchiko)
+    steden: [fujikawaguchiko]
+    kersenbloesem:
+      begintTypisch: 04-10
+      hoogtepuntTypisch: 04-17
+      duurDagen: 9
+    herfstblad:
+      begintTypisch: 10-28
+      hoogtepuntTypisch: 11-08
+    opmerking: >-
+      Het meer ligt op ruim 800 meter, waardoor het er een graad of vijf kouder
+      is dan in Tokio. Voor het zicht op de berg is de ochtend vrijwel altijd
+      beter dan de middag: later op de dag trekt er bewolking omheen. In oktober
+      is de kans op een heldere top een stuk groter dan in de zomer.
+
   - id: chugoku
     naam: Chugoku (Hiroshima)
     steden: [hiroshima]

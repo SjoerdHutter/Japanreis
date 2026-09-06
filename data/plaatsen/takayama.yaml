@@ -1,0 +1,32 @@
+# Takayama. Uit de gedeelde Google Maps lijst, opgehaald op 6 september 2026.
+# Niet ter plaatse geverifieerd; zie de kop van tokio.yaml.
+
+- id: miyagawa-ochtendmarkt
+  naam: Miyagawa ochtendmarkt
+  naamLokaal: 宮川朝市
+  stad: takayama
+  categorie: attractie
+  coordinaten: { lat: 36.1425, lon: 137.2585 }
+  adres: Shimosannomachi, Takayama, Gifu 506-0841
+  beschrijving: >-
+    Kramen langs de Miyagawa met groente, ingemaakte waar, sarubobo poppetjes en
+    warme dingen om lopend te eten. Loopt om twaalf uur af, dus dit is een reden
+    om niet uit te slapen. Aan de overkant van de rivier begint meteen de oude
+    koopmanswijk, dus je kunt het aan elkaar knopen.
+  openingstijden:
+    standaard: 07:00-12:00
+    opmerking: In de winter begint hij om 08:00.
+  prijs: gratis
+  tijdvakken: [edo, meiji]
+  attractie:
+    type: markt
+    bezoekduurMinuten: 45
+    regenbestendig: false
+    dagdeel: [ochtend]
+    drukte:
+      besteMoment: Voor 09:00. Na elf uur breken de eerste kramen al af.
+  bronnen:
+    - naam: Takayama Asaichi
+      url: http://www.asaichi.net/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]

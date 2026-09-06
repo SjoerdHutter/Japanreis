@@ -1,23 +1,77 @@
 # Het reisschema. Dit is de tweede bron voor de highlight logica, naast GPS.
 #
-# De datums staan bewust leeg tot de reis geboekt is. Zolang ze leeg zijn valt
-# de highlight terug op GPS, en zonder GPS op de laatst bekeken stad. Vul per
-# segment `van` en `tot` in als YYYY-MM-DD; allebei of geen van beide.
+# Datums als YYYY-MM-DD, `van` en `tot` allebei of geen van beide. Een stad mag
+# meerdere keren voorkomen: Hanoi staat er twee keer in, want de overstap op de
+# heenreis en die op de terugreis zijn aparte dagen met andere plannen.
 #
-# Een stad mag meerdere keren voorkomen. Hanoi staat er twee keer in, want de
-# overstap op de heenreis en die op de terugreis zijn aparte dagen met andere
-# plannen.
+# LET OP, over `verblijf`. De boekingslinks uit het reisoverzicht staan hier
+# bewust niet in. Zo'n link draagt een `auth_key` of een reserverings-id waarmee
+# iedereen die hem heeft de boeking kan openen en wijzigen; dat is een sleutel
+# en deze repository is openbaar. Zet de links in het reserveringenscherm van de
+# app, dat bewaart ze alleen op je eigen toestel.
 
 naam: Japan en Hanoi
 segmenten:
   - stad: hanoi
-    opmerking: Overstap heenreis, zie de overstapplanner.
-  - stad: tokio
-  - stad: hakone
-  - stad: kyoto
-  - stad: nara
-    opmerking: Dagtrip, met Kyoto of Osaka als basis.
+    van: 2026-10-04
+    tot: 2026-10-04
+    opmerking: >-
+      Overstap heenreis. Aankomst 06:00, door om 00:15 die nacht. Dat is bijna
+      achttien uur, ruim genoeg voor een dagdeel in de stad; zie de
+      overstapplanner.
+    verblijf: { via: nog-te-boeken, nachten: 0, opmerking: Nog te bepalen of je een dagkamer wil. }
+
   - stad: osaka
+    van: 2026-10-05
+    tot: 2026-10-06
+    opmerking: Aankomst Kansai 06:40. Tweede dag Universal Studios.
+    verblijf: { via: booking, nachten: 2, betaald: nee, ontbijt: false }
+
   - stad: hiroshima
+    van: 2026-10-07
+    tot: 2026-10-07
+    opmerking: Heen met de Shinkansen, ongeveer anderhalf uur.
+    verblijf: { via: booking, nachten: 1, betaald: nee, ontbijt: false }
+
+  - stad: kyoto
+    van: 2026-10-08
+    tot: 2026-10-12
+    opmerking: Heen met de Shinkansen, ongeveer twee uur.
+    verblijf: { via: booking, nachten: 5, betaald: ja, ontbijt: false }
+
+  - stad: kanazawa
+    van: 2026-10-13
+    tot: 2026-10-15
+    verblijf: { via: booking, nachten: 3, betaald: ja, ontbijt: false }
+
+  - stad: shirakawa-go
+    van: 2026-10-16
+    tot: 2026-10-16
+    opmerking: >-
+      Dagtrip, geen overnachting. Ligt tussen Kanazawa en Takayama, dus dit is de
+      ochtend van de dag dat je verkast; je slaapt die nacht in Takayama.
+
+  - stad: takayama
+    van: 2026-10-16
+    tot: 2026-10-17
+    verblijf: { via: agoda, nachten: 2, betaald: nee, ontbijt: false }
+
+  - stad: tokio
+    van: 2026-10-18
+    tot: 2026-10-23
+    opmerking: >-
+      Vijf nachten, en op 23 oktober de vlucht terug naar Amsterdam om 09:30,
+      via Hanoi.
+    verblijf: { via: airbnb, nachten: 5, betaald: deels, ontbijt: false }
+
+  - stad: fujikawaguchiko
+    van: 2026-10-19
+    tot: 2026-10-22
+    opmerking: >-
+      Dagtrip vanuit Tokio, dag nog te kiezen. Alleen zinvol bij helder weer,
+      want zonder zicht op Fuji blijft er weinig over.
+
   - stad: hanoi
-    opmerking: Overstap terugreis.
+    van: 2026-10-23
+    tot: 2026-10-23
+    opmerking: Overstap terugreis, op weg naar Amsterdam.

@@ -69,7 +69,7 @@ export const Filterbalk = ({
   aantal,
   totaal,
 }: {
-  tab: 'attracties' | 'eten' | 'stempels' | 'eigen';
+  tab: 'attracties' | 'eten' | 'winkels' | 'stempels' | 'eigen';
   filter: Filter;
   keuzes: Keuzes;
   stad: Stad;

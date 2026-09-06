@@ -1,0 +1,514 @@
+# Reisadvies uit de opgeslagen Instagram collectie.
+#
+# 77 posts, thematisch geordend. Bij het merendeel van de reels staat de
+# inhoudelijke informatie in beeld of wordt die gesproken en niet in het
+# bijschrift; wat hier staat is wat er wel uit te halen was.
+#
+# Over de bedragen: in de tekst staan plaatshouders als {0} en {1}, geen
+# uitgeschreven euro's. Het scherm vult ze in met de centrale valutahelper, dus
+# de euro tussen haakjes beweegt mee met de koers en er is precies één plek waar
+# die vandaan komt. Zie src/domein/schema/tips.ts.
+#
+# Waar posts elkaar tegenspreken staat dat er expliciet bij. Doen alsof er
+# consensus is die er niet is, is erger dan de tegenspraak laten staan.
+
+herkomst: Opgeslagen Instagram collectie Japan, 77 posts
+verzameldOp: 2026-09-06
+
+groepen:
+  - id: voorbereiding
+    titel: Voorbereiding en aankomst
+    land: [japan]
+    inleiding: Wat je geregeld wil hebben voordat je op het vliegtuig stapt.
+    tips:
+      - tekst: >-
+          Vul Visit Japan Web volledig in zodra vluchten en accommodatie geboekt
+          zijn. Je krijgt een QR code voor immigratie en douane waarmee je de
+          snelle rij mag gebruiken. Maak er een screenshot van, dan ben je niet
+          afhankelijk van netwerk op het vliegveld.
+      - tekst: >-
+          Laad je Suica kaart vooraf op. Op een iPhone kan dat via Apple Wallet.
+          Met Android moet je een fysieke kaart kopen op het treinstation van de
+          luchthaven.
+      - tekst: >-
+          Regel een eSIM enkele dagen tot weken voor vertrek. Pocket wifi of een
+          simkaart kopen op de luchthaven is aanzienlijk duurder.
+      - tekst: >-
+          Bepaal vooraf welk vervoer je vanaf de luchthaven neemt. Dat scheelt
+          zoeken en geld op de dag van aankomst zelf.
+      - tekst: >-
+          Boek deze zaken ruim vooraf, ze zijn vrijwel altijd uitverkocht:
+          Shinkansen en limited express treinen in het hoogseizoen, het Ghibli
+          Museum, Shibuya Sky en zeker het zonsondergangslot, het Pokemon Cafe in
+          Tokio en Osaka, en de Sagano Scenic Railway. Voor het Pokemon Cafe
+          geldt dat annuleringen vaak vrijkomen; kijk de avond ervoor nog een keer.
+        bron: '@luca_castagnini_'
+
+  - id: vervoer
+    titel: Vervoer
+    land: [japan]
+    tips:
+      - tekst: >-
+          De snelle luchthaventrein is een verkapte toeristenbelasting. De Narita
+          Express kost {0}, de Access Express ernaast {1} en is slechts zeven
+          minuten langzamer. Op Kansai staat de Haruka voor {2} naast de Nankai
+          voor {3}, die zelfs sneller in Namba is. Op Haneda kost de Keikyu {4}.
+        bedragen:
+          - { bedrag: 22, valuta: EUR, toelichting: In de post genoemd in dollars }
+          - { bedrag: 9, valuta: EUR }
+          - { bedrag: 20, valuta: EUR }
+          - { bedrag: 10, valuta: EUR }
+          - { bedrag: 3, valuta: EUR }
+        bron: '@nomadminh'
+      - tekst: >-
+          Met veel bagage is de airport limousine bus het overwegen waard,
+          ongeveer {0}. Je koopt het ticket aan een balie in de terminal, er is
+          echte bagageruimte en de bus zet je dichter bij je hotel af dan welke
+          trein dan ook.
+        bedragen: [{ bedrag: 9, valuta: EUR }]
+        bron: '@nomadminh'
+      - tekst: >-
+          Tussen Osaka en Kyoto hoef je niet de Shinkansen van ongeveer {0} te
+          nemen. De Hankyu Kyo-train Garaku doet Osaka-umeda naar
+          Kyoto-kawaramachi in 45 minuten voor {1}, zonder reserveringstoeslag.
+          Elk rijtuig staat voor een seizoen, met tatami, bamboeschermen en echte
+          rotstuinen. Rijdt alleen vier keer per dag, in het weekend en op
+          feestdagen.
+        bedragen:
+          - { bedrag: 30, valuta: EUR }
+          - { bedrag: 400, valuta: JPY }
+        stad: kyoto
+      - tekst: >-
+          De Aoniyoshi Sightseeing Train verbindt Kyoto, Nara en Osaka en je mag
+          koffers meenemen. Boek vroeg, alle plaatsen zijn gereserveerd. Kies
+          tussen twin seats en saloon seats, selecteer je stoel op de plattegrond
+          en betaal online. Let op dat het tijdslot daadwerkelijk Aoniyoshi
+          vermeldt.
+        bron: '@themamawhotravels'
+      - tekst: >-
+          De Hokuriku route is een compact alternatief voor twee nachten:
+          Kanazawa, Shirakawa-go, Takayama en Nagoya, met samoeraiwijken, UNESCO
+          dorpen en uitstekend rundvlees.
+        stad: kanazawa
+
+  - id: apps
+    titel: Apps en digitale hulpmiddelen
+    land: [japan]
+    inleiding: Aanvullend op de appgids elders in deze app.
+    tips:
+      - tekst: >-
+          Suica voor treinen, bussen en betalingen bij de konbini. Je tapt met je
+          telefoon, ook met het scherm uit.
+      - tekst: >-
+          NAVITIME voor routes, perrons, overstaptijden, tarieven en zelfs de
+          beste uitgang van een station. Volledig in het Engels.
+      - tekst: >-
+          Tabelog voor restaurants waar locals komen. Let op het Tabelog 100
+          keurmerk, dat zijn de beste adressen van het jaar.
+      - tekst: GO Taxi om zonder taalbarriere een taxi te bestellen, landelijk beschikbaar.
+      - tekst: Klook voor tickets, tours en activiteiten die je vooraf boekt.
+
+  - id: besparen
+    titel: Geld besparen
+    land: [japan]
+    tips:
+      - tekst: >-
+          Koop drank en verpakt eten in de supermarkt in plaats van de konbini.
+          Vaak de helft van de prijs. Zoek op het Japanse woord voor supermarkt
+          in Google Maps om de dichtstbijzijnde te vinden.
+      - tekst: >-
+          Ga na 19:00 naar de supermarkt voor bento boxen. Alle kant en klare
+          maaltijden krijgen dan afprijzingen tot tachtig procent.
+      - tekst: >-
+          Koop geen flessenwater, het kraanwater is veilig. Een waterfilterflesje
+          uit een 100 yen winkel, {0}, is genoeg als je twijfelt.
+        bedragen: [{ bedrag: 100, valuta: JPY }]
+      - tekst: >-
+          Eet duur tijdens de lunch in plaats van het diner. Dezelfde restaurants
+          bieden set lunches die veel goedkoper zijn.
+      - tekst: >-
+          Ga niet alleen naar virale adressen. Bij een ketenrestaurant eet je een
+          volwaardige Japanse maaltijd vanaf {0}.
+        bedragen: [{ bedrag: 500, valuta: JPY }]
+      - tekst: >-
+          Wissel geen geld op toeristische plekken en vraag niet standaard om de
+          Engelse kaart; in beide gevallen betaal je meer.
+      - tekst: Vermijd overnachten in centraal Shibuya of Shinjuku als je op de prijs let.
+        stad: tokio
+
+  - id: winkelen
+    titel: Winkelen algemeen
+    land: [japan]
+    tips:
+      - tekst: >-
+          Koop merken als Onitsuka Tiger, Gelato Pique en high end labels niet in
+          de flagship store. Warenhuizen geven vaak vijf tot tien procent
+          toeristenkorting bovenop de tien procent tax refund.
+        bron: '@itsgracechin'
+      - tekst: >-
+          Download de gratis kortingscoupons van ketens als Don Quijote, BIC
+          Camera, JINS, Alpen en de bekende drogisterijen. Dat levert nog eens
+          vijf tot tien procent op.
+        bron: '@itsgracechin'
+      - tekst: >-
+          Voor souvenirs is Kappabashi Kitchenware Town in Tokio een beter adres
+          dan Don Quijote. Matcha kommen, handgemaakte eetstokjes en
+          stokjeshouders zijn er goedkoper en unieker.
+        stad: tokio
+        bron: '@deannawoo'
+      - tekst: >-
+          Als je te veel koopt: de opvouwbare tas van 3COINS kost {0} en houdt
+          ongeveer 20 kg, vergelijkbaar met de ruimbagagelimiet van de meeste
+          luchtvaartmaatschappijen. Materiaal vergelijkbaar met de IKEA tas en
+          stevig genoeg om zonder extra bescherming in te checken.
+        bedragen: [{ bedrag: 550, valuta: JPY }]
+        bron: '@erwinandnigel'
+
+  - id: vintage
+    titel: Vintage en tweedehands
+    land: [japan]
+    inleiding: >-
+      Het onderwerp waar deze collectie het meest over te zeggen heeft, en waar
+      de posts elkaar ook het duidelijkst tegenspreken.
+    tips:
+      - tekst: >-
+          Begin een luxe vintage zoektocht in Osaka, niet in Tokio. Osaka heeft
+          meer concurrentie tussen winkels, snellere doorstroom van voorraad,
+          meer ruimte om over de prijs te praten en vooral lokale kopers. Tokio
+          heeft de zeldzaamste stukken maar hogere prijzen en nauwelijks
+          onderhandelingsruimte. Reken op minimaal twee volle dagen in Osaka.
+        stad: osaka
+        bron: '@mayatrends'
+      - tekst: >-
+          Aanbevolen adressen in Osaka: Paradise Vintage, ALLU Vintage, Brand
+          Off, Komehyo en Okura.
+        stad: osaka
+        bron: '@mayatrends'
+      - tekst: >-
+          In Tokio wordt MixTHINKS in Harajuku genoemd als de ene stop die je
+          niet mag missen, met een sterke Chanel selectie, een hele verdieping
+          met tassen en een achterkamer met koopjes. Er wordt onderhandeld, dus
+          vraag er altijd naar.
+        stad: tokio
+      - tekst: >-
+          De beste prijzen in Tokio zitten niet in Omotesando, dat juist het
+          duurst bleek, maar in Ginza en rond Ueno. Daar werden vintage Chanel
+          klepstukken gevonden voor ongeveer {0}, een derde van de Britse prijs.
+        bedragen: [{ bedrag: 1500, valuta: EUR, toelichting: In de post genoemd in ponden }]
+        stad: tokio
+        bron: '@manindersachdeva'
+      - tekst: >-
+          Categorieindeling van de Tokiose winkels: Tampopo House en King Family
+          voor echte koopjes, BOOKOFF en Mode Off voor betaalbaar tweedehands met
+          soms merkstukken, 2nd STREET en Treasure Factory Cle voor gecureerde
+          merkkleding.
+        stad: tokio
+        bron: '@sara_34chi_'
+      - tekst: >-
+          Buiten het centrum: Super 2nd Street Saitama en BOOKOFF SUPER BAZAAR
+          Omiya Stellar Town, beide in Saitama. Safari Koenji wordt genoemd als
+          adres voor vintage Ralph Lauren.
+        stad: tokio
+        bron: '@klaize711'
+      - tekst: >-
+          Thrift juist niet in Tokio en Osaka, want daar is het duurder, maar in
+          steden als Sapporo en Fukuoka.
+        tegenspraak: >-
+          Dit spreekt de andere posts in deze groep tegen, die Osaka juist
+          aanraden. Het verschil zit hem waarschijnlijk in wat je zoekt: dit gaat
+          over gewoon tweedehands, de andere posts over luxe designertassen.
+        bron: '@itsgracechin'
+
+  - id: markten
+    titel: Markten
+    land: [japan]
+    tips:
+      - tekst: >-
+          Tokyo Vintage Weekend Market op Oi Racecourse in Shinagawa, alleen
+          zaterdag en zondag van 09:00 tot 14:30. Controleer vooraf de website.
+          Een vintage Coach laptoptas kostte hier {0}.
+        bedragen: [{ bedrag: 2000, valuta: JPY }]
+        stad: tokio
+        bron: '@brewnice_'
+      - tekst: >-
+          Drie antiekmarkten in Tokio die genoemd worden: Oedo Antique Market,
+          Hanazono Shrine Antique Market en Ueno Aozora Antique Market.
+        stad: tokio
+        bron: '@michitabi.tokyo'
+      - tekst: >-
+          Voor een vintage kimono is Yanaka Ginza het adres. Kimonos vanaf {0} en
+          obi gordels rond {1}. In Kyoto wordt Modoribashi Shashinkan genoemd
+          voor vintage kimono, stoffen en accessoires.
+        bedragen:
+          - { bedrag: 330, tot: 550, valuta: JPY }
+          - { bedrag: 1100, valuta: JPY }
+        stad: tokio
+
+  - id: eten
+    titel: Eten en drinken
+    land: [japan]
+    tips:
+      - tekst: >-
+          Tsukiji Market is de grootste toeristenval van Tokio. Loop twee minuten
+          door naar Tsukiji Uogashi, twee met elkaar verbonden gebouwen, waar
+          dezelfde vis fors goedkoper is. Een toro bowl is er bijna twee keer
+          goedkoper en toro nigiri vier keer. Een hele bak uni kostte {0}
+          tegenover een klein bakje voor {1} in Tsukiji zelf. Er is bovendien een
+          eetzaal met handenwasgelegenheid en voldoende toiletten.
+        bedragen:
+          - { bedrag: 3000, valuta: JPY }
+          - { bedrag: 2000, valuta: JPY }
+        stad: tokio
+        bron: '@itsgracechin'
+      - tekst: >-
+          Nakiryu in Toshima wordt genoemd als goedkoopste Michelin ster ramen van
+          Japan. In Kyoto doen Men-ya Inoichi en Men-ya Inoichi Hanare hetzelfde
+          voor onder de {0}. Bij de ene vestiging schrijf je je naam op voor een
+          tijdslot, bij de andere sluit je buiten aan. Wachttijd ongeveer twintig
+          minuten.
+        bedragen: [{ bedrag: 10, valuta: EUR, toelichting: In de post genoemd in dollars }]
+        stad: kyoto
+      - tekst: >-
+          Omakase in drie prijsklassen in Tokio: Sushi Azabu circa dertien gangen
+          voor {0}, Mantensushi Marunouchi twintig tot vijfentwintig gangen voor
+          {1}, en Ebisu Sushi Kenshin twintig gangen met wijnarrangement voor {2}
+          of zonder arrangement {3}.
+        bedragen:
+          - { bedrag: 4800, valuta: JPY }
+          - { bedrag: 8800, valuta: JPY }
+          - { bedrag: 30000, valuta: JPY }
+          - { bedrag: 19000, valuta: JPY }
+        stad: tokio
+        bron: '@girleatsin'
+      - tekst: >-
+          Ginza Sushi Banya Kai wordt aanbevolen voor een omakase van twintig
+          gangen voor {0}, met gedrukte Engelse menukaarten.
+        bedragen: [{ bedrag: 63, valuta: EUR, toelichting: In de post genoemd in dollars }]
+        stad: tokio
+        bron: '@itshelenmelon'
+      - tekst: >-
+          Een tonijn omakase van acht gangen in Tokio kost ongeveer {0}.
+          Reserveren via TableCheck en minimaal een maand vooraf. Tafels voor twee
+          zijn vrijwel niet te krijgen; een tafel voor vier boeken en op de dag
+          zelf een couvert annuleren kostte {1}.
+        bedragen:
+          - { bedrag: 4000, valuta: JPY }
+          - { bedrag: 2000, valuta: JPY }
+        stad: tokio
+        bron: '@saltandshaikh'
+      - tekst: >-
+          Osaka top vijf: Kitan Hibiki met een wagyu burger, Tokito voor een steak
+          sandwich, klein en zonder reservering, Grenier Patisserie, Matcha 587 en
+          Kuromonmaru voor melonijs. Eervolle vermelding voor Maguroya Kurogin
+          voor tonijn, prijzig en druk, dus ga vroeg.
+        stad: osaka
+        bron: '@cloutom'
+      - tekst: >-
+          Kanizen in Shinsaibashi wordt genoemd voor levende krab, aan tafel
+          bereid. Contant en pin allebei goed.
+        stad: osaka
+        bron: '@koyamas_travel10'
+      - tekst: >-
+          Kyoto staat bekend om unagi van hoge kwaliteit, de moeite waard om
+          minimaal een keer te proberen. Sommige zaken rekenen per portie af,
+          prettig als je een kleine eter bent.
+        stad: kyoto
+
+  - id: tokio
+    titel: Tokio
+    land: [japan]
+    tips:
+      - tekst: >-
+          Todoroki Valley is na drie jaar sluiting weer open sinds maart 2026.
+          Het is het enige natuurlijke ravijn in de 23 wijken van Tokio, ongeveer
+          twintig minuten van Shibuya, ingang bij de rode Golf Bridge naast
+          station Todoroki. Gratis en het hele jaar open.
+        stad: tokio
+        bron: '@tokyo24h.journey'
+      - tekst: >-
+          Drie ondergewaardeerde plekken: Kyu Asakura House, een bewaard gebleven
+          traditioneel huis met tuinen; Momiji-no-Taki, een klein park met
+          waterval; en Hie Shrine, een tunnel van rode torii poorten zonder de
+          drukte.
+        stad: tokio
+        bron: '@wheretonextguys'
+      - tekst: >-
+          Head spa bij Rabbicour in Ginza. Reserveren verplicht, geen inloop, en
+          enkele weken vooruit boeken. Je kiest zelf de themakamer. Er zijn twee
+          vestigingen, dus kijk bij de andere als je tijdslot vol is.
+        stad: tokio
+        bron: '@greenonionbun'
+      - tekst: >-
+          OttersFamily in Jingumae, Shibuya, voor een sessie van vijfentwintig
+          minuten met otters voor {0}. Doordeweeks 10:45 tot 18:30, in het
+          weekend 11:00 tot 18:45. Er hangt een dierlijke geur; mondkapjes en
+          kleding worden verstrekt.
+        bedragen: [{ bedrag: 2000, valuta: JPY }]
+        stad: tokio
+      - tekst: >-
+          Wood Works Kawagoe in Saitama, ongeveer dertig minuten van Tokio, waar
+          je in een uur je eigen eetstokjes maakt. Engelstalig personeel.
+        stad: tokio
+
+  - id: kyoto
+    titel: Kyoto en omgeving
+    land: [japan]
+    tips:
+      - tekst: >-
+          Arashiyama is meer dan alleen het bamboebos. De aanbevolen dagindeling
+          is ontbijt bij een vroeg geopende onigiri zaak, daarna vroeg het
+          bamboebos in, jetlag werkt in je voordeel, en vooral doorlopen tot
+          voorbij het drukste stuk. Dan omhoog naar Otagi Nenbutsu-ji met meer dan
+          duizend beeldjes met verschillende gezichtsuitdrukkingen, en tot slot
+          unagi als lunch terug in het centrum. Verder in de route: verstopte
+          tempels, het apenpark en koffie aan de rivier.
+        stad: kyoto
+      - tekst: >-
+          De Hozugawa rivierboottocht start bij station JR Kameoka, acht minuten
+          lopen, en vaart ook bij regen. Reserveren kan vooraf, maar inloop is ook
+          mogelijk.
+        stad: kyoto
+        bron: '@hozugawakudari'
+      - tekst: >-
+          De wandeling van Kurama-dera naar Kifune duurt ongeveer een uur, kost
+          {0} entree en voert langs 800 jaar oude ceders.
+        bedragen: [{ bedrag: 500, valuta: JPY }]
+        stad: kyoto
+        bron: '@askastour.kyoto'
+      - tekst: >-
+          Kifune Shrine ligt ruim een uur van Kyoto Station, telt honderden
+          lantaarns door het bos en is meer dan 1.600 jaar oud. Het is er ongeveer
+          tien graden koeler dan in de stad, wat verklaart waarom locals er in de
+          avond komen. Kawadoko, eten op een platform boven de rivier, is alleen
+          in de zomer.
+        stad: kyoto
+        bron: '@japanwithmekyoto'
+      - tekst: >-
+          Hotel Village Kyoto in Omiya wordt aanbevolen voor ongeveer {0} per
+          persoon per nacht, inclusief onsen van 15:00 tot middernacht, sake,
+          snacks, matcha station en pyjama. Loopafstand van de metro, goed
+          verbonden met de Nishiki markt en met de tram naar Arashiyama.
+        bedragen: [{ bedrag: 35, valuta: EUR, toelichting: In de post genoemd in ponden }]
+        stad: kyoto
+
+  - id: nara
+    titel: Nara
+    land: [japan]
+    inleiding: >-
+      Staat niet in het reisschema, maar is een dagtrip vanuit Kyoto of Osaka en
+      de collectie heeft er genoeg over te zeggen om het te overwegen.
+    tips:
+      - tekst: >-
+          Begin bij Kasuga Taisha en loop naar beneden in plaats van omhoog.
+          Vriendelijkere herten, minder drukte.
+        stad: nara
+      - tekst: >-
+          De agressiefste herten staan bij de ingang waar de crackers verkocht
+          worden. Loop dieper het park in, richting Araike Enchi, voor rustigere
+          dieren.
+        stad: nara
+      - tekst: >-
+          Voer geen herten bij de ingangen, buig naar ze en ze buigen terug, en ga
+          vroeg in de ochtend of laat in de middag.
+        stad: nara
+      - tekst: >-
+          De moeite waard: Todai-ji met de Grote Boeddha, de lantaarnpaden van
+          Kasuga Taisha, Yugayama Enchi, het Ukimido paviljoen en optioneel een
+          korte klim op Mount Wakakusa.
+        stad: nara
+      - tekst: >-
+          Buiten het park: Naramachi met oude straten en traditionele huizen, en
+          de Harushika sake brouwerij met een proefset voor ongeveer {0}.
+        bedragen: [{ bedrag: 700, valuta: JPY }]
+        stad: nara
+      - tekst: >-
+          Eetadressen: Nakatanidou voor de mochi demonstratie, Susuruka voor
+          ramen, Soba-dokoro Kitahara voor soba, Hosekibako voor kakigori en
+          Rokumei Coffee.
+        stad: nara
+
+  - id: fuji
+    titel: Mount Fuji
+    land: [japan]
+    tips:
+      - tekst: >-
+          De ronde om Lake Kawaguchiko is ongeveer 18 km, grotendeels vlak met
+          enkele korte klimmetjes, ook geschikt voor recreatieve fietsers.
+          Fietshuur ligt rond {0} per dag, e-bikes beschikbaar.
+        bedragen: [{ bedrag: 1600, tot: 2800, valuta: JPY }]
+        stad: fujikawaguchiko
+      - tekst: >-
+          Rijd tegen de klok in, dan zit je aan de waterkant met het beste zicht
+          op Fuji.
+        stad: fujikawaguchiko
+      - tekst: >-
+          De Mishima Skywalk wordt genoemd als plek met goed zicht op de berg,
+          waarbij het oversteken van de hangbrug zelf ook de moeite waard is.
+        bron: '@sylvanavanbeek'
+
+  - id: buiten-de-paden
+    titel: Buiten de gebaande paden
+    land: [japan]
+    inleiding: >-
+      Niet voor deze reis, want de route ligt vast, maar het staat in de
+      collectie en is het bewaren waard.
+    tips:
+      - tekst: >-
+          De standaardroute Tokio, Kyoto, Osaka is volgens een van de posts de
+          reden dat reizen vol, gehaast en duur voelen. Het alternatief is Kyushu.
+      - tekst: >-
+          Route 1: begin in Osaka en neem de Sanyo Shinkansen van Shin-Osaka naar
+          Hakata in Fukuoka, tweeënhalf uur en {0} enkele reis, ongeveer hetzelfde
+          als Tokio naar Kyoto maar zonder de drukte. Reis vanaf Hakata verder per
+          trein of auto.
+        bedragen: [{ bedrag: 15000, tot: 16000, valuta: JPY }]
+      - tekst: >-
+          Route 2 met de beste doorstroom: vlieg in op Kagoshima, reis noordwaarts
+          door Kyushu en vlieg uit vanaf Fukuoka. Geen dubbele trajecten.
+      - tekst: >-
+          Stops onderweg: Yufuin, een rustig onsen stadje met Ghibli dorp en
+          vrediger dan Hakone; Beppu met hete bronnen en straatvoedsel gestoomd
+          door de aarde; Mount Aso met vulkaan en open landschap; Takachiho Gorge
+          met een boottocht door de waterval kloof; en Kirishima, een klein stadje
+          met openbare voetenbaden.
+      - tekst: >-
+          In Kyushu zijn ryokan aanzienlijk goedkoper, zijn privé onsen af te
+          huren en zijn de panoramatreinen niet overvol.
+
+  - id: overnachten
+    titel: Overnachten
+    land: [japan]
+    tips:
+      - tekst: >-
+          BSPK Shinjuku wordt aanbevolen voor ongeveer {0} per persoon per nacht
+          in een driepersoonskamer, inclusief ontbijt, koffie en donuts overdag,
+          een open bar in de avond en pyjama. Minder dan tien minuten lopen van
+          station Shinjuku en rustig ondanks de ligging.
+        bedragen: [{ bedrag: 60, valuta: EUR, toelichting: In de post genoemd in ponden }]
+        stad: tokio
+      - tekst: Village Kyoto in Omiya, zie de groep over Kyoto.
+        stad: kyoto
+      - tekst: Vermijd centraal Shibuya en Shinjuku als je op de prijs let.
+        stad: tokio
+
+  - id: souvenirs
+    titel: Souvenirs en ervaringen
+    land: [japan]
+    tips:
+      - tekst: >-
+          Een goshuincho, het boekje waarin tempels en schrijnen hun stempel en
+          kalligrafie zetten, wordt genoemd als souvenir dat je gedurende de hele
+          reis opbouwt.
+        bron: '@kaan.to.japan'
+      - tekst: Zelfgemaakte eetstokjes bij Wood Works Kawagoe, zie de groep over Tokio.
+        stad: tokio
+      - tekst: >-
+          Een op maat gemaakt kussen bij Nishikawa Shinsaibashi in Osaka kost {0}
+          afhankelijk van de vulling, met vijf procent korting in de winkel en
+          ongeveer acht procent terug via de tax refund, die in hetzelfde gebouw
+          wordt afgehandeld. De gekozen vulling beinvloedt de opmeting, dus
+          wisselen halverwege betekent opnieuw beginnen. Een afspraak maken wordt
+          sterk aangeraden.
+        bedragen: [{ bedrag: 33000, tot: 44000, valuta: JPY }]
+        stad: osaka
+        bron: '@laxtoluxury'

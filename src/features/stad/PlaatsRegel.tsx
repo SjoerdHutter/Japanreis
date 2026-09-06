@@ -86,6 +86,7 @@ export const PlaatsRegel = ({
             {(plaats.ekiStempel || plaats.goshuin) && (
               <Label>{plaats.ekiStempel ? 'eki stamp' : 'goshuin'}</Label>
             )}
+            {plaats.tags?.includes('google-maps-lijst') && <Label>op je lijst</Label>}
           </span>
         </span>
         <span aria-hidden className="pt-1 text-inkt-zacht">
@@ -126,6 +127,16 @@ export const PlaatsRegel = ({
             <Regel titel="Reserveren">
               {plaats.reservering === 'verplicht' ? 'Verplicht' : 'Aanbevolen'}. De
               reserveringsagenda komt in een latere fase.
+            </Regel>
+          )}
+
+          {plaats.adres && <Regel titel="Adres">{plaats.adres}</Regel>}
+
+          {plaats.coordinaatGeschat && (
+            <Regel titel="Pin">
+              Wijst het huizenblok aan en niet de deur, dus hij kan er honderd meter naast zitten.
+              Het adres hierboven klopt wel. Een Japans adres is nu eenmaal een wijk met een
+              bloknummer en geen straat met een huisnummer.
             </Regel>
           )}
 

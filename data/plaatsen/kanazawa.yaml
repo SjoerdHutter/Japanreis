@@ -1,0 +1,238 @@
+# Kanazawa. Overgenomen uit de gedeelde Google Maps lijst, opgehaald op
+# 6 september 2026. Openingstijden en prijzen zijn niet ter plaatse
+# geverifieerd; zie de kop van tokio.yaml.
+#
+# Bij een aantal winkels en theehuizen staat `coordinaatGeschat: true`. Een
+# Japans adres wijst een blok aan en geen deur, dus die pin kan honderd meter
+# naast het pand liggen. De naam en het adres kloppen wel.
+
+- id: kenrokuen
+  naam: Kenrokuen
+  naamLokaal: 兼六園
+  stad: kanazawa
+  categorie: attractie
+  coordinaten: { lat: 36.5622, lon: 136.6626 }
+  adres: 1-1 Kenrokumachi, Kanazawa, Ishikawa 920-0936
+  beschrijving: >-
+    Een van de drie grote tuinen van Japan, aangelegd door de Maeda's over twee
+    eeuwen. De naam betekent tuin van de zes eigenschappen, die volgens de
+    Chinese leer niet samen kunnen gaan: ruimte en afzondering, aanleg en
+    ouderdom, water en uitzicht. Anderhalf uur is genoeg voor de hele lus.
+    Staat zelf niet op de Google Maps lijst, maar de poort, het theehuis en het
+    restaurant die er wel op staan liggen er allemaal in, dus zonder de tuin
+    zelf hangen die punten in de lucht.
+  openingstijden:
+    standaard: 08:00-17:00
+    opmerking: In de winter een uur later open en eerder dicht.
+  prijs: { bedrag: 320, valuta: JPY }
+  tijdvakken: [edo, meiji]
+  attractie:
+    type: tuin
+    bezoekduurMinuten: 90
+    regenbestendig: false
+    dagdeel: [ochtend, middag]
+    drukte:
+      besteMoment: Bij opening, of het laatste uur.
+      drukstMoment: 10:00 tot 15:00.
+  bronnen:
+    - naam: Kenrokuen, prefectuur Ishikawa
+      url: http://www.pref.ishikawa.jp/siro-niwa/kenrokuen/
+      gecontroleerdOp: 2026-09-06
+
+- id: kanazawa-jo
+  naam: Kasteel Kanazawa
+  naamLokaal: 金沢城
+  stad: kanazawa
+  categorie: attractie
+  coordinaten: { lat: 36.5654, lon: 136.6592 }
+  adres: 1-1 Marunouchi, Kanazawa, Ishikawa 920-0937
+  beschrijving: >-
+    Het kasteelterrein ligt direct naast Kenrokuen, alleen gescheiden door een
+    brug. Het park is gratis en dag en nacht toegankelijk; alleen de herbouwde
+    binnengebouwen kosten entree. De witte daken zijn van lood, oorspronkelijk
+    zodat het in geval van beleg tot kogels omgesmolten kon worden.
+  openingstijden:
+    standaard: Park dag en nacht open
+    opmerking: >-
+      Google Maps vermeldt geen tijden voor het park. De gebouwen binnen het
+      terrein hebben wel eigen openingstijden, ruwweg 09:00-16:30.
+  prijs: gratis
+  tijdvakken: [edo, meiji]
+  attractie:
+    type: kasteel
+    bezoekduurMinuten: 60
+    regenbestendig: false
+    dagdeel: [ochtend, middag, avond]
+  bronnen:
+    - naam: Kasteel Kanazawa, prefectuur Ishikawa
+      url: http://www.pref.ishikawa.jp/siro-niwa/kanazawajou/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]
+
+- id: kenrokuen-kamisaka
+  naam: Kenrokuen Kamisaka poort
+  naamLokaal: 兼六園上坂口
+  stad: kanazawa
+  categorie: vervoer
+  coordinaten: { lat: 36.5645, lon: 136.664 }
+  coordinaatGeschat: true
+  adres: 1-1 Kenrokumachi, Kanazawa, Ishikawa 920-0936
+  beschrijving: >-
+    Een van de ingangen van Kenrokuen, aan de noordkant. Handig als je vanaf
+    Higashi Chaya komt lopen, want dan hoef je niet om de tuin heen naar de
+    hoofdingang.
+  openingstijden:
+    standaard: 08:00-17:00
+  tags: [google-maps-lijst]
+
+- id: shigure-tei
+  naam: Shigure-tei
+  naamLokaal: 時雨亭
+  stad: kanazawa
+  categorie: eten
+  coordinaten: { lat: 36.5605, lon: 136.6605 }
+  coordinaatGeschat: true
+  adres: 1-5 Kenrokumachi, Kanazawa, Ishikawa 920-0936
+  beschrijving: >-
+    Theehuis binnen Kenrokuen, herbouwd op de plek van het origineel uit de
+    zeventiende eeuw. Je zit op tatami met uitzicht op de tuin en krijgt matcha
+    met een zoetigheid. Geen ceremonie van een uur maar een pauze van twintig
+    minuten, en daarmee de laagdrempeligste manier om het een keer te doen.
+  openingstijden:
+    standaard: 09:00-16:00
+  prijs: { bedrag: 310, tot: 1000, valuta: JPY, toelichting: Afhankelijk van de set }
+  eten:
+    keuken: thee
+    moeite: snelle-bak
+  bronnen:
+    - naam: Shigure-tei, prefectuur Ishikawa
+      url: http://www.pref.ishikawa.jp/siro-niwa/kenrokuen/sigure.html
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]
+
+- id: kenrokutei
+  naam: Kenrokutei
+  naamLokaal: 見城亭
+  stad: kanazawa
+  categorie: eten
+  coordinaten: { lat: 36.5613, lon: 136.664 }
+  coordinaatGeschat: true
+  adres: 1-20 Kenrokumachi, Kanazawa, Ishikawa 920-0936
+  beschrijving: >-
+    Restaurant in het park zelf, met Kaga-keuken en uitzicht op de tuin. Van
+    tevoren reserveren, want het loopt vol met groepen.
+  openingstijden:
+    opmerking: Niet vermeld op Google Maps. Bel of kijk op de site.
+  prijs: { bedrag: 1000, tot: 4000, valuta: JPY }
+  reservering: aanbevolen
+  eten:
+    keuken: kaiseki
+    moeite: waardig-een-omweg
+  bronnen:
+    - naam: Kenrokutei
+      url: https://kenrokutei.com/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]
+
+- id: higashi-chaya
+  naam: Higashi Chaya wijk
+  naamLokaal: ひがし茶屋街
+  stad: kanazawa
+  categorie: attractie
+  coordinaten: { lat: 36.5721, lon: 136.6666 }
+  adres: 1 Chome-13 Higashiyama, Kanazawa, Ishikawa 920-0831
+  beschrijving: >-
+    De grootste van de drie geishawijken van Kanazawa, met houten gevels en
+    fijne houten traliewerken uit de Edoperiode. Overdag zitten er winkels en
+    theehuizen in; tegen de avond wordt het er stil en zie je pas hoe de straat
+    bedoeld was. Twee van de theehuizen zijn van binnen te bezichtigen.
+  openingstijden:
+    standaard: Straat dag en nacht open
+    opmerking: De winkels en theehuizen zelf ruwweg 09:00-17:00.
+  prijs: gratis
+  tijdvakken: [edo]
+  attractie:
+    type: wijk
+    bezoekduurMinuten: 75
+    regenbestendig: false
+    dagdeel: [ochtend, avond]
+    drukte:
+      besteMoment: Voor 10:00, of na 17:00 als de dagjesmensen weg zijn.
+      drukstMoment: 11:00 tot 16:00.
+  tags: [google-maps-lijst]
+
+- id: kaikaro
+  naam: Salon de thé Kaikaro
+  naamLokaal: 懐華樓
+  stad: kanazawa
+  categorie: eten
+  coordinaten: { lat: 36.5723, lon: 136.6672 }
+  coordinaatGeschat: true
+  adres: 1 Chome-14-8 Higashiyama, Kanazawa, Ishikawa 920-0831
+  beschrijving: >-
+    Het grootste theehuis van Higashi Chaya, nog altijd in gebruik voor
+    geishavoorstellingen en overdag open voor bezoek. Binnen zit een kamer met
+    goud verwerkt in de tatami en een trap in vermiljoen lak.
+  openingstijden:
+    standaard: 10:00-17:00
+    perDag: { dinsdag: gesloten, woensdag: gesloten }
+  prijs: { bedrag: 1000, tot: 2000, valuta: JPY }
+  eten:
+    keuken: thee
+    moeite: waardig-een-omweg
+  bronnen:
+    - naam: Kaikaro
+      url: http://www.kaikaro.jp/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]
+
+- id: kanson-an
+  naam: Kanson-An
+  naamLokaal: 寒村庵
+  stad: kanazawa
+  categorie: eten
+  coordinaten: { lat: 36.5721, lon: 136.6669 }
+  coordinaatGeschat: true
+  adres: 1 Chome-13-21 Higashiyama, Kanazawa, Ishikawa 920-0831
+  beschrijving: >-
+    Theekamer in de tuin van het Shima theehuis, een paar deuren van Kaikaro. Je
+    krijgt matcha met een wagashi terwijl je uitkijkt op de tuin. Klein, dus bij
+    drukte kan het even wachten zijn.
+  openingstijden:
+    standaard: 09:30-17:00
+  eten:
+    keuken: thee
+    moeite: snelle-bak
+  bronnen:
+    - naam: Ochaya Shima
+      url: http://www.ochaya-shima.com/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]
+
+- id: omicho-markt
+  naam: Omicho markt
+  naamLokaal: 近江町市場
+  stad: kanazawa
+  categorie: attractie
+  coordinaten: { lat: 36.5714, lon: 136.6564 }
+  adres: 50 Kamiomicho, Kanazawa, Ishikawa 920-0905
+  beschrijving: >-
+    Overdekte versmarkt die al sinds de achttiende eeuw op deze plek zit, en
+    anders dan de toeristenmarkten in Kyoto en Tokio nog steeds de markt waar de
+    stad zelf boodschappen doet. Krab en zoete garnaal zijn hier de specialiteit.
+    Boven en achter de kramen zitten kleine zaken voor een kaisendon.
+  openingstijden:
+    standaard: 09:00-17:00
+  tijdvakken: [edo]
+  attractie:
+    type: markt
+    bezoekduurMinuten: 60
+    regenbestendig: true
+    dagdeel: [ochtend, middag]
+    drukte:
+      besteMoment: Voor 10:00 voor de markt zelf, of rond 11:30 om te eten voor de rij.
+  bronnen:
+    - naam: Omicho markt
+      url: http://ohmicho-ichiba.com/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]

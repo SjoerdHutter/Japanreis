@@ -8,6 +8,8 @@ import { Kaart, laagVan, type KaartPunt } from '@/features/kaart/Kaart';
 import { OfflineKnop } from '@/features/kaart/OfflineKnop';
 import { VastzetKnop } from '@/features/steden/Hoofdmenu';
 import { Filterbalk } from './Filterbalk';
+import { verblijfIn, VERBLIJF_NAAM } from '@/domein/highlight/verblijf';
+import { REISSCHEMA } from '@/data/content';
 import { PlaatsRegel } from './PlaatsRegel';
 import { leesEigenPunten } from '@/data/db/idb';
 import { filterPlaatsen, keuzesUit, type Filter } from '@/domein/filters/plaatsen';
@@ -25,14 +27,46 @@ import { formatteerPrijs } from '@/domein/valuta/formatteer';
  * lijst is maar ook meteen laat zien welke kant je op moet.
  */
 
-type Tab = 'attracties' | 'eten' | 'stempels' | 'eigen';
+type Tab = 'attracties' | 'eten' | 'winkels' | 'stempels' | 'eigen';
 
 const TABS: { id: Tab; naam: string }[] = [
   { id: 'attracties', naam: 'Attracties' },
   { id: 'eten', naam: 'Eten' },
+  { id: 'winkels', naam: 'Winkels en overig' },
   { id: 'stempels', naam: 'Stempels' },
   { id: 'eigen', naam: 'Eigen punten' },
 ];
+
+/**
+ * Welke plaatsen horen bij welk tabblad.
+ *
+ * De tab "winkels en overig" vangt alles op wat geen attractie, eetlocatie of
+ * stempel is. Die is er niet voor de sier: zonder dat tabblad zit een punt met
+ * categorie `winkel`, `vervoer`, `verblijf` of `overig` wel in het bestand en op
+ * de kaart, maar staat het in geen enkele lijst. Dat is precies het soort gat
+ * waar je pas achter komt als je een winkeladres zoekt en het nergens kunt
+ * vinden terwijl je zeker weet dat je het hebt toegevoegd.
+ */
+const MAANDEN = [
+  'januari',
+  'februari',
+  'maart',
+  'april',
+  'mei',
+  'juni',
+  'juli',
+  'augustus',
+  'september',
+  'oktober',
+  'november',
+  'december',
+];
+
+/** 2026-10-13 wordt "13 oktober". Streepjes horen niet in een zin. */
+const alsDatum = (isoDatum: string): string => {
+  const [, maand, dag] = isoDatum.split('-');
+  return `${Number(dag)} ${MAANDEN[Number(maand) - 1]}`;
+};
 
 const hoortBij = (plaats: Plaats, tab: Tab): boolean => {
   switch (tab) {
@@ -40,6 +74,13 @@ const hoortBij = (plaats: Plaats, tab: Tab): boolean => {
       return plaats.categorie === 'attractie';
     case 'eten':
       return plaats.categorie === 'eten';
+    case 'winkels':
+      return (
+        plaats.categorie === 'winkel' ||
+        plaats.categorie === 'vervoer' ||
+        plaats.categorie === 'verblijf' ||
+        plaats.categorie === 'overig'
+      );
     case 'stempels':
       return Boolean(plaats.ekiStempel || plaats.goshuin);
     case 'eigen':
@@ -65,6 +106,7 @@ export const StadScherm = () => {
   const [filterPerTab, setFilterPerTab] = useState<Record<Tab, Filter>>({
     attracties: {},
     eten: {},
+    winkels: {},
     stempels: {},
     eigen: {},
   });
@@ -166,6 +208,8 @@ export const StadScherm = () => {
   const tijdlijn = tijdlijnVan(stad);
   const tijdvakNaam = tijdlijn?.tijdvakken.find((v) => v.id === tijdvakUitLink)?.naam;
 
+  const verblijven = verblijfIn(REISSCHEMA, stad.id);
+
   const telling = (id: Tab): number =>
     id === 'eigen' ? eigen.length : alle.filter((p) => hoortBij(p, id)).length;
 
@@ -188,6 +232,35 @@ export const StadScherm = () => {
         <p className="mt-2 leading-relaxed text-inkt-zacht dark:text-papier/70">
           {stad.korteBeschrijving}
         </p>
+
+        {verblijven.map((v, i) => (
+          <div
+            key={`${v.van}-${i}`}
+            className="mt-3 rounded-lg bg-papier-diep px-3 py-2 text-sm leading-relaxed dark:bg-nacht-diep"
+          >
+            <span className="font-medium">
+              {v.van === v.tot
+                ? alsDatum(v.van)
+                : `${alsDatum(v.van)} tot en met ${alsDatum(v.tot)}`}
+              {v.verblijf !== undefined &&
+                v.verblijf.nachten > 0 &&
+                `, ${v.verblijf.nachten} ${v.verblijf.nachten === 1 ? 'nacht' : 'nachten'}`}
+            </span>
+            {v.verblijf && (
+              <span className="text-inkt-zacht dark:text-papier/70">
+                {'. '}
+                {VERBLIJF_NAAM[v.verblijf.via]}
+                {v.verblijf.betaald === 'ja' && ', betaald'}
+                {v.verblijf.betaald === 'nee' && ', nog niet betaald'}
+                {v.verblijf.betaald === 'deels' && ', deels betaald'}
+                {v.verblijf.ontbijt === false && ', geen ontbijt'}
+              </span>
+            )}
+            {v.opmerking && (
+              <p className="mt-1 text-inkt-zacht dark:text-papier/70">{v.opmerking}</p>
+            )}
+          </div>
+        ))}
         <p className="mt-2">
           <Link
             to={`/geschiedenis/${stad.id}`}

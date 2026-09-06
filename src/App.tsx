@@ -7,6 +7,7 @@ import { StadGeschiedenisScherm, TijdlijnScherm } from '@/features/geschiedenis/
 import { FotokaartScherm } from '@/features/fotos/FotokaartScherm';
 import { StempelboekScherm } from '@/features/stempels/StempelboekScherm';
 import { AppgidsScherm } from '@/features/praktisch/AppgidsScherm';
+import { TipsScherm } from '@/features/praktisch/TipsScherm';
 import { VervoerScherm } from '@/features/praktisch/VervoerScherm';
 import { BudgetScherm } from '@/features/praktisch/BudgetScherm';
 import { DagplannerScherm } from '@/features/planning/DagplannerScherm';
@@ -22,6 +23,7 @@ const App = () => (
       <Route path="/fotos" element={<FotokaartScherm />} />
       <Route path="/stempels" element={<StempelboekScherm />} />
       <Route path="/apps" element={<AppgidsScherm />} />
+      <Route path="/tips" element={<TipsScherm />} />
       <Route path="/vervoer" element={<VervoerScherm />} />
       <Route path="/budget" element={<BudgetScherm />} />
       <Route path="/dagplanner" element={<DagplannerScherm />} />
