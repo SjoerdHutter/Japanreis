@@ -65,10 +65,15 @@ export const coordinatenUitUrl = (url: string): Coordinaat | null => {
  * De GeoJSON die Takeout van een lijst maakt.
  *
  * Vorm: een FeatureCollection waarin elke feature een Point is met
- * `[lengtegraad, breedtegraad]` en de gegevens onder `properties.location`.
- * Let op de volgorde: GeoJSON zet de lengtegraad eerst, andersom dan hoe
- * iedereen coördinaten uitspreekt. Dat verwisselen zet Kyoto in de Stille
- * Oceaan, dus het staat hier expliciet.
+ * `[lengtegraad, breedtegraad]`. Let op de volgorde: GeoJSON zet de
+ * lengtegraad eerst, andersom dan hoe iedereen coördinaten uitspreekt. Dat
+ * verwisselen zet Kyoto in de Stille Oceaan, dus het staat hier expliciet.
+ *
+ * De naam en het adres staan niet altijd op dezelfde plek. Opgeslagen plaatsen
+ * zetten ze onder `properties.location`, gelabelde plaatsen zetten ze
+ * rechtstreeks op `properties`. Beide vormen komen uit dezelfde export, dus
+ * beide worden gelezen; alleen naar `location` kijken laat een heel bestand
+ * stilletjes leeg terugkomen.
  */
 export const leesGoogleGeoJson = (tekst: string, lijst?: string): RuwPunt[] => {
   const data = JSON.parse(tekst) as {
@@ -78,6 +83,8 @@ export const leesGoogleGeoJson = (tekst: string, lijst?: string): RuwPunt[] => {
         location?: { name?: string; address?: string; country_code?: string };
         google_maps_url?: string;
         Title?: string;
+        name?: string;
+        address?: string;
         comment?: string;
       };
     }[];
@@ -89,7 +96,8 @@ export const leesGoogleGeoJson = (tekst: string, lijst?: string): RuwPunt[] => {
     const eigenschappen = feature.properties ?? {};
     const plek = eigenschappen.location ?? {};
     const url = eigenschappen.google_maps_url;
-    const naam = plek.name ?? eigenschappen.Title ?? plek.address;
+    const adres = plek.address ?? eigenschappen.address;
+    const naam = plek.name ?? eigenschappen.name ?? eigenschappen.Title ?? adres;
     if (!naam) continue;
 
     let coordinaten: Coordinaat | undefined;
@@ -103,7 +111,7 @@ export const leesGoogleGeoJson = (tekst: string, lijst?: string): RuwPunt[] => {
     punten.push({
       naam: naam.trim(),
       coordinaten,
-      adres: plek.address,
+      adres,
       notitie: eigenschappen.comment,
       url,
       lijst,
@@ -161,10 +169,15 @@ export const leesCsvRijen = (tekst: string): string[][] => {
 /**
  * De CSV die Takeout van opgeslagen plaatsen en van lijsten maakt.
  *
- * Kolommen zijn meestal Title, Note en URL. De coördinaten zitten niet in het
- * bestand maar hooguit in de link, dus een deel van de punten komt hier zonder
- * plek uit. Dat is geen fout van de importer maar van het bestandsformaat, en
- * daarom blijven die punten staan met een naam en zonder pin.
+ * Kolommen zijn meestal Title, Note en URL, maar Takeout vertaalt de koppen
+ * mee met de taal van je account: een Nederlandse export schrijft Plaats, Adres
+ * en URL. Alleen op de Engelse namen zoeken laat zo'n bestand afketsen op
+ * "geen kolom Title gevonden", terwijl er niets mis mee is.
+ *
+ * De coördinaten zitten niet in het bestand maar hooguit in de link, dus een
+ * deel van de punten komt hier zonder plek uit. Dat is geen fout van de
+ * importer maar van het bestandsformaat, en daarom blijven die punten staan
+ * met een naam en zonder pin.
  */
 export const leesGoogleCsv = (tekst: string, lijst?: string): RuwPunt[] => {
   const rijen = leesCsvRijen(tekst);
@@ -174,15 +187,17 @@ export const leesGoogleCsv = (tekst: string, lijst?: string): RuwPunt[] => {
   const kolom = (...namen: string[]): number =>
     koppen.findIndex((k) => namen.some((n) => k === n || k.includes(n)));
 
-  const iNaam = kolom('title', 'naam', 'name');
-  const iNotitie = kolom('note', 'comment', 'notitie');
+  const iNaam = kolom('title', 'naam', 'name', 'plaats', 'titel');
+  const iNotitie = kolom('note', 'comment', 'notitie', 'opmerking');
+  const iAdres = kolom('adres', 'address');
   const iUrl = kolom('url', 'link');
-  const iLat = kolom('latitude', 'lat');
-  const iLon = kolom('longitude', 'lon', 'lng');
+  const iLat = kolom('latitude', 'lat', 'breedtegraad');
+  const iLon = kolom('longitude', 'lon', 'lng', 'lengtegraad');
 
-  // Zonder titelkolom is dit geen Takeout-bestand. Dan de eerste kolom als naam
+  // Zonder naamkolom is dit geen Takeout-bestand. Dan de eerste kolom als naam
   // nemen zou van een willekeurig bestand een lijst met onzin maken.
-  if (iNaam === -1) throw new Error('Geen kolom "Title" gevonden; is dit een Takeout CSV?');
+  if (iNaam === -1)
+    throw new Error('Geen kolom "Title" of "Plaats" gevonden; is dit een Takeout CSV?');
 
   const punten: RuwPunt[] = [];
   for (const rij of rijen.slice(1)) {
@@ -201,6 +216,7 @@ export const leesGoogleCsv = (tekst: string, lijst?: string): RuwPunt[] => {
     punten.push({
       naam,
       coordinaten,
+      adres: iAdres >= 0 ? (rij[iAdres] ?? '').trim() || undefined : undefined,
       notitie: iNotitie >= 0 ? (rij[iNotitie] ?? '').trim() || undefined : undefined,
       url: url || undefined,
       lijst,

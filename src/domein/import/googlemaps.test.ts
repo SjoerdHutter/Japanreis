@@ -85,6 +85,45 @@ describe('leesGoogleGeoJson', () => {
     expect(eerste.lijst).toBe('Japan');
   });
 
+  it('leest ook een feature die naam en adres niet onder location zet', () => {
+    // Zo schrijft Takeout gelabelde plaatsen op: alles rechtstreeks op
+    // properties, zonder location eromheen. Alleen naar location kijken gaf
+    // een lege lijst terug bij een bestand waar wel degelijk iets in stond.
+    const gelabeld = JSON.stringify({
+      type: 'FeatureCollection',
+      features: [
+        {
+          type: 'Feature',
+          geometry: { type: 'Point', coordinates: [4.9041389, 52.3675734] },
+          properties: { name: 'Huis', address: 'Amsterdam, Nederland' },
+        },
+      ],
+    });
+    const [punt] = leesGoogleGeoJson(gelabeld);
+    expect(punt.naam).toBe('Huis');
+    expect(punt.adres).toBe('Amsterdam, Nederland');
+    expect(punt.coordinaten).toEqual({ lat: 52.3675734, lon: 4.9041389 });
+  });
+
+  it('slaat een plaats zonder naam over in plaats van hem naamloos te bewaren', () => {
+    // Takeout schrijft af en toe een punt weg met alleen een opmerking dat er
+    // geen locatiegegevens zijn. Een pin zonder naam helpt niemand.
+    const zonderNaam = JSON.stringify({
+      type: 'FeatureCollection',
+      features: [
+        {
+          type: 'Feature',
+          geometry: { type: 'Point', coordinates: [0, 0] },
+          properties: {
+            google_maps_url: 'http://maps.google.com/?q=20.8814875,-103.8383618',
+            Comment: 'Er zijn geen locatiegegevens beschikbaar voor deze opgeslagen plaats',
+          },
+        },
+      ],
+    });
+    expect(leesGoogleGeoJson(zonderNaam)).toEqual([]);
+  });
+
   it('klaagt over een bestand dat geen features heeft', () => {
     expect(() => leesGoogleGeoJson('{"iets":1}')).toThrow(/features/);
   });
@@ -135,6 +174,21 @@ describe('leesGoogleCsv', () => {
   it('gebruikt losse kolommen met coördinaten als die er wel zijn', () => {
     const csv = 'Title,Latitude,Longitude\nHoan Kiem,21.0287,105.8524\n';
     expect(leesGoogleCsv(csv)[0].coordinaten).toEqual({ lat: 21.0287, lon: 105.8524 });
+  });
+
+  it('leest een Nederlandse export, want Takeout vertaalt de kolomkoppen mee', () => {
+    const csv =
+      'Plaats,Adres,URL\n' +
+      'Fushimi Inari,"68 Fukakusa Yabunouchicho, Kyoto",' +
+      'https://www.google.com/maps/search/?api=1&query=34.9671%2C135.7727\n';
+    const [punt] = leesGoogleCsv(csv, 'Japan');
+    expect(punt.naam).toBe('Fushimi Inari');
+    expect(punt.adres).toBe('68 Fukakusa Yabunouchicho, Kyoto');
+    expect(punt.coordinaten).toEqual({ lat: 34.9671, lon: 135.7727 });
+  });
+
+  it('geeft een lege lijst bij een export waar alleen de koppen in staan', () => {
+    expect(leesGoogleCsv('Plaats,Adres,URL\n')).toEqual([]);
   });
 });
 
