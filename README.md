@@ -143,17 +143,31 @@ lijstpagina is niet uit te lezen. Er moet dus een bestand aan te pas komen.
 
 1. Gaat het om de lijst van iemand anders: open de gedeelde link in Google Maps
    en sla de lijst op, zodat hij bij je eigen opgeslagen lijsten komt te staan.
-2. Ga naar takeout.google.com, kies alleen **Maps (your places)** en **Saved**,
-   en vraag de export aan.
-3. Pak het zip-bestand uit. Lijsten staan als `.csv` onder Saved, je eigen
-   opgeslagen plaatsen als `.json` onder Maps.
-4. Kies dat bestand in de app onder "Eigen punten importeren".
+   Takeout exporteert alleen wat van jou is, dus zonder deze stap zit de lijst
+   niet in de export.
+2. Ga naar takeout.google.com, kies alleen **Maps (je plaatsen)** en
+   **Opgeslagen**, en vraag de export aan.
+3. Pak het zip-bestand uit.
+
+Welk bestand je nodig hebt, hangt ervan af waar de plekken staan:
+
+| Bestand                                       | Wat erin zit                                                                                                                                      |
+| --------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `Opgeslagen/<lijstnaam>.csv`                  | Eén bestand per lijst: Favorieten, Wil ik heen, Ster, en elke lijst die je zelf gemaakt of opgeslagen hebt. **Dit is bijna altijd wat je zoekt.** |
+| `Maps (je plaatsen)/Opgeslagen plaatsen.json` | Alleen losse plekken die je met de bladwijzerknop bewaarde, niet de inhoud van je lijsten.                                                        |
+| `Maps (je plaatsen)/Gelabelde plaatsen.json`  | Alleen Thuis, Werk en andere labels. Meestal één of twee regels.                                                                                  |
+
+Kies het bestand in de app onder "Eigen punten importeren".
 
 GeoJSON heeft de coördinaten erin en werkt het beste. Een CSV heeft ze niet, dus
 die worden uit de links gehaald en dat lukt niet altijd. Punten zonder
 coördinaten komen gewoon binnen en blijven staan tot je ze met de hand plaatst;
 er wordt nooit iets weggegooid. Lukt de export helemaal niet, dan kun je de
 namen ook plakken.
+
+Takeout vertaalt de kolomkoppen mee met de taal van je Google account, dus een
+Nederlandse export schrijft `Plaats, Adres, URL` waar een Engelse `Title, Note,
+URL` schrijft. Beide worden gelezen.
 
 ### Etiquette, taal en seizoen
 
