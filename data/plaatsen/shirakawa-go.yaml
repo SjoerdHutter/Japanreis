@@ -1,0 +1,36 @@
+# Shirakawa-go. Uit de gedeelde Google Maps lijst, opgehaald op 6 september
+# 2026. Niet ter plaatse geverifieerd; zie de kop van tokio.yaml.
+
+- id: ogimachi
+  naam: Historische dorpen van Shirakawa-go en Gokayama
+  naamLokaal: 白川郷・五箇山の合掌造り集落
+  stad: shirakawa-go
+  categorie: attractie
+  coordinaten: { lat: 36.2578, lon: 136.9063 }
+  adres: Ogimachi, Shirakawa, Ono District, Gifu 501-5627
+  beschrijving: >-
+    Ogimachi is het grootste van de drie dorpen op de werelderfgoedlijst en het
+    enige dat met de bus goed bereikbaar is. Ruim honderd gassho-boerderijen met
+    rieten daken, waarvan een deel bewoond en een handvol van binnen te
+    bezichtigen. Vanaf het uitzichtpunt Shiroyama zie je het hele dorp in één
+    keer; dat is tien minuten klimmen of een korte pendelbus.
+  openingstijden:
+    standaard: Dorp dag en nacht toegankelijk
+    opmerking: >-
+      De huizen die je van binnen kunt bekijken hebben eigen tijden, ruwweg
+      09:00-16:00. Google Maps vermeldt voor het dorp zelf niets.
+  prijs: gratis
+  tijdvakken: [edo, naoorlogs]
+  attractie:
+    type: wijk
+    bezoekduurMinuten: 180
+    regenbestendig: false
+    dagdeel: [ochtend, middag]
+    drukte:
+      besteMoment: Voor 10:00 of na 15:00, als de bussen met dagtochten weg zijn.
+      drukstMoment: 10:30 tot 14:30.
+  bronnen:
+    - naam: Gemeente Shirakawa
+      url: https://www.vill.shirakawa.lg.jp/1960.htm
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]

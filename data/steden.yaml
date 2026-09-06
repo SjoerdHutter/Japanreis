@@ -18,7 +18,7 @@
     noordoost: { lat: 35.78, lon: 139.85 }
   tijdlijn: japan
   tijdvakken: [edo, meiji, naoorlogs]
-  volgorde: 1
+  volgorde: 9
   korteBeschrijving: >-
     Geen stad met één centrum maar een reeks steden aan elkaar geregen door de
     Yamanote-lijn. Elke wijk heeft een eigen karakter en een eigen tempo.
@@ -44,7 +44,7 @@
     noordoost: { lat: 35.29, lon: 139.17 }
   tijdlijn: japan
   tijdvakken: [edo, meiji]
-  volgorde: 2
+  volgorde: 11
   korteBeschrijving: >-
     Bergen, zwavel en warm water op twee uur van Tokio. Bekend om de onsen, het
     uitzicht op de Fuji als het weer meewerkt, en de rondgang met kabelbaan,
@@ -69,7 +69,7 @@
     noordoost: { lat: 35.08, lon: 135.83 }
   tijdlijn: japan
   tijdvakken: [heian, kamakura, muromachi, edo, meiji]
-  volgorde: 3
+  volgorde: 4
   korteBeschrijving: >-
     Duizend jaar hoofdstad en het enige grote Japanse stadscentrum dat de oorlog
     heeft doorstaan. Tempels, tuinen en een strak geometrisch stratenplan uit de
@@ -96,7 +96,7 @@
     noordoost: { lat: 34.72, lon: 135.87 }
   tijdlijn: japan
   tijdvakken: [nara, heian]
-  volgorde: 4
+  volgorde: 10
   korteBeschrijving: >-
     De hoofdstad voor Kyoto, nu een overzichtelijke stad met een park vol herten
     en de grootste houten gebouwen van het land. Als dagtrip vanuit Kyoto of
@@ -121,7 +121,7 @@
     noordoost: { lat: 34.75, lon: 135.56 }
   tijdlijn: japan
   tijdvakken: [muromachi, edo, meiji, naoorlogs]
-  volgorde: 5
+  volgorde: 2
   korteBeschrijving: >-
     Handelsstad met een directe inslag en het beste straatvoedsel van het land.
     Minder tempels, meer eten, en 's avonds het drukste neon van Japan.
@@ -145,7 +145,7 @@
     noordoost: { lat: 34.42, lon: 132.5 }
   tijdlijn: japan
   tijdvakken: [edo, meiji, naoorlogs]
-  volgorde: 6
+  volgorde: 3
   korteBeschrijving: >-
     Een moderne, ruim opgezette stad rond een herdenkingspark, met het eiland
     Miyajima op een half uur varen.
@@ -169,7 +169,7 @@
     noordoost: { lat: 21.09, lon: 105.9 }
   tijdlijn: hanoi
   tijdvakken: [thang-long, frans-koloniaal, onafhankelijkheid, modern]
-  volgorde: 7
+  volgorde: 1
   korteBeschrijving: >-
     Overstapstad op de heenreis en de terugreis, en een volwaardige bestemming
     op zichzelf. Het centrum ligt op ongeveer 45 minuten van de luchthaven Noi
@@ -181,3 +181,109 @@
     het operagebouw aan die nu naast de smalle straatjes van de oude wijk
     liggen. Na 1945 was de stad de hoofdstad van Noord-Vietnam en na 1976 van
     het herenigde land.
+
+- id: kanazawa
+  naam: Kanazawa
+  naamLokaal: 金沢
+  land: japan
+  tijdzone: Asia/Tokyo
+  valuta: JPY
+  centrum: { lat: 36.568, lon: 136.657 }
+  straalKm: 12
+  kaartgebied:
+    zuidwest: { lat: 36.545, lon: 136.63 }
+    noordoost: { lat: 36.59, lon: 136.68 }
+  tijdlijn: japan
+  tijdvakken: [muromachi, edo, meiji]
+  volgorde: 5
+  korteBeschrijving: >-
+    Compacte stad waar de oorlog aan voorbij is gegaan, met daardoor hele wijken
+    hout uit de Edoperiode nog overeind. Alles ligt binnen loopafstand of een
+    korte busrit, dus drie nachten is er ruim.
+  geschiedenis: >-
+    Kanazawa was vanaf 1583 de zetel van de Maeda's, na de shogun de rijkste
+    familie van Japan. Die rijkdom ging niet naar een leger maar naar
+    ambachten en theeceremonie, deels om de shogun geen reden tot argwaan te
+    geven. Vandaar het bladgoud, het lakwerk en de geishawijken. De stad had
+    geen oorlogsindustrie en is daarom in 1945 niet gebombardeerd, wat verklaart
+    waarom de houten wijken er nog staan terwijl ze in de meeste Japanse steden
+    verdwenen zijn.
+
+- id: shirakawa-go
+  naam: Shirakawa-go
+  naamLokaal: 白川郷
+  land: japan
+  tijdzone: Asia/Tokyo
+  valuta: JPY
+  centrum: { lat: 36.2578, lon: 136.9063 }
+  straalKm: 6
+  kaartgebied:
+    zuidwest: { lat: 36.245, lon: 136.895 }
+    noordoost: { lat: 36.27, lon: 136.92 }
+  tijdlijn: japan
+  tijdvakken: [edo, naoorlogs]
+  volgorde: 6
+  korteBeschrijving: >-
+    Bergdorp met rieten boerderijen, halverwege Kanazawa en Takayama en daarom
+    goed te doen op de dag dat je verkast. Een dagtrip, geen overnachting; het
+    dorp is klein en na een uur of drie heb je het gezien.
+  geschiedenis: >-
+    De gassho-zukuri boerderijen danken hun steile daken aan de sneeuw, die hier
+    meters hoog ligt. Onder dat dak zaten zolders waar zijderupsen werden
+    gehouden, de winterinkomsten van een dorp dat de rest van het jaar
+    nauwelijks landbouwgrond had. Toen de zijde in de twintigste eeuw wegviel
+    stonden de huizen leeg en werden er tientallen gesloopt of verplaatst voor
+    een stuwmeer. Wat overbleef staat sinds 1995 op de werelderfgoedlijst.
+
+- id: takayama
+  naam: Takayama
+  naamLokaal: 高山
+  land: japan
+  tijdzone: Asia/Tokyo
+  valuta: JPY
+  centrum: { lat: 36.1418, lon: 137.256 }
+  straalKm: 10
+  kaartgebied:
+    zuidwest: { lat: 36.125, lon: 137.24 }
+    noordoost: { lat: 36.16, lon: 137.28 }
+  tijdlijn: japan
+  tijdvakken: [edo, meiji]
+  volgorde: 7
+  korteBeschrijving: >-
+    Stadje in de bergen met een bewaard gebleven koopmanswijk en twee
+    ochtendmarkten. Klein genoeg om in een dag te lopen, dus twee nachten geeft
+    ruimte voor een ochtend zonder haast.
+  geschiedenis: >-
+    Takayama lag zo afgelegen tussen de bergen dat de shogun het gebied in 1692
+    rechtstreeks onder zijn eigen bestuur plaatste, in plaats van het aan een
+    daimyo te laten. Het hout uit de omliggende bergen en de timmerlieden die
+    ermee werkten waren te waardevol. Diezelfde afzondering hield de stad
+    daarna buiten de industrialisatie, waardoor de houten koopmanshuizen aan de
+    Sanmachi-straten er nog staan zoals ze gebouwd zijn.
+
+- id: fujikawaguchiko
+  naam: Fujikawaguchiko
+  naamLokaal: 富士河口湖
+  land: japan
+  tijdzone: Asia/Tokyo
+  valuta: JPY
+  centrum: { lat: 35.5011, lon: 138.7566 }
+  straalKm: 15
+  kaartgebied:
+    zuidwest: { lat: 35.47, lon: 138.68 }
+    noordoost: { lat: 35.545, lon: 138.8 }
+  tijdlijn: japan
+  tijdvakken: [edo, naoorlogs]
+  volgorde: 8
+  korteBeschrijving: >-
+    Het meer aan de noordkant van Fuji, dagtrip vanuit Tokio. De ronde om het
+    meer is ongeveer 18 km en grotendeels vlak, ook per fiets te doen. Alleen
+    zinvol bij helder weer: zonder zicht op de berg blijft er een gewoon meer
+    over.
+  geschiedenis: >-
+    Fuji is eeuwenlang eerder beklommen uit geloof dan uit sport. In de
+    Edoperiode groeiden de Fuji-ko uit tot verenigingen die spaarden om één lid
+    namens de hele groep naar de top te sturen, en langs de routes ontstonden
+    pelgrimsherbergen waarvan er in Fujiyoshida nog staan. Vrouwen mochten pas
+    vanaf 1872 naar boven. Het meer zelf ontstond doordat lava van een oude
+    uitbarsting het dal afsloot.

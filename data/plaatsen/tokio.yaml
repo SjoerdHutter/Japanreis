@@ -11,11 +11,11 @@
   stad: tokio
   categorie: attractie
   coordinaten: { lat: 35.7148, lon: 139.7967 }
+  adres: 2-3-1 Asakusa, Taito
   beschrijving: >-
     De oudste tempel van Tokio, en de drukste. De aanloopstraat Nakamise staat
     vol kraampjes en is overdag schouder aan schouder; vroeg in de ochtend of
     na zonsondergang loop je er zo doorheen en is de poort verlicht.
-  adres: 2-3-1 Asakusa, Taito
   openingstijden:
     standaard: 06:00-17:00
     opmerking: Het terrein zelf is dag en nacht open, alleen de hoofdhal sluit.
@@ -256,3 +256,272 @@
       toegangspoortjes, naast het informatiekantoor. Vraag ernaar bij de balie
       als je hem niet ziet staan; het personeel wijst hem zonder morren aan.
     openingstijden: { standaard: 06:00-22:00 }
+
+# Hieronder de punten uit de gedeelde Google Maps lijst, opgehaald op
+# 6 september 2026. Bij de winkels staat `coordinaatGeschat: true`: een Japans
+# adres wijst een blok aan en geen deur, dus die pin kan honderd meter naast het
+# pand liggen. Naam, adres en telefoonnummer kloppen wel.
+
+- id: tokyo-skytree
+  naam: Tokyo Skytree
+  naamLokaal: 東京スカイツリー
+  stad: tokio
+  categorie: attractie
+  coordinaten: { lat: 35.7101, lon: 139.8107 }
+  adres: 1 Chome-1-2 Oshiage, Sumida City, Tokyo 131-0045
+  beschrijving: >-
+    Met 634 meter de hoogste toren ter wereld, met twee uitkijkdekken op 350 en
+    450 meter. Het hoge dek kost extra en levert vooral hoogte op, niet meer
+    zicht: op 350 meter zie je de stad nog als stad. Bij helder weer staat Fuji
+    aan de westkant. Aan de voet zit een winkelcentrum, dus met regen kun je er
+    langer terecht.
+  openingstijden:
+    standaard: 10:00-22:00
+    perDag: { zaterdag: 09:00-22:00, zondag: 09:00-22:00 }
+    laatsteToegang: '21:00'
+  prijs: { bedrag: 2100, tot: 3400, valuta: JPY, toelichting: Afhankelijk van het dek en de dag }
+  reservering: aanbevolen
+  tijdvakken: [naoorlogs]
+  attractie:
+    type: uitzichtpunt
+    bezoekduurMinuten: 90
+    regenbestendig: true
+    dagdeel: [middag, avond]
+    drukte:
+      besteMoment: Bij opening, of het laatste uur voor sluiting.
+      drukstMoment: 15:00 tot 19:00, en het hele weekend.
+  bronnen:
+    - naam: Tokyo Skytree
+      url: https://www.tokyo-skytree.jp/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]
+
+- id: teamlab-borderless
+  naam: 'teamLab Borderless: Mori Building Digital Art Museum'
+  naamLokaal: チームラボボーダレス
+  stad: tokio
+  categorie: attractie
+  coordinaten: { lat: 35.6602, lon: 139.7398 }
+  adres: Azabudai Hills Garden Plaza B, B1, 5 Chome-9 Toranomon, Minato City, Tokyo 106-0041
+  beschrijving: >-
+    Digitale kunst in donkere zalen zonder plattegrond, waar de werken van kamer
+    naar kamer bewegen. Sinds 2024 in Azabudai Hills. Draag geen rok en geen
+    hakken: er zijn spiegelvloeren en je klimt en zit. Reken op twee tot drie uur
+    en op een tijdslot dat je vooraf boekt.
+  openingstijden:
+    standaard: 08:30-21:00
+    perDag: { dinsdag: gesloten }
+  prijs: { bedrag: 3800, valuta: JPY }
+  reservering: verplicht
+  tijdvakken: [naoorlogs]
+  attractie:
+    type: museum
+    bezoekduurMinuten: 150
+    regenbestendig: true
+    dagdeel: [ochtend, middag, avond]
+    drukte:
+      besteMoment: Het eerste tijdslot van de dag.
+  bronnen:
+    - naam: teamLab Borderless
+      url: https://www.teamlab.art/jp/e/tokyo/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]
+
+- id: gotoku-ji
+  naam: Gōtoku-ji
+  naamLokaal: 豪徳寺
+  stad: tokio
+  categorie: attractie
+  coordinaten: { lat: 35.6462, lon: 139.6494 }
+  adres: 2 Chome-24-7 Gotokuji, Setagaya City, Tokyo 154-0021
+  beschrijving: >-
+    De kattentempel, waar honderden witte maneki-neko op rekken naast elkaar
+    staan. Bezoekers laten er een achter als een wens is uitgekomen, dus de
+    verzameling groeit. Ligt in een rustige woonwijk in Setagaya en is daardoor
+    een stuk stiller dan wat je van de foto's verwacht.
+  openingstijden:
+    standaard: 06:00-17:00
+    opmerking: Het kantoor voor de goshuin sluit eerder dan de tempel zelf.
+  prijs: gratis
+  tijdvakken: [edo]
+  attractie:
+    type: tempel
+    bezoekduurMinuten: 45
+    regenbestendig: false
+    dagdeel: [ochtend, middag]
+  goshuin:
+    waar: Bij het kantoor rechts van de hoofdhal, waar ook de beeldjes verkocht worden.
+    prijs: { bedrag: 300, valuta: JPY }
+    openingstijden: { standaard: 08:00-16:30 }
+  bronnen:
+    - naam: Gōtoku-ji
+      url: https://gotokuji.jp/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]
+
+- id: yayoi-kusama-museum
+  naam: Yayoi Kusama Museum
+  naamLokaal: 草間彌生美術館
+  stad: tokio
+  categorie: attractie
+  coordinaten: { lat: 35.704, lon: 139.7185 }
+  coordinaatGeschat: true
+  adres: 107 Bentencho, Shinjuku City, Tokyo 162-0851
+  beschrijving: >-
+    Klein museum van vijf verdiepingen, gewijd aan het werk van Kusama zelf.
+    Kaarten gaan per tijdslot en per maand in de verkoop, en zijn snel weg.
+  geslotenOpmerking: >-
+    Google Maps meldde op 6 september 2026 "tijdelijk gesloten". Controleer de
+    site voor je erheen gaat.
+  reservering: verplicht
+  tijdvakken: [naoorlogs]
+  attractie:
+    type: museum
+    bezoekduurMinuten: 60
+    regenbestendig: true
+    dagdeel: [middag]
+  bronnen:
+    - naam: Yayoi Kusama Museum
+      url: https://yayoikusamamuseum.jp/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst, controleren]
+
+- id: mixthinks-harajuku
+  naam: MixTHINKS Harajuku
+  stad: tokio
+  categorie: winkel
+  coordinaten: { lat: 35.6675, lon: 139.705 }
+  coordinaatGeschat: true
+  adres: 6 Chome-28-6 Jingumae, Shibuya, Tokyo 150-0001, 1F en 2F
+  beschrijving: >-
+    Vintage tassen over twee verdiepingen, met een sterke selectie Chanel en een
+    achterkamer met de koopjes. Er wordt onderhandeld, dus vraag er altijd naar.
+    In de Instagramcollectie staat dit als de ene adres in Tokio dat je niet mag
+    overslaan.
+  openingstijden:
+    standaard: 11:30-21:00
+  bronnen:
+    - naam: MixTHINKS
+      url: https://mixthinks-online.com/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst, vintage, tassen]
+
+- id: brand-off-ginza
+  naam: BRAND OFF Ginza
+  stad: tokio
+  categorie: winkel
+  coordinaten: { lat: 35.6714, lon: 139.7627 }
+  coordinaatGeschat: true
+  adres: 5 Chome-5-9 Ginza, Chuo City, Tokyo 104-0061, 1F tot 4F
+  beschrijving: >-
+    Vier verdiepingen tweedehands merkkleding en tassen in Ginza. De keten heeft
+    meerdere filialen; dit is de vestiging Ginza. Ginza en de buurt rond Ueno
+    worden in de Instagramcollectie genoemd als de plekken waar de prijzen beter
+    zijn dan in Omotesando.
+  openingstijden:
+    standaard: 11:00-20:00
+  bronnen:
+    - naam: BRAND OFF, vestiging Ginza
+      url: https://kaitori.brandoff.co.jp/shop/kanto/tokyo/12487
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst, vintage, tassen]
+
+- id: exitmelsa
+  naam: EXITMELSA
+  naamLokaal: エクシートメルサ
+  stad: tokio
+  categorie: winkel
+  coordinaten: { lat: 35.6708, lon: 139.7648 }
+  coordinaatGeschat: true
+  adres: >-
+  beschrijving: >-
+    Klein winkelcentrum in Ginza. Voor deze reis vooral van belang omdat ANTE
+    Vintage in het souterrain zit, maar er zitten meer zaken in en het is
+    overdekt, dus met regen goed te combineren met de rest van Ginza.
+    Nakamura Sekizenkai Building, 5 Chome-7-10 Ginza, Chuo City, Tokyo 104-0061
+  openingstijden:
+    standaard: 11:00-20:00
+  bronnen:
+    - naam: EXITMELSA
+      url: http://www.exitmelsa.jp/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]
+
+- id: ante-vintage-ginza
+  naam: ANTE Vintage Tokyo
+  stad: tokio
+  categorie: winkel
+  coordinaten: { lat: 35.6708, lon: 139.7648 }
+  coordinaatGeschat: true
+  adres: 5 Chome-7-10 Ginza, Chuo City, Tokyo 104-0061, B1
+  beschrijving: >-
+    Vintage horloges, in het souterrain van EXITMELSA. Zelfde adres, dus in één
+    bezoek te doen.
+  openingstijden:
+    standaard: 11:00-20:00
+  bronnen:
+    - naam: ANTE Watch Tokyo
+      url: https://antewatchtokyo.com/ja-jp
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst, horloges]
+
+- id: mizutani-camera
+  naam: Mizutani Camera
+  naamLokaal: 水谷カメラ
+  stad: tokio
+  categorie: winkel
+  coordinaten: { lat: 35.7085, lon: 139.7745 }
+  coordinaatGeschat: true
+  adres: 6 Chome-9-9-17 Ueno, Taito City, Tokyo 110-0005
+  beschrijving: >-
+    Kleine zaak in Ueno voor tweedehands horloges, ondanks de naam. Let op de
+    sluitingsdagen: maandag en donderdag is er niemand, en dat is precies het
+    soort ding waar je voor een dichte deur voor staat.
+  openingstijden:
+    standaard: 10:00-17:00
+    perDag: { maandag: gesloten, donderdag: gesloten, zaterdag: 10:00-16:30 }
+  bronnen:
+    - naam: Mizutani
+      url: http://mizutaniwatches.blog.fc2.com/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst, horloges]
+
+- id: vintage-miyabi
+  naam: Vintage Miyabi
+  stad: tokio
+  categorie: winkel
+  coordinaten: { lat: 35.6947, lon: 139.7787 }
+  coordinaatGeschat: true
+  adres: 2 Chome-1-9 Higashikanda, Chiyoda City, Tokyo 101-0031
+  beschrijving: >-
+    Vintage designertassen in Higashikanda, weg van de winkelstraten. Niet in de
+    buurt van de andere adressen op deze lijst, dus plan hem apart of laat hem
+    vallen.
+  openingstijden:
+    standaard: 11:30-19:30
+  bronnen:
+    - naam: Vintage Miyabi
+      url: https://miyabi-tokyo.jp/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst, vintage, tassen]
+
+- id: 2nd-street-fujimachi
+  naam: 2nd Street Fujimachi
+  stad: tokio
+  categorie: winkel
+  coordinaten: { lat: 35.725, lon: 139.557 }
+  coordinaatGeschat: true
+  adres: 5 Chome-1-4 Fujimachi, Nishitokyo, Tokyo 202-0014
+  beschrijving: >-
+    Filiaal van de tweedehandsketen, in Nishitokyo. Dat ligt een eind buiten het
+    centrum, ruim een halfuur met de trein vanaf Shinjuku. De keten heeft ook
+    vestigingen in de stad zelf; ga hier alleen heen als je gericht op zoek bent.
+    Let op: dit punt valt buiten het offline kaartgebied van Tokio, dus zonder
+    bereik zie je hier wel de pin maar geen kaart eromheen.
+  openingstijden:
+    standaard: 10:00-20:00
+  bronnen:
+    - naam: 2nd Street
+      url: https://www.2ndstreet.jp/shop/details
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst, vintage]

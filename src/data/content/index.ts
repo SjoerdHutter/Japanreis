@@ -6,12 +6,14 @@ import vervoerRuw from '../../../data/vervoer.yaml';
 import etiquetteRuw from '../../../data/etiquette.yaml';
 import zinnenRuw from '../../../data/zinnen.yaml';
 import seizoenRuw from '../../../data/seizoen.yaml';
+import tipsRuw from '../../../data/tips.yaml';
 import {
   appsBestandSchema,
   vervoerBestandSchema,
   etiquetteBestandSchema,
   zinnenBestandSchema,
   seizoenBestandSchema,
+  tipsBestandSchema,
   plaatsenBestandSchema,
   reisschemaSchema,
   stedenBestandSchema,
@@ -25,6 +27,7 @@ import {
   type Etiquette,
   type Zin,
   type SeizoenContent,
+  type TipsContent,
 } from '@/domein/schema';
 
 /**
@@ -69,6 +72,8 @@ export const ETIQUETTE: Etiquette[] = parseer(etiquetteBestandSchema, etiquetteR
 export const ZINNEN: Zin[] = parseer(zinnenBestandSchema, zinnenRuw, 'zinnen');
 
 export const SEIZOEN: SeizoenContent = parseer(seizoenBestandSchema, seizoenRuw, 'seizoen');
+
+export const TIPS: TipsContent = parseer(tipsBestandSchema, tipsRuw, 'tips');
 
 export const stadMet = (id: string): Stad | undefined => STEDEN.find((s) => s.id === id);
 

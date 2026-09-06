@@ -1,0 +1,34 @@
+# Fujikawaguchiko. Uit de gedeelde Google Maps lijst, opgehaald op 6 september
+# 2026. Niet ter plaatse geverifieerd; zie de kop van tokio.yaml.
+
+- id: kawaguchiko
+  naam: Meer Kawaguchi
+  naamLokaal: 河口湖
+  stad: fujikawaguchiko
+  categorie: attractie
+  coordinaten: { lat: 35.5011, lon: 138.7566 }
+  adres: Minamitsuru District, Yamanashi
+  beschrijving: >-
+    Het bereikbaarste van de vijf Fuji-meren en de plek waar de berg zich van
+    zijn bekendste kant laat zien. De ronde om het meer is ongeveer 18 km,
+    grotendeels vlak met een paar korte klimmetjes, goed te doen op een huurfiets.
+    Rijd tegen de klok in, dan zit je aan de kant van het water met het beste
+    zicht. Zonder heldere lucht blijft er een gewoon bergmeer over, dus check het
+    weer voor je aan de trein begint.
+  openingstijden:
+    standaard: Dag en nacht toegankelijk
+  prijs: gratis
+  tijdvakken: [edo, naoorlogs]
+  attractie:
+    type: water
+    bezoekduurMinuten: 300
+    regenbestendig: false
+    dagdeel: [ochtend, middag]
+    drukte:
+      besteMoment: >-
+        Vroege ochtend. De kans op een vrije top is dan het grootst; later op de
+        dag trekt er bewolking omheen.
+  bronnen:
+    - naam: Google Maps lijst Japan
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]

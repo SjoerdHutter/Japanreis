@@ -6,6 +6,7 @@
   stad: osaka
   categorie: attractie
   coordinaten: { lat: 34.6873, lon: 135.5259 }
+  adres: 1-1 Osakajo, Chuo Ward, Osaka, 540-0002
   beschrijving: >-
     De toren is een betonnen wederopbouw uit 1931 met een lift erin, dus binnen
     voelt het als een museum en niet als een kasteel. De muren en grachten
@@ -20,6 +21,11 @@
     bezoekduurMinuten: 90
     regenbestendig: true
     dagdeel: [ochtend, middag]
+  bronnen:
+    - naam: Kasteel Osaka
+      url: https://www.osakacastle.net/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]
 
 - id: dotonbori
   naam: Dōtonbori
@@ -27,6 +33,7 @@
   stad: osaka
   categorie: attractie
   coordinaten: { lat: 34.6687, lon: 135.5013 }
+  adres: 1 Chome Dotonbori, Chuo Ward, Osaka, 542-0071
   beschrijving: >-
     De kanaalstraat met de rennende Glico-man en een gevel vol bewegend neon.
     Overdag valt het tegen, na het donker is het het drukste en luidruchtigste
@@ -38,6 +45,11 @@
     bezoekduurMinuten: 60
     regenbestendig: false
     dagdeel: [avond, nacht]
+  bronnen:
+    - naam: Dōtonbori
+      url: http://www.dotonbori.or.jp/ja/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]
 
 - id: kuromon-ichiba
   naam: Kuromon Ichiba
@@ -45,6 +57,7 @@
   stad: osaka
   categorie: eten
   coordinaten: { lat: 34.6653, lon: 135.5062 }
+  adres: 2 Chome-4-1 Nipponbashi, Chuo Ward, Osaka, 542-0073
   beschrijving: >-
     Overdekte markt van zeshonderd meter waar je je ontbijt bij elkaar loopt:
     gegrilde kamsteek, oesters, fugu en fruit. De prijzen zijn de laatste jaren
@@ -58,6 +71,11 @@
     keuken: streetfood
     ontbijt: true
     moeite: waardig-een-omweg
+  bronnen:
+    - naam: Kuromon markt
+      url: https://kuromon.com/jp/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]
 
 - id: shinsekai
   naam: Shinsekai en Tsūtenkaku
@@ -65,6 +83,7 @@
   stad: osaka
   categorie: attractie
   coordinaten: { lat: 34.6524, lon: 135.5063 }
+  adres: 2 Chome-5 Ebisuhigashi, Naniwa Ward, Osaka, 556-0002
   beschrijving: >-
     Wijk die in 1912 werd aangelegd als een toekomstvisioen en daarna zestig
     jaar stil is blijven staan. Kushikatsu aan het spit, en de regel dat je maar
@@ -79,6 +98,11 @@
     bezoekduurMinuten: 90
     regenbestendig: false
     dagdeel: [avond]
+  bronnen:
+    - naam: Tsūtenkaku
+      url: https://www.tsutenkaku.co.jp/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]
 
 - id: umeda-sky-building
   naam: Umeda Sky Building
@@ -86,6 +110,7 @@
   stad: osaka
   categorie: attractie
   coordinaten: { lat: 34.7053, lon: 135.4897 }
+  adres: 1 Chome-1-88 Oyodonaka, Kita Ward, Osaka, 531-6023
   beschrijving: >-
     Twee torens met bovenin een zwevende ring, waar je via een roltrap door de
     open lucht naartoe gaat. Het dak is open, dus bij wind is het koud en bij
@@ -100,6 +125,11 @@
     bezoekduurMinuten: 75
     regenbestendig: false
     dagdeel: [avond]
+  bronnen:
+    - naam: Umeda Sky Building
+      url: https://www.skybldg.co.jp/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]
 
 - id: sumiyoshi-taisha
   naam: Sumiyoshi Taisha
@@ -175,3 +205,109 @@
   ekiStempel:
     waar: Bij de centrale doorgang binnen de poortjes, naast het servicekantoor.
     openingstijden: { standaard: 06:00-22:00 }
+
+# Hieronder de punten uit de gedeelde Google Maps lijst, opgehaald op
+# 6 september 2026. Kasteel Osaka, Dotonbori, de Kuromon markt, Umeda Sky en
+# Shinsekai met Tsutenkaku stonden er al in en zijn hierboven aangevuld.
+
+- id: universal-studios-japan
+  naam: Universal Studios Japan
+  naamLokaal: ユニバーサル・スタジオ・ジャパン
+  stad: osaka
+  categorie: attractie
+  coordinaten: { lat: 34.6654, lon: 135.4323 }
+  adres: 2 Chome-1-33 Sakurajima, Konohana Ward, Osaka, 554-0031
+  beschrijving: >-
+    Een hele dag, geen halve. Koop de kaartjes vooraf en overweeg een Express
+    Pass: zonder wachten kost een populaire attractie hier makkelijk twee uur.
+    Super Nintendo World heeft daarbovenop vaak een apart tijdslot nodig, dat je
+    in de app van het park boekt zodra je binnen bent.
+  openingstijden:
+    opmerking: >-
+      Google Maps vermeldt geen vaste tijden; het park schuift per dag en per
+      seizoen. Ruwweg 09:00-21:00. Kijk de dag ervoor op de site.
+  prijs: { bedrag: 8600, tot: 10900, valuta: JPY, toelichting: Dagkaart, prijs schuift per dag }
+  reservering: verplicht
+  tijdvakken: [naoorlogs]
+  attractie:
+    type: pretpark
+    bezoekduurMinuten: 540
+    regenbestendig: false
+    dagdeel: [ochtend, middag, avond]
+    drukte:
+      besteMoment: Sta voor opening bij de poort en ga meteen naar het achterste deel van het park.
+      drukstMoment: Weekend en Japanse schoolvakanties.
+  bronnen:
+    - naam: Universal Studios Japan
+      url: https://www.usj.co.jp/web/ja/jp
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]
+
+- id: kaiyukan
+  naam: Aquarium Kaiyukan
+  naamLokaal: 海遊館
+  stad: osaka
+  categorie: attractie
+  coordinaten: { lat: 34.6545, lon: 135.4289 }
+  adres: 1 Chome-1-10 Kaigandori, Minato Ward, Osaka, 552-0022
+  beschrijving: >-
+    Een van de grootste aquaria ter wereld, opgezet als één spiraal naar beneden
+    rond een centraal bassin met walvishaaien. Je loopt dus één route en ziet
+    hetzelfde bassin op steeds grotere diepte. Volledig binnen, dus dit is de
+    plek voor een regendag.
+  openingstijden:
+    standaard: 10:30-20:00
+    perDag: { zaterdag: 09:30-20:00, zondag: 09:30-20:00 }
+    laatsteToegang: '19:00'
+  prijs: { bedrag: 2700, valuta: JPY }
+  reservering: aanbevolen
+  tijdvakken: [naoorlogs]
+  attractie:
+    type: aquarium
+    bezoekduurMinuten: 150
+    regenbestendig: true
+    dagdeel: [ochtend, middag, avond]
+    drukte:
+      besteMoment: Na 16:00, als de schoolgroepen weg zijn.
+  bronnen:
+    - naam: Kaiyukan
+      url: https://www.kaiyukan.com/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]
+
+- id: brand-osaka
+  naam: BRAND OSAKA
+  stad: osaka
+  categorie: winkel
+  coordinaten: { lat: 34.7327, lon: 135.4983 }
+  coordinaatGeschat: true
+  adres: 4 Chome-2-26 Nishinakajima, Yodogawa Ward, Osaka 532-0011, 6F
+  beschrijving: >-
+    Vintage tassen op de zesde verdieping in Nishinakajima, ten noorden van
+    Umeda. In het weekend dicht, dus dit moet op een doordeweekse dag. De
+    Instagramcollectie raadt aan een luxe vintage zoektocht juist in Osaka te
+    beginnen en niet in Tokio: meer concurrentie tussen winkels en meer ruimte om
+    over de prijs te praten.
+  openingstijden:
+    standaard: 11:00-19:00
+    perDag: { zaterdag: gesloten, zondag: gesloten }
+  bronnen:
+    - naam: BRAND OSAKA
+      url: https://linktr.ee/6kgww56ctb
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst, vintage, tassen]
+
+- id: oldies-but-goodies
+  naam: Oldies but goodies Japan
+  stad: osaka
+  categorie: winkel
+  coordinaten: { lat: 34.662, lon: 135.501 }
+  coordinaatGeschat: true
+  adres: 2 Chome-4-23 Motomachi, Naniwa Ward, Osaka 556-0016, 5F
+  beschrijving: >-
+    Vintage tassen op de vijfde verdieping in Motomachi, vlak bij Namba en dus
+    goed te combineren met de Kuromon markt en Dotonbori. Zondag dicht.
+  openingstijden:
+    standaard: 09:00-18:00
+    perDag: { zondag: gesloten }
+  tags: [google-maps-lijst, vintage, tassen]

@@ -6,6 +6,7 @@
   stad: hiroshima
   categorie: attractie
   coordinaten: { lat: 34.3955, lon: 132.4536 }
+  adres: 1-10 Otemachi, Naka Ward, Hiroshima, 730-0051
   beschrijving: >-
     De ruïne van de tentoonstellingshal, vrijwel recht onder het punt waar de
     bom op 6 augustus 1945 ontplofte. Het skelet is bewust gelaten zoals het die
@@ -17,6 +18,7 @@
     bezoekduurMinuten: 20
     regenbestendig: false
     dagdeel: [ochtend, middag, avond]
+  tags: [google-maps-lijst]
 
 - id: vredesmuseum
   naam: Vredesmuseum Hiroshima
@@ -24,6 +26,7 @@
   stad: hiroshima
   categorie: attractie
   coordinaten: { lat: 34.3915, lon: 132.4519 }
+  adres: 1-2 Nakajimacho, Naka Ward, Hiroshima, 730-0811
   beschrijving: >-
     Het museum vertelt de dag vanuit de mensen die hem meemaakten, met
     persoonlijke voorwerpen en getuigenissen. Zwaar en zorgvuldig gedaan. Neem
@@ -42,6 +45,7 @@
   bronnen:
     - naam: Hiroshima Peace Memorial Museum
       url: https://hpmmuseum.jp/
+  tags: [google-maps-lijst]
 
 - id: vredespark
   naam: Vredespark
@@ -67,6 +71,7 @@
   stad: hiroshima
   categorie: attractie
   coordinaten: { lat: 34.296, lon: 132.3199 }
+  adres: 1-1 Miyajimacho, Hatsukaichi, Hiroshima 739-0588
   beschrijving: >-
     De schrijn staat op palen in zee, met de rode poort ervoor. Bij vloed lijkt
     alles te drijven, bij eb loop je er tussen de schelpen naartoe. Kijk vooraf
@@ -87,6 +92,11 @@
     waar: Bij de uitgang van de schrijn, in het kantoor links.
     prijs: { bedrag: 300, valuta: JPY }
     openingstijden: { standaard: 08:00-16:30 }
+  bronnen:
+    - naam: Itsukushima schrijn
+      url: https://www.itsukushimajinja.jp/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]
 
 - id: shukkei-en
   naam: Shukkei-en
@@ -94,6 +104,7 @@
   stad: hiroshima
   categorie: attractie
   coordinaten: { lat: 34.4013, lon: 132.4661 }
+  adres: 2-11 Kaminoboricho, Naka Ward, Hiroshima, 730-0014
   beschrijving: >-
     Wandeltuin uit 1620 die een heel landschap in het klein nabootst: bergen,
     een vallei en een meer met eilandjes. Verwoest in 1945 en daarna
@@ -108,6 +119,11 @@
     bezoekduurMinuten: 60
     regenbestendig: false
     dagdeel: [ochtend, middag]
+  bronnen:
+    - naam: Shukkei-en
+      url: http://shukkeien.jp/
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]
 
 - id: okonomimura
   naam: Okonomimura
@@ -115,6 +131,7 @@
   stad: hiroshima
   categorie: eten
   coordinaten: { lat: 34.3924, lon: 132.4602 }
+  adres: 5-13 Shintenchi, Naka Ward, Hiroshima, 730-0034
   beschrijving: >-
     Drie verdiepingen met niets dan okonomiyaki-kraampjes. De Hiroshima-variant
     wordt gelaagd in plaats van gemengd, met een berg kool en een laag
@@ -128,6 +145,11 @@
     keuken: okonomiyaki
     lateNight: true
     moeite: waardig-een-omweg
+  bronnen:
+    - naam: Okonomimura
+      url: http://okonomimura.jp/index.html
+      gecontroleerdOp: 2026-09-06
+  tags: [google-maps-lijst]
 
 - id: station-hiroshima-stempel
   naam: Eki stamp station Hiroshima

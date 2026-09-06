@@ -26,7 +26,16 @@ export const categorieSchema = z.enum([
 ]);
 export type Categorie = z.infer<typeof categorieSchema>;
 
-/** De filters uit hoofdstuk 2 van de functiespecificatie. */
+/**
+ * De filters uit hoofdstuk 2 van de functiespecificatie.
+ *
+ * Twee soorten staan niet in die lijst maar wel in het reisschema, en ze onder
+ * een bestaande noemer schuiven zou het filter juist onbruikbaar maken. Een
+ * pretpark onder `park` zetten laat het opduiken bij wie een plantsoen zoekt,
+ * en een aquarium onder `museum` bij wie binnen wil zitten met een tentoon-
+ * stelling. Beide zijn dagvullend, betaald en regenbestendig, en verdienen dus
+ * hun eigen knop.
+ */
 export const attractieTypeSchema = z.enum([
   'tempel',
   'schrijn',
@@ -39,6 +48,8 @@ export const attractieTypeSchema = z.enum([
   'park',
   'monument',
   'water',
+  'pretpark',
+  'aquarium',
 ]);
 export type AttractieType = z.infer<typeof attractieTypeSchema>;
 
@@ -59,10 +70,13 @@ export const keukenSchema = z.enum([
   'curry',
   'konbini',
   'depachika',
-  // Eén toevoeging op de lijst uit de specificatie: Osaka en Hiroshima zijn
+  // Twee toevoegingen op de lijst uit de specificatie. Osaka en Hiroshima zijn
   // zonder okonomiyaki niet te beschrijven, en onder izakaya schuiven doet
-  // geen recht aan wat je er zoekt.
+  // geen recht aan wat je er zoekt. En een theehuis is geen restaurant: je gaat
+  // er voor een ceremonie van een uur zitten, niet voor een maaltijd. Kanazawa
+  // en Kyoto staan er vol mee.
   'okonomiyaki',
+  'thee',
   // Hanoi
   'pho',
   'bun-cha',
@@ -141,6 +155,17 @@ export const plaatsSchema = z.object({
   stad: z.string().min(1),
   categorie: categorieSchema,
   coordinaten: coordinaatSchema,
+  /**
+   * Waar of de pin het gebouw aanwijst of alleen het huizenblok.
+   *
+   * Nodig omdat een Japans adres geen straat en huisnummer is maar een wijk,
+   * een blok en een volgnummer binnen dat blok. Zonder geocoder is daar het
+   * blok uit af te leiden en niet de deur, en dat is voor een tempel geen
+   * probleem maar voor een winkel op de zesde verdieping wel. Liever een pin
+   * met de mededeling dat hij op honderd meter kan zitten dan een pin die
+   * precisie voorwendt die er niet is.
+   */
+  coordinaatGeschat: z.boolean().optional(),
   beschrijving: z.string().optional(),
   adres: z.string().optional(),
   openingstijden: openingstijdenSchema.optional(),

@@ -24,6 +24,7 @@ import {
   seizoenBestandSchema,
   zinnenBestandSchema,
 } from '../src/domein/schema/context';
+import { tipsBestandSchema } from '../src/domein/schema/tips';
 import { binnenGebied } from '../src/domein/geo/afstand';
 
 const DATA = 'data';
@@ -65,6 +66,7 @@ const etiquette = controleer(
 );
 const zinnen = controleer(zinnenBestandSchema, lees(join(DATA, 'zinnen.yaml')), 'zinnen.yaml');
 const seizoen = controleer(seizoenBestandSchema, lees(join(DATA, 'seizoen.yaml')), 'seizoen.yaml');
+const tips = controleer(tipsBestandSchema, lees(join(DATA, 'tips.yaml')), 'tips.yaml');
 
 if (zinnen && new Set(zinnen.map((z) => z.id)).size !== zinnen.length) {
   fouten.push('zinnen.yaml: dubbele zin-id');
@@ -193,8 +195,21 @@ if (steden && tijdlijnen && reisschema) {
     }
   }
 
+  // Een tip die naar een stad verwijst die niet bestaat verdwijnt stilletjes uit
+  // het filter, en dat merk je pas als je hem mist.
+  if (tips) {
+    for (const groep of tips.groepen) {
+      for (const tip of groep.tips) {
+        if (tip.stad !== undefined && !stadIds.has(tip.stad)) {
+          fouten.push(`tips.yaml: groep ${groep.id} verwijst naar onbekende stad "${tip.stad}"`);
+        }
+      }
+    }
+  }
+
+  const aantalTips = tips?.groepen.reduce((n, g) => n + g.tips.length, 0) ?? 0;
   console.log(
-    `Gecontroleerd: ${steden.length} steden, ${plaatsIds.size} plaatsen, ${apps?.length ?? 0} apps, ${vervoer?.trajecten.length ?? 0} trajecten, ${etiquette?.length ?? 0} etiquettekaarten, ${zinnen?.length ?? 0} zinnen.`,
+    `Gecontroleerd: ${steden.length} steden, ${plaatsIds.size} plaatsen, ${apps?.length ?? 0} apps, ${vervoer?.trajecten.length ?? 0} trajecten, ${etiquette?.length ?? 0} etiquettekaarten, ${zinnen?.length ?? 0} zinnen, ${aantalTips} tips.`,
   );
 }
 
