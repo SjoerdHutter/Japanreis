@@ -29,6 +29,8 @@ import { stationsBestandSchema } from '../src/domein/schema/station';
 import { reisdagenBestandSchema } from '../src/domein/schema/reisdag';
 import { allergenenBestandSchema, noodBestandSchema } from '../src/domein/schema/nood';
 import { laatsteTreinenBestandSchema } from '../src/domein/schema/trein';
+import { kaartlagenBestandSchema } from '../src/domein/schema/kaartlaag';
+import { existsSync } from 'node:fs';
 import { binnenGebied } from '../src/domein/geo/afstand';
 
 const DATA = 'data';
@@ -131,6 +133,23 @@ if (laatsteTreinen && steden) {
     for (const stad of [trein.stad, trein.naarStad]) {
       if (!stadIds.has(stad))
         fouten.push(`laatste-treinen.yaml: ${trein.id} kent stad "${stad}" niet`);
+    }
+  }
+}
+
+// De kaartlagen uit scripts/kaartlagen.ts: geldig, van een bekende stad, en
+// klein genoeg om met de app mee te reizen.
+const kaartlagenMap = join(DATA, 'kaartlagen');
+if (existsSync(kaartlagenMap) && steden) {
+  for (const bestand of readdirSync(kaartlagenMap).filter((b) => extname(b) === '.json')) {
+    const pad = join(kaartlagenMap, bestand);
+    const ruw = readFileSync(pad, 'utf8');
+    const lagen = controleer(kaartlagenBestandSchema, JSON.parse(ruw), `kaartlagen/${bestand}`);
+    if (lagen && !steden.some((s) => s.id === basename(bestand, '.json'))) {
+      fouten.push(`kaartlagen/${bestand}: er is geen stad met die naam`);
+    }
+    if (Buffer.byteLength(ruw) > 300 * 1024) {
+      fouten.push(`kaartlagen/${bestand}: groter dan 300 kB`);
     }
   }
 }

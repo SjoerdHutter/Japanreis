@@ -252,6 +252,23 @@ export const Filterbalk = ({
         </Rij>
       )}
 
+      {(tab === 'attracties' || tab === 'eten') && (
+        <Rij label="Betalen">
+          <Chip
+            aan={filter.contant === 'alleen'}
+            onClick={() => zet({ contant: filter.contant === 'alleen' ? undefined : 'alleen' })}
+          >
+            alleen contant
+          </Chip>
+          <Chip
+            aan={filter.contant === 'zonder'}
+            onClick={() => zet({ contant: filter.contant === 'zonder' ? undefined : 'zonder' })}
+          >
+            kaart kan
+          </Chip>
+        </Rij>
+      )}
+
       {/* Het afstandsfilter heeft een vertrekpunt nodig. Zonder locatie is een
           looptijd betekenisloos, dus dan staat er een knop om die aan te zetten
           in plaats van een filter dat stilletjes niets doet. */}

@@ -21,7 +21,8 @@ import { nuOpen, vasteSluitingsdagen, weekdagIn } from '@/domein/openingstijden/
  * een leeg scherm staat zonder te begrijpen waarom.
  *
  * Wat er met opzet niet in zit, omdat de specificatie dat uitsluit: Engelse
- * kaart, contant only, en rookvergunning.
+ * kaart en rookvergunning. Contant zat eerst ook in dat rijtje; nu is er een
+ * veld "alleen contant" dat je ook zelf per plaats zet.
  */
 
 /** Hoe ver je in een minuut loopt, in kilometers. Vier kilometer per uur. */
@@ -54,6 +55,12 @@ export interface Filter {
   verbergVandaagGesloten?: boolean;
   reserveringVerplicht?: boolean;
   gratis?: boolean;
+  /**
+   * Betalen: alleen de plaatsen waar je contant moet hebben, of juist alleen
+   * die waar je kaart ook kan. Een plaats waarvan het niet bekend is telt als
+   * "kaart kan", want daar is het niet als contant bekend.
+   */
+  contant?: 'alleen' | 'zonder';
   /** Verwijzing naar een tijdvak, om vanaf de tijdlijn terug te filteren. */
   tijdvak?: string;
   /**
@@ -160,6 +167,8 @@ export const filterPlaatsen = (
     // Overal van toepassing.
     if (filter.reserveringVerplicht === true && plaats.reservering !== 'verplicht') return false;
     if (filter.gratis === true && !prijsIsGratis(plaats.prijs)) return false;
+    if (filter.contant === 'alleen' && plaats.alleenContant !== true) return false;
+    if (filter.contant === 'zonder' && plaats.alleenContant === true) return false;
     if (filter.tijdvak && !plaats.tijdvakken?.includes(filter.tijdvak)) return false;
 
     if (filter.verbergVandaagGesloten === true) {
@@ -202,6 +211,7 @@ export interface Keuzes {
   heeftLateNight: boolean;
   heeftReservering: boolean;
   heeftGratis: boolean;
+  heeftContant: boolean;
 }
 
 export const keuzesUit = (plaatsen: Plaats[]): Keuzes => {
@@ -214,6 +224,7 @@ export const keuzesUit = (plaatsen: Plaats[]): Keuzes => {
   let heeftLateNight = false;
   let heeftReservering = false;
   let heeftGratis = false;
+  let heeftContant = false;
 
   for (const plaats of plaatsen) {
     if (plaats.attractie) {
@@ -229,6 +240,7 @@ export const keuzesUit = (plaatsen: Plaats[]): Keuzes => {
     for (const v of plaats.tijdvakken ?? []) tijdvakken.add(v);
     if (plaats.reservering === 'verplicht') heeftReservering = true;
     if (prijsIsGratis(plaats.prijs)) heeftGratis = true;
+    if (plaats.alleenContant) heeftContant = true;
   }
 
   return {
@@ -241,5 +253,6 @@ export const keuzesUit = (plaatsen: Plaats[]): Keuzes => {
     heeftLateNight,
     heeftReservering,
     heeftGratis,
+    heeftContant,
   };
 };

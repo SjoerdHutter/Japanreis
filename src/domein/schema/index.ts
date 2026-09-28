@@ -18,3 +18,4 @@ export * from './gegevens';
 export * from './opslag';
 export * from './nood';
 export * from './trein';
+export * from './kaartlaag';

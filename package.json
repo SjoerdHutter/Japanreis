@@ -14,7 +14,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "validate": "tsx scripts/validate-data.ts",
-    "icons": "node scripts/generate-icons.mjs"
+    "icons": "node scripts/generate-icons.mjs",
+    "kaartlagen": "tsx scripts/kaartlagen.ts"
   },
   "dependencies": {
     "@types/leaflet.markercluster": "^1.5.6",

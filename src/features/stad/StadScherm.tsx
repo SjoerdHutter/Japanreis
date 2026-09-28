@@ -1,10 +1,12 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import type { EigenPunt, Plaats } from '@/domein/schema';
-import { laadPlaatsen, stadMet, tijdlijnVan } from '@/data/content';
+import { laadKaartlagen, stadMet, tijdlijnVan } from '@/data/content';
+import { alsOverlays } from '@/features/kaart/kaartlagen';
+import { usePlaatsen } from '@/data/usePlaatsen';
 import { useApp } from '@/state/useApp';
 import { Kaartje, Label, Sectiekop, Terug } from '@/ui/basis';
-import { Kaart, laagVan, type KaartPunt } from '@/features/kaart/Kaart';
+import { Kaart, laagVan, type KaartOverlay, type KaartPunt } from '@/features/kaart/Kaart';
 import { OfflineKnop } from '@/features/kaart/OfflineKnop';
 import { VastzetKnop } from '@/features/steden/Hoofdmenu';
 import { Filterbalk } from './Filterbalk';
@@ -92,7 +94,6 @@ export const StadScherm = () => {
   const { stadId = '' } = useParams();
   const stad = stadMet(stadId);
   const { koersen, positie, onthoudBezoek } = useApp();
-  const [plaatsen, setPlaatsen] = useState<Plaats[] | null>(null);
   const [eigen, setEigen] = useState<EigenPunt[]>([]);
   const [tab, setTab] = useState<Tab>('attracties');
   /**
@@ -123,13 +124,29 @@ export const StadScherm = () => {
   // zodra je terugnavigeert. Hij wordt er hieronder bij gemengd.
   const tijdvakUitLink = zoekparams.get('tijdvak') ?? undefined;
 
+  // De plaatsen met je eigen waarden eroverheen, zoals "alleen contant".
+  const plaatsen = usePlaatsen(stad?.id);
+
+  // Geldautomaten, kluisjes en toiletten, als lagen om aan te zetten.
+  const [lagen, setLagen] = useState<{ stadId: string; lagen: KaartOverlay[] } | null>(null);
+  const [lagenBron, setLagenBron] = useState<string | null>(null);
+  useEffect(() => {
+    if (!stad) return;
+    let levend = true;
+    void laadKaartlagen(stad.id).then((bestand) => {
+      if (!levend) return;
+      setLagen(bestand ? { stadId: stad.id, lagen: alsOverlays(bestand, stad) } : null);
+      setLagenBron(bestand ? bestand.opgehaaldOp : null);
+    });
+    return () => {
+      levend = false;
+    };
+  }, [stad]);
+
   useEffect(() => {
     if (!stad) return;
     onthoudBezoek(stad.id);
     let levend = true;
-    void laadPlaatsen(stad.id).then((p) => {
-      if (levend) setPlaatsen(p);
-    });
     void leesEigenPunten(stad.id).then((p) => {
       if (levend) setEigen(p);
     });
@@ -285,7 +302,24 @@ export const StadScherm = () => {
       </header>
 
       <div className="mb-3">
-        <Kaart punten={punten} gebied={stad.kaartgebied} positie={positie} />
+        <Kaart
+          punten={punten}
+          gebied={stad.kaartgebied}
+          positie={positie}
+          lagen={lagen?.stadId === stad.id ? lagen.lagen : undefined}
+        />
+        {lagenBron && (
+          <p className="mt-1 text-xs text-inkt-zacht dark:text-papier/50">
+            Geldautomaten, kluisjes en toiletten via de knop rechtsboven: OpenStreetMap, opgehaald
+            op{' '}
+            {new Date(lagenBron).toLocaleDateString('nl-NL', {
+              day: 'numeric',
+              month: 'long',
+              year: 'numeric',
+            })}
+            .
+          </p>
+        )}
       </div>
       <div className="mb-6">
         <OfflineKnop stad={stad} />

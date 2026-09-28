@@ -72,3 +72,37 @@ body {
   border: 2px solid rgba(255, 255, 255, 0.85);
   box-shadow: 0 1px 4px rgb(0 0 0 / 0.35);
 }
+
+/* De praktische kaartlagen: een klein rondje met een teken, per laag een kleur. */
+.kaartlaag-icoon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 9999px;
+  color: white;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1;
+  border: 1.5px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 1px 3px rgb(0 0 0 / 0.35);
+}
+
+.kaartlaag-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  padding: 3px 0;
+}
+
+.kaartlaag-aantal {
+  opacity: 0.55;
+  font-size: 12px;
+}
+
+.leaflet-control-layers-expanded {
+  padding: 8px 10px;
+  border-radius: 12px;
+}

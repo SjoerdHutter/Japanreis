@@ -173,6 +173,12 @@ export const plaatsSchema = z.object({
   geslotenOpmerking: z.string().optional(),
   prijs: prijsSchema.optional(),
   reservering: reserveringSchema.optional(),
+  /**
+   * Alleen contant, geen kaart. In Japan geldt dat voor veel kleine tempels,
+   * marktkramen en eettentjes, in Hanoi voor vrijwel alle straateten. Je zet
+   * het ook zelf per plaats, als eigen waarde.
+   */
+  alleenContant: z.boolean().optional(),
   /** Verwijzing naar de tijdvakken uit de tijdlijn; zie tijdlijn.ts. */
   tijdvakken: z.array(z.string()).optional(),
 

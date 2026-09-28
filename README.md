@@ -165,6 +165,9 @@ Gebouwd:
   met het adres in lokaal schrift, een knop voor de taxichauffeur, kopiëren en
   route; en de avond voor je verkast een herinnering aan takkyubin met het
   volgende adres.
+- Kaartlagen: geldautomaten die een buitenlandse pas nemen, kluisjes en
+  toiletten uit OpenStreetMap, als lagen in de kaart van elke stad; en per
+  plaats "alleen contant", met een filter.
 
 De app is daarmee compleet volgens de functiespecificatie.
 
@@ -528,3 +531,27 @@ De avond voor je verkast staat er een herinnering aan takkyubin, met het adres
 van het volgende verblijf klaar om te kopiëren. Staat een verblijf nog niet in
 Mijn gegevens, dan zegt de kaart "Vul deze accommodatie aan" en brengt hij je
 naar het formulier, met de stad en de datums al ingevuld.
+
+### Geldautomaten, kluisjes en toiletten
+
+`npm run kaartlagen` haalt per stad uit OpenStreetMap (via de Overpass API) de
+geldautomaten die een buitenlandse pas nemen, de kluisjes en de openbare
+toiletten, binnen het kaartgebied uit `steden.yaml`. Het schrijft één klein
+JSON-bestand per stad in `data/kaartlagen/`, hoogstens 300 kB; commit die, dan
+reizen ze met de app mee en werken ze offline. Het script draai je met de hand,
+nooit in de browser. Met `npm run kaartlagen kyoto nara` doe je alleen die
+steden.
+
+In Japan tellen als geldautomaat die van Seven Bank en Japan Post. Omdat de
+automaat zelf in OpenStreetMap vaak niet los staat, tellen ook elke 7-Eleven en
+elk postkantoor mee, tenzij er al een automaat binnen dertig meter staat. In
+Hanoi telt elke automaat.
+
+In de kaart van een stad staan ze onder de lagenknop rechtsboven, standaard
+uit. De spelden worden pas gemaakt als je een laag aanzet, en samengevoegd tot
+bolletjes met een getal; drieduizend toiletten zijn anders traag op een
+telefoon. Welke lagen aan staan onthoudt het toestel.
+
+Per plaats kun je aangeven of hij alleen contant neemt; dat is een eigen waarde
+en komt als label op de kaart van de plaats. Het filter "Betalen" op het
+stadsscherm toont alleen wat contant moet, of juist alleen waar een kaart kan.

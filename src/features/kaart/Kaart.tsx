@@ -45,6 +45,61 @@ const speld = (laag: Laag): L.DivIcon =>
     iconAnchor: [8, 8],
   });
 
+/**
+ * Een laag die je in de lagenknop aan en uit zet: geldautomaten, kluisjes,
+ * toiletten. Staat standaard uit, en de spelden worden pas gemaakt als je hem
+ * aanzet; een stadskaart met drieduizend toiletten erop is anders traag op
+ * een telefoon.
+ */
+export interface KaartOverlay {
+  id: string;
+  naam: string;
+  kleur: string;
+  /** Eén of twee tekens in het rondje, zoals ¥ of WC. */
+  teken: string;
+  punten: { lat: number; lon: number; titel: string; regels: string[] }[];
+}
+
+const LAGEN_SLEUTEL = 'japanreis.kaartlagen';
+
+const leesAanstaand = (): Set<string> => {
+  try {
+    return new Set(JSON.parse(localStorage.getItem(LAGEN_SLEUTEL) ?? '[]') as string[]);
+  } catch {
+    return new Set();
+  }
+};
+
+const bewaarAanstaand = (ids: Set<string>) => {
+  try {
+    localStorage.setItem(LAGEN_SLEUTEL, JSON.stringify([...ids]));
+  } catch {
+    /* geen localStorage: dan staan de lagen de volgende keer weer uit */
+  }
+};
+
+const laagIcoon = (laag: KaartOverlay): L.DivIcon =>
+  L.divIcon({
+    className: '',
+    html: `<span class="kaartlaag-icoon" style="background:${laag.kleur}">${laag.teken}</span>`,
+    iconSize: [20, 20],
+    iconAnchor: [10, 10],
+  });
+
+const laagBallon = (punt: KaartOverlay['punten'][number]): HTMLElement => {
+  const ballon = document.createElement('div');
+  const titel = document.createElement('strong');
+  titel.textContent = punt.titel;
+  ballon.append(titel);
+  for (const regel of punt.regels) {
+    const p = document.createElement('p');
+    p.className = 'mt-1 text-xs';
+    p.textContent = regel;
+    ballon.append(p);
+  }
+  return ballon;
+};
+
 export interface KaartPunt {
   id: string;
   naam: string;
@@ -63,8 +118,11 @@ export const Kaart = ({
   onKies,
   onTikOpKaart,
   clusteren = true,
+  lagen,
 }: {
   punten: KaartPunt[];
+  /** Lagen voor de lagenknop rechtsboven. */
+  lagen?: KaartOverlay[];
   /**
    * De reis als doorlopende lijn. Met opzet niet per stad geknipt: dan zou de
    * vlucht van Hanoi naar Tokio uit de kaart verdwijnen en zou de reis eruitzien
@@ -94,6 +152,7 @@ export const Kaart = ({
   const groep = useRef<L.MarkerClusterGroup | null>(null);
   const ikRef = useRef<L.CircleMarker | null>(null);
   const lijnRef = useRef<L.Polyline | null>(null);
+  const lagenRef = useRef<{ knop: L.Control.Layers; groepen: L.Layer[] } | null>(null);
   // In een ref, zodat een nieuwe onKies de markers niet opnieuw laat bouwen.
   const kiesRef = useRef(onKies);
   useEffect(() => {
@@ -134,13 +193,82 @@ export const Kaart = ({
     kaart.current = m;
 
     return () => {
-      m.remove();
+      // Eerst loslaten, dan opruimen: zo telt het weghalen van de lagen bij het
+      // sluiten van de kaart niet als "laag uitgezet".
       kaart.current = null;
+      m.remove();
       groep.current = null;
       ikRef.current = null;
       lijnRef.current = null;
+      lagenRef.current = null;
     };
   }, []);
+
+  // De lagenknop. Opnieuw opgebouwd als de lagen veranderen, bijvoorbeeld bij
+  // een andere stad; welke lagen aan staan onthoudt het toestel.
+  useEffect(() => {
+    const m = kaart.current;
+    if (!m) return;
+    if (lagenRef.current) {
+      lagenRef.current.knop.remove();
+      for (const groep of lagenRef.current.groepen) {
+        groep.off('remove');
+        groep.remove();
+      }
+      lagenRef.current = null;
+    }
+    if (!lagen || lagen.length === 0) return;
+
+    const aan = leesAanstaand();
+    const overlays: Record<string, L.Layer> = {};
+    const groepen: L.Layer[] = [];
+    for (const laag of lagen) {
+      const groep = L.markerClusterGroup({
+        showCoverageOnHover: false,
+        maxClusterRadius: 40,
+        disableClusteringAtZoom: 17,
+        iconCreateFunction: (cluster) => {
+          const aantal = cluster.getChildCount();
+          const maat = aantal < 10 ? 24 : aantal < 100 ? 30 : 36;
+          return L.divIcon({
+            html: `<span class="reis-cluster" style="width:${maat}px;height:${maat}px;background:${laag.kleur}">${aantal}</span>`,
+            className: '',
+            iconSize: L.point(maat, maat),
+          });
+        },
+      });
+      let gevuld = false;
+      groep.on('add', () => {
+        if (gevuld) return;
+        gevuld = true;
+        const icoon = laagIcoon(laag);
+        groep.addLayers(
+          laag.punten.map((punt) =>
+            L.marker([punt.lat, punt.lon], { icon: icoon, title: punt.titel }).bindPopup(
+              laagBallon(punt),
+            ),
+          ),
+        );
+      });
+      groep.on('add', () => {
+        aan.add(laag.id);
+        bewaarAanstaand(aan);
+      });
+      groep.on('remove', () => {
+        if (!kaart.current) return;
+        aan.delete(laag.id);
+        bewaarAanstaand(aan);
+      });
+      overlays[
+        `<span class="kaartlaag-label"><span class="kaartlaag-icoon" style="background:${laag.kleur}">${laag.teken}</span>${laag.naam} <span class="kaartlaag-aantal">${laag.punten.length}</span></span>`
+      ] = groep;
+      groepen.push(groep);
+      if (aan.has(laag.id)) groep.addTo(m);
+    }
+    const knop = L.control.layers(undefined, overlays, { collapsed: true, position: 'topright' });
+    knop.addTo(m);
+    lagenRef.current = { knop, groepen };
+  }, [lagen]);
 
   // Het beeld op het gebied van de stad zetten. Apart van de opbouw, zodat
   // wisselen van stad de kaart niet opnieuw laat opbouwen.

@@ -24,6 +24,7 @@ import {
   noodBestandSchema,
   allergenenBestandSchema,
   laatsteTreinenBestandSchema,
+  kaartlagenBestandSchema,
   plaatsenBestandSchema,
   reisschemaSchema,
   stedenBestandSchema,
@@ -43,6 +44,7 @@ import {
   type NoodContent,
   type AllergeenVertaling,
   type LaatsteTrein,
+  type Kaartlagen,
 } from '@/domein/schema';
 
 /**
@@ -148,4 +150,20 @@ export const laadPlaatsen = async (stadId: string): Promise<Plaats[]> => {
 export const laadAllePlaatsen = async (): Promise<Plaats[]> => {
   const perStad = await Promise.all(STEDEN.map((s) => laadPlaatsen(s.id)));
   return perStad.flat();
+};
+
+/**
+ * De kaartlagen per stad (geldautomaten, kluisjes, toiletten), net als de
+ * plaatsen als losse brokken die de service worker bij de installatie al heeft
+ * opgehaald. Null voor een stad zonder bestand.
+ */
+const kaartlaagBestanden = import.meta.glob<{ default: unknown }>(
+  '../../../data/kaartlagen/*.json',
+);
+
+export const laadKaartlagen = async (stadId: string): Promise<Kaartlagen | null> => {
+  const sleutel = Object.keys(kaartlaagBestanden).find((pad) => pad.endsWith(`/${stadId}.json`));
+  if (!sleutel) return null;
+  const module = await kaartlaagBestanden[sleutel]();
+  return parseer(kaartlagenBestandSchema, module.default, `kaartlagen/${stadId}`);
 };
