@@ -1,5 +1,5 @@
 import { ALLERGEEN_NAAM } from '@/domein/schema';
-import { ALLERGEEN_VERTALINGEN, APPS, NOOD, ZINNEN } from './index';
+import { ALLERGEEN_VERTALINGEN, APPS, LAATSTE_TREINEN, NOOD, ZINNEN } from './index';
 
 /**
  * Alle meegeleverde feiten die je voor vertrek nog moet nakijken, per groep.
@@ -28,6 +28,7 @@ export const noodFeitId = (id: string) => `nood:${id}`;
 export const allergeenFeitId = (id: string) => `allergeen:${id}`;
 export const zinFeitId = (id: string) => `zin:${id}`;
 export const appFeitId = (id: string) => `app:${id}`;
+export const treinFeitId = (id: string) => `trein:${id}`;
 
 const vasteGroepen = (): Feitengroep[] => [
   {
@@ -71,6 +72,17 @@ const vasteGroepen = (): Feitengroep[] => [
       titel: ALLERGEEN_NAAM[a.id],
       detail: `${a.japans}, ${a.vietnamees}`,
       gecontroleerd: a.gecontroleerd,
+    })),
+  },
+  {
+    id: 'treinen',
+    naam: 'Laatste treinen',
+    pad: '/dagplanner',
+    feiten: LAATSTE_TREINEN.map((t) => ({
+      id: treinFeitId(t.id),
+      titel: `${t.van} naar ${t.naar}`,
+      detail: `${t.lijn}, rond ${t.laatsteVertrek}`,
+      gecontroleerd: t.gecontroleerd,
     })),
   },
   {

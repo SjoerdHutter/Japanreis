@@ -120,3 +120,13 @@ export const dagplanRecordSchema = z.object({
   regenUit: z.boolean().optional(),
   gewijzigdOp: z.string().min(1),
 });
+
+/** Een eigen waarde over de meegeleverde content heen. */
+export const overschrijvingRecordSchema = z.object({
+  id: z.string().min(1),
+  doel: z.string().min(1),
+  doelId: z.string().min(1),
+  veld: z.string().min(1),
+  waarde: z.unknown(),
+  gewijzigdOp: z.string().min(1),
+});

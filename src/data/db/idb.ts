@@ -21,6 +21,7 @@ import type { Koersen } from '@/domein/valuta/koers';
 import type { Keuze } from '@/domein/highlight/bepaal';
 import type { JetlagInstellingen } from '@/domein/jetlag/protocol';
 import type { WeerVanStad } from '@/domein/weer/verwachting';
+import type { Overschrijving } from '@/domein/overschrijven/samenvoegen';
 import { meldWijziging } from './wijzigingen';
 
 /**
@@ -91,6 +92,8 @@ interface JapanreisDB extends DBSchema {
   weer: { key: string; value: WeerVanStad };
   /** Wat je per dag en stad in de dagplanner hebt gekozen. */
   dagplannen: { key: string; value: Dagplan };
+  /** Je eigen waarden over de meegeleverde content heen; zie domein/overschrijven. */
+  overschrijvingen: { key: string; value: Overschrijving };
 }
 
 /** Je keuze in de dagplanner voor één dag in één stad. */
@@ -181,7 +184,7 @@ export interface OpgeslagenFoto {
 }
 
 const DB_NAAM = 'japanreis';
-const DB_VERSIE = 9;
+const DB_VERSIE = 10;
 
 let dbBelofte: Promise<IDBPDatabase<JapanreisDB>> | null = null;
 
@@ -235,6 +238,9 @@ export const getDb = (): Promise<IDBPDatabase<JapanreisDB>> => {
       }
       if (!db.objectStoreNames.contains('dagplannen')) {
         db.createObjectStore('dagplannen', { keyPath: 'id' });
+      }
+      if (!db.objectStoreNames.contains('overschrijvingen')) {
+        db.createObjectStore('overschrijvingen', { keyPath: 'id' });
       }
     },
   });

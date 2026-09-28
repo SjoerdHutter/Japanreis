@@ -157,6 +157,10 @@ Gebouwd:
   De planner onthoudt je keuze per dag.
 - Naar je agenda: vluchten, in- en uitchecken, geboekte reserveringen en de
   kaartverkoop als .ics-bestand, met herinneringen.
+- Laatste trein: de dagplanner waarschuwt als de laatste stop van een avond te
+  dicht op de laatste trein naar je terugstation eindigt. Tijden kun je zelf
+  aanpassen; overal in de app kun je meegeleverde waarden overschrijven met een
+  eigen waarde.
 
 De app is daarmee compleet volgens de functiespecificatie.
 
@@ -481,3 +485,23 @@ bijwerkt in plaats van verdubbelt.
 
 Adressen en boekingsnummers gaan er alleen in als je "persoonlijke gegevens
 meenemen" aanvinkt.
+
+### De laatste trein en eigen waarden
+
+In `data/laatste-treinen.yaml` staat per knooppunt ongeveer de laatste
+praktische vertrektijd naar een station waar je 's avonds heen moet: van Gion
+naar Kyoto Station, van Shibuya naar Shinjuku, van Kawaguchiko terug naar Tokio.
+Een benadering, geen dienstregeling, en daarom met het label "controleren".
+
+De dagplanner kijkt naar de laatste stop van je dag, het verblijf van die nacht
+en het terugstation dat je daar in Mijn gegevens bij zette, en neemt het
+knooppunt dat het dichtst bij die stop ligt. Eindigt de stop later dan een half
+uur voor die trein, dan staat er een waarschuwing bij, met een knop naar Google
+Maps voor de echte vertrektijden. Ligt je verblijf op loopafstand, dan zegt de
+planner niets. Weet de app het niet, dan staat er "laatste trein onbekend" en
+vul je de tijd zelf in.
+
+Dat laatste is een algemene regel in de app: wat de app meebrengt en wat jij
+beter weet, overschrijf je met een eigen waarde. Die staat apart op je toestel
+(en in de backup), krijgt het label "eigen waarde", en met "terugzetten" ga je
+terug naar wat de app meebracht. De content zelf blijft onaangeroerd.

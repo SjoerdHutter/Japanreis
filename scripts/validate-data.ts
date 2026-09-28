@@ -28,6 +28,7 @@ import { tipsBestandSchema } from '../src/domein/schema/tips';
 import { stationsBestandSchema } from '../src/domein/schema/station';
 import { reisdagenBestandSchema } from '../src/domein/schema/reisdag';
 import { allergenenBestandSchema, noodBestandSchema } from '../src/domein/schema/nood';
+import { laatsteTreinenBestandSchema } from '../src/domein/schema/trein';
 import { binnenGebied } from '../src/domein/geo/afstand';
 
 const DATA = 'data';
@@ -114,6 +115,24 @@ if (etiquette && new Set(etiquette.map((e) => e.id)).size !== etiquette.length) 
 
 if (apps && new Set(apps.map((a) => a.id)).size !== apps.length) {
   fouten.push('apps.yaml: dubbele app-id');
+}
+
+const laatsteTreinen = controleer(
+  laatsteTreinenBestandSchema,
+  lees(join(DATA, 'laatste-treinen.yaml')),
+  'laatste-treinen.yaml',
+);
+if (laatsteTreinen && steden) {
+  const stadIds = new Set(steden.map((s) => s.id));
+  if (new Set(laatsteTreinen.map((t) => t.id)).size !== laatsteTreinen.length) {
+    fouten.push('laatste-treinen.yaml: dubbele id');
+  }
+  for (const trein of laatsteTreinen) {
+    for (const stad of [trein.stad, trein.naarStad]) {
+      if (!stadIds.has(stad))
+        fouten.push(`laatste-treinen.yaml: ${trein.id} kent stad "${stad}" niet`);
+    }
+  }
 }
 
 if (steden && tijdlijnen && reisschema) {

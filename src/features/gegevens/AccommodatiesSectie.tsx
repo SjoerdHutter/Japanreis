@@ -8,7 +8,8 @@ import {
   type Coordinaat,
   type DagMetTijd,
 } from '@/domein/schema';
-import { STEDEN, stadMet } from '@/data/content';
+import { LAATSTE_TREINEN, STEDEN, stadMet } from '@/data/content';
+import { bekendeTerugstations } from '@/domein/planning/laatsteTrein';
 import { bewaarGegeven, eigenaarVan, verwijderGegeven } from '@/data/gegevens';
 import { alsKorteDatum } from '@/domein/tijd/datums';
 import { Kaart } from '@/features/kaart/Kaart';
@@ -290,7 +291,17 @@ const VerblijfFormulier = ({
         fout={fouten.terugstation}
         uitleg="Waar je 's avonds met de trein naartoe moet. Hiermee waarschuwt de dagplanner voor de laatste trein."
       >
-        <Invoer value={waarden.terugstation} onChange={zet('terugstation')} />
+        <Invoer
+          value={waarden.terugstation}
+          onChange={zet('terugstation')}
+          list="terugstations"
+          autoComplete="off"
+        />
+        <datalist id="terugstations">
+          {bekendeTerugstations(LAATSTE_TREINEN, waarden.stadId).map((naam) => (
+            <option key={naam} value={naam} />
+          ))}
+        </datalist>
       </Veld>
       <Veld label="Boekingsnummer" fout={fouten.boekingsnummer}>
         <Invoer value={waarden.boekingsnummer} onChange={zet('boekingsnummer')} {...CODE_INVOER} />

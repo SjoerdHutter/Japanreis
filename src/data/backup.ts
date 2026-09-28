@@ -8,6 +8,7 @@ import {
   fotoRecordSchema,
   gegevenSchema,
   opnameRecordSchema,
+  overschrijvingRecordSchema,
   overstapRecordSchema,
   reserveringRecordSchema,
   stempelRecordSchema,
@@ -93,6 +94,7 @@ export const BACKUP_STORES: StoreBeschrijving[] = [
   { store: 'overstappen', naam: 'Overstapplannen', schema: overstapRecordSchema },
   { store: 'controles', naam: 'Nagekeken feiten', schema: controleRecordSchema },
   { store: 'dagplannen', naam: 'Dagplannen', schema: dagplanRecordSchema },
+  { store: 'overschrijvingen', naam: 'Eigen waarden', schema: overschrijvingRecordSchema },
 ];
 
 /** Instellingen uit de sleutelstore die met je meeverhuizen naar een ander toestel. */
@@ -406,6 +408,6 @@ export const zetTerug = async (
   if (!laatste || laatste < gemaakt) await schrijf('backup.laatste', gemaakt);
   if (!(await lees('data.gewijzigdOp'))) await schrijf('data.gewijzigdOp', gemaakt);
 
-  meldWijziging('gegevens', 'bijlagen', 'reserveringen', 'controles');
+  meldWijziging('gegevens', 'bijlagen', 'reserveringen', 'controles', 'overschrijvingen');
   return geschreven;
 };

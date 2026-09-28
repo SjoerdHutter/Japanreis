@@ -7,7 +7,8 @@
  * zonder dat je de app opnieuw opent. Een gewone EventTarget is daarvoor genoeg.
  */
 
-export type Onderwerp = 'gegevens' | 'bijlagen' | 'reserveringen' | 'controles';
+export type Onderwerp =
+  'gegevens' | 'bijlagen' | 'reserveringen' | 'controles' | 'overschrijvingen';
 
 const doel = new EventTarget();
 

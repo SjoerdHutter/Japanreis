@@ -14,6 +14,7 @@ import { WeerRegel, weerVan } from '@/features/weer/WeerRegel';
 import { WindWaarschuwing } from '@/features/weer/WindWaarschuwing';
 import { useApp } from '@/state/useApp';
 import { Reserveringen } from './Reserveringen';
+import { LaatsteTreinMelding } from './LaatsteTreinMelding';
 
 /**
  * De dagplanner en de reserveringsagenda uit hoofdstuk 12.
@@ -32,7 +33,16 @@ import { Reserveringen } from './Reserveringen';
 const STANDAARD_START = '09:00';
 const STANDAARD_EIND = '18:00';
 
+/**
+ * Een link met een andere datum of stad bouwt de planner opnieuw op, ook als
+ * je er al op stond; anders bleef de vorige stad staan.
+ */
 export const DagplannerScherm = () => {
+  const [zoekparams] = useSearchParams();
+  return <Dagplanner key={`${zoekparams.get('datum')}_${zoekparams.get('stad')}`} />;
+};
+
+const Dagplanner = () => {
   const [zoekparams] = useSearchParams();
   const naarSectie = zoekparams.get('sectie');
   const { weer, highlight } = useApp();
@@ -319,6 +329,9 @@ export const DagplannerScherm = () => {
                     {w}
                   </p>
                 ))}
+                {stop === plan.stops[plan.stops.length - 1] && (
+                  <LaatsteTreinMelding stadId={stadId} datum={datum} stop={stop} />
+                )}
               </Kaartje>
             ))}
           </div>

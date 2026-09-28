@@ -11,6 +11,7 @@ import stationsRuw from '../../../data/stations.yaml';
 import reisdagenRuw from '../../../data/reisdagen.yaml';
 import noodRuw from '../../../data/nood.yaml';
 import allergenenRuw from '../../../data/allergenen.yaml';
+import laatsteTreinenRuw from '../../../data/laatste-treinen.yaml';
 import {
   appsBestandSchema,
   vervoerBestandSchema,
@@ -22,6 +23,7 @@ import {
   reisdagenBestandSchema,
   noodBestandSchema,
   allergenenBestandSchema,
+  laatsteTreinenBestandSchema,
   plaatsenBestandSchema,
   reisschemaSchema,
   stedenBestandSchema,
@@ -40,6 +42,7 @@ import {
   type Reisdag,
   type NoodContent,
   type AllergeenVertaling,
+  type LaatsteTrein,
 } from '@/domein/schema';
 
 /**
@@ -97,6 +100,12 @@ export const ALLERGEEN_VERTALINGEN: AllergeenVertaling[] = parseer(
   allergenenBestandSchema,
   allergenenRuw,
   'allergenen',
+);
+
+export const LAATSTE_TREINEN: LaatsteTrein[] = parseer(
+  laatsteTreinenBestandSchema,
+  laatsteTreinenRuw,
+  'laatste-treinen',
 );
 
 export const stationMet = (id: string): Station | undefined => STATIONS.find((s) => s.id === id);
