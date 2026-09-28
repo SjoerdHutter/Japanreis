@@ -1,6 +1,9 @@
 import type { Reisschema, Stad } from '@/domein/schema';
 import { alsKorteDatum, alsPeriode, plusDagen } from '@/domein/tijd/datums';
+import { nachtenVolgensSchema, reisperiode } from '@/domein/reizen/dagen';
 import { verblijfVanNacht, type MijnGegevens } from './orden';
+
+export { nachtenVolgensSchema, reisperiode };
 
 /**
  * Wat er nog ontbreekt aan je gegevens.
@@ -30,33 +33,6 @@ export interface Ontbrekend {
   /** Voor een verblijf dat er nog niet is: de stad en de nachten, om het formulier voor te vullen. */
   nieuw?: { stadId: string; van: string; tot: string };
 }
-
-export interface Nacht {
-  datum: string;
-  stadId: string;
-}
-
-/**
- * De nachten die je volgens het reisschema ergens slaapt. Het aantal nachten
- * komt uit het schema zelf en wordt niet uit van en tot afgeleid; zie de
- * toelichting bij `verblijfSchema`.
- */
-export const nachtenVolgensSchema = (reisschema: Reisschema): Nacht[] =>
-  reisschema.segmenten.flatMap((segment) => {
-    if (!segment.van || !segment.verblijf || segment.verblijf.nachten <= 0) return [];
-    return Array.from({ length: segment.verblijf.nachten }, (_, i) => ({
-      datum: plusDagen(segment.van!, i),
-      stadId: segment.stad,
-    }));
-  });
-
-/** Eerste en laatste dag van de reis, uit het schema. Null zolang er geen datums zijn. */
-export const reisperiode = (reisschema: Reisschema): { van: string; tot: string } | null => {
-  const datums = reisschema.segmenten.flatMap((s) => (s.van && s.tot ? [s.van, s.tot] : []));
-  if (datums.length === 0) return null;
-  datums.sort();
-  return { van: datums[0], tot: datums[datums.length - 1] };
-};
 
 export const watOntbreekt = (
   gegevens: MijnGegevens,

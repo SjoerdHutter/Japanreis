@@ -151,6 +151,10 @@ Gebouwd:
   politie en je allergieën in het Japans of Vietnamees) en wat je doet bij een
   aardbeving of tyfoon. Plus Controleren: alle meegeleverde feiten die je voor
   vertrek moet nakijken, met een vinkje.
+- Weer: de verwachting van Open-Meteo per stad en per dag, in de reisdagen
+  (nu dag voor dag, elke dag van de reis) en in de dagplanner. Een regendag
+  zet het regenvoorstel in de planner aan, harde wind geeft een waarschuwing.
+  De planner onthoudt je keuze per dag.
 
 De app is daarmee compleet volgens de functiespecificatie.
 
@@ -433,3 +437,28 @@ reis op moet kunnen bouwen, en ze komen uit algemene kennis. De app zet er een
 label "controleren" bij. Tik erop en vink "gecontroleerd" aan als je het bij de
 bron hebt nagekeken; dat vinkje staat op je toestel en gaat mee in de backup.
 Onder Meer, Controleren staan ze allemaal onder elkaar.
+
+### Weer in de planner
+
+De app haalt de verwachting op bij Open-Meteo (zonder sleutel), per stad uit het
+reisschema en voor de dagen dat je er bent: minimum en maximum, kans op regen,
+millimeters en de zwaarste windstoot. Dat gebeurt bij het openen van de app en
+bij terugkomen, als er bereik is en de vorige keer langer dan drie uur geleden
+is. De verwachting gaat in IndexedDB; zonder bereik staat erbij wanneer hij is
+opgehaald. Verder dan zestien dagen vooruit staat er "nog geen verwachting",
+want wat daarna komt is een gok.
+
+De reisdagen zijn nu dag voor dag: elke dag van de reis heeft een kaart met de
+stad, het weer, en de trein als je die dag verkast. De dagtrip naar de Fuji,
+waarvan de datum nog openligt, staat onderaan onder "Nog zonder datum".
+
+Een regendag is een dag met minstens zestig procent kans of minstens vijf
+millimeter. Op zo'n dag houdt de dagplanner alleen wat bij regen kan (hetzelfde
+filter als "bij regen" op het stadsscherm) plus het eten; wat je buiten had
+gekozen staat apart onder "Bij regen overgeslagen". Eén knop zet dat uit.
+Windstoten vanaf 60 km/h geven een waarschuwing, vanaf 90 km/h een rode met
+het advies om het tyfoonnieuws en de treinen na te kijken. Die staat voor
+vandaag en morgen ook in het hoofdmenu.
+
+De dagplanner onthoudt per dag en per stad wat je koos, en die keuzes gaan mee
+in de backup.

@@ -20,6 +20,7 @@ import type { Opname, Uitgave } from '@/domein/budget/uitgaven';
 import type { Koersen } from '@/domein/valuta/koers';
 import type { Keuze } from '@/domein/highlight/bepaal';
 import type { JetlagInstellingen } from '@/domein/jetlag/protocol';
+import type { WeerVanStad } from '@/domein/weer/verwachting';
 import { meldWijziging } from './wijzigingen';
 
 /**
@@ -86,6 +87,24 @@ interface JapanreisDB extends DBSchema {
    * vertaling, een laatste trein. Het vinkje is van jou, niet van de content.
    */
   controles: { key: string; value: Controle };
+  /** De laatst opgehaalde weersverwachting per stad. Een cache, geen eigen gegevens. */
+  weer: { key: string; value: WeerVanStad };
+  /** Wat je per dag en stad in de dagplanner hebt gekozen. */
+  dagplannen: { key: string; value: Dagplan };
+}
+
+/** Je keuze in de dagplanner voor één dag in één stad. */
+export interface Dagplan {
+  /** `${datum}_${stadId}` */
+  id: string;
+  datum: string;
+  stadId: string;
+  plaatsIds: string[];
+  start: string;
+  eind: string;
+  /** Het regenvoorstel met de hand uitgezet. */
+  regenUit?: boolean;
+  gewijzigdOp: string;
 }
 
 /** Een feit uit de content dat je hebt nagekeken. De id is `bron:id`, zoals `nood:japan-politie`. */
@@ -162,7 +181,7 @@ export interface OpgeslagenFoto {
 }
 
 const DB_NAAM = 'japanreis';
-const DB_VERSIE = 8;
+const DB_VERSIE = 9;
 
 let dbBelofte: Promise<IDBPDatabase<JapanreisDB>> | null = null;
 
@@ -210,6 +229,12 @@ export const getDb = (): Promise<IDBPDatabase<JapanreisDB>> => {
       }
       if (!db.objectStoreNames.contains('controles')) {
         db.createObjectStore('controles', { keyPath: 'id' });
+      }
+      if (!db.objectStoreNames.contains('weer')) {
+        db.createObjectStore('weer', { keyPath: 'stadId' });
+      }
+      if (!db.objectStoreNames.contains('dagplannen')) {
+        db.createObjectStore('dagplannen', { keyPath: 'id' });
       }
     },
   });

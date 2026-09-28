@@ -73,7 +73,7 @@ export const GROEPEN: Groep[] = [
       {
         pad: '/reisdagen',
         naam: 'Reisdagen',
-        uitleg: 'Welke trein of bus, en je koffer',
+        uitleg: 'Dag voor dag: weer, trein en je koffer',
         icoon: Route,
       },
       {

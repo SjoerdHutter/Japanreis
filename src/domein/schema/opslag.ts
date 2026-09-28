@@ -108,3 +108,15 @@ export const controleRecordSchema = z.object({
   id: z.string().min(1),
   gecontroleerdOp: z.string().min(1),
 });
+
+/** Je keuze in de dagplanner voor één dag in één stad. */
+export const dagplanRecordSchema = z.object({
+  id: z.string().min(1),
+  datum: datumSchema,
+  stadId: z.string().min(1),
+  plaatsIds: z.array(z.string()),
+  start: tijdSchema,
+  eind: tijdSchema,
+  regenUit: z.boolean().optional(),
+  gewijzigdOp: z.string().min(1),
+});
