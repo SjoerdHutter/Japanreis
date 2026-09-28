@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { REISDAGEN, REISSCHEMA, STEDEN } from '@/data/content';
 import { vandaagOpReis } from '@/domein/highlight/vandaag';
 import { dagenVanDeReis, reisdagenZonderDatum } from '@/domein/reizen/dagen';
@@ -36,7 +36,12 @@ export const ReisdagenScherm = () => {
       <h1 className="mt-1 text-2xl font-semibold tracking-tight">Reisdagen</h1>
       <p className="mt-2 mb-5 leading-relaxed text-inkt-zacht dark:text-papier/70">
         De reis dag voor dag: waar je bent, het weer, en welke trein of bus als je verkast. De
-        vertrektijden en perrons staan op de borden en in Google Maps.
+        vertrektijden en perrons staan op de borden en in Google Maps. Je notitie per dag komt in
+        het{' '}
+        <Link to="/fotos" className="text-zegel underline underline-offset-2 dark:text-zegel-licht">
+          reisverslag
+        </Link>
+        .
       </p>
 
       <div className="grid gap-3">

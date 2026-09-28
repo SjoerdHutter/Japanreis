@@ -14,6 +14,7 @@ import type {
   Coordinaat,
   EigenPunt,
   Gegeven,
+  Dagnotitie,
   OpgeslagenReservering,
   OpgeslagenSpoor,
 } from '@/domein/schema';
@@ -97,6 +98,8 @@ interface JapanreisDB extends DBSchema {
   overschrijvingen: { key: string; value: Overschrijving };
   /** Gelopen routes uit GPX-bestanden; zie domein/sporen. */
   sporen: { key: string; value: OpgeslagenSpoor };
+  /** Je notitie en hoogtepunt per dag, met de datum als sleutel. */
+  dagnotities: { key: string; value: Dagnotitie };
 }
 
 /** Je keuze in de dagplanner voor één dag in één stad. */
@@ -187,7 +190,7 @@ export interface OpgeslagenFoto {
 }
 
 const DB_NAAM = 'japanreis';
-const DB_VERSIE = 11;
+const DB_VERSIE = 12;
 
 let dbBelofte: Promise<IDBPDatabase<JapanreisDB>> | null = null;
 
@@ -247,6 +250,9 @@ export const getDb = (): Promise<IDBPDatabase<JapanreisDB>> => {
       }
       if (!db.objectStoreNames.contains('sporen')) {
         db.createObjectStore('sporen', { keyPath: 'id' });
+      }
+      if (!db.objectStoreNames.contains('dagnotities')) {
+        db.createObjectStore('dagnotities', { keyPath: 'datum' });
       }
     },
   });

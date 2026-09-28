@@ -9,10 +9,11 @@ import { Kaartje, Label } from '@/ui/basis';
 import { ReisdagKaart } from './ReisdagKaart';
 import { VerblijfKaart } from '@/features/verblijf/VerblijfKaart';
 import { VerhuisHerinnering } from '@/features/verblijf/VerhuisHerinnering';
+import { DagNotitie } from './DagNotitie';
 
 /**
- * Eén dag van de reis: waar je bent, het weer, de trein als je verkast, en een
- * knop naar de dagplanner voor die dag.
+ * Eén dag van de reis: waar je bent, het weer, de trein als je verkast, een
+ * knop naar de dagplanner voor die dag, en je notitie.
  */
 export const DagKaart = ({
   dag,
@@ -83,6 +84,10 @@ export const DagKaart = ({
           Plan deze dag
         </Link>
       )}
+
+      <div className="border-t border-black/5 pt-3 dark:border-white/10">
+        <DagNotitie datum={dag.datum} altijdOpen={vandaag} />
+      </div>
     </Kaartje>
   );
 };

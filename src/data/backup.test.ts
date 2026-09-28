@@ -21,6 +21,10 @@ describe('de backup', () => {
     }
   });
 
+  it('kent de sleutel van een store die niet op id sleutelt', () => {
+    expect(BACKUP_STORES.find((b) => b.store === 'dagnotities')?.sleutel).toBe('datum');
+  });
+
   it('heeft een optie voor de foto’s en een voor de documenten', () => {
     expect(BACKUP_STORES.find((b) => b.store === 'fotos')?.optie).toBe('fotos');
     expect(BACKUP_STORES.find((b) => b.store === 'bijlagen')?.optie).toBe('documenten');

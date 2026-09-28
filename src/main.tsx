@@ -5,6 +5,7 @@ import { z } from 'zod';
 import App from './App';
 import { registerServiceWorker } from './pwa';
 import { vraagBlijvendeOpslag } from './data/opslagruimte';
+import { bewaarAchtergeblevenConcept } from './data/dagnotities';
 import './styles/index.css';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet.markercluster/dist/MarkerCluster.css';
@@ -31,3 +32,6 @@ registerServiceWorker();
 
 // Vragen of de browser je gegevens bewaart, bij elke start zolang het nee is.
 void vraagBlijvendeOpslag();
+
+// Een dagnotitie die bij het sluiten nog onderweg was naar de database.
+void bewaarAchtergeblevenConcept();

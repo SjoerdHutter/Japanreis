@@ -8,7 +8,13 @@
  */
 
 export type Onderwerp =
-  'gegevens' | 'bijlagen' | 'reserveringen' | 'controles' | 'overschrijvingen' | 'sporen';
+  | 'gegevens'
+  | 'bijlagen'
+  | 'reserveringen'
+  | 'controles'
+  | 'overschrijvingen'
+  | 'sporen'
+  | 'dagnotities';
 
 const doel = new EventTarget();
 

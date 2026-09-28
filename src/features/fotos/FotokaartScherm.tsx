@@ -1,12 +1,17 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { Coordinaat, Plaats } from '@/domein/schema';
-import { STEDEN, laadAllePlaatsen, stadMet } from '@/data/content';
+import { REISDAGEN, REISSCHEMA, STEDEN, laadAllePlaatsen, stadMet } from '@/data/content';
 import { useApp } from '@/state/useApp';
 import { Kaart, type KaartPunt, type KaartSpoor } from '@/features/kaart/Kaart';
 import { useOpslag } from '@/data/db/useOpslag';
 import { leesSporen } from '@/data/sporen';
+import { leesDagnotities } from '@/data/dagnotities';
+import { deelOfDownload, download } from '@/data/deel';
+import { dagenVanDeReis } from '@/domein/reizen/dagen';
+import { verblijfVanNacht } from '@/domein/gegevens/orden';
+import { useMijnGegevens } from '@/features/gegevens/gedeeld';
 import { alsAfstand } from '@/domein/sporen/spoor';
-import type { OpgeslagenSpoor } from '@/domein/schema';
+import type { Dagnotitie, OpgeslagenSpoor } from '@/domein/schema';
 import { Kaartje, Knop, Label, Sectiekop, Terug } from '@/ui/basis';
 import { leesFoto } from '@/domein/fotos/exif';
 import { momentInZone } from '@/domein/tijd/zones';
@@ -62,7 +67,9 @@ export const FotokaartScherm = () => {
   const [dag, setDag] = useState<string | null>(null);
   const [geselecteerd, setGeselecteerd] = useState<string | null>(null);
   const [plaatsBezig, setPlaatsBezig] = useState<string | null>(null);
-  const [verslagUrl, setVerslagUrl] = useState<string | null>(null);
+  const [persoonlijk, setPersoonlijk] = useState(false);
+  const { waarde: notities } = useOpslag(leesDagnotities, [] as Dagnotitie[], ['dagnotities']);
+  const { gegevens } = useMijnGegevens();
   const { waarde: sporen } = useOpslag(leesSporen, [] as OpgeslagenSpoor[], ['sporen']);
   /** Dagen waarvan je de routes van de kaart hebt gehaald; '' is "nog zonder dag". */
   const [verborgen, setVerborgen] = useState<ReadonlySet<string>>(new Set());
@@ -284,18 +291,33 @@ export const FotokaartScherm = () => {
     setGeselecteerd(null);
   };
 
-  const maakVerslag = () => {
-    if (verslagUrl) URL.revokeObjectURL(verslagUrl);
-    const html = maakReisverslag(alle, STEDEN, plaatsen, cijfers, sporen);
-    const url = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
-    setVerslagUrl(url);
+  /**
+   * Het reisverslag als bestand. Pas gemaakt bij de tik, zodat het altijd de
+   * laatste notitie bevat; het rekenwerk is klein genoeg om Safari's grens
+   * voor delen na een tik niet te halen.
+   */
+  const verslag = (): File => {
+    const reisdagen = dagenVanDeReis(REISSCHEMA, REISDAGEN);
+    const verblijven = persoonlijk
+      ? new Map(
+          reisdagen.flatMap((d) => {
+            const verblijf = verblijfVanNacht(d.datum, gegevens.accommodaties);
+            return verblijf ? [[d.datum, verblijf.naam] as const] : [];
+          }),
+        )
+      : undefined;
+    const html = maakReisverslag({
+      fotos: alle,
+      steden: STEDEN,
+      plaatsen,
+      cijfers,
+      sporen,
+      notities,
+      reisdagen: reisdagen.map((d) => ({ datum: d.datum, steden: d.steden })),
+      verblijven,
+    });
+    return new File([html], 'reisverslag.html', { type: 'text/html' });
   };
-  useEffect(
-    () => () => {
-      if (verslagUrl) URL.revokeObjectURL(verslagUrl);
-    },
-    [verslagUrl],
-  );
 
   const zonderPlek = fotos.filter((f) => !f.coordinaten);
   const ruimte = fotos.reduce((t, f) => t + f.volledig.size + f.miniatuur.size, 0);
@@ -476,29 +498,43 @@ export const FotokaartScherm = () => {
                   samen {alsAfstand(sporen.reduce((som, s) => som + s.statistiek.afstandM, 0))}.
                 </p>
               )}
-
-              <div className="mt-3 flex flex-wrap items-center gap-2">
-                <Knop klein onClick={maakVerslag}>
-                  Maak een reisverslag
-                </Knop>
-                {verslagUrl && (
-                  <a
-                    href={verslagUrl}
-                    download="reisverslag.html"
-                    className="text-sm text-zegel underline underline-offset-2"
-                  >
-                    reisverslag.html opslaan
-                  </a>
-                )}
-              </div>
-              <p className="mt-2 text-xs text-inkt-zacht dark:text-papier/50">
-                Het verslag bevat de route, de dagen, de plekken en je gelopen routes, en geen
-                foto's. Zo kun je het delen zonder je fotorol mee te sturen.
-              </p>
             </Kaartje>
           </section>
         </>
       )}
+
+      <section className="mt-6">
+        <Sectiekop>Reisverslag</Sectiekop>
+        <Kaartje className="p-4 text-sm leading-relaxed">
+          <p>
+            De reis dag voor dag: waar je was, je hoogtepunt en notitie, de plekken van je foto's en
+            je gelopen routes. Geen foto's, zodat je het kunt delen zonder je fotorol mee te sturen.
+          </p>
+          <label className="mt-3 flex items-start gap-2">
+            <input
+              type="checkbox"
+              className="mt-1"
+              checked={persoonlijk}
+              onChange={(e) => setPersoonlijk(e.target.checked)}
+            />
+            <span>
+              Persoonlijke gegevens meenemen
+              <span className="block text-xs text-inkt-zacht dark:text-papier/55">
+                Dan staat bij elke nacht de naam van je verblijf erin. Adressen en boekingsnummers
+                nooit.
+              </span>
+            </span>
+          </label>
+          <div className="mt-3 flex flex-wrap items-center gap-2">
+            <Knop klein soort="nadruk" onClick={() => void deelOfDownload(verslag())}>
+              Deel het reisverslag
+            </Knop>
+            <Knop klein onClick={() => download(verslag(), 'reisverslag.html')}>
+              Als bestand
+            </Knop>
+          </div>
+        </Kaartje>
+      </section>
     </div>
   );
 };

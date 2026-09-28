@@ -16,6 +16,7 @@ import { NogInTeVullen } from '@/features/gegevens/NogInTeVullen';
 import { BackupHerinnering } from '@/features/backup/BackupHerinnering';
 import { WindVandaag } from '@/features/weer/WindVandaag';
 import { VerblijfVandaag } from '@/features/verblijf/VerblijfVandaag';
+import { NotitieVanavond } from '@/features/reizen/NotitieVanavond';
 
 /**
  * Het hoofdmenu: één highlight bovenaan, alle andere steden eronder.
@@ -150,6 +151,7 @@ export const Hoofdmenu = () => {
       <VerblijfVandaag />
       <WindVandaag />
       <JetlagVandaag />
+      <NotitieVanavond />
       <BackupHerinnering />
       <NogInTeVullen />
 

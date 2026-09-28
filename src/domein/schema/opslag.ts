@@ -156,3 +156,15 @@ export const spoorRecordSchema = z.object({
   gewijzigdOp: z.string().min(1),
 });
 export type OpgeslagenSpoor = z.infer<typeof spoorRecordSchema>;
+
+/**
+ * De notitie bij een dag van de reis, en een kort hoogtepunt. De datum is de
+ * sleutel: één notitie per dag, waar je die ook schrijft.
+ */
+export const dagnotitieRecordSchema = z.object({
+  datum: datumSchema,
+  notitie: z.string().max(20_000),
+  hoogtepunt: z.string().max(200).optional(),
+  gewijzigdOp: z.string().min(1),
+});
+export type Dagnotitie = z.infer<typeof dagnotitieRecordSchema>;

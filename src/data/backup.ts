@@ -3,6 +3,7 @@ import { strToU8 } from 'fflate';
 import {
   bijlageGegevensSchema,
   controleRecordSchema,
+  dagnotitieRecordSchema,
   dagplanRecordSchema,
   eigenPuntSchema,
   fotoRecordSchema,
@@ -97,6 +98,7 @@ export const BACKUP_STORES: StoreBeschrijving[] = [
   { store: 'dagplannen', naam: 'Dagplannen', schema: dagplanRecordSchema },
   { store: 'overschrijvingen', naam: 'Eigen waarden', schema: overschrijvingRecordSchema },
   { store: 'sporen', naam: 'Gelopen routes', schema: spoorRecordSchema },
+  { store: 'dagnotities', naam: 'Dagnotities', schema: dagnotitieRecordSchema, sleutel: 'datum' },
 ];
 
 /** Instellingen uit de sleutelstore die met je meeverhuizen naar een ander toestel. */

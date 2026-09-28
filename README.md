@@ -178,6 +178,10 @@ Gebouwd:
 - Gelopen routes: GPX-bestanden uit Strava, Komoot of je horloge op de
   fotokaart, per dag, met afstand, klimmen en tijd in beweging, en als kleine
   omtrek in het reisverslag.
+- Dagnotitie: bij elke dag in de reisdagen een notitie en een hoogtepunt, die
+  zichzelf bewaren; 's avonds een zacht zetje in het hoofdmenu als je nog
+  niets schreef. Notities gaan mee in de backup en staan in het reisverslag
+  bij hun dag.
 
 De app is daarmee compleet volgens de functiespecificatie.
 
@@ -350,8 +354,11 @@ tijd, vergeleken op de wandklok. Ligt er niets binnen anderhalf uur, dan komt er
 geen voorstel: een foto uit het midden van een vlucht van zes uur ergens
 neerzetten is geen hulp maar een verzinsel.
 
-Het reisverslag is één los HTML-bestand met de route, de dagen en de plekken, en
-zonder foto's. Zo kun je het delen zonder je fotorol mee te sturen.
+Het reisverslag is één los HTML-bestand, dag voor dag over de hele reis: waar
+je was, je hoogtepunt en notitie, de plekken van je foto's en je gelopen
+routes, en geen foto's. Zo kun je het delen zonder je fotorol mee te sturen.
+Waar je sliep staat er alleen in als je "persoonlijke gegevens meenemen"
+aanvinkt; adressen en boekingsnummers nooit.
 
 ### Een Instagram collectie importeren
 
@@ -621,3 +628,18 @@ backup klein; de cijfers zijn bij het inlezen al uit alle punten berekend. Op
 de kaart zet je de routes per dag aan en uit, en de tijdbalk zoomt in op een
 dag. In het reisverslag staat bij elke dag de omtrek van de route als klein
 plaatje, met de cijfers.
+
+### De dagnotitie
+
+Bij elke dag in /reisdagen staat een notitie en een kort "hoogtepunt van de
+dag". Er is geen bewaarknop: wat je typt staat er een tel later in, ook als je
+de app wegdrukt of het scherm op slot zet voordat die tel voorbij is. Bij de
+dag van vandaag staan de velden meteen open, bij de andere dagen achter
+"Schrijf een notitie".
+
+Na acht uur 's avonds, in de tijdzone van de stad waar je bent, vraagt het
+hoofdmenu "Hoe was je dag?" zolang de notitie van vandaag leeg is. Tik erop en
+je schrijft ter plekke. Voor en na de reis vraagt het niets.
+
+Notities gaan mee in de backup (als "Dagnotities") en staan in het reisverslag
+bij hun dag, naast de foto's en de gelopen routes van die dag.
