@@ -120,7 +120,7 @@
     zuidwest: { lat: 34.6, lon: 135.42 }
     noordoost: { lat: 34.75, lon: 135.56 }
   tijdlijn: japan
-  tijdvakken: [muromachi, edo, meiji, taisho, vroeg-showa, naoorlogs]
+  tijdvakken: [muromachi, azuchi-momoyama, edo, meiji, taisho, vroeg-showa, naoorlogs]
   volgorde: 2
   korteBeschrijving: >-
     Handelsstad met een directe inslag en het beste straatvoedsel van het land.
@@ -194,7 +194,7 @@
     zuidwest: { lat: 36.545, lon: 136.63 }
     noordoost: { lat: 36.59, lon: 136.68 }
   tijdlijn: japan
-  tijdvakken: [muromachi, edo, meiji]
+  tijdvakken: [muromachi, azuchi-momoyama, edo, meiji]
   volgorde: 5
   korteBeschrijving: >-
     Compacte stad waar de oorlog aan voorbij is gegaan, met daardoor hele wijken
