@@ -157,7 +157,7 @@ export const GROEPEN: Groep[] = [
       {
         pad: '/fotos',
         naam: 'Fotokaart',
-        uitleg: 'Je reis als lijn op de kaart',
+        uitleg: "Je foto's en gelopen routes op de kaart",
         icoon: Camera,
       },
       {

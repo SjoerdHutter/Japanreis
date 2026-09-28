@@ -2,7 +2,11 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { Coordinaat, Plaats } from '@/domein/schema';
 import { STEDEN, laadAllePlaatsen, stadMet } from '@/data/content';
 import { useApp } from '@/state/useApp';
-import { Kaart, type KaartPunt } from '@/features/kaart/Kaart';
+import { Kaart, type KaartPunt, type KaartSpoor } from '@/features/kaart/Kaart';
+import { useOpslag } from '@/data/db/useOpslag';
+import { leesSporen } from '@/data/sporen';
+import { alsAfstand } from '@/domein/sporen/spoor';
+import type { OpgeslagenSpoor } from '@/domein/schema';
 import { Kaartje, Knop, Label, Sectiekop, Terug } from '@/ui/basis';
 import { leesFoto } from '@/domein/fotos/exif';
 import { momentInZone } from '@/domein/tijd/zones';
@@ -26,6 +30,7 @@ import {
 } from '@/data/db/idb';
 import { omhullendGebied } from './gebied';
 import { maakReisverslag } from './verslag';
+import { GpxInvoer, SporenLijst } from './Sporen';
 
 /**
  * De fotokaart.
@@ -58,6 +63,9 @@ export const FotokaartScherm = () => {
   const [geselecteerd, setGeselecteerd] = useState<string | null>(null);
   const [plaatsBezig, setPlaatsBezig] = useState<string | null>(null);
   const [verslagUrl, setVerslagUrl] = useState<string | null>(null);
+  const { waarde: sporen } = useOpslag(leesSporen, [] as OpgeslagenSpoor[], ['sporen']);
+  /** Dagen waarvan je de routes van de kaart hebt gehaald; '' is "nog zonder dag". */
+  const [verborgen, setVerborgen] = useState<ReadonlySet<string>>(new Set());
 
   /**
    * De blob-urls van de miniaturen.
@@ -140,7 +148,54 @@ export const FotokaartScherm = () => {
     [zichtbaar],
   );
 
-  const gebied = useMemo(() => omhullendGebied(lijn.length > 0 ? lijn : [], HELE_REIS), [lijn]);
+  // De routes van de gekozen dag, of van de hele reis; min de dagen die je uitzette.
+  const zichtbareSporen = useMemo<KaartSpoor[]>(
+    () =>
+      sporen
+        .filter((s) => (dag ? s.datum === dag : true) && !verborgen.has(s.datum ?? ''))
+        .map((s) => ({ id: s.id, naam: s.naam, kleur: s.kleur, lijnen: s.lijnen })),
+    [sporen, dag, verborgen],
+  );
+
+  // De tijdbalk kent elke dag met een foto of een route.
+  const tijdbalk = useMemo(() => {
+    const perDag = new Map(dagen.map((d) => [d.datum, { ...d, routes: 0 }]));
+    for (const spoor of sporen) {
+      if (!spoor.datum) continue;
+      const bestaand = perDag.get(spoor.datum);
+      if (bestaand) bestaand.routes += 1;
+      else {
+        const [lat, lon] = spoor.lijnen[0]?.[0] ?? [0, 0];
+        perDag.set(spoor.datum, {
+          datum: spoor.datum,
+          stadId: stadVoorPunt({ lat, lon }, STEDEN)?.id,
+          fotos: [],
+          routes: 1,
+        });
+      }
+    }
+    return [...perDag.values()].sort((a, b) => a.datum.localeCompare(b.datum));
+  }, [dagen, sporen]);
+
+  const gebied = useMemo(() => {
+    // Een dag met een route: inzoomen op die dag. Anders de hele reis.
+    const routepunten = zichtbareSporen.flatMap((s) =>
+      s.lijnen.flat().map(([lat, lon]) => ({ lat, lon })),
+    );
+    if (dag && routepunten.length > 0) {
+      const fotopunten = zichtbaar.filter((f) => f.coordinaten).map((f) => f.coordinaten!);
+      return omhullendGebied([...routepunten, ...fotopunten], HELE_REIS);
+    }
+    return omhullendGebied([...lijn, ...routepunten], HELE_REIS);
+  }, [lijn, dag, zichtbaar, zichtbareSporen]);
+
+  const wisselDag = (d: string) =>
+    setVerborgen((oud) => {
+      const nieuw = new Set(oud);
+      if (nieuw.has(d)) nieuw.delete(d);
+      else nieuw.add(d);
+      return nieuw;
+    });
 
   const verwerk = async (bestanden: FileList) => {
     setFout(null);
@@ -231,7 +286,7 @@ export const FotokaartScherm = () => {
 
   const maakVerslag = () => {
     if (verslagUrl) URL.revokeObjectURL(verslagUrl);
-    const html = maakReisverslag(alle, STEDEN, plaatsen, cijfers);
+    const html = maakReisverslag(alle, STEDEN, plaatsen, cijfers, sporen);
     const url = URL.createObjectURL(new Blob([html], { type: 'text/html' }));
     setVerslagUrl(url);
   };
@@ -251,7 +306,7 @@ export const FotokaartScherm = () => {
       <h1 className="mt-1 text-2xl font-semibold tracking-tight">Fotokaart</h1>
       <p className="mt-2 mb-5 leading-relaxed text-inkt-zacht dark:text-papier/70">
         Je foto's op de kaart, als één doorlopende lijn: heenreis over Hanoi, Japan, en terug over
-        Hanoi. De foto's blijven op dit toestel.
+        Hanoi. Daarbij je gelopen routes uit een GPX-bestand. Alles blijft op dit toestel.
       </p>
 
       <Kaartje className="mb-5 p-4">
@@ -284,9 +339,11 @@ export const FotokaartScherm = () => {
         {fout && <p className="mt-2 text-sm text-zegel">{fout}</p>}
       </Kaartje>
 
-      {fotos.length === 0 ? (
+      <GpxInvoer />
+
+      {fotos.length === 0 && sporen.length === 0 ? (
         <p className="text-sm text-inkt-zacht dark:text-papier/60">
-          Nog geen foto's. Voeg ze hierboven toe; ze verlaten je toestel niet.
+          Nog geen foto's of routes. Voeg ze hierboven toe; ze verlaten je toestel niet.
         </p>
       ) : (
         <>
@@ -294,6 +351,7 @@ export const FotokaartScherm = () => {
             <Kaart
               punten={punten}
               lijn={lijn}
+              sporen={zichtbareSporen}
               gebied={gebied}
               positie={positie}
               hoogte="22rem"
@@ -317,46 +375,54 @@ export const FotokaartScherm = () => {
             </div>
           )}
 
-          <Tijdbalk dagen={dagen} gekozen={dag} onKies={setDag} />
+          <Tijdbalk dagen={tijdbalk} gekozen={dag} onKies={setDag} />
 
-          <section className="mb-6">
-            <Sectiekop
-              extra={
-                <span className="text-xs text-inkt-zacht dark:text-papier/50">
-                  {zichtbaar.length} van {fotos.length}
-                </span>
-              }
-            >
-              {dag ? `Foto's van ${dag}` : 'Alle foto’s'}
-            </Sectiekop>
-            <div className="grid grid-cols-3 gap-1.5 sm:grid-cols-4">
-              {zichtbaar.map((f) => {
-                const bestand = fotos.find((o) => o.id === f.id)!;
-                return (
-                  <button
-                    key={f.id}
-                    type="button"
-                    onClick={() => setGeselecteerd(geselecteerd === f.id ? null : f.id)}
-                    className={`relative aspect-square overflow-hidden rounded-lg border-2 transition ${
-                      geselecteerd === f.id ? 'border-zegel' : 'border-transparent'
-                    }`}
-                  >
-                    <img
-                      src={urls[bestand.id]}
-                      alt={f.naam}
-                      loading="lazy"
-                      className="h-full w-full object-cover"
-                    />
-                    {!f.coordinaten && (
-                      <span className="absolute right-1 bottom-1 rounded bg-amber-500 px-1 text-[10px] font-medium text-white">
-                        geen plek
-                      </span>
-                    )}
-                  </button>
-                );
-              })}
-            </div>
-          </section>
+          <SporenLijst
+            sporen={dag ? sporen.filter((s) => s.datum === dag) : sporen}
+            verborgen={verborgen}
+            onWissel={wisselDag}
+          />
+
+          {fotos.length > 0 && (
+            <section className="mb-6">
+              <Sectiekop
+                extra={
+                  <span className="text-xs text-inkt-zacht dark:text-papier/50">
+                    {zichtbaar.length} van {fotos.length}
+                  </span>
+                }
+              >
+                {dag ? `Foto's van ${dag}` : 'Alle foto’s'}
+              </Sectiekop>
+              <div className="grid grid-cols-3 gap-1.5 sm:grid-cols-4">
+                {zichtbaar.map((f) => {
+                  const bestand = fotos.find((o) => o.id === f.id)!;
+                  return (
+                    <button
+                      key={f.id}
+                      type="button"
+                      onClick={() => setGeselecteerd(geselecteerd === f.id ? null : f.id)}
+                      className={`relative aspect-square overflow-hidden rounded-lg border-2 transition ${
+                        geselecteerd === f.id ? 'border-zegel' : 'border-transparent'
+                      }`}
+                    >
+                      <img
+                        src={urls[bestand.id]}
+                        alt={f.naam}
+                        loading="lazy"
+                        className="h-full w-full object-cover"
+                      />
+                      {!f.coordinaten && (
+                        <span className="absolute right-1 bottom-1 rounded bg-amber-500 px-1 text-[10px] font-medium text-white">
+                          geen plek
+                        </span>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            </section>
+          )}
 
           {geselecteerd && (
             <FotoDetail
@@ -382,24 +448,34 @@ export const FotokaartScherm = () => {
           <section>
             <Sectiekop>De reis in cijfers</Sectiekop>
             <Kaartje className="p-4 text-sm leading-relaxed">
-              <p>
-                {cijfers.aantalFotos} foto's over {cijfers.aantalDagen}{' '}
-                {cijfers.aantalDagen === 1 ? 'dag' : 'dagen'}, waarvan {cijfers.aantalMetPlek} met
-                een plek op de kaart.
-              </p>
-              <p className="mt-1.5">
-                Hemelsbreed {cijfers.hemelsbredeAfstandKm.toLocaleString('nl-NL')} kilometer tussen
-                de foto's. Dat is de reikwijdte van de reis en geen gereden afstand.
-              </p>
-              {cijfers.stedenBezocht.length > 0 && (
-                <p className="mt-1.5">
-                  Steden op de lijn:{' '}
-                  {cijfers.stedenBezocht.map((id) => stadMet(id)?.naam ?? id).join(', ')}.
+              {fotos.length > 0 && (
+                <>
+                  <p>
+                    {cijfers.aantalFotos} foto's over {cijfers.aantalDagen}{' '}
+                    {cijfers.aantalDagen === 1 ? 'dag' : 'dagen'}, waarvan {cijfers.aantalMetPlek}{' '}
+                    met een plek op de kaart.
+                  </p>
+                  <p className="mt-1.5">
+                    Hemelsbreed {cijfers.hemelsbredeAfstandKm.toLocaleString('nl-NL')} kilometer
+                    tussen de foto's. Dat is de reikwijdte van de reis en geen gereden afstand.
+                  </p>
+                  {cijfers.stedenBezocht.length > 0 && (
+                    <p className="mt-1.5">
+                      Steden op de lijn:{' '}
+                      {cijfers.stedenBezocht.map((id) => stadMet(id)?.naam ?? id).join(', ')}.
+                    </p>
+                  )}
+                  <p className="mt-1.5 text-inkt-zacht dark:text-papier/55">
+                    De foto's nemen {alsGrootte(ruimte)} in beslag op dit toestel.
+                  </p>
+                </>
+              )}
+              {sporen.length > 0 && (
+                <p className={fotos.length > 0 ? 'mt-1.5' : ''}>
+                  {sporen.length === 1 ? 'Eén gelopen route' : `${sporen.length} gelopen routes`},
+                  samen {alsAfstand(sporen.reduce((som, s) => som + s.statistiek.afstandM, 0))}.
                 </p>
               )}
-              <p className="mt-1.5 text-inkt-zacht dark:text-papier/55">
-                De foto's nemen {alsGrootte(ruimte)} in beslag op dit toestel.
-              </p>
 
               <div className="mt-3 flex flex-wrap items-center gap-2">
                 <Knop klein onClick={maakVerslag}>
@@ -416,8 +492,8 @@ export const FotokaartScherm = () => {
                 )}
               </div>
               <p className="mt-2 text-xs text-inkt-zacht dark:text-papier/50">
-                Het verslag bevat de route, de dagen en de plekken, en geen foto's. Zo kun je het
-                delen zonder je fotorol mee te sturen.
+                Het verslag bevat de route, de dagen, de plekken en je gelopen routes, en geen
+                foto's. Zo kun je het delen zonder je fotorol mee te sturen.
               </p>
             </Kaartje>
           </section>
@@ -433,7 +509,7 @@ const Tijdbalk = ({
   gekozen,
   onKies,
 }: {
-  dagen: { datum: string; stadId?: string; fotos: Foto[] }[];
+  dagen: { datum: string; stadId?: string; fotos: Foto[]; routes: number }[];
   gekozen: string | null;
   onKies: (datum: string | null) => void;
 }) => {
@@ -468,7 +544,7 @@ const Tijdbalk = ({
           >
             {d.datum.slice(5)}{' '}
             <span className="opacity-60">
-              {d.stadId ? (stadMet(d.stadId)?.naam ?? d.stadId) : d.fotos.length}
+              {d.stadId ? (stadMet(d.stadId)?.naam ?? d.stadId) : d.fotos.length + d.routes}
             </span>
           </button>
         ))}

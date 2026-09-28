@@ -15,6 +15,7 @@ import type {
   EigenPunt,
   Gegeven,
   OpgeslagenReservering,
+  OpgeslagenSpoor,
 } from '@/domein/schema';
 import type { Opname, Uitgave } from '@/domein/budget/uitgaven';
 import type { Koersen } from '@/domein/valuta/koers';
@@ -94,6 +95,8 @@ interface JapanreisDB extends DBSchema {
   dagplannen: { key: string; value: Dagplan };
   /** Je eigen waarden over de meegeleverde content heen; zie domein/overschrijven. */
   overschrijvingen: { key: string; value: Overschrijving };
+  /** Gelopen routes uit GPX-bestanden; zie domein/sporen. */
+  sporen: { key: string; value: OpgeslagenSpoor };
 }
 
 /** Je keuze in de dagplanner voor één dag in één stad. */
@@ -184,7 +187,7 @@ export interface OpgeslagenFoto {
 }
 
 const DB_NAAM = 'japanreis';
-const DB_VERSIE = 10;
+const DB_VERSIE = 11;
 
 let dbBelofte: Promise<IDBPDatabase<JapanreisDB>> | null = null;
 
@@ -241,6 +244,9 @@ export const getDb = (): Promise<IDBPDatabase<JapanreisDB>> => {
       }
       if (!db.objectStoreNames.contains('overschrijvingen')) {
         db.createObjectStore('overschrijvingen', { keyPath: 'id' });
+      }
+      if (!db.objectStoreNames.contains('sporen')) {
+        db.createObjectStore('sporen', { keyPath: 'id' });
       }
     },
   });

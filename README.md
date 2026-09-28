@@ -175,6 +175,9 @@ Gebouwd:
   of het Nederlands, met de allergenen die er gewoonlijk in zitten. Staat je
   allergie in Mijn gegevens, dan krijgt elk gerecht waar hij in zit een rode
   rand, en vraag je het met één tik aan het personeel.
+- Gelopen routes: GPX-bestanden uit Strava, Komoot of je horloge op de
+  fotokaart, per dag, met afstand, klimmen en tijd in beweging, en als kleine
+  omtrek in het reisverslag.
 
 De app is daarmee compleet volgens de functiespecificatie.
 
@@ -597,3 +600,24 @@ dus als begin van het gesprek, niet als antwoord.
 Niets hiervan is door een kok of moedertaalspreker nagekeken, dus elk gerecht
 heeft "controleren". De menukaart laadt pas als je hem opent, maar reist wel
 mee in de offline versie.
+
+### Gelopen routes
+
+Op de fotokaart (/fotos) lees je GPX-bestanden in: uit Strava, Komoot, je
+horloge of een app als Open GPX Tracker. Bewaar het bestand eerst in Bestanden
+en kies het daar; meerdere tegelijk mag. Elk spoor in een bestand wordt een
+eigen route, en een geplande route zonder tijden kan ook.
+
+Per route zie je de afstand, hoeveel je klom (met een drempel van drie meter,
+zodat het heen en weer schommelen van GPS-hoogte op een vlakke kade niet
+meetelt), de tijd in beweging (stilstaan en gaten in de opname tellen niet) en
+de dag. Die dag komt uit het eerste tijdstip, in de tijdzone van de stad waar
+de route begint; een ochtendloop in Tokio hoort bij de dag in Tokio en niet bij
+de avond ervoor in Nederland. Naam, kleur en dag pas je aan met het potlood.
+
+Bewaard wordt een vereenvoudigde lijn die op een paar meter na hetzelfde loopt
+(Douglas-Peucker), niet elk punt uit het bestand. Dat houdt de kaart vlot en de
+backup klein; de cijfers zijn bij het inlezen al uit alle punten berekend. Op
+de kaart zet je de routes per dag aan en uit, en de tijdbalk zoomt in op een
+dag. In het reisverslag staat bij elke dag de omtrek van de route als klein
+plaatje, met de cijfers.

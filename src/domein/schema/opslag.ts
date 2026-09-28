@@ -130,3 +130,29 @@ export const overschrijvingRecordSchema = z.object({
   waarde: z.unknown(),
   gewijzigdOp: z.string().min(1),
 });
+
+/**
+ * Een gelopen route uit een GPX-bestand, vereenvoudigd tot op een paar meter.
+ * De kleur is een vaste hexcode: hij komt in het reisverslag in een SVG terecht.
+ */
+export const spoorRecordSchema = z.object({
+  id: z.string().min(1),
+  naam: z.string().trim().min(1, { error: 'Geef de route een naam.' }).max(120),
+  kleur: z.string().regex(/^#[0-9a-f]{6}$/i),
+  datum: datumSchema.optional(),
+  lijnen: z.array(z.array(z.tuple([z.number().min(-90).max(90), z.number().min(-180).max(180)]))),
+  statistiek: z.object({
+    afstandM: z.number().nonnegative(),
+    stijgingM: z.number().nonnegative().optional(),
+    dalingM: z.number().nonnegative().optional(),
+    duurS: z.number().nonnegative().optional(),
+    bewegingS: z.number().nonnegative().optional(),
+    begin: z.string().optional(),
+    eind: z.string().optional(),
+    punten: z.number().int().nonnegative(),
+  }),
+  bestandsnaam: z.string().optional(),
+  toegevoegdOp: z.string().min(1),
+  gewijzigdOp: z.string().min(1),
+});
+export type OpgeslagenSpoor = z.infer<typeof spoorRecordSchema>;

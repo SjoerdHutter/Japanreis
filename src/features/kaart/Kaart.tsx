@@ -100,6 +100,14 @@ const laagBallon = (punt: KaartOverlay['punten'][number]): HTMLElement => {
   return ballon;
 };
 
+/** Een gelopen route: een of meer lijnen in één kleur. */
+export interface KaartSpoor {
+  id: string;
+  naam: string;
+  kleur: string;
+  lijnen: [number, number][][];
+}
+
 export interface KaartPunt {
   id: string;
   naam: string;
@@ -119,8 +127,11 @@ export const Kaart = ({
   onTikOpKaart,
   clusteren = true,
   lagen,
+  sporen,
 }: {
   punten: KaartPunt[];
+  /** Gelopen routes uit GPX-bestanden, als doorgetrokken lijnen. */
+  sporen?: KaartSpoor[];
   /** Lagen voor de lagenknop rechtsboven. */
   lagen?: KaartOverlay[];
   /**
@@ -152,6 +163,7 @@ export const Kaart = ({
   const groep = useRef<L.MarkerClusterGroup | null>(null);
   const ikRef = useRef<L.CircleMarker | null>(null);
   const lijnRef = useRef<L.Polyline | null>(null);
+  const sporenRef = useRef<L.LayerGroup | null>(null);
   const lagenRef = useRef<{ knop: L.Control.Layers; groepen: L.Layer[] } | null>(null);
   // In een ref, zodat een nieuwe onKies de markers niet opnieuw laat bouwen.
   const kiesRef = useRef(onKies);
@@ -200,6 +212,7 @@ export const Kaart = ({
       groep.current = null;
       ikRef.current = null;
       lijnRef.current = null;
+      sporenRef.current = null;
       lagenRef.current = null;
     };
   }, []);
@@ -318,6 +331,33 @@ export const Kaart = ({
       { color: KLEUR.foto, weight: 2.5, opacity: 0.85, dashArray: '1 6', lineCap: 'round' },
     ).addTo(m);
   }, [lijn]);
+
+  // De sporen onder de spelden, zodat een foto op de route aanklikbaar blijft.
+  useEffect(() => {
+    const m = kaart.current;
+    if (!m) return;
+    sporenRef.current?.remove();
+    sporenRef.current = null;
+    if (!sporen || sporen.length === 0) return;
+    const groep = L.layerGroup();
+    for (const spoor of sporen) {
+      const lijnen = spoor.lijnen.filter((l) => l.length >= 2);
+      if (lijnen.length === 0) continue;
+      const titel = document.createElement('strong');
+      titel.textContent = spoor.naam;
+      L.polyline(lijnen, {
+        color: spoor.kleur,
+        weight: 4,
+        opacity: 0.85,
+        lineJoin: 'round',
+        lineCap: 'round',
+      })
+        .bindPopup(titel)
+        .addTo(groep);
+    }
+    groep.addTo(m);
+    sporenRef.current = groep;
+  }, [sporen]);
 
   // Je eigen positie als apart bolletje. Geen speld, want het is geen plaats.
   useEffect(() => {

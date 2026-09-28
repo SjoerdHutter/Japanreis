@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { Plaats, Stad } from '@/domein/schema';
+import type { OpgeslagenSpoor, Plaats, Stad } from '@/domein/schema';
 import { overzicht, type Foto } from '@/domein/fotos/reis';
 import { maakReisverslag } from './verslag';
 
@@ -106,5 +106,59 @@ describe('maakReisverslag', () => {
     const leeg = maakReisverslag([], STEDEN, PLAATSEN, overzicht([], STEDEN));
     expect(leeg).toContain('Japan en Hanoi');
     expect(leeg).toContain('onbekend');
+  });
+
+  it('zet een gelopen route bij zijn dag, als svg met de cijfers', () => {
+    const route: OpgeslagenSpoor = {
+      id: 'r',
+      naam: 'Langs de <rivier>',
+      kleur: '#2563eb',
+      datum: '2026-04-02',
+      lijnen: [
+        [
+          [35.71, 139.79],
+          [35.72, 139.8],
+          [35.715, 139.81],
+        ],
+      ],
+      statistiek: { afstandM: 4200, stijgingM: 35, bewegingS: 3900, punten: 3 },
+      toegevoegdOp: '2026-04-02T10:00:00Z',
+      gewijzigdOp: '2026-04-02T10:00:00Z',
+    };
+    const metRoute = maakReisverslag(FOTOS, STEDEN, PLAATSEN, overzicht(FOTOS, STEDEN), [
+      route,
+      { ...route, id: 's', naam: 'Zonder dag', datum: undefined },
+    ]);
+    const dag = metRoute.slice(
+      metRoute.indexOf('2026-04-02'),
+      metRoute.indexOf('</li>', metRoute.indexOf('<svg')),
+    );
+    expect(dag).toContain('<svg');
+    expect(dag).toContain('stroke="#2563eb"');
+    expect(dag).toContain('Langs de &lt;rivier&gt;: 4,2 km, 35 m klimmen, 1 u 5 min in beweging');
+    expect(metRoute).toContain('Routes zonder dag');
+    expect(metRoute).toContain('2 gelopen routes, samen 8,4 km');
+    expect(metRoute).not.toMatch(/<svg[^>]+href="https?:/);
+  });
+
+  it('heeft een dag met alleen een route', () => {
+    const route: OpgeslagenSpoor = {
+      id: 'r',
+      naam: 'Ochtendloop',
+      kleur: '#dc2626',
+      datum: '2026-04-05',
+      lijnen: [
+        [
+          [35.71, 139.79],
+          [35.72, 139.8],
+        ],
+      ],
+      statistiek: { afstandM: 1500, punten: 2 },
+      toegevoegdOp: '2026-04-05T10:00:00Z',
+      gewijzigdOp: '2026-04-05T10:00:00Z',
+    };
+    const html = maakReisverslag([], STEDEN, PLAATSEN, overzicht([], STEDEN), [route]);
+    expect(html).toContain('2026-04-05 <span>Tokio</span>');
+    expect(html).not.toContain('0 foto');
   });
 });

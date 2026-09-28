@@ -1,5 +1,12 @@
-import type { Plaats, Stad } from '@/domein/schema';
-import { groepeerPerDag, plaatsVoorFoto, type Foto, type Reisoverzicht } from '@/domein/fotos/reis';
+import type { OpgeslagenSpoor, Plaats, Stad } from '@/domein/schema';
+import {
+  groepeerPerDag,
+  plaatsVoorFoto,
+  stadVoorPunt,
+  type Foto,
+  type Reisoverzicht,
+} from '@/domein/fotos/reis';
+import { alsAfstand, alsSamenvatting, alsSvg } from '@/domein/sporen/spoor';
 
 /**
  * Het reisverslag: de reis als één pagina die je kunt bewaren of doorsturen.
@@ -10,7 +17,8 @@ import { groepeerPerDag, plaatsVoorFoto, type Foto, type Reisoverzicht } from '@
  * wat een vriend die later gaat eraan heeft.
  *
  * Eén los HTML-bestand zonder verwijzingen naar buiten, zodat het over tien jaar
- * nog opent.
+ * nog opent. Gelopen routes staan er als kleine SVG in, zonder kaart eronder:
+ * de vorm van de dag en de cijfers.
  */
 
 const ontsnap = (tekst: string): string =>
@@ -30,9 +38,42 @@ export const maakReisverslag = (
   steden: Stad[],
   plaatsen: Plaats[],
   cijfers: Reisoverzicht,
+  sporen: readonly OpgeslagenSpoor[] = [],
 ): string => {
-  const dagen = groepeerPerDag(fotos, steden);
+  const fotodagen = groepeerPerDag(fotos, steden);
   const naamVan = (id: string): string => steden.find((s) => s.id === id)?.naam ?? id;
+
+  // Elke dag met foto's of een route, op volgorde.
+  const datums = [
+    ...new Set([
+      ...fotodagen.map((d) => d.datum),
+      ...sporen.flatMap((s) => (s.datum ? [s.datum] : [])),
+    ]),
+  ].sort();
+  const dagen = datums.map((datum) => {
+    const fotodag = fotodagen.find((d) => d.datum === datum);
+    const routes = sporen.filter((s) => s.datum === datum);
+    const begin = routes[0]?.lijnen[0]?.[0];
+    return {
+      datum,
+      fotos: fotodag?.fotos ?? [],
+      routes,
+      stadId:
+        fotodag?.stadId ??
+        (begin ? stadVoorPunt({ lat: begin[0], lon: begin[1] }, steden)?.id : undefined),
+    };
+  });
+
+  const routeBlok = (routes: readonly OpgeslagenSpoor[]): string => {
+    if (routes.length === 0) return '';
+    const regels = routes
+      .map(
+        (r) =>
+          `<li><span class="stip" style="background:${ontsnap(r.kleur)}"></span>${ontsnap(r.naam)}: ${ontsnap(alsSamenvatting(r.statistiek))}</li>`,
+      )
+      .join('');
+    return `<div class="routes">${alsSvg(routes)}<ul>${regels}</ul></div>`;
+  };
 
   const dagRegels = dagen
     .map((dag) => {
@@ -51,13 +92,33 @@ export const maakReisverslag = (
       const plekken =
         bezocht.size > 0 ? `<p class="plekken">${[...bezocht].map(ontsnap).join(' · ')}</p>` : '';
 
+      const telling =
+        dag.fotos.length > 0
+          ? `<p class="telling">${dag.fotos.length} ${dag.fotos.length === 1 ? 'foto' : "foto's"}</p>`
+          : '';
+
       return `<li>
         <h3>${ontsnap(dag.datum)} <span>${ontsnap(stad)}</span></h3>
-        <p class="telling">${dag.fotos.length} ${dag.fotos.length === 1 ? 'foto' : "foto's"}</p>
+        ${telling}
         ${plekken}
+        ${routeBlok(dag.routes)}
       </li>`;
     })
     .join('\n');
+
+  const fotoCijfers =
+    cijfers.aantalFotos > 0 || sporen.length === 0
+      ? `<li>${cijfers.aantalFotos} foto's over ${cijfers.aantalDagen} ${cijfers.aantalDagen === 1 ? 'dag' : 'dagen'}</li>
+    <li>${cijfers.hemelsbredeAfstandKm.toLocaleString('nl-NL')} kilometer hemelsbreed, van de eerste tot de laatste foto</li>`
+      : '';
+  const zonderDag = sporen.filter((s) => !s.datum);
+  const zonderDagBlok =
+    zonderDag.length > 0 ? `<h2>Routes zonder dag</h2>${routeBlok(zonderDag)}` : '';
+  const totaalRoutes = sporen.reduce((som, s) => som + s.statistiek.afstandM, 0);
+  const routeCijfer =
+    sporen.length > 0
+      ? `<li>${sporen.length} ${sporen.length === 1 ? 'gelopen route' : 'gelopen routes'}, samen ${ontsnap(alsAfstand(totaalRoutes))}</li>`
+      : '';
 
   return `<!doctype html>
 <html lang="nl">
@@ -81,6 +142,11 @@ export const maakReisverslag = (
   h3 { font-size: 1rem; margin: 0; }
   h3 span { font-weight: 400; opacity: .65; margin-left: .35rem; }
   .telling, .plekken { margin: .25rem 0 0; font-size: .9rem; opacity: .75; }
+  h2 { font-size: 1.1rem; margin: 2.5rem 0 .75rem; }
+  .routes { margin: .6rem 0 0; }
+  .routes svg { display: block; max-width: 100%; height: auto; margin-bottom: .35rem; }
+  .routes ul { list-style: none; padding: 0; margin: 0; font-size: .9rem; }
+  .stip { display: inline-block; width: .6rem; height: .6rem; border-radius: 50%; margin-right: .4rem; }
   footer { margin-top: 3rem; font-size: .8rem; opacity: .55; }
 </style>
 </head>
@@ -89,14 +155,15 @@ export const maakReisverslag = (
   <p class="onder">${ontsnap(alsDatum(cijfers.eersteFoto))} tot ${ontsnap(alsDatum(cijfers.laatsteFoto))}</p>
 
   <ul class="cijfers">
-    <li>${cijfers.aantalFotos} foto's over ${cijfers.aantalDagen} ${cijfers.aantalDagen === 1 ? 'dag' : 'dagen'}</li>
-    <li>${cijfers.hemelsbredeAfstandKm.toLocaleString('nl-NL')} kilometer hemelsbreed, van de eerste tot de laatste foto</li>
+    ${fotoCijfers}
     <li>Steden op de route: ${cijfers.stedenBezocht.map((id) => ontsnap(naamVan(id))).join(', ') || 'geen'}</li>
+    ${routeCijfer}
   </ul>
 
   <ol>
 ${dagRegels}
   </ol>
+  ${zonderDagBlok}
 
   <footer>
     Gemaakt met de reisapp. Dit verslag bevat de route en de plekken, en geen foto's:

@@ -11,6 +11,7 @@ import {
   overschrijvingRecordSchema,
   overstapRecordSchema,
   reserveringRecordSchema,
+  spoorRecordSchema,
   stempelRecordSchema,
   uitgaveRecordSchema,
 } from '@/domein/schema';
@@ -95,6 +96,7 @@ export const BACKUP_STORES: StoreBeschrijving[] = [
   { store: 'controles', naam: 'Nagekeken feiten', schema: controleRecordSchema },
   { store: 'dagplannen', naam: 'Dagplannen', schema: dagplanRecordSchema },
   { store: 'overschrijvingen', naam: 'Eigen waarden', schema: overschrijvingRecordSchema },
+  { store: 'sporen', naam: 'Gelopen routes', schema: spoorRecordSchema },
 ];
 
 /** Instellingen uit de sleutelstore die met je meeverhuizen naar een ander toestel. */
