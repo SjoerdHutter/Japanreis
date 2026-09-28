@@ -1,6 +1,7 @@
 import {
   Archive,
   CalendarDays,
+  CalendarPlus,
   ListChecks,
   Camera,
   Import,
@@ -87,6 +88,12 @@ export const GROEPEN: Groep[] = [
         naam: 'Dagplanner',
         uitleg: 'Een route met tijden, en je reserveringen',
         icoon: CalendarDays,
+      },
+      {
+        pad: '/agenda',
+        naam: 'Naar je agenda',
+        uitleg: 'Vluchten, verblijven en kaartverkoop',
+        icoon: CalendarPlus,
       },
       {
         pad: '/jetlag',

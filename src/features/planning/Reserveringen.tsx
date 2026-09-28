@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { QrCode } from 'lucide-react';
 import { REISSCHEMA, STEDEN, stadMet } from '@/data/content';
 import {
@@ -73,7 +74,14 @@ export const Reserveringen = ({ stadId }: { stadId?: string }) => {
       <p className="mb-3 text-sm leading-relaxed text-inkt-zacht dark:text-papier/65">
         Eén plek voor restaurants, ryokan, het Ghibli Museum en teamLab. Vul in wanneer de
         kaartverkoop opengaat: het Ghibli Museum verkoopt op de tiende van de maand ervoor en is
-        binnen minuten weg. Je voucher of QR-code zet je erbij, dan heb je hem ook zonder bereik.
+        binnen minuten weg. Je voucher of QR-code zet je erbij, dan heb je hem ook zonder bereik.{' '}
+        <Link
+          to="/agenda"
+          className="text-zegel underline underline-offset-2 dark:text-zegel-licht"
+        >
+          Zet de kaartverkoop in je agenda
+        </Link>
+        .
       </p>
 
       {bewerken === 'nieuw' ? (

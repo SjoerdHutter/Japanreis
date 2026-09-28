@@ -155,6 +155,8 @@ Gebouwd:
   (nu dag voor dag, elke dag van de reis) en in de dagplanner. Een regendag
   zet het regenvoorstel in de planner aan, harde wind geeft een waarschuwing.
   De planner onthoudt je keuze per dag.
+- Naar je agenda: vluchten, in- en uitchecken, geboekte reserveringen en de
+  kaartverkoop als .ics-bestand, met herinneringen.
 
 De app is daarmee compleet volgens de functiespecificatie.
 
@@ -462,3 +464,20 @@ vandaag en morgen ook in het hoofdmenu.
 
 De dagplanner onthoudt per dag en per stad wat je koos, en die keuzes gaan mee
 in de backup.
+
+### Naar je agenda
+
+Onder Meer, Naar je agenda maakt een .ics-bestand van je vluchten, het in- en
+uitchecken, je geboekte reserveringen en het moment dat een kaartverkoop opent.
+Alles, één dag, of alleen de kaartverkoop. Met een herinnering een dag en een
+kwartier voor de kaartverkoop, drie uur voor een vlucht en een uur voor het
+uitchecken.
+
+De tijden staan in UTC in het bestand; je agenda zet ze om naar de tijd van
+waar je bent. Een vlucht die om 00:15 uit Hanoi vertrekt staat zo op het goede
+moment, ook als je telefoon nog op Amsterdam staat. Elke afspraak heeft een
+vaste id, zodat een agenda die dat respecteert hem bij een nieuwe export
+bijwerkt in plaats van verdubbelt.
+
+Adressen en boekingsnummers gaan er alleen in als je "persoonlijke gegevens
+meenemen" aanvinkt.
