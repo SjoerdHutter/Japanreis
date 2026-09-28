@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { Valuta } from '@/domein/schema';
-import { STEDEN } from '@/data/content';
+import { REISSCHEMA, STEDEN } from '@/data/content';
+import { vandaagOpReis } from '@/domein/highlight/vandaag';
 import { useApp } from '@/state/useApp';
 import { Kaartje, Knop, Label, Sectiekop } from '@/ui/basis';
 import { formatteerBedrag, formatteerEuro, formatteerLokaal } from '@/domein/valuta/formatteer';
@@ -38,7 +39,12 @@ import {
 const NIEUWE_ID = () =>
   globalThis.crypto?.randomUUID?.() ?? `post-${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
-const VANDAAG = () => new Date().toISOString().slice(0, 10);
+/**
+ * De datum van een uitgave: vandaag op de plek waar je bent. Niet in UTC, want
+ * dan kwam een ontbijt om acht uur in Kyoto op de dag ervoor te staan en klopte
+ * het overzicht per dag niet meer.
+ */
+const VANDAAG = () => vandaagOpReis(STEDEN, REISSCHEMA);
 
 export const BudgetScherm = () => {
   const { koersen, koersVerversen } = useApp();

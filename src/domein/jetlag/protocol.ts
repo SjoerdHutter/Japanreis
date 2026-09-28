@@ -1,6 +1,6 @@
 import type { Reisschema, Stad } from '@/domein/schema';
 import { alsMinuten } from '@/domein/planning/overstap';
-import { datumIn, utcOffsetMinuten } from '@/domein/tijd/zones';
+import { THUIS_TIJDZONE, datumIn, utcOffsetMinuten } from '@/domein/tijd/zones';
 
 /**
  * Het jetlagplan: per dag wanneer je slaapt, en wanneer je licht zoekt of juist
@@ -33,9 +33,6 @@ import { datumIn, utcOffsetMinuten } from '@/domein/tijd/zones';
  * uur terug, en dan moet je lichaam op de terugweg acht uur schuiven in plaats
  * van zeven.
  */
-
-/** Waar je woont. De reis begint en eindigt hier. */
-export const THUIS_TIJDZONE = 'Europe/Amsterdam';
 
 /**
  * Hoe ver het dieptepunt van je lichaamstemperatuur voor je gewone wektijd ligt.
