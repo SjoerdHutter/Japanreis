@@ -57,7 +57,7 @@
       Google Maps vermeldt geen tijden voor het park. De gebouwen binnen het
       terrein hebben wel eigen openingstijden, ruwweg 09:00-16:30.
   prijs: gratis
-  tijdvakken: [edo, meiji]
+  tijdvakken: [azuchi-momoyama, edo, meiji]
   attractie:
     type: kasteel
     bezoekduurMinuten: 60

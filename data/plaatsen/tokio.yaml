@@ -85,7 +85,7 @@
     Valt een feestdag op maandag, dan is het museum die maandag open en de
     dinsdag erna dicht.
   prijs: { bedrag: 1000, valuta: JPY }
-  tijdvakken: [nara, heian, kamakura, muromachi, edo, meiji]
+  tijdvakken: [nara, heian, kamakura, muromachi, azuchi-momoyama, edo, meiji]
   attractie:
     type: museum
     bezoekduurMinuten: 150

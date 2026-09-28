@@ -15,7 +15,7 @@
     standaard: 09:00-17:00
     laatsteToegang: '16:30'
   prijs: { bedrag: 600, valuta: JPY }
-  tijdvakken: [muromachi, edo, vroeg-showa, naoorlogs]
+  tijdvakken: [muromachi, azuchi-momoyama, edo, vroeg-showa, naoorlogs]
   attractie:
     type: kasteel
     bezoekduurMinuten: 90
