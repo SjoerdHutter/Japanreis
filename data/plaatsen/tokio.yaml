@@ -51,7 +51,7 @@
     standaard: Zonsopgang tot zonsondergang
     opmerking: De tijden verschuiven per maand mee met het licht.
   prijs: gratis
-  tijdvakken: [meiji, naoorlogs]
+  tijdvakken: [meiji, taisho, naoorlogs]
   attractie:
     type: schrijn
     bezoekduurMinuten: 75
@@ -249,7 +249,7 @@
     gebouw erop. Het eerste stempeltje van de reis, en meteen een goede oefening
     in zoeken: hij staat niet in het zicht.
   prijs: gratis
-  tijdvakken: [meiji, naoorlogs]
+  tijdvakken: [taisho, naoorlogs]
   ekiStempel:
     waar: >-
       Aan de Marunouchi-kant, bij de noordelijke doorgang binnen de

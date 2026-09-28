@@ -15,7 +15,7 @@
     standaard: 09:00-17:00
     laatsteToegang: '16:30'
   prijs: { bedrag: 600, valuta: JPY }
-  tijdvakken: [muromachi, edo, naoorlogs]
+  tijdvakken: [muromachi, edo, vroeg-showa, naoorlogs]
   attractie:
     type: kasteel
     bezoekduurMinuten: 90
@@ -92,7 +92,7 @@
     standaard: 10:00-20:00
     opmerking: Tijden van de toren; de wijk zelf is altijd open.
   prijs: { bedrag: 900, valuta: JPY, toelichting: Uitkijk Tsūtenkaku }
-  tijdvakken: [meiji, naoorlogs]
+  tijdvakken: [meiji, taisho, naoorlogs]
   attractie:
     type: wijk
     bezoekduurMinuten: 90
