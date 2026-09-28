@@ -13,6 +13,7 @@ import { isVoorbij, periodeVan, verblijfIn } from '@/domein/highlight/verblijf';
 import { JetlagVandaag } from '@/features/jetlag/JetlagVandaag';
 import { ReisdagVandaag } from '@/features/reizen/ReisdagVandaag';
 import { NogInTeVullen } from '@/features/gegevens/NogInTeVullen';
+import { BackupHerinnering } from '@/features/backup/BackupHerinnering';
 
 /**
  * Het hoofdmenu: één highlight bovenaan, alle andere steden eronder.
@@ -145,6 +146,7 @@ export const Hoofdmenu = () => {
 
       <ReisdagVandaag />
       <JetlagVandaag />
+      <BackupHerinnering />
       <NogInTeVullen />
 
       <section>

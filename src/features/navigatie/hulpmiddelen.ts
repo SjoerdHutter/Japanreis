@@ -1,4 +1,5 @@
 import {
+  Archive,
   CalendarDays,
   Camera,
   Import,
@@ -50,6 +51,12 @@ export const GROEPEN: Groep[] = [
         naam: 'Mijn gegevens',
         uitleg: 'Verzekering, vluchten, verblijven en documenten',
         icoon: ShieldUser,
+      },
+      {
+        pad: '/backup',
+        naam: 'Backup',
+        uitleg: 'Alles in één bestand, en weer terugzetten',
+        icoon: Archive,
       },
     ],
   },

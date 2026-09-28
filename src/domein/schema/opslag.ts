@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { bedragSchema, coordinaatSchema } from './basis';
 import { datumSchema, tijdSchema } from './gegevens';
 
 /**
@@ -40,3 +41,64 @@ export const reserveringRecordSchema = z.object({
   gewijzigdOp: z.string().optional(),
 });
 export type OpgeslagenReservering = z.infer<typeof reserveringRecordSchema>;
+
+/** Een uitgave uit het budget; zie domein/budget/uitgaven.ts. */
+export const uitgaveRecordSchema = z.object({
+  id: z.string().min(1),
+  omschrijving: z.string(),
+  bedrag: bedragSchema,
+  categorie: z.enum([
+    'eten',
+    'vervoer',
+    'attracties',
+    'verblijf',
+    'winkelen',
+    'stempels',
+    'overig',
+  ]),
+  contant: z.boolean(),
+  datum: datumSchema,
+  stadId: z.string().optional(),
+});
+
+/** Contant geld dat je opnam of wisselde. */
+export const opnameRecordSchema = z.object({
+  id: z.string().min(1),
+  bedrag: bedragSchema,
+  datum: datumSchema,
+  omschrijving: z.string().optional(),
+});
+
+/** Een gehaalde stempel, zonder de afbeelding; die gaat als los bestand mee. */
+export const stempelRecordSchema = z.object({
+  id: z.string().min(1),
+  plaatsId: z.string().min(1),
+  stadId: z.string().min(1),
+  type: z.enum(['eki', 'goshuin']),
+  gehaaldOp: z.string().min(1),
+  notitie: z.string().optional(),
+});
+
+/** Een foto, zonder de bestanden; die gaan als losse bestanden mee. */
+export const fotoRecordSchema = z.object({
+  id: z.string().min(1),
+  naam: z.string(),
+  genomenOp: z.string().optional(),
+  wandklok: z.string().optional(),
+  tijdstipBron: z.enum(['exif', 'bestand']).optional(),
+  coordinaten: coordinaatSchema.optional(),
+  handmatigGeplaatst: z.boolean().optional(),
+  stadId: z.string().optional(),
+  plaatsId: z.string().optional(),
+  toegevoegdOp: z.string().min(1),
+});
+
+/** Een bewaard overstapplan voor Hanoi. */
+export const overstapRecordSchema = z.object({
+  id: z.enum(['heenreis', 'terugreis']),
+  landing: z.string(),
+  vertrek: z.string(),
+  bagageOphalen: z.boolean(),
+  plaatsIds: z.array(z.string()),
+  bewaardOp: z.string().min(1),
+});

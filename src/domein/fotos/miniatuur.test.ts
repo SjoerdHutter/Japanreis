@@ -11,4 +11,8 @@ describe('alsGrootte', () => {
     expect(alsGrootte(3.5 * 1024 * 1024)).toBe('3.5 MB');
     expect(alsGrootte(250 * 1024 * 1024)).toBe('250 MB');
   });
+
+  it('schrijft de opslag van een telefoon in gigabytes', () => {
+    expect(alsGrootte(1044 * 1024 * 1024)).toBe('1.0 GB');
+  });
 });

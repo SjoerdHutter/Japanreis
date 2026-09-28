@@ -44,6 +44,14 @@ export interface SleutelWaarde {
   'stempelboek.tipGetoond': boolean;
   /** Je gewone slaaptijden en je keuzes voor het jetlagplan. */
   'jetlag.instellingen': JetlagInstellingen;
+  /** Wanneer je voor het laatst een backup maakte, als ISO-moment. */
+  'backup.laatste': string;
+  /** Tot wanneer de herinnering aan een backup even stil is. */
+  'backup.uitgesteldTot': string;
+  /** Wanneer er voor het laatst iets van jou veranderde, voor de backupherinnering. */
+  'data.gewijzigdOp': string;
+  /** Of de browser beloofde je gegevens niet zomaar op te ruimen. */
+  'opslag.persistent': boolean;
 }
 
 interface JapanreisDB extends DBSchema {
@@ -205,6 +213,21 @@ export type Waarde<S extends Store> = StoreValue<JapanreisDB, S>;
 export type Sleutel<S extends Store> = StoreKey<JapanreisDB, S>;
 
 /**
+ * Stores die geen gegevens van jou bevatten maar een cache of toestand van dit
+ * toestel. Een wijziging daarin is geen reden om aan een backup te herinneren.
+ */
+const GEEN_EIGEN_DATA = new Set<string>(['cachestatus', 'weer']);
+
+/**
+ * Onthoudt dat er iets van jou veranderde. De backupherinnering vergelijkt dit
+ * met het moment van de laatste backup.
+ */
+export const markeerGewijzigd = (store?: string): void => {
+  if (store && GEEN_EIGEN_DATA.has(store)) return;
+  void schrijf('data.gewijzigdOp', new Date().toISOString());
+};
+
+/**
  * Algemene lees- en schrijfhulpjes voor de stores die er later bij kwamen.
  *
  * De oudere stores hebben elk een eigen setje functies hieronder, allemaal met
@@ -253,6 +276,7 @@ export const bewaarIn = async <S extends Store>(
   try {
     const transactie = (await getDb()).transaction(store, 'readwrite');
     await Promise.all([...waarden.map((w) => transactie.store.put(w)), transactie.done]);
+    markeerGewijzigd(store);
     return true;
   } catch {
     return false;
@@ -266,6 +290,7 @@ export const verwijderUit = async <S extends Store>(
   try {
     const transactie = (await getDb()).transaction(store, 'readwrite');
     await Promise.all([...sleutels.map((k) => transactie.store.delete(k)), transactie.done]);
+    markeerGewijzigd(store);
     return true;
   } catch {
     return false;
@@ -343,6 +368,7 @@ export const bewaarEigenPunten = async (punten: EigenPunt[]): Promise<void> => {
   } catch {
     /* geen opslag beschikbaar */
   }
+  markeerGewijzigd();
 };
 
 /** Werkt één punt bij: een plek erbij zetten, koppelen of de notitie wijzigen. */
@@ -352,6 +378,7 @@ export const werkEigenPuntBij = async (punt: EigenPunt): Promise<void> => {
   } catch {
     /* geen opslag beschikbaar */
   }
+  markeerGewijzigd();
 };
 
 export const verwijderEigenPunt = async (id: string): Promise<void> => {
@@ -360,6 +387,7 @@ export const verwijderEigenPunt = async (id: string): Promise<void> => {
   } catch {
     /* geen opslag beschikbaar */
   }
+  markeerGewijzigd();
 };
 
 /** Gooit alles weg wat uit één import kwam, voor het geval het niet klopte. */
@@ -370,6 +398,7 @@ export const verwijderEigenPuntenVanLijst = async (lijst: string): Promise<numbe
     const weg = alle.filter((p) => p.lijst === lijst);
     const transactie = db.transaction('eigenpunten', 'readwrite');
     await Promise.all([...weg.map((p) => transactie.store.delete(p.id)), transactie.done]);
+    markeerGewijzigd();
     return weg.length;
   } catch {
     return 0;
@@ -399,6 +428,7 @@ export const bewaarFotos = async (fotos: OpgeslagenFoto[]): Promise<void> => {
   } catch {
     /* geen opslag beschikbaar, of de schijf zit vol */
   }
+  markeerGewijzigd();
 };
 
 export const werkFotoBij = async (foto: OpgeslagenFoto): Promise<void> => {
@@ -407,6 +437,7 @@ export const werkFotoBij = async (foto: OpgeslagenFoto): Promise<void> => {
   } catch {
     /* zie hierboven */
   }
+  markeerGewijzigd();
 };
 
 export const verwijderFoto = async (id: string): Promise<void> => {
@@ -415,6 +446,7 @@ export const verwijderFoto = async (id: string): Promise<void> => {
   } catch {
     /* zie hierboven */
   }
+  markeerGewijzigd();
 };
 
 /** Hoeveel ruimte de foto's innemen, voor de melding in het scherm. */
@@ -438,6 +470,7 @@ export const bewaarStempel = async (stempel: VerzameldeStempel): Promise<void> =
   } catch {
     /* geen opslag beschikbaar */
   }
+  markeerGewijzigd();
 };
 
 export const verwijderStempel = async (id: string): Promise<void> => {
@@ -446,6 +479,7 @@ export const verwijderStempel = async (id: string): Promise<void> => {
   } catch {
     /* geen opslag beschikbaar */
   }
+  markeerGewijzigd();
 };
 
 /** Uitgaven en opnames. */
@@ -463,6 +497,7 @@ export const bewaarUitgave = async (uitgave: Uitgave): Promise<void> => {
   } catch {
     /* geen opslag beschikbaar */
   }
+  markeerGewijzigd();
 };
 
 export const verwijderUitgave = async (id: string): Promise<void> => {
@@ -471,6 +506,7 @@ export const verwijderUitgave = async (id: string): Promise<void> => {
   } catch {
     /* geen opslag beschikbaar */
   }
+  markeerGewijzigd();
 };
 
 export const leesOpnames = async (): Promise<Opname[]> => {
@@ -487,6 +523,7 @@ export const bewaarOpname = async (opname: Opname): Promise<void> => {
   } catch {
     /* geen opslag beschikbaar */
   }
+  markeerGewijzigd();
 };
 
 export const verwijderOpname = async (id: string): Promise<void> => {
@@ -495,6 +532,7 @@ export const verwijderOpname = async (id: string): Promise<void> => {
   } catch {
     /* geen opslag beschikbaar */
   }
+  markeerGewijzigd();
 };
 
 /** Reserveringen. */
@@ -513,6 +551,7 @@ export const bewaarReservering = async (reservering: Reservering): Promise<void>
     /* geen opslag beschikbaar */
   }
   meldWijziging('reserveringen');
+  markeerGewijzigd();
 };
 
 /** Gooit een reservering weg, en de vouchers en QR-codes die erbij horen. */
@@ -526,6 +565,7 @@ export const verwijderReservering = async (id: string): Promise<void> => {
     /* geen opslag beschikbaar */
   }
   meldWijziging('reserveringen', 'bijlagen');
+  markeerGewijzigd();
 };
 
 /** Opgeslagen overstapplannen, heen en terug apart. */
@@ -543,4 +583,5 @@ export const bewaarOverstap = async (overstap: OpgeslagenOverstap): Promise<void
   } catch {
     /* geen opslag beschikbaar */
   }
+  markeerGewijzigd();
 };

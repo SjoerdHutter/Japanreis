@@ -52,3 +52,11 @@ export const alsPeriode = (van: string, tot: string): string => {
     ? `${dagVan} ${tussen} ${alsKorteDatum(tot)}`
     : `${alsKorteDatum(van)} ${tussen} ${alsKorteDatum(tot)}`;
 };
+
+/** JJJJ_MM_DD op de klok van dit toestel, voor in een bestandsnaam. */
+export const alsBestandsdatum = (moment: Date = new Date()): string =>
+  [
+    moment.getFullYear(),
+    String(moment.getMonth() + 1).padStart(2, '0'),
+    String(moment.getDate()).padStart(2, '0'),
+  ].join('_');

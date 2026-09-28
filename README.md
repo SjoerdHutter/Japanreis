@@ -144,6 +144,8 @@ Gebouwd:
   het hele scherm openen, een JSON sjabloon om op je laptop in te vullen, en in
   het hoofdmenu wat er nog ontbreekt. Reserveringen kregen een tijd, een
   boekingsnummer en vouchers.
+- Backup en herstel: alles in één zip, via het deelvenster naar iCloud Drive,
+  en weer terug met samenvoegen of vervangen.
 
 De app is daarmee compleet volgens de functiespecificatie.
 
@@ -383,3 +385,30 @@ Alles in één keer invullen gaat met het sjabloon: download het, vul het op je
 laptop in met je boekingsmails ernaast, en lees het op je telefoon weer in. Je
 ziet eerst wat er nieuw is en wat verandert; pas daarna wordt er iets bewaard.
 Een leeg veld in het bestand laat staan wat er al in de app stond.
+
+### Backup en herstel
+
+Onder Meer, Backup zet alles wat je in de app hebt gezet in één zip:
+`japanreis_backup_JJJJ_MM_DD.zip`. Daarin een manifest (versie, datum en
+aantallen), per onderdeel een JSON-bestand, en de foto's en bijlagen als losse
+bestanden. Op een iPhone opent het deelvenster, zodat je hem met "Bewaar in
+Bestanden" in iCloud Drive zet. Foto's en persoonlijke documenten kun je
+weglaten; het scherm laat zien hoe groot het bestand ongeveer wordt.
+
+Een backup bevat altijd je polisnummer en boekingsnummers, en met documenten
+ook je paspoort. Bewaar hem op een plek die alleen van jou is.
+
+Terugzetten laat eerst zien wat erin zit en wat er zou veranderen. Samenvoegen
+voegt toe wat er nog niet is en vervangt een regel alleen als die in de backup
+nieuwer is. Vervangen maakt eerst leeg wat in de backup zit, en vraagt je
+daarvoor VERVANGEN te typen. Wat niet in de backup zit blijft staan.
+
+Niet in de backup: de kaarttegels (die haal je opnieuw op), de wisselkoers en
+het weer, en welke stad je het laatst bekeek. Een test bewaakt dat elke store
+met eigen gegevens wel meegaat, zodat een nieuwe functie niet stilletjes buiten
+de backup valt.
+
+Bij het opstarten vraagt de app de browser om je gegevens niet op te ruimen.
+Onder Meer staat of dat gelukt is en hoeveel ruimte de app gebruikt. Is je
+laatste backup ouder dan drie dagen en is er sindsdien iets bijgekomen, dan
+staat er in het hoofdmenu een herinnering.

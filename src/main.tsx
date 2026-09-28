@@ -4,6 +4,7 @@ import { HashRouter } from 'react-router-dom';
 import { z } from 'zod';
 import App from './App';
 import { registerServiceWorker } from './pwa';
+import { vraagBlijvendeOpslag } from './data/opslagruimte';
 import './styles/index.css';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet.markercluster/dist/MarkerCluster.css';
@@ -27,3 +28,6 @@ createRoot(document.getElementById('root')!).render(
 );
 
 registerServiceWorker();
+
+// Vragen of de browser je gegevens bewaart, bij elke start zolang het nee is.
+void vraagBlijvendeOpslag();

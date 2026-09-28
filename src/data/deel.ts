@@ -49,9 +49,4 @@ export const deelOfDownload = async (bestand: File): Promise<DeelUitkomst> => {
 };
 
 /** YYYY_MM_DD van vandaag, voor in een bestandsnaam. */
-export const datumVoorBestand = (moment: Date = new Date()): string =>
-  [
-    moment.getFullYear(),
-    String(moment.getMonth() + 1).padStart(2, '0'),
-    String(moment.getDate()).padStart(2, '0'),
-  ].join('_');
+export { alsBestandsdatum as datumVoorBestand } from '@/domein/tijd/datums';
