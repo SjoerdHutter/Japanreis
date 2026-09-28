@@ -12,6 +12,9 @@
  * correctie die ontbreekt kost een dag.
  */
 
+/** Waar je woont. De reis begint en eindigt hier. */
+export const THUIS_TIJDZONE = 'Europe/Amsterdam';
+
 /**
  * Hoeveel de wandklok in deze zone voorloopt op UTC, in milliseconden, op het
  * gegeven moment.

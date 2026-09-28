@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import type { Plaats } from '@/domein/schema';
-import { STEDEN, laadAllePlaatsen, stadMet } from '@/data/content';
-import { Kaartje, Knop, Label } from '@/ui/basis';
+import { REISSCHEMA, STEDEN, laadAllePlaatsen, stadMet } from '@/data/content';
+import { Kaartje, Knop, Label, Terug } from '@/ui/basis';
 import {
   bewaarStempel,
   leesStempels,
@@ -13,6 +13,19 @@ import {
 } from '@/data/db/idb';
 import { maakMiniatuur } from '@/domein/fotos/miniatuur';
 import { teHalenUit, tellers, toonGoshuinTip, type TeHalen } from '@/domein/stempels/boek';
+import { vandaagOpReis } from '@/domein/highlight/vandaag';
+import { datumIn } from '@/domein/tijd/zones';
+
+/**
+ * De dag waarop je een stempel haalt, in de tijdzone van de stad waar hij staat.
+ * Eerst was dat de datum in UTC, en die loopt in Japan negen uur achter: een
+ * stempel die je om acht uur 's ochtends op een station in Kyoto haalde, stond
+ * in het boek op de dag ervoor.
+ */
+const vandaagIn = (stadId: string): string => {
+  const tijdzone = stadMet(stadId)?.tijdzone;
+  return tijdzone ? datumIn(tijdzone, new Date()) : vandaagOpReis(STEDEN, REISSCHEMA);
+};
 
 /**
  * Het digitale stempelboek.
@@ -81,7 +94,7 @@ export const StempelboekScherm = () => {
         plaatsId: stempel.plaatsId,
         stadId: stempel.stadId,
         type: stempel.type,
-        gehaaldOp: new Date().toISOString().slice(0, 10),
+        gehaaldOp: vandaagIn(stempel.stadId),
       });
     }
     toon(await haalOp());
@@ -100,7 +113,7 @@ export const StempelboekScherm = () => {
         plaatsId: stempel.plaatsId,
         stadId: stempel.stadId,
         type: stempel.type,
-        gehaaldOp: bestaand?.gehaaldOp ?? new Date().toISOString().slice(0, 10),
+        gehaaldOp: bestaand?.gehaaldOp ?? vandaagIn(stempel.stadId),
         notitie: bestaand?.notitie,
         afbeelding: miniatuur.blob,
       });
@@ -116,10 +129,8 @@ export const StempelboekScherm = () => {
 
   return (
     <div className="mx-auto w-full max-w-2xl px-4 pt-4 pb-16">
-      <Link to="/" className="text-sm text-zegel underline underline-offset-2">
-        Alle steden
-      </Link>
-      <h1 className="mt-3 text-2xl font-semibold tracking-tight">Stempelboek</h1>
+      <Terug naar="/meer" />
+      <h1 className="mt-1 text-2xl font-semibold tracking-tight">Stempelboek</h1>
       <p className="mt-2 mb-5 leading-relaxed text-inkt-zacht dark:text-papier/70">
         Eki stamps zijn gratis en staan op stations en bij attracties. Een goshuin is kalligrafie
         die ter plekke geschreven wordt en hoort in een eigen boekje.

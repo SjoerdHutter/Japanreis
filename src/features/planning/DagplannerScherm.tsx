@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
 import type { Plaats } from '@/domein/schema';
-import { STEDEN, laadPlaatsen, stadMet } from '@/data/content';
+import { REISSCHEMA, STEDEN, laadPlaatsen, stadMet } from '@/data/content';
+import { vandaagOpReis } from '@/domein/highlight/vandaag';
+import { THUIS_TIJDZONE, datumIn } from '@/domein/tijd/zones';
 import { Kaartje, Knop, Label, Sectiekop } from '@/ui/basis';
 import { alsKlok, maakDagplan } from '@/domein/planning/dagplanner';
 import { alsMinuten } from '@/domein/planning/overstap';
@@ -24,13 +25,11 @@ import {
 const NIEUWE_ID = () =>
   globalThis.crypto?.randomUUID?.() ?? `res-${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
-const VANDAAG = () => new Date().toISOString().slice(0, 10);
-
 export const DagplannerScherm = () => {
   const [stadId, setStadId] = useState(STEDEN[0]?.id ?? '');
   const [plaatsen, setPlaatsen] = useState<Plaats[]>([]);
   const [gekozen, setGekozen] = useState<Set<string>>(new Set());
-  const [datum, setDatum] = useState(VANDAAG());
+  const [gekozenDatum, setGekozenDatum] = useState<string | null>(null);
   const [start, setStart] = useState('09:00');
   const [eind, setEind] = useState('18:00');
 
@@ -40,6 +39,14 @@ export const DagplannerScherm = () => {
   const [verkoopVanaf, setVerkoopVanaf] = useState('');
 
   const stad = stadMet(stadId);
+  /**
+   * De dag van het plan: tot je er zelf een kiest, vandaag in de stad die je
+   * plant. Eerst was dat de datum in UTC, en die loopt in Japan negen uur
+   * achter. Wie op een maandag voor negen uur 's ochtends een dag in Kyoto
+   * plande, kreeg de sluitingsdagen van zondag, terwijl veel musea juist op
+   * maandag dicht zijn.
+   */
+  const datum = gekozenDatum ?? datumIn(stad?.tijdzone ?? THUIS_TIJDZONE, new Date());
   const haalRes = useCallback(() => leesReserveringen(), []);
 
   useEffect(() => {
@@ -111,10 +118,7 @@ export const DagplannerScherm = () => {
 
   return (
     <div className="mx-auto w-full max-w-2xl px-4 pt-4 pb-16">
-      <Link to="/" className="text-sm text-zegel underline underline-offset-2">
-        Alle steden
-      </Link>
-      <h1 className="mt-3 text-2xl font-semibold tracking-tight">Dagplanner</h1>
+      <h1 className="mt-1 text-2xl font-semibold tracking-tight">Dagplanner</h1>
       <p className="mt-2 mb-5 leading-relaxed text-inkt-zacht dark:text-papier/70">
         Vink punten aan; de app zet er een looproute van met tijden, en haalt eruit wat die dag
         gesloten is.
@@ -141,7 +145,7 @@ export const DagplannerScherm = () => {
             <input
               type="date"
               value={datum}
-              onChange={(e) => setDatum(e.target.value)}
+              onChange={(e) => setGekozenDatum(e.target.value || null)}
               className="w-full rounded-lg border border-black/10 bg-white px-3 py-2 dark:border-white/15 dark:bg-nacht"
             />
           </label>
@@ -367,7 +371,10 @@ const ReserveringRegel = ({
   onWissel: () => void;
   onWeg: () => void;
 }) => {
-  const vandaag = VANDAAG();
+  // Een kaartverkoop opent op een dag van de plek zelf: het Ghibli Museum op de
+  // tiende in Japan, niet op de tiende thuis. Zonder stad telt waar je bent.
+  const zone = stadMet(reservering.stadId ?? '')?.tijdzone;
+  const vandaag = zone ? datumIn(zone, new Date()) : vandaagOpReis(STEDEN, REISSCHEMA);
   const verkoopOpen = reservering.verkoopVanaf !== undefined && reservering.verkoopVanaf <= vandaag;
 
   return (

@@ -4,7 +4,7 @@ import { TIPS, STEDEN } from '@/data/content';
 import { stukkenVan } from '@/domein/tips/tekst';
 import type { Tip } from '@/domein/schema';
 import { useApp } from '@/state/useApp';
-import { Kaartje, Label, Sectiekop } from '@/ui/basis';
+import { Kaartje, Label, Sectiekop, Terug } from '@/ui/basis';
 
 /**
  * De reisadviezen uit de opgeslagen Instagram collectie.
@@ -43,10 +43,8 @@ export const TipsScherm = () => {
 
   return (
     <div className="mx-auto w-full max-w-2xl px-4 pt-4 pb-16">
-      <Link to="/" className="text-sm text-zegel underline underline-offset-2">
-        Alle steden
-      </Link>
-      <h1 className="mt-3 text-2xl font-semibold tracking-tight">Tips uit je collectie</h1>
+      <Terug naar="/meer" />
+      <h1 className="mt-1 text-2xl font-semibold tracking-tight">Tips uit je collectie</h1>
       <p className="mt-2 mb-4 leading-relaxed text-inkt-zacht dark:text-papier/70">
         {totaal} adviezen uit {TIPS.herkomst.toLowerCase()}, geordend per thema. Bedragen staan in
         de lokale valuta met het euro equivalent erachter, omgerekend tegen de koers die de app nu

@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { STEDEN, VERVOER, stadMet } from '@/data/content';
 import { useApp } from '@/state/useApp';
-import { Kaartje, Knop, Label, Sectiekop } from '@/ui/basis';
+import { Kaartje, Knop, Label, Sectiekop, Terug } from '@/ui/basis';
 import { formatteerBedrag } from '@/domein/valuta/formatteer';
 import { rekenAlles, reistijdMinuten, type GekozenRit } from '@/domein/vervoer/jrpass';
 
@@ -53,13 +53,25 @@ export const VervoerScherm = () => {
 
   return (
     <div className="mx-auto w-full max-w-2xl px-4 pt-4 pb-16">
-      <Link to="/" className="text-sm text-zegel underline underline-offset-2">
-        Alle steden
-      </Link>
-      <h1 className="mt-3 text-2xl font-semibold tracking-tight">Vervoer en JR Pass</h1>
+      <Terug naar="/meer" />
+      <h1 className="mt-1 text-2xl font-semibold tracking-tight">Vervoer en JR Pass</h1>
       <p className="mt-2 mb-5 leading-relaxed text-inkt-zacht dark:text-papier/70">
         Vink je ritten aan; heen en terug telt als twee. De app rekent uit of een pas zich
         terugverdient.
+      </p>
+      <p className="-mt-2 mb-5 flex flex-wrap gap-1.5 text-sm">
+        <Link
+          to="/reisdagen"
+          className="rounded-full bg-papier-diep px-2.5 py-1 font-medium text-zegel dark:bg-nacht-diep dark:text-zegel-licht"
+        >
+          Reisdagen
+        </Link>
+        <Link
+          to="/stations"
+          className="rounded-full bg-papier-diep px-2.5 py-1 font-medium text-zegel dark:bg-nacht-diep dark:text-zegel-licht"
+        >
+          Stationsgidsen
+        </Link>
       </p>
 
       <Sectiekop>Je ritten</Sectiekop>

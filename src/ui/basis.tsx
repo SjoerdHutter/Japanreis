@@ -1,4 +1,6 @@
 import type { ReactNode } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { ChevronLeft } from 'lucide-react';
 
 /**
  * De kleine bouwstenen die overal terugkomen. Geen componentenbibliotheek maar
@@ -82,6 +84,35 @@ export const Kaartje = ({
     {children}
   </div>
 );
+
+/**
+ * Terug naar waar je vandaan kwam.
+ *
+ * Eerst stond bovenaan elk scherm een link "Alle steden", ook als je via het
+ * jetlagplan of het stempelboek binnenkwam; terug bracht je dan ergens anders
+ * dan je vandaan kwam. Deze knop gaat een stap terug in de geschiedenis. Heb je
+ * het scherm direct geopend, vanaf je startscherm of een gedeelde link, dan is
+ * er geen stap terug en gaat hij naar `naar`.
+ */
+export const Terug = ({ naar = '/' }: { naar?: string }) => {
+  const navigeer = useNavigate();
+  const terug = () => {
+    // React Router nummert de stappen in history.state; 0 is de eerste.
+    const stap = (window.history.state as { idx?: number } | null)?.idx ?? 0;
+    if (stap > 0) navigeer(-1);
+    else navigeer(naar);
+  };
+  return (
+    <button
+      type="button"
+      onClick={terug}
+      className="-ml-1.5 inline-flex min-h-9 items-center gap-0.5 pr-3 text-sm font-medium text-zegel dark:text-zegel-licht"
+    >
+      <ChevronLeft className="size-5" aria-hidden />
+      Terug
+    </button>
+  );
+};
 
 export const Sectiekop = ({ children, extra }: { children: ReactNode; extra?: ReactNode }) => (
   <div className="mb-3 flex items-baseline justify-between gap-3">

@@ -1,10 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
 import type { Coordinaat, Plaats } from '@/domein/schema';
 import { STEDEN, laadAllePlaatsen, stadMet } from '@/data/content';
 import { useApp } from '@/state/useApp';
 import { Kaart, type KaartPunt } from '@/features/kaart/Kaart';
-import { Kaartje, Knop, Label, Sectiekop } from '@/ui/basis';
+import { Kaartje, Knop, Label, Sectiekop, Terug } from '@/ui/basis';
 import { leesFoto } from '@/domein/fotos/exif';
 import { momentInZone } from '@/domein/tijd/zones';
 import { alsGrootte, maakMiniatuur } from '@/domein/fotos/miniatuur';
@@ -248,10 +247,8 @@ export const FotokaartScherm = () => {
 
   return (
     <div className="mx-auto w-full max-w-2xl px-4 pt-4 pb-16">
-      <Link to="/" className="text-sm text-zegel underline underline-offset-2">
-        Alle steden
-      </Link>
-      <h1 className="mt-3 text-2xl font-semibold tracking-tight">Fotokaart</h1>
+      <Terug naar="/meer" />
+      <h1 className="mt-1 text-2xl font-semibold tracking-tight">Fotokaart</h1>
       <p className="mt-2 mb-5 leading-relaxed text-inkt-zacht dark:text-papier/70">
         Je foto's op de kaart, als één doorlopende lijn: heenreis over Hanoi, Japan, en terug over
         Hanoi. De foto's blijven op dit toestel.

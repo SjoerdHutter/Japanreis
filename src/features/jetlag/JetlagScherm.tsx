@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { STEDEN, stadMet } from '@/data/content';
-import { Kaartje, Label } from '@/ui/basis';
+import { Kaartje, Label, Terug } from '@/ui/basis';
 import {
   MAX_VOORBEREIDING,
   dagVanVandaag,
@@ -56,10 +55,8 @@ export const JetlagScherm = () => {
 
   return (
     <div className="mx-auto w-full max-w-2xl px-4 pt-4 pb-16">
-      <Link to="/" className="text-sm text-zegel underline underline-offset-2">
-        Alle steden
-      </Link>
-      <h1 className="mt-3 text-2xl font-semibold tracking-tight">Jetlag</h1>
+      <Terug naar="/meer" />
+      <h1 className="mt-1 text-2xl font-semibold tracking-tight">Jetlag</h1>
       <p className="mt-2 mb-5 leading-relaxed text-inkt-zacht dark:text-papier/70">
         Een plan per dag voor je lichaamsklok, heen en terug. Licht op het juiste moment is het
         sterkste middel dat er is; licht op het verkeerde moment duwt je klok de verkeerde kant op.

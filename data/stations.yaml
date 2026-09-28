@@ -1,0 +1,448 @@
+# Stationsgidsen: hoe je door de stations op de route komt.
+#
+# Redactionele content uit algemene kennis, niet ter plaatse geverifieerd, net
+# als de startset in data/plaatsen. Grote stations worden geregeld verbouwd;
+# Hiroshima kreeg in 2025 een nieuw stationsgebouw. Kijk bij twijfel op de
+# borden, die hebben altijd gelijk.
+#
+# Perronnummers en vertrektijden staan er met opzet niet in: die wisselen, en
+# de borden en een app als Jorudan weten het beter.
+#
+# De coördinaten van de uitgangen zijn geschat. Een uitgang is een trap of een
+# roltrap, en een punt op de kaart zit er al gauw vijftig meter naast.
+
+- id: kansai-airport
+  naam: Kansai Airport Station
+  naamLokaal: 関西空港駅
+  stad: osaka
+  coordinaten: { lat: 34.4327, lon: 135.2441 }
+  samenvatting: >-
+    Het station ligt tegenover Terminal 1, via de loopbrug op de tweede
+    verdieping. JR en Nankai hebben elk hun eigen poortjes, naast elkaar: blauw
+    is JR, rood is Nankai. Welke je neemt hangt af van waar je hotel ligt.
+  uitgangen:
+    - naam: Loopbrug naar Terminal 1
+      waarvoor: >-
+        Van de aankomsthal op de eerste verdieping ga je een verdieping omhoog
+        en loop je over de brug naar het station. Volg de borden Railways.
+  overstappen:
+    - naar: Umeda, Shin-Osaka en Kyoto
+      hoe: >-
+        JR Haruka, een snelle trein met gereserveerde plaatsen. Stopt sinds 2023
+        ook in station Osaka zelf, op de nieuwe ondergrondse perrons. Voor
+        buitenlanders is er een ICOCA en Haruka combinatie aan het JR-loket.
+    - naar: Osaka via de ringlijn
+      hoe: >-
+        JR Kansai Airport Rapid, langzamer maar zonder reservering. Kan met je
+        ICOCA of Suica.
+    - naar: Namba
+      hoe: >-
+        Nankai: de Rapi:t met gereserveerde plaatsen, of de Airport Express die
+        net iets langer doet en zonder toeslag rijdt. Kies Nankai als je hotel
+        bij Namba of Dotonbori ligt.
+  tips:
+    - >-
+      Laad je Suica of ICOCA hier op of koop er een, dan ben je de rest van de
+      reis van losse kaartjes af.
+    - >-
+      Op dit station is geen offline kaart: het ligt buiten het kaartgebied van
+      Osaka. Op het vliegveld is gratis wifi.
+
+- id: namba
+  naam: Namba
+  naamLokaal: なんば駅
+  stad: osaka
+  coordinaten: { lat: 34.6624, lon: 135.5017 }
+  samenvatting: >-
+    Geen station maar een knoop van vier: Nankai naar het vliegveld, de
+    Midosuji-metro, Kintetsu en Hanshin naar Nara en Kobe, en een apart JR-station
+    verder naar het westen. Ze heten allemaal Namba en liggen allemaal onder
+    dezelfde winkelstraten.
+  uitgangen:
+    - naam: Nankai Namba, de hoofdingang
+      naamLokaal: 南海なんば駅
+      coordinaten: { lat: 34.6621, lon: 135.5017 }
+      waarvoor: >-
+        Hier komt de trein van het vliegveld aan. Dotonbori ligt een minuut of
+        acht naar het noorden, de Kuromon-markt tien minuten naar het oosten.
+  overstappen:
+    - naar: Umeda en Shin-Osaka
+      hoe: >-
+        Midosuji-metro, de rode lijn. Rechtstreeks, zonder overstap, en
+        ongeveer om de paar minuten.
+    - naar: Nara
+      hoe: >-
+        Kintetsu vanaf Osaka-Namba. Kintetsu Nara ligt vlak bij het hertenpark,
+        dichterbij dan JR Nara.
+  tips:
+    - >-
+      Volg onder de grond de naam van de maatschappij en niet het woord Namba,
+      want dat staat overal.
+
+- id: umeda
+  naam: Osaka Station en Umeda
+  naamLokaal: 大阪駅・梅田
+  stad: osaka
+  coordinaten: { lat: 34.7025, lon: 135.4959 }
+  samenvatting: >-
+    JR heet hier Osaka, de rest heet Umeda: Hankyu, Hanshin en drie metrolijnen,
+    allemaal met eigen poortjes en onder elkaar verbonden door een ondergronds
+    doolhof van winkelgangen. Reken op tien minuten lopen tussen twee
+    maatschappijen.
+  uitgangen:
+    - naam: Centrale uitgang noord
+      naamLokaal: 中央北口
+      coordinaten: { lat: 34.7040, lon: 135.4960 }
+      waarvoor: Grand Front Osaka, en de weg naar het Umeda Sky Building, zo'n tien minuten lopen.
+    - naam: Centrale uitgang zuid
+      naamLokaal: 中央南口
+      coordinaten: { lat: 34.7017, lon: 135.4962 }
+      waarvoor: Richting Hanshin, de warenhuizen en de Midosuji-metro.
+    - naam: Midosuji-uitgang noord
+      naamLokaal: 御堂筋北口
+      coordinaten: { lat: 34.7040, lon: 135.4985 }
+      waarvoor: Aan de oostkant, het dichtst bij Hankyu Umeda.
+    - naam: Umekita, de ondergrondse perrons
+      naamLokaal: うめきた地下口
+      coordinaten: { lat: 34.7042, lon: 135.4932 }
+      waarvoor: >-
+        Hier stopt de Haruka van en naar het vliegveld, aan de westkant en een
+        eind van de rest van het station.
+  overstappen:
+    - naar: Universal Studios
+      hoe: >-
+        JR ringlijn naar Nishikujo en daar de JR Yumesaki-lijn naar Universal
+        City. Sommige treinen rijden door zonder overstap. Samen zo'n twintig
+        minuten.
+    - naar: Kyoto Kawaramachi, midden in Kyoto
+      hoe: >-
+        Hankyu, de Kyoto-lijn. De snelste treinen heten daar ook 特急 maar
+        kosten niets extra.
+    - naar: Namba en Shin-Osaka
+      hoe: Midosuji-metro, de rode lijn.
+    - naar: Shin-Osaka voor de Shinkansen
+      hoe: JR, één halte met de Kyoto-lijn. Sneller dan de metro.
+  tips:
+    - >-
+      Onder de grond heet alles Umeda. Volg de naam van de maatschappij, niet
+      het woord Umeda.
+
+- id: shin-osaka
+  naam: Shin-Osaka
+  naamLokaal: 新大阪駅
+  stad: osaka
+  coordinaten: { lat: 34.7335, lon: 135.5002 }
+  samenvatting: >-
+    Het Shinkansen-station van Osaka, een halte ten noorden van het centrum.
+    Hier gaan de treinen naar Tokio, Kyoto en Hiroshima. Van de stad zie je
+    weinig: dit is een station om over te stappen.
+  uitgangen:
+    - naam: Centrale uitgang
+      naamLokaal: 中央口
+      waarvoor: Taxi's, bussen en de ingang van de Midosuji-metro. Volg voor de metro 地下鉄.
+  shinkansen: >-
+    De Shinkansen rijdt op de bovenste verdieping. Kom je met een andere JR-trein
+    aan, dan stap je binnendoor over via de poortjes met 新幹線のりかえ, zonder
+    naar buiten te gaan.
+  overstappen:
+    - naar: Umeda en Namba
+      hoe: Midosuji-metro, de rode lijn, of voor Umeda één halte JR.
+    - naar: Kansai Airport
+      hoe: De Haruka stopt hier ook.
+  tips:
+    - >-
+      Koop je ekiben, de lunchdoos voor in de trein, al binnen de
+      Shinkansen-poortjes. Daar is de keuze groot en op het perron klein.
+
+- id: hiroshima
+  naam: Hiroshima Station
+  naamLokaal: 広島駅
+  stad: hiroshima
+  coordinaten: { lat: 34.3977, lon: 132.4754 }
+  samenvatting: >-
+    Twee kanten die je moet kennen: de Shinkansen komt aan de noordkant aan, de
+    stad en de tram liggen aan de zuidkant. Binnendoor is dat een paar minuten
+    lopen. Het station kreeg in 2025 een nieuw gebouw, dus foto's en borden in
+    oudere gidsen kloppen niet meer.
+  uitgangen:
+    - naam: Zuiduitgang
+      naamLokaal: 南口
+      coordinaten: { lat: 34.3965, lon: 132.4754 }
+      waarvoor: >-
+        Het centrum, de bussen en de tram (Hiroden) naar het Vredespark. Neem
+        een tram met Genbaku Dome-mae op het bord.
+    - naam: Noorduitgang, de Shinkansen-kant
+      naamLokaal: 新幹線口
+      coordinaten: { lat: 34.3990, lon: 132.4757 }
+      waarvoor: De Shinkansen, en de hotels aan de noordkant.
+  shinkansen: Aan de noordkant, met eigen poortjes binnen het station.
+  overstappen:
+    - naar: Miyajima
+      hoe: >-
+        JR Sanyo-lijn naar Miyajimaguchi, ruim een half uur, en daar de veerboot
+        van tien minuten. De JR-boot valt onder de JR Pass. Op Miyajima betaal
+        je een kleine bezoekersbelasting.
+    - naar: Het Vredespark
+      hoe: >-
+        Tram vanaf de zuidkant, een minuut of twintig. Lopen kan ook, dan ben je
+        er in een half uur.
+
+- id: kyoto
+  naam: Kyoto Station
+  naamLokaal: 京都駅
+  stad: kyoto
+  coordinaten: { lat: 34.9858, lon: 135.7588 }
+  samenvatting: >-
+    Een enorm modern gebouw met twee kanten. Noord is de stad: bussen, metro en
+    de Kyoto Tower recht tegenover. Zuid is de Shinkansen en Kintetsu naar Nara.
+    Met de toren als baken raak je hier niet snel de weg kwijt.
+  uitgangen:
+    - naam: Karasuma, de centrale uitgang
+      naamLokaal: 烏丸中央口
+      coordinaten: { lat: 34.9872, lon: 135.7590 }
+      waarvoor: >-
+        Het busstation voor de stadsbussen naar Kiyomizu, Gion en Kinkaku-ji, de
+        taxi's, de metro, en de Kyoto Tower aan de overkant.
+    - naam: Hachijo, de zuiduitgang
+      naamLokaal: 八条口
+      coordinaten: { lat: 34.9845, lon: 135.7583 }
+      waarvoor: >-
+        De Shinkansen-kant. Hier vertrekken ook de luchthavenbussen naar Kansai
+        Airport, en Kintetsu ligt ernaast.
+  shinkansen: >-
+    Aan de zuidkant, bij de Hachijo-uitgang. Kom je met een andere JR-trein aan,
+    dan stap je binnendoor over via de poortjes met 新幹線のりかえ.
+  overstappen:
+    - naar: Fushimi Inari
+      hoe: JR Nara-lijn, twee haltes tot Inari. De poort staat recht tegenover het station.
+    - naar: Arashiyama
+      hoe: >-
+        JR Sagano-lijn tot Saga-Arashiyama, een kwartier. Vertrekt aan de
+        westkant van het station, reken op een paar minuten lopen binnen.
+    - naar: Nara
+      hoe: >-
+        Kintetsu aan de zuidkant, of de JR Nara-lijn. Kintetsu brengt je
+        dichter bij het hertenpark.
+    - naar: Het centrum en Gion
+      hoe: >-
+        Metro, de Karasuma-lijn, naar Shijo, en dan lopen. Vaak sneller dan de
+        stadsbus, die rond de tempels vaststaat.
+    - naar: Kanazawa
+      hoe: >-
+        Limited express Thunderbird naar Tsuruga, daar overstappen op de
+        Hokuriku Shinkansen. Zie de reisdag van 13 oktober.
+  bagage: >-
+    Kluisjes op allebei de kanten, maar de grote raken 's ochtends vol. Wie zijn
+    koffer een dag kwijt wil, kan ook naar een bewaarservice of Ecbo Cloak kijken.
+  tips:
+    - >-
+      De stadsbussen bij de centrale uitgang zijn overvol. Met z'n tweeën is een
+      taxi naar Kiyomizu of Gion vaak niet veel duurder en veel sneller.
+
+- id: kanazawa
+  naam: Kanazawa Station
+  naamLokaal: 金沢駅
+  stad: kanazawa
+  coordinaten: { lat: 36.5780, lon: 136.6478 }
+  samenvatting: >-
+    Overzichtelijk, met een grote houten poort aan de oostkant die je niet kunt
+    missen. Alles wat je nodig hebt vertrekt vanaf die kant, ook de bus naar
+    Shirakawa-go.
+  uitgangen:
+    - naam: Oostuitgang, de Kenrokuen-kant
+      naamLokaal: 兼六園口（東口）
+      coordinaten: { lat: 36.5783, lon: 136.6490 }
+      waarvoor: >-
+        De Tsuzumi-mon, de houten poort. Het busstation voor de stadsbussen naar
+        Kenrokuen en Higashi Chaya, en de langeafstandsbussen naar Shirakawa-go en
+        Takayama.
+    - naam: Westuitgang
+      naamLokaal: 金沢港口（西口）
+      coordinaten: { lat: 36.5779, lon: 136.6463 }
+      waarvoor: De rustige kant, met een paar hotels.
+  shinkansen: >-
+    De Hokuriku Shinkansen naar Tokio en naar Tsuruga, met eigen poortjes in het
+    station.
+  overstappen:
+    - naar: Kenrokuen en Higashi Chaya
+      hoe: >-
+        Stadsbus vanaf de oostkant, een minuut of vijftien. Lopen kan ook: naar
+        Kenrokuen is het ongeveer een half uur.
+    - naar: Omicho-markt
+      hoe: Een kwartier lopen vanaf de oostkant, of een paar haltes met de bus.
+  tips:
+    - >-
+      De bus naar Shirakawa-go vertrekt vanaf het busstation aan de oostkant.
+      Wees er op tijd, met je koffer: die gaat in het bagageruim.
+
+- id: shirakawa-go-bus
+  naam: Busstation Shirakawa-go
+  naamLokaal: 白川郷バスターミナル
+  stad: shirakawa-go
+  soort: bus
+  coordinaten: { lat: 36.2562, lon: 136.9054 }
+  samenvatting: >-
+    Geen treinstation: Shirakawa-go bereik je alleen met de bus. Hier stop je
+    tussen Kanazawa en Takayama, en hier vertrek je ook weer. Het dorp begint om
+    de hoek.
+  uitgangen:
+    - naam: Naar het dorp
+      waarvoor: >-
+        Ogimachi ligt op een paar minuten lopen. Het uitzichtpunt Shiroyama bereik
+        je met een pendelbusje of in tien minuten klimmen.
+  bagage: >-
+    Bij het busstation zijn kluisjes en een bewaarplek voor koffers. Op drukke
+    dagen raken die vol; kom je met een grote koffer, reken dan niet op een
+    plek en overweeg je koffer vooruit te sturen naar Takayama.
+  tips:
+    - >-
+      Kijk bij aankomst meteen waar je bus naar Takayama vertrekt en hoe laat.
+      Je zit aan een gereserveerde bus vast.
+
+- id: takayama
+  naam: Takayama Station
+  naamLokaal: 高山駅
+  stad: takayama
+  coordinaten: { lat: 36.1413, lon: 137.2517 }
+  samenvatting: >-
+    Klein en overzichtelijk. De oude stad ligt op tien minuten lopen naar het
+    oosten, en het busstation zit er direct naast. Hier kun je niet verdwalen.
+  uitgangen:
+    - naam: Oostuitgang
+      naamLokaal: 東口
+      coordinaten: { lat: 36.1413, lon: 137.2524 }
+      waarvoor: >-
+        De oude stad en de ochtendmarkten, tien minuten lopen. Het busstation van
+        Nohi ligt aan deze kant, naast het station.
+    - naam: Westuitgang
+      naamLokaal: 西口
+      coordinaten: { lat: 36.1413, lon: 137.2508 }
+      waarvoor: De rustige kant.
+  overstappen:
+    - naar: Tokio
+      hoe: >-
+        Limited express Hida naar Nagoya en daar de Shinkansen, of de Hida naar
+        Toyama en daar de Hokuriku Shinkansen. Zie de reisdag van 18 oktober.
+    - naar: Shirakawa-go en Kanazawa
+      hoe: Nohi-bus vanaf het busstation naast het station. Reserveren.
+  tips:
+    - >-
+      De limited express Hida heeft grote ramen, en het stuk door de bergen is
+      mooi. Zit aan de kant van de rivier als het kan.
+
+- id: tokio
+  naam: Tokyo Station
+  naamLokaal: 東京駅
+  stad: tokio
+  coordinaten: { lat: 35.6812, lon: 139.7671 }
+  samenvatting: >-
+    Twee kanten met elk een eigen karakter. Marunouchi, de westkant, is het rode
+    bakstenen gebouw uit 1914 met de keizerlijke tuinen erachter. Yaesu, de
+    oostkant, is modern, met de Shinkansen naar Kyoto en Osaka en de bussen.
+    Binnen het station loop je makkelijk tien minuten van de ene kant naar de
+    andere.
+  uitgangen:
+    - naam: Marunouchi, centrale uitgang
+      naamLokaal: 丸の内中央口
+      coordinaten: { lat: 35.6812, lon: 139.7652 }
+      waarvoor: Het bakstenen stationsgebouw, en rechtdoor naar het Keizerlijk Paleis.
+    - naam: Marunouchi, noorduitgang
+      naamLokaal: 丸の内北口
+      coordinaten: { lat: 35.6826, lon: 139.7656 }
+      waarvoor: Onder de koepel. De eki stamp staat aan deze kant, binnen de poortjes.
+    - naam: Yaesu, centrale uitgang
+      naamLokaal: 八重洲中央口
+      coordinaten: { lat: 35.6811, lon: 139.7690 }
+      waarvoor: >-
+        De Shinkansen naar Kyoto en Osaka, en onder de grond de winkelstraten
+        met Ramen Street en Character Street.
+    - naam: Yaesu, zuiduitgang
+      naamLokaal: 八重洲南口
+      coordinaten: { lat: 35.6795, lon: 139.7688 }
+      waarvoor: Het busstation voor de snelbussen, ook naar de vliegvelden.
+  shinkansen: >-
+    Twee maatschappijen naast elkaar aan de Yaesu-kant: de Tokaido Shinkansen
+    naar Kyoto, Osaka en Hiroshima, en daarnaast de Shinkansen naar het noorden
+    en naar Kanazawa. Ze hebben elk hun eigen poortjes; kijk op je kaartje welke
+    je nodig hebt.
+  overstappen:
+    - naar: Narita Airport
+      hoe: >-
+        Narita Express vanaf de perrons diep onder de grond aan de
+        Marunouchi-kant. Reken op tien minuten lopen vanaf de poortjes.
+    - naar: Tokyo Disney
+      hoe: >-
+        JR Keiyo-lijn, een eind lopen naar het zuidoosten door lange gangen met
+        rolpaden. Reken op een kwartier.
+    - naar: Shinjuku, Ueno en de rest van de stad
+      hoe: JR Yamanote-lijn en Chuo-lijn, of de Marunouchi-metro aan de westkant.
+  tips:
+    - >-
+      Ben je elkaar kwijt, spreek dan af bij de Gin no Suzu, de zilveren bel
+      in de gang onder de Yaesu-kant. Dat is het bekende afspreekpunt.
+
+- id: shinjuku
+  naam: Shinjuku Station
+  naamLokaal: 新宿駅
+  stad: tokio
+  coordinaten: { lat: 35.6896, lon: 139.7006 }
+  samenvatting: >-
+    Het drukste station ter wereld, met meer dan tweehonderd uitgangen. De
+    enige regel die je nodig hebt: kies je uitgang voordat je uitstapt. West
+    zijn de wolkenkrabbers, oost het uitgaansleven, zuid het busstation.
+  uitgangen:
+    - naam: Westuitgang
+      naamLokaal: 西口
+      coordinaten: { lat: 35.6908, lon: 139.6989 }
+      waarvoor: >-
+        De wolkenkrabbers en het stadhuis met het gratis uitzicht, tien minuten
+        lopen. Omoide Yokocho ligt direct aan de noordkant van deze uitgang.
+        Odakyu naar Hakone en Keio vertrekken hier.
+    - naam: Oostuitgang
+      naamLokaal: 東口
+      coordinaten: { lat: 35.6912, lon: 139.7010 }
+      waarvoor: Kabukicho, de winkelstraten en Isetan.
+    - naam: Zuiduitgang en Nieuwe zuiduitgang
+      naamLokaal: 南口・新南改札
+      coordinaten: { lat: 35.6880, lon: 139.7006 }
+      waarvoor: >-
+        Busta Shinjuku, het busstation boven het station, voor de bussen naar
+        Kawaguchiko en Takayama. Shinjuku Gyoen ligt tien minuten verder.
+  overstappen:
+    - naar: Kawaguchiko en de Fuji
+      hoe: >-
+        De Fuji Excursion rijdt rechtstreeks, met gereserveerde plaatsen. Let
+        op: het laatste stuk is van Fujikyu en valt niet onder de JR Pass. De
+        bus vanaf Busta Shinjuku doet er ongeveer even lang over.
+    - naar: Hakone
+      hoe: Odakyu Romancecar vanaf de westkant.
+  tips:
+    - >-
+      Tussen oost en west is buiten de poortjes een vrije doorgang aan de
+      noordkant. Zonder die doorgang loop je een eind om.
+
+- id: kawaguchiko
+  naam: Kawaguchiko Station
+  naamLokaal: 河口湖駅
+  stad: fujikawaguchiko
+  coordinaten: { lat: 35.4983, lon: 138.7690 }
+  samenvatting: >-
+    Een klein eindstation van Fujikyu, met een busstation ervoor. Bij helder
+    weer zie je de Fuji al boven het station uitsteken. Van hier gaan de
+    sightseeingbussen rond het meer.
+  uitgangen:
+    - naam: Stationsplein
+      waarvoor: >-
+        De sightseeingbussen rond de meren, de bussen terug naar Tokio, en
+        fietsverhuur voor de ronde om het meer.
+  overstappen:
+    - naar: De Chureito-pagode
+      hoe: >-
+        Fujikyu een paar haltes terug richting Otsuki, tot Shimoyoshida. Daarna
+        de trappen op; die zijn het uitzicht waard.
+    - naar: Het meer
+      hoe: Een kwartier lopen, of de sightseeingbus langs de noordoever.
+  tips:
+    - >-
+      Kijk 's ochtends eerst naar de berg. Zie je hem niet, dan zie je hem de
+      rest van de dag meestal ook niet.

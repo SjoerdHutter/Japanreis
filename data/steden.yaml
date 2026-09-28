@@ -17,7 +17,7 @@
     zuidwest: { lat: 35.58, lon: 139.6 }
     noordoost: { lat: 35.78, lon: 139.85 }
   tijdlijn: japan
-  tijdvakken: [edo, meiji, naoorlogs]
+  tijdvakken: [edo, meiji, taisho, naoorlogs]
   volgorde: 9
   korteBeschrijving: >-
     Geen stad met één centrum maar een reeks steden aan elkaar geregen door de
@@ -120,7 +120,7 @@
     zuidwest: { lat: 34.6, lon: 135.42 }
     noordoost: { lat: 34.75, lon: 135.56 }
   tijdlijn: japan
-  tijdvakken: [muromachi, edo, meiji, naoorlogs]
+  tijdvakken: [muromachi, edo, meiji, taisho, vroeg-showa, naoorlogs]
   volgorde: 2
   korteBeschrijving: >-
     Handelsstad met een directe inslag en het beste straatvoedsel van het land.
@@ -144,7 +144,7 @@
     zuidwest: { lat: 34.24, lon: 132.29 }
     noordoost: { lat: 34.42, lon: 132.5 }
   tijdlijn: japan
-  tijdvakken: [edo, meiji, naoorlogs]
+  tijdvakken: [edo, taisho, vroeg-showa, naoorlogs]
   volgorde: 3
   korteBeschrijving: >-
     Een moderne, ruim opgezette stad rond een herdenkingspark, met het eiland

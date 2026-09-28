@@ -28,7 +28,7 @@ export const zinSchema = z.object({
     .string()
     .min(1)
     .regex(/^[a-z0-9-]+$/),
-  categorie: z.enum(['basis', 'eten', 'allergie', 'onderweg', 'nood']),
+  categorie: z.enum(['basis', 'eten', 'allergie', 'onderweg', 'station', 'borden', 'nood']),
   land: landSchema,
   nederlands: z.string().min(1),
   /** Het schrift, om te tonen aan wie geen Engels spreekt. */

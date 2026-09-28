@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
 import type { Valuta } from '@/domein/schema';
-import { STEDEN } from '@/data/content';
+import { REISSCHEMA, STEDEN } from '@/data/content';
+import { vandaagOpReis } from '@/domein/highlight/vandaag';
 import { useApp } from '@/state/useApp';
 import { Kaartje, Knop, Label, Sectiekop } from '@/ui/basis';
 import { formatteerBedrag, formatteerEuro, formatteerLokaal } from '@/domein/valuta/formatteer';
@@ -38,7 +38,12 @@ import {
 const NIEUWE_ID = () =>
   globalThis.crypto?.randomUUID?.() ?? `post-${Date.now()}-${Math.random().toString(36).slice(2)}`;
 
-const VANDAAG = () => new Date().toISOString().slice(0, 10);
+/**
+ * De datum van een uitgave: vandaag op de plek waar je bent. Niet in UTC, want
+ * dan kwam een ontbijt om acht uur in Kyoto op de dag ervoor te staan en klopte
+ * het overzicht per dag niet meer.
+ */
+const VANDAAG = () => vandaagOpReis(STEDEN, REISSCHEMA);
 
 export const BudgetScherm = () => {
   const { koersen, koersVerversen } = useApp();
@@ -101,10 +106,7 @@ export const BudgetScherm = () => {
 
   return (
     <div className="mx-auto w-full max-w-2xl px-4 pt-4 pb-16">
-      <Link to="/" className="text-sm text-zegel underline underline-offset-2">
-        Alle steden
-      </Link>
-      <h1 className="mt-3 text-2xl font-semibold tracking-tight">Budget en uitgaven</h1>
+      <h1 className="mt-1 text-2xl font-semibold tracking-tight">Budget en uitgaven</h1>
 
       <Kaartje className="mt-4 mb-5 p-4">
         <p className="text-sm text-inkt-zacht dark:text-papier/70">Uitgegeven tot nu toe</p>

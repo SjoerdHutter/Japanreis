@@ -25,6 +25,8 @@ import {
   zinnenBestandSchema,
 } from '../src/domein/schema/context';
 import { tipsBestandSchema } from '../src/domein/schema/tips';
+import { stationsBestandSchema } from '../src/domein/schema/station';
+import { reisdagenBestandSchema } from '../src/domein/schema/reisdag';
 import { binnenGebied } from '../src/domein/geo/afstand';
 
 const DATA = 'data';
@@ -67,6 +69,16 @@ const etiquette = controleer(
 const zinnen = controleer(zinnenBestandSchema, lees(join(DATA, 'zinnen.yaml')), 'zinnen.yaml');
 const seizoen = controleer(seizoenBestandSchema, lees(join(DATA, 'seizoen.yaml')), 'seizoen.yaml');
 const tips = controleer(tipsBestandSchema, lees(join(DATA, 'tips.yaml')), 'tips.yaml');
+const stations = controleer(
+  stationsBestandSchema,
+  lees(join(DATA, 'stations.yaml')),
+  'stations.yaml',
+);
+const reisdagen = controleer(
+  reisdagenBestandSchema,
+  lees(join(DATA, 'reisdagen.yaml')),
+  'reisdagen.yaml',
+);
 
 if (zinnen && new Set(zinnen.map((z) => z.id)).size !== zinnen.length) {
   fouten.push('zinnen.yaml: dubbele zin-id');
@@ -207,9 +219,55 @@ if (steden && tijdlijnen && reisschema) {
     }
   }
 
+  // Een station hoort bij een bestaande stad, anders staat hij bij geen enkele
+  // stad in de lijst. Een uitgang buiten het kaartgebied is geen fout, maar
+  // dan is er daar offline geen kaart.
+  const stationIds = new Set(stations?.map((s) => s.id) ?? []);
+  if (stations) {
+    if (stationIds.size !== stations.length) fouten.push('stations.yaml: dubbele station-id');
+    for (const station of stations) {
+      const stad = steden.find((s) => s.id === station.stad);
+      if (!stad) {
+        fouten.push(`stations.yaml: ${station.id} verwijst naar onbekende stad "${station.stad}"`);
+        continue;
+      }
+      const punten = [
+        station.coordinaten,
+        ...station.uitgangen.flatMap((u) => u.coordinaten ?? []),
+      ];
+      if (punten.some((c) => !binnenGebied(c, stad.kaartgebied))) {
+        opmerkingen.push(
+          `stations.yaml: ${station.id} ligt buiten het kaartgebied van ${stad.id}, dus offline zie je hier geen kaart`,
+        );
+      }
+    }
+  }
+
+  // Een reisdag die naar een onbekende stad of stationsgids wijst, laat een
+  // knop achter die nergens heen gaat.
+  if (reisdagen) {
+    if (new Set(reisdagen.map((r) => r.id)).size !== reisdagen.length) {
+      fouten.push('reisdagen.yaml: dubbele reisdag-id');
+    }
+    for (const dag of reisdagen) {
+      for (const stadId of [dag.van, dag.naar]) {
+        if (stadId !== undefined && !stadIds.has(stadId)) {
+          fouten.push(`reisdagen.yaml: ${dag.id} verwijst naar onbekende stad "${stadId}"`);
+        }
+      }
+      for (const stap of dag.stappen) {
+        for (const stationId of [stap.vanStation, stap.naarStation]) {
+          if (stationId !== undefined && !stationIds.has(stationId)) {
+            fouten.push(`reisdagen.yaml: ${dag.id} verwijst naar onbekend station "${stationId}"`);
+          }
+        }
+      }
+    }
+  }
+
   const aantalTips = tips?.groepen.reduce((n, g) => n + g.tips.length, 0) ?? 0;
   console.log(
-    `Gecontroleerd: ${steden.length} steden, ${plaatsIds.size} plaatsen, ${apps?.length ?? 0} apps, ${vervoer?.trajecten.length ?? 0} trajecten, ${etiquette?.length ?? 0} etiquettekaarten, ${zinnen?.length ?? 0} zinnen, ${aantalTips} tips.`,
+    `Gecontroleerd: ${steden.length} steden, ${plaatsIds.size} plaatsen, ${apps?.length ?? 0} apps, ${vervoer?.trajecten.length ?? 0} trajecten, ${etiquette?.length ?? 0} etiquettekaarten, ${zinnen?.length ?? 0} zinnen, ${aantalTips} tips, ${stations?.length ?? 0} stations, ${reisdagen?.length ?? 0} reisdagen.`,
   );
 }
 

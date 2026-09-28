@@ -9,7 +9,9 @@ import { TIJDLIJNEN, REISSCHEMA } from '@/data/content';
 import type { Reden } from '@/domein/highlight/bepaal';
 import { bepaalReisstatus, type Reisstatus } from '@/domein/highlight/reisstatus';
 import { datumIn } from '@/domein/tijd/zones';
+import { isVoorbij, periodeVan, verblijfIn } from '@/domein/highlight/verblijf';
 import { JetlagVandaag } from '@/features/jetlag/JetlagVandaag';
+import { ReisdagVandaag } from '@/features/reizen/ReisdagVandaag';
 
 /**
  * Het hoofdmenu: één highlight bovenaan, alle andere steden eronder.
@@ -140,6 +142,7 @@ export const Hoofdmenu = () => {
         </section>
       )}
 
+      <ReisdagVandaag />
       <JetlagVandaag />
 
       <section>
@@ -161,9 +164,18 @@ export const Hoofdmenu = () => {
           Alle steden
         </Sectiekop>
         <div className="grid gap-2">
-          {rest.map((stad) => (
-            <StadKaartje key={stad.id} stad={stad} offline={offlineSteden.has(stad.id)} />
-          ))}
+          {rest.map((stad) => {
+            const verblijven = verblijfIn(REISSCHEMA, stad.id);
+            return (
+              <StadKaartje
+                key={stad.id}
+                stad={stad}
+                offline={offlineSteden.has(stad.id)}
+                periode={periodeVan(verblijven)}
+                geweest={isVoorbij(verblijven, datumIn(stad.tijdzone, new Date()))}
+              />
+            );
+          })}
         </div>
       </section>
 
@@ -190,45 +202,6 @@ export const Hoofdmenu = () => {
           ))}
         </div>
       </section>
-
-      <div className="mt-8 flex flex-wrap justify-center gap-x-5 gap-y-2 text-center">
-        <Link to="/fotos" className="text-sm text-zegel underline underline-offset-2">
-          Fotokaart
-        </Link>
-        <Link to="/stempels" className="text-sm text-zegel underline underline-offset-2">
-          Stempelboek
-        </Link>
-        <Link to="/apps" className="text-sm text-zegel underline underline-offset-2">
-          Handige apps
-        </Link>
-        <Link to="/tips" className="text-sm text-zegel underline underline-offset-2">
-          Tips uit je collectie
-        </Link>
-        <Link to="/vervoer" className="text-sm text-zegel underline underline-offset-2">
-          Vervoer en JR Pass
-        </Link>
-        <Link to="/budget" className="text-sm text-zegel underline underline-offset-2">
-          Budget
-        </Link>
-        <Link to="/dagplanner" className="text-sm text-zegel underline underline-offset-2">
-          Dagplanner
-        </Link>
-        <Link to="/overstap" className="text-sm text-zegel underline underline-offset-2">
-          Overstap Hanoi
-        </Link>
-        <Link to="/jetlag" className="text-sm text-zegel underline underline-offset-2">
-          Jetlag
-        </Link>
-        <Link to="/context" className="text-sm text-zegel underline underline-offset-2">
-          Etiquette en taal
-        </Link>
-        <Link to="/import" className="text-sm text-zegel underline underline-offset-2">
-          Eigen punten importeren
-        </Link>
-        <p className="w-full text-xs text-inkt-zacht dark:text-papier/40">
-          Versie {__APP_VERSIE__}
-        </p>
-      </div>
     </div>
   );
 };

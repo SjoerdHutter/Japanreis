@@ -14,29 +14,43 @@ import { DagplannerScherm } from '@/features/planning/DagplannerScherm';
 import { OverstapScherm } from '@/features/planning/OverstapScherm';
 import { ContextScherm } from '@/features/praktisch/ContextScherm';
 import { JetlagScherm } from '@/features/jetlag/JetlagScherm';
+import { MeerScherm } from '@/features/navigatie/MeerScherm';
+import { Tabbalk } from '@/features/navigatie/Tabbalk';
+import { ReisdagenScherm } from '@/features/reizen/ReisdagenScherm';
+import { StationScherm } from '@/features/reizen/StationScherm';
+import { StationsScherm } from '@/features/reizen/StationsScherm';
 
 const App = () => (
   <AppProvider>
-    <Routes>
-      <Route path="/" element={<Hoofdmenu />} />
-      <Route path="/stad/:stadId" element={<StadScherm />} />
-      <Route path="/import" element={<ImportScherm />} />
-      <Route path="/fotos" element={<FotokaartScherm />} />
-      <Route path="/stempels" element={<StempelboekScherm />} />
-      <Route path="/apps" element={<AppgidsScherm />} />
-      <Route path="/tips" element={<TipsScherm />} />
-      <Route path="/vervoer" element={<VervoerScherm />} />
-      <Route path="/budget" element={<BudgetScherm />} />
-      <Route path="/dagplanner" element={<DagplannerScherm />} />
-      <Route path="/overstap" element={<OverstapScherm />} />
-      <Route path="/context" element={<ContextScherm />} />
-      <Route path="/jetlag" element={<JetlagScherm />} />
-      <Route path="/tijdlijn/:tijdlijnId" element={<TijdlijnScherm />} />
-      <Route path="/geschiedenis/:stadId" element={<StadGeschiedenisScherm />} />
-      {/* Onbekend pad hoort niet op een lege pagina uit te komen; terug naar
+    {/* Ruimte onder elk scherm voor de balk onderaan, zodat die nooit het
+        laatste stuk van een pagina afdekt. */}
+    <div className="pb-14">
+      <Routes>
+        <Route path="/" element={<Hoofdmenu />} />
+        <Route path="/stad/:stadId" element={<StadScherm />} />
+        <Route path="/import" element={<ImportScherm />} />
+        <Route path="/fotos" element={<FotokaartScherm />} />
+        <Route path="/stempels" element={<StempelboekScherm />} />
+        <Route path="/apps" element={<AppgidsScherm />} />
+        <Route path="/tips" element={<TipsScherm />} />
+        <Route path="/vervoer" element={<VervoerScherm />} />
+        <Route path="/budget" element={<BudgetScherm />} />
+        <Route path="/dagplanner" element={<DagplannerScherm />} />
+        <Route path="/overstap" element={<OverstapScherm />} />
+        <Route path="/context" element={<ContextScherm />} />
+        <Route path="/jetlag" element={<JetlagScherm />} />
+        <Route path="/meer" element={<MeerScherm />} />
+        <Route path="/reisdagen" element={<ReisdagenScherm />} />
+        <Route path="/stations" element={<StationsScherm />} />
+        <Route path="/station/:stationId" element={<StationScherm />} />
+        <Route path="/tijdlijn/:tijdlijnId" element={<TijdlijnScherm />} />
+        <Route path="/geschiedenis/:stadId" element={<StadGeschiedenisScherm />} />
+        {/* Onbekend pad hoort niet op een lege pagina uit te komen; terug naar
           het overzicht is altijd een bruikbaar antwoord. */}
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </div>
+    <Tabbalk />
   </AppProvider>
 );
 

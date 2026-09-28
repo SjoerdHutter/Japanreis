@@ -8,11 +8,11 @@
   coordinaten: { lat: 34.3955, lon: 132.4536 }
   adres: 1-10 Otemachi, Naka Ward, Hiroshima, 730-0051
   beschrijving: >-
-    De ruïne van de tentoonstellingshal, vrijwel recht onder het punt waar de
-    bom op 6 augustus 1945 ontplofte. Het skelet is bewust gelaten zoals het die
+    De ruïne van de tentoonstellingshal uit 1915, vrijwel recht onder het punt
+    waar de bom op 6 augustus 1945 ontplofte. Het skelet is bewust gelaten zoals het die
     ochtend achterbleef. Van buitenaf te bekijken, dag en nacht.
   prijs: gratis
-  tijdvakken: [meiji, naoorlogs]
+  tijdvakken: [taisho, vroeg-showa, naoorlogs]
   attractie:
     type: monument
     bezoekduurMinuten: 20
