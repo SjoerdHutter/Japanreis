@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { STEDEN, VERVOER, stadMet } from '@/data/content';
 import { useApp } from '@/state/useApp';
 import { Kaartje, Knop, Label, Sectiekop, Terug } from '@/ui/basis';
@@ -57,6 +58,20 @@ export const VervoerScherm = () => {
       <p className="mt-2 mb-5 leading-relaxed text-inkt-zacht dark:text-papier/70">
         Vink je ritten aan; heen en terug telt als twee. De app rekent uit of een pas zich
         terugverdient.
+      </p>
+      <p className="-mt-2 mb-5 flex flex-wrap gap-1.5 text-sm">
+        <Link
+          to="/reisdagen"
+          className="rounded-full bg-papier-diep px-2.5 py-1 font-medium text-zegel dark:bg-nacht-diep dark:text-zegel-licht"
+        >
+          Reisdagen
+        </Link>
+        <Link
+          to="/stations"
+          className="rounded-full bg-papier-diep px-2.5 py-1 font-medium text-zegel dark:bg-nacht-diep dark:text-zegel-licht"
+        >
+          Stationsgidsen
+        </Link>
       </p>
 
       <Sectiekop>Je ritten</Sectiekop>

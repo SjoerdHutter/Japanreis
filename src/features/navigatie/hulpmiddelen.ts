@@ -7,7 +7,9 @@ import {
   Lightbulb,
   Moon,
   Plane,
+  Route,
   ScrollText,
+  Signpost,
   Smartphone,
   Stamp,
   TrainFront,
@@ -42,6 +44,18 @@ export const GROEPEN: Groep[] = [
   {
     naam: 'Plannen',
     middelen: [
+      {
+        pad: '/reisdagen',
+        naam: 'Reisdagen',
+        uitleg: 'Welke trein of bus, en je koffer',
+        icoon: Route,
+      },
+      {
+        pad: '/stations',
+        naam: 'Stations',
+        uitleg: 'Uitgangen, Shinkansen en overstappen',
+        icoon: Signpost,
+      },
       {
         pad: '/dagplanner',
         naam: 'Dagplanner',

@@ -25,10 +25,20 @@ const CATEGORIE_NAAM: Record<Zin['categorie'], string> = {
   eten: 'Eten en drinken',
   allergie: 'Allergieën',
   onderweg: 'Onderweg',
+  station: 'Op het station',
+  borden: 'Borden op het station',
   nood: 'Nood',
 };
 
-const CATEGORIE_VOLGORDE: Zin['categorie'][] = ['basis', 'eten', 'allergie', 'onderweg', 'nood'];
+const CATEGORIE_VOLGORDE: Zin['categorie'][] = [
+  'basis',
+  'eten',
+  'allergie',
+  'onderweg',
+  'station',
+  'borden',
+  'nood',
+];
 
 const BLOEI_TEKST: Record<BloeiStand, string> = {
   nu: 'nu, ongeveer',

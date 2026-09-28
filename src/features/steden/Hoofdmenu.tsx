@@ -11,6 +11,7 @@ import { bepaalReisstatus, type Reisstatus } from '@/domein/highlight/reisstatus
 import { datumIn } from '@/domein/tijd/zones';
 import { isVoorbij, periodeVan, verblijfIn } from '@/domein/highlight/verblijf';
 import { JetlagVandaag } from '@/features/jetlag/JetlagVandaag';
+import { ReisdagVandaag } from '@/features/reizen/ReisdagVandaag';
 
 /**
  * Het hoofdmenu: één highlight bovenaan, alle andere steden eronder.
@@ -141,6 +142,7 @@ export const Hoofdmenu = () => {
         </section>
       )}
 
+      <ReisdagVandaag />
       <JetlagVandaag />
 
       <section>

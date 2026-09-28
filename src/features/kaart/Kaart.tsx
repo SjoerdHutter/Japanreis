@@ -17,7 +17,7 @@ import { TEGEL_BRONVERMELDING, TEGEL_URL } from '@/kaart/constanten';
  * content, zodat altijd zichtbaar blijft wat van jou is en wat van de app.
  */
 
-export type Laag = 'attractie' | 'eten' | 'stempel' | 'eigen' | 'foto' | 'overig';
+export type Laag = 'attractie' | 'eten' | 'stempel' | 'eigen' | 'foto' | 'uitgang' | 'overig';
 
 const KLEUR: Record<Laag, string> = {
   attractie: '#8c2f39',
@@ -25,6 +25,8 @@ const KLEUR: Record<Laag, string> = {
   stempel: '#2f4858',
   eigen: '#4338ca',
   foto: '#0f766e',
+  // De uitgangen van een station, in het blauw van de reis.
+  uitgang: '#2f4858',
   overig: '#5c554c',
 };
 
@@ -60,6 +62,7 @@ export const Kaart = ({
   lijn,
   onKies,
   onTikOpKaart,
+  clusteren = true,
 }: {
   punten: KaartPunt[];
   /**
@@ -79,6 +82,12 @@ export const Kaart = ({
    * zestien pixels lastig te pakken, en het resultaat is hetzelfde.
    */
   onTikOpKaart?: (plek: Coordinaat) => void;
+  /**
+   * Punten die dicht bij elkaar liggen samenvoegen tot een bolletje met een
+   * getal. Op een stadskaart onmisbaar, op de kaart van een station juist niet:
+   * daar gaat het erom dat je de twee uitgangen naast elkaar ziet liggen.
+   */
+  clusteren?: boolean;
 }) => {
   const houder = useRef<HTMLDivElement>(null);
   const kaart = useRef<L.Map | null>(null);
@@ -90,6 +99,8 @@ export const Kaart = ({
   useEffect(() => {
     kiesRef.current = onKies;
   }, [onKies]);
+  // Alleen bij het opbouwen van de kaart gelezen; wisselen daarna doet niets.
+  const clusterenRef = useRef(clusteren);
   const tikRef = useRef(onTikOpKaart);
   useEffect(() => {
     tikRef.current = onTikOpKaart;
@@ -104,6 +115,8 @@ export const Kaart = ({
     groep.current = L.markerClusterGroup({
       showCoverageOnHover: false,
       maxClusterRadius: 48,
+      // Vanaf zoomniveau 1 niet meer samenvoegen is in de praktijk: nooit.
+      ...(clusterenRef.current ? {} : { disableClusteringAtZoom: 1 }),
       iconCreateFunction: (cluster) => {
         const aantal = cluster.getChildCount();
         const maat = aantal < 10 ? 30 : aantal < 50 ? 36 : 42;

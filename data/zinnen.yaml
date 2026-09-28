@@ -111,6 +111,182 @@
   lokaal: いくらですか
   uitspraak: ikoera des ka
 
+# Op het station. Eerst de borden, want die lees je vaker dan je iets vraagt:
+# een Japans station is goed bewegwijzerd, maar het Engels staat er kleiner bij
+# en op de kleine stations soms helemaal niet.
+
+- id: bord-uitgang
+  categorie: borden
+  land: japan
+  nederlands: Uitgang
+  lokaal: 出口
+  uitspraak: degoetsji
+  wanneer: Geel bord. Grote stations hebben tientallen uitgangen, elk met een eigen naam of nummer.
+
+- id: bord-windrichtingen
+  categorie: borden
+  land: japan
+  nederlands: Oost, west, zuid, noord en centrale uitgang
+  lokaal: 東口　西口　南口　北口　中央口
+  uitspraak: higasjigoetsji, nisjigoetsji, minamigoetsji, kitagoetsji, tsjoeoogoetsji
+  wanneer: >-
+    De verkeerde kant uit kan op een groot station een kwartier omlopen kosten.
+    Kijk in de stationsgids welke uitgang je wilt voordat je door de poortjes
+    gaat.
+
+- id: bord-poortjes
+  categorie: borden
+  land: japan
+  nederlands: Poortjes, de kaartcontrole
+  lokaal: 改札口
+  uitspraak: kaisatsoegoetsji
+  wanneer: Het blauwe of groene paneel is voor je Suica of ICOCA; het gleufje is voor papieren kaartjes.
+
+- id: bord-overstappen
+  categorie: borden
+  land: japan
+  nederlands: Overstappen
+  lokaal: 乗換口
+  uitspraak: norikaegoetsji
+  wanneer: >-
+    Een overstap naar een andere maatschappij gaat vaak via eigen poortjes.
+    Zonder die poortjes zou je eruit moeten en opnieuw inchecken.
+
+- id: bord-perron
+  categorie: borden
+  land: japan
+  nederlands: Perron, spoor
+  lokaal: 番線
+  uitspraak: bansen
+  wanneer: 14番線 is perron 14. Bij bus en taxi staat er のりば, opstapplaats.
+
+- id: bord-shinkansen
+  categorie: borden
+  land: japan
+  nederlands: Shinkansen, de hogesnelheidstrein
+  lokaal: 新幹線
+  uitspraak: sjinkansen
+  wanneer: Heeft op de grote stations eigen poortjes, binnen de gewone. Je kaartje moet er dan twee keer door.
+
+- id: bord-vrij-gereserveerd
+  categorie: borden
+  land: japan
+  nederlands: Vrije wagon en gereserveerde wagon
+  lokaal: 自由席　指定席
+  uitspraak: dzjiejoeseki, sjiteeseki
+  wanneer: >-
+    Op het perron staat per wagon op de grond aangegeven waar je in de rij
+    staat. Je wagonnummer staat op je kaartje als 号車, goosja.
+
+- id: bord-treinsoorten
+  categorie: borden
+  land: japan
+  nederlands: Stoptrein, sneltrein en limited express
+  lokaal: 普通　快速　特急
+  uitspraak: foetsoe, kaisokoe, tokkjoe
+  wanneer: >-
+    Voor een stoptrein en een sneltrein is je Suica genoeg. Voor een 特急 betaal
+    je bij JR en Kintetsu een toeslag; bij Hankyu en Keihan niet, daar is het
+    gewoon de snelste trein.
+
+- id: bord-bijbetalen
+  categorie: borden
+  land: japan
+  nederlands: Bijbetaalautomaat
+  lokaal: 精算機
+  uitspraak: seesanki
+  wanneer: >-
+    Staat vlak voor de poortjes. Houdt je kaart niet op en piept het poortje,
+    dan staat er te weinig op; hier vul je het verschil aan.
+
+- id: bord-lockers
+  categorie: borden
+  land: japan
+  nederlands: Kluisjes
+  lokaal: コインロッカー
+  uitspraak: koin rokkaa
+  wanneer: De grote kluisjes voor een koffer zijn op drukke stations 's ochtends vaak al vol.
+
+- id: bord-vrouwenwagon
+  categorie: borden
+  land: japan
+  nederlands: Wagon alleen voor vrouwen
+  lokaal: 女性専用車
+  uitspraak: dzjosee senjoosja
+  wanneer: Op veel lijnen tijdens de spits. De tijden staan bij de deur.
+
+- id: bord-laatste-trein
+  categorie: borden
+  land: japan
+  nederlands: Laatste trein
+  lokaal: 終電
+  uitspraak: sjoeden
+  wanneer: Rond middernacht. Daarna rijdt er tot een uur of vijf niets meer.
+
+- id: perron-naar
+  categorie: station
+  land: japan
+  nederlands: Van welk perron vertrekt de trein naar Kyoto
+  lokaal: 京都行きは何番線ですか
+  uitspraak: kjooto-joeki wa nanbansen des ka
+  wanneer: Wijs voor een andere bestemming de naam aan op je kaartje of in de app.
+
+- id: stopt-deze-trein
+  categorie: station
+  land: japan
+  nederlands: Stopt deze trein hier
+  lokaal: この電車はここに止まりますか
+  uitspraak: kono densja wa koko ni tomarimas ka
+  wanneer: Wijs daarbij het station aan op je kaartje of op de kaart.
+
+- id: waar-uitgang
+  categorie: station
+  land: japan
+  nederlands: Waar is de uitgang
+  lokaal: 出口はどこですか
+  uitspraak: degoetsji wa doko des ka
+
+- id: waar-lockers
+  categorie: station
+  land: japan
+  nederlands: Waar zijn de kluisjes
+  lokaal: コインロッカーはどこですか
+  uitspraak: koin rokkaa wa doko des ka
+
+- id: plaats-reserveren
+  categorie: station
+  land: japan
+  nederlands: Een gereserveerde plaats in de Shinkansen graag
+  lokaal: 新幹線の指定席をお願いします
+  uitspraak: sjinkansen no sjiteeseki o onegai sjimas
+  wanneer: Aan het loket of bij de automaat met een medewerker. Wijs de trein en de tijd aan in de app.
+
+- id: plaats-koffer
+  categorie: station
+  land: japan
+  nederlands: Met ruimte voor een grote koffer graag
+  lokaal: 特大荷物スペースつき座席をお願いします
+  uitspraak: tokoedai nimotsoe soepeesoe tsoeki zaseki o onegai sjimas
+  wanneer: >-
+    In de Shinkansen tussen Tokio, Osaka en Hiroshima moet je voor een koffer
+    van meer dan 160 cm (lengte, breedte en hoogte bij elkaar) zo'n plaats
+    reserveren. Zonder reservering betaal je aan boord bij.
+
+- id: kaart-werkt-niet
+  categorie: station
+  land: japan
+  nederlands: Mijn kaart werkt niet bij de poortjes
+  lokaal: ICカードが通りません
+  uitspraak: ai sii kaado ga toorimasen
+  wanneer: Zeg dit bij het hokje naast de poortjes. Meestal staat er te weinig op of ben je vergeten in te checken.
+
+- id: bus-naar
+  categorie: station
+  land: japan
+  nederlands: Gaat deze bus naar Shirakawa-go
+  lokaal: このバスは白川郷に行きますか
+  uitspraak: kono basoe wa sjirakawagoo ni ikimas ka
+
 - id: hallo-vn
   categorie: basis
   land: vietnam

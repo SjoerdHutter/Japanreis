@@ -61,6 +61,8 @@ aanloopt.
 | `data/reisschema.yaml`      | Welke stad op welke dag; voedt de highlight logica |
 | `data/tijdlijnen.yaml`      | De historische tijdvakken van Japan en van Hanoi   |
 | `data/plaatsen/<stad>.yaml` | De punten van die stad: attracties, eten, stempels |
+| `data/stations.yaml`        | Stationsgidsen: uitgangen, Shinkansen, overstappen |
+| `data/reisdagen.yaml`       | Per reisdag welke trein of bus, en je koffer       |
 
 > **Let op:** de startset in `data/plaatsen/` is redactionele content uit
 > algemene kennis en is niet ter plaatse geverifieerd. Openingstijden en prijzen
@@ -133,6 +135,9 @@ Gebouwd:
 - Fase 10: een balk onderaan elk scherm (Steden, Plannen, Budget, Taal en Meer),
   het scherm Meer met alle hulpmiddelen als tegels, een terugknop die teruggaat
   naar waar je vandaan kwam, en bij elke stad de datums uit het reisschema.
+- Fase 11: de treinen. Reisdagen met een kaart in het hoofdmenu op de dag
+  zelf en de avond ervoor, stationsgidsen met de uitgangen op de kaart, en de
+  borden en zinnen voor op het station onder Taal.
 
 De app is daarmee compleet volgens de functiespecificatie.
 

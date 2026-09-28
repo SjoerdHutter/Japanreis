@@ -16,6 +16,9 @@ import { ContextScherm } from '@/features/praktisch/ContextScherm';
 import { JetlagScherm } from '@/features/jetlag/JetlagScherm';
 import { MeerScherm } from '@/features/navigatie/MeerScherm';
 import { Tabbalk } from '@/features/navigatie/Tabbalk';
+import { ReisdagenScherm } from '@/features/reizen/ReisdagenScherm';
+import { StationScherm } from '@/features/reizen/StationScherm';
+import { StationsScherm } from '@/features/reizen/StationsScherm';
 
 const App = () => (
   <AppProvider>
@@ -37,6 +40,9 @@ const App = () => (
         <Route path="/context" element={<ContextScherm />} />
         <Route path="/jetlag" element={<JetlagScherm />} />
         <Route path="/meer" element={<MeerScherm />} />
+        <Route path="/reisdagen" element={<ReisdagenScherm />} />
+        <Route path="/stations" element={<StationsScherm />} />
+        <Route path="/station/:stationId" element={<StationScherm />} />
         <Route path="/tijdlijn/:tijdlijnId" element={<TijdlijnScherm />} />
         <Route path="/geschiedenis/:stadId" element={<StadGeschiedenisScherm />} />
         {/* Onbekend pad hoort niet op een lege pagina uit te komen; terug naar

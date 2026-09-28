@@ -9,7 +9,7 @@ import { OfflineKnop } from '@/features/kaart/OfflineKnop';
 import { VastzetKnop } from '@/features/steden/Hoofdmenu';
 import { Filterbalk } from './Filterbalk';
 import { verblijfIn, VERBLIJF_NAAM } from '@/domein/highlight/verblijf';
-import { REISSCHEMA } from '@/data/content';
+import { REISSCHEMA, STATIONS } from '@/data/content';
 import { PlaatsRegel } from './PlaatsRegel';
 import { leesEigenPunten } from '@/data/db/idb';
 import { filterPlaatsen, keuzesUit, type Filter } from '@/domein/filters/plaatsen';
@@ -209,6 +209,7 @@ export const StadScherm = () => {
   const tijdvakNaam = tijdlijn?.tijdvakken.find((v) => v.id === tijdvakUitLink)?.naam;
 
   const verblijven = verblijfIn(REISSCHEMA, stad.id);
+  const stations = STATIONS.filter((s) => s.stad === stad.id);
 
   const telling = (id: Tab): number =>
     id === 'eigen' ? eigen.length : alle.filter((p) => hoortBij(p, id)).length;
@@ -267,6 +268,20 @@ export const StadScherm = () => {
             Geschiedenis van {stad.naam}
           </Link>
         </p>
+        {stations.length > 0 && (
+          <p className="mt-2 flex flex-wrap items-center gap-1.5 text-sm">
+            <span className="text-inkt-zacht dark:text-papier/60">Stationsgids:</span>
+            {stations.map((station) => (
+              <Link
+                key={station.id}
+                to={`/station/${station.id}`}
+                className="rounded-full bg-papier-diep px-2.5 py-1 font-medium text-zegel dark:bg-nacht-diep dark:text-zegel-licht"
+              >
+                {station.naam}
+              </Link>
+            ))}
+          </p>
+        )}
       </header>
 
       <div className="mb-3">

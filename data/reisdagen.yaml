@@ -1,0 +1,283 @@
+# De reisdagen: hoe je van de ene stad naar de andere komt.
+#
+# Redactionele content uit algemene kennis, niet ter plaatse geverifieerd.
+# Reistijden zijn afgerond en gelden voor de gewone dienstregeling; de exacte
+# tijden en perrons staan op de borden en in Jorudan of Google Maps. Zet bij een
+# gereserveerde trein de vertrektijd in de notitie van je reservering in de
+# dagplanner.
+#
+# `van` en `naar` bij een stap zijn zo geschreven dat Google Maps ze vindt; de
+# app maakt er een routeknop van voor als je bereik hebt.
+
+- id: aankomst-osaka
+  datum: 2026-10-05
+  titel: Van Kansai Airport naar Osaka
+  naar: osaka
+  stappen:
+    - vervoer: limited-express
+      naam: JR Haruka
+      van: Kansai Airport Station
+      naar: Osaka Station
+      vanStation: kansai-airport
+      naarStation: umeda
+      minuten: 50
+      reserveren: aanbevolen
+      opmerking: Stopt ook in Tennoji en Shin-Osaka. Neem deze als je hotel bij Umeda of Shin-Osaka ligt.
+    - vervoer: trein
+      naam: Nankai, de Rapi:t of de Airport Express
+      van: Kansai Airport Station
+      naar: Namba Station
+      vanStation: kansai-airport
+      naarStation: namba
+      minuten: 40
+      alternatief: true
+      opmerking: >-
+        Neem deze als je hotel bij Namba of Dotonbori ligt. De Rapi:t heeft
+        gereserveerde plaatsen, de Airport Express niet.
+  opmerking: >-
+    Je landt om 06:40 na een nacht in het vliegtuig. De treinen rijden dan al,
+    maar rond half acht begint in Osaka de spits: met een koffer wil je daar
+    liever voor zitten.
+
+- id: universal-studios
+  datum: 2026-10-06
+  titel: Naar Universal Studios
+  van: osaka
+  naar: osaka
+  stappen:
+    - vervoer: trein
+      naam: JR ringlijn en Yumesaki-lijn
+      van: Osaka Station
+      naar: Universal City Station
+      vanStation: umeda
+      minuten: 20
+      reserveren: niet-nodig
+      opmerking: >-
+        Ringlijn naar Nishikujo, daar de Yumesaki-lijn. Sommige treinen rijden
+        door zonder overstap. Kan met je ICOCA of Suica.
+
+- id: osaka-hiroshima
+  datum: 2026-10-07
+  titel: Van Osaka naar Hiroshima
+  van: osaka
+  naar: hiroshima
+  stappen:
+    - vervoer: trein
+      naam: JR Kyoto-lijn, één halte
+      van: Osaka Station
+      naar: Shin-Osaka Station
+      vanStation: umeda
+      naarStation: shin-osaka
+      minuten: 5
+      reserveren: niet-nodig
+      opmerking: Zit je bij Namba, neem dan de Midosuji-metro rechtstreeks naar Shin-Osaka.
+    - vervoer: shinkansen
+      naam: Sanyo Shinkansen, Nozomi of Sakura
+      van: Shin-Osaka Station
+      naar: Hiroshima Station
+      vanStation: shin-osaka
+      naarStation: hiroshima
+      minuten: 85
+      reserveren: aanbevolen
+      opmerking: >-
+        Met een JR Pass mag je in de Sakura en de Hikari; voor de Nozomi en de
+        Mizuho betaal je bij.
+  bagage: >-
+    Een koffer van meer dan 160 cm, lengte, breedte en hoogte bij elkaar, mag in
+    deze Shinkansen alleen mee met een gereserveerde plaats met bagageruimte.
+    Zonder die reservering betaal je aan boord bij. De zin om dat aan het loket
+    te vragen staat onder Taal.
+
+- id: hiroshima-kyoto
+  datum: 2026-10-08
+  titel: Van Hiroshima naar Kyoto
+  van: hiroshima
+  naar: kyoto
+  stappen:
+    - vervoer: shinkansen
+      naam: Sanyo en Tokaido Shinkansen, Nozomi
+      van: Hiroshima Station
+      naar: Kyoto Station
+      vanStation: hiroshima
+      naarStation: kyoto
+      minuten: 100
+      reserveren: aanbevolen
+      opmerking: De Nozomi rijdt rechtstreeks; de Sakura en de Mizuho stoppen in Shin-Osaka.
+    - vervoer: shinkansen
+      naam: Sakura naar Shin-Osaka, daar een Hikari naar Kyoto
+      van: Hiroshima Station
+      naar: Kyoto Station
+      vanStation: hiroshima
+      naarStation: kyoto
+      minuten: 115
+      reserveren: aanbevolen
+      alternatief: true
+      opmerking: Met een JR Pass zonder bijbetalen. Overstappen in Shin-Osaka op hetzelfde station.
+  bagage: >-
+    Dezelfde regel als op de heenweg: een koffer boven de 160 cm alleen met een
+    gereserveerde plaats met bagageruimte.
+  opmerking: >-
+    Wil je 's ochtends nog naar Miyajima, reken dan op een ochtend: trein en boot
+    zijn heen en terug samen ruim anderhalf uur, en dan ben je er nog niet
+    geweest. Laat je koffer zolang in een kluisje op station Hiroshima.
+
+- id: kyoto-kanazawa
+  datum: 2026-10-13
+  titel: Van Kyoto naar Kanazawa
+  van: kyoto
+  naar: kanazawa
+  stappen:
+    - vervoer: limited-express
+      naam: JR Thunderbird
+      van: Kyoto Station
+      naar: Tsuruga Station
+      vanStation: kyoto
+      minuten: 55
+      reserveren: aanbevolen
+    - vervoer: shinkansen
+      naam: Hokuriku Shinkansen
+      van: Tsuruga Station
+      naar: Kanazawa Station
+      naarStation: kanazawa
+      minuten: 50
+      reserveren: aanbevolen
+      opmerking: >-
+        In Tsuruga vertrekt de Shinkansen een verdieping hoger. De overstap is
+        krap gepland: loop meteen door.
+  bagage: >-
+    Hier geldt de kofferregel van de Tokaido Shinkansen niet, maar de rekken
+    zijn klein. Met een grote koffer ben je graag als eerste bij je wagon.
+  opmerking: >-
+    Sinds 2024 rijdt de Thunderbird niet meer door naar Kanazawa. Koop beide
+    treinen tegelijk, dan past de overstaptijd.
+
+- id: kanazawa-takayama
+  datum: 2026-10-16
+  titel: Van Kanazawa via Shirakawa-go naar Takayama
+  van: kanazawa
+  naar: takayama
+  stappen:
+    - vervoer: bus
+      naam: Bus naar Shirakawa-go
+      van: Kanazawa Station
+      naar: Shirakawa-go Bus Terminal
+      vanStation: kanazawa
+      naarStation: shirakawa-go-bus
+      minuten: 80
+      reserveren: verplicht
+      opmerking: Vertrekt vanaf het busstation aan de oostkant van het station.
+    - vervoer: bus
+      naam: Nohi-bus naar Takayama
+      van: Shirakawa-go Bus Terminal
+      naar: Takayama Nohi Bus Center
+      vanStation: shirakawa-go-bus
+      naarStation: takayama
+      minuten: 50
+      reserveren: verplicht
+  bagage: >-
+    Je koffer gaat in het bagageruim. In Shirakawa-go kun je hem kwijt bij het
+    busstation, zolang er plek is. Wil je zeker zijn, stuur hem dan vanuit je
+    hotel in Kanazawa vooruit naar je hotel in Takayama.
+  opmerking: >-
+    Reserveer beide ritten en laat er ongeveer drie uur tussen zitten. Meer heb
+    je in het dorp niet nodig, en minder is krap.
+
+- id: takayama-tokio
+  datum: 2026-10-18
+  titel: Van Takayama naar Tokio
+  van: takayama
+  naar: tokio
+  stappen:
+    - vervoer: limited-express
+      naam: JR Hida
+      van: Takayama Station
+      naar: Nagoya Station
+      vanStation: takayama
+      minuten: 145
+      reserveren: aanbevolen
+    - vervoer: shinkansen
+      naam: Tokaido Shinkansen, Nozomi of Hikari
+      van: Nagoya Station
+      naar: Tokyo Station
+      naarStation: tokio
+      minuten: 100
+      reserveren: aanbevolen
+    - vervoer: limited-express
+      naam: Hida naar Toyama, daar de Hokuriku Shinkansen
+      van: Takayama Station
+      naar: Tokyo Station
+      vanStation: takayama
+      naarStation: tokio
+      minuten: 225
+      reserveren: aanbevolen
+      alternatief: true
+      opmerking: Iets langer, maar zonder de kofferregel van de Tokaido Shinkansen.
+    - vervoer: bus
+      naam: Nohi-bus naar Busta Shinjuku
+      van: Takayama Nohi Bus Center
+      naar: Busta Shinjuku
+      vanStation: takayama
+      naarStation: shinjuku
+      minuten: 330
+      reserveren: verplicht
+      alternatief: true
+      opmerking: De goedkoopste weg, zonder overstap, maar een dag in de bus.
+  bagage: >-
+    Op de Tokaido Shinkansen vanaf Nagoya weer de kofferregel: boven de 160 cm
+    alleen met een gereserveerde plaats met bagageruimte.
+
+- id: fuji
+  wanneer: Een dag tussen 19 en 22 oktober, bij helder weer
+  titel: Dagtrip naar de Fuji
+  van: tokio
+  naar: fujikawaguchiko
+  stappen:
+    - vervoer: limited-express
+      naam: Fuji Excursion
+      van: Shinjuku Station
+      naar: Kawaguchiko Station
+      vanStation: shinjuku
+      naarStation: kawaguchiko
+      minuten: 115
+      reserveren: verplicht
+      opmerking: >-
+        Alleen gereserveerde plaatsen. Het laatste stuk is van Fujikyu en valt
+        niet onder de JR Pass.
+    - vervoer: bus
+      naam: Snelbus vanaf Busta Shinjuku
+      van: Busta Shinjuku
+      naar: Kawaguchiko Station
+      vanStation: shinjuku
+      naarStation: kawaguchiko
+      minuten: 110
+      reserveren: aanbevolen
+      alternatief: true
+  opmerking: >-
+    Kies de dag op het weer. Kijk de avond ervoor of de top vrij is, en ga
+    vroeg: later op de dag trekt er bewolking om de berg.
+
+- id: naar-het-vliegveld
+  datum: 2026-10-23
+  titel: Naar het vliegveld
+  van: tokio
+  naar: hanoi
+  stappen:
+    - vervoer: limited-express
+      naam: Narita Express
+      van: Tokyo Station
+      naar: Narita Airport
+      vanStation: tokio
+      minuten: 60
+      reserveren: verplicht
+    - vervoer: trein
+      naam: Keikyu naar Haneda
+      van: Shinagawa Station
+      naar: Haneda Airport
+      minuten: 20
+      reserveren: niet-nodig
+      alternatief: true
+      opmerking: Als je vlucht van Haneda vertrekt.
+  opmerking: >-
+    Je vlucht vertrekt om 09:30. Kijk op je ticket of dat vanaf Narita of
+    Haneda is, en wees er twee tot drie uur van tevoren. Voor Narita betekent
+    dat vroeg de deur uit: kijk de avond ervoor welke trein of bus dan al rijdt.

@@ -106,7 +106,7 @@ export const Terug = ({ naar = '/' }: { naar?: string }) => {
     <button
       type="button"
       onClick={terug}
-      className="-ml-1.5 inline-flex min-h-9 items-center gap-0.5 pr-3 text-sm font-medium text-zegel"
+      className="-ml-1.5 inline-flex min-h-9 items-center gap-0.5 pr-3 text-sm font-medium text-zegel dark:text-zegel-licht"
     >
       <ChevronLeft className="size-5" aria-hidden />
       Terug
