@@ -130,6 +130,9 @@ Gebouwd:
   visumcheck, je lijst delen, en de volledige offline test.
 - Fase 9: het jetlagplan, heen en terug, met een regel voor vandaag in het
   hoofdmenu.
+- Fase 10: een balk onderaan elk scherm (Steden, Plannen, Budget, Taal en Meer),
+  het scherm Meer met alle hulpmiddelen als tegels, een terugknop die teruggaat
+  naar waar je vandaan kwam, en bij elke stad de datums uit het reisschema.
 
 De app is daarmee compleet volgens de functiespecificatie.
 

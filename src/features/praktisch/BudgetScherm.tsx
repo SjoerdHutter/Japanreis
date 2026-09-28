@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
 import type { Valuta } from '@/domein/schema';
 import { REISSCHEMA, STEDEN } from '@/data/content';
 import { vandaagOpReis } from '@/domein/highlight/vandaag';
@@ -107,10 +106,7 @@ export const BudgetScherm = () => {
 
   return (
     <div className="mx-auto w-full max-w-2xl px-4 pt-4 pb-16">
-      <Link to="/" className="text-sm text-zegel underline underline-offset-2">
-        Alle steden
-      </Link>
-      <h1 className="mt-3 text-2xl font-semibold tracking-tight">Budget en uitgaven</h1>
+      <h1 className="mt-1 text-2xl font-semibold tracking-tight">Budget en uitgaven</h1>
 
       <Kaartje className="mt-4 mb-5 p-4">
         <p className="text-sm text-inkt-zacht dark:text-papier/70">Uitgegeven tot nu toe</p>

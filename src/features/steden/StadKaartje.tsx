@@ -13,17 +13,42 @@ import { Label } from '@/ui/basis';
  * beschrijving: het hoofdmenu werd 1685 pixels breed en schoof op een telefoon
  * zijwaarts. De `min-w-0` op de tekst daarbinnen helpt daar niet tegen; die
  * geldt binnen het kaartje, niet voor het grid eromheen.
+ *
+ * Naast de naam staat wanneer je er bent. Zonder dat moest je elke stad openen
+ * om te zien waar je volgende week zit, terwijl dat de vraag is die je bij het
+ * inpakken stelt.
  */
-export const StadKaartje = ({ stad, offline }: { stad: Stad; offline: boolean }) => (
+export const StadKaartje = ({
+  stad,
+  offline,
+  periode,
+  geweest = false,
+}: {
+  stad: Stad;
+  offline: boolean;
+  /** Wanneer je er volgens het reisschema bent, bijvoorbeeld "8 t/m 12 okt". */
+  periode?: string | null;
+  /** Elk bezoek ligt achter je. Dan zakt het kaartje wat weg, maar blijft het te openen. */
+  geweest?: boolean;
+}) => (
   <Link
     to={`/stad/${stad.id}`}
-    className="flex min-w-0 items-center gap-3 rounded-xl border border-black/5 bg-white/60 px-3.5 py-3 transition hover:bg-white dark:border-white/10 dark:bg-nacht-diep/60 dark:hover:bg-nacht-diep"
+    className={`flex min-w-0 items-center gap-3 rounded-xl border border-black/5 bg-white/60 px-3.5 py-3 transition hover:bg-white dark:border-white/10 dark:bg-nacht-diep/60 dark:hover:bg-nacht-diep ${
+      geweest ? 'opacity-55' : ''
+    }`}
   >
     <span className="text-lg" aria-hidden>
       {stad.land === 'japan' ? '🇯🇵' : '🇻🇳'}
     </span>
     <span className="min-w-0 flex-1">
-      <span className="block font-medium">{stad.naam}</span>
+      <span className="flex items-baseline gap-2">
+        <span className="font-medium">{stad.naam}</span>
+        {periode && (
+          <span className="ml-auto shrink-0 text-xs font-medium text-inkt-zacht tabular-nums dark:text-papier/60">
+            {geweest ? `geweest, ${periode}` : periode}
+          </span>
+        )}
+      </span>
       <span className="block truncate text-sm text-inkt-zacht dark:text-papier/60">
         {stad.korteBeschrijving}
       </span>

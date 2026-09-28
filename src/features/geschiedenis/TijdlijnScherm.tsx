@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import type { Plaats, Stad, Tijdvak } from '@/domein/schema';
 import { STEDEN, TIJDLIJNEN, laadPlaatsen } from '@/data/content';
-import { Kaartje, Label, Sectiekop } from '@/ui/basis';
+import { Kaartje, Label, Sectiekop, Terug } from '@/ui/basis';
 
 /**
  * De tijdlijn van een land: Japan van Nara tot naoorlogs, Hanoi van Thang Long
@@ -56,11 +56,9 @@ export const TijdlijnScherm = () => {
 
   return (
     <div className="mx-auto w-full max-w-2xl px-4 pt-4 pb-16">
-      <Link to="/" className="text-sm text-zegel underline underline-offset-2">
-        Alle steden
-      </Link>
+      <Terug naar="/" />
 
-      <header className="mt-3 mb-6">
+      <header className="mt-1 mb-6">
         <h1 className="text-2xl font-semibold tracking-tight">Tijdlijn {tijdlijn.naam}</h1>
         <p className="mt-2 leading-relaxed text-inkt-zacht dark:text-papier/70">
           Van elk tijdvak staat eronder wat je er in deze reis van terugziet.
@@ -172,11 +170,8 @@ export const StadGeschiedenisScherm = () => {
 
   return (
     <div className="mx-auto w-full max-w-2xl px-4 pt-4 pb-16">
-      <Link to={`/stad/${stad.id}`} className="text-sm text-zegel underline underline-offset-2">
-        Terug naar {stad.naam}
-      </Link>
-
-      <h1 className="mt-3 text-2xl font-semibold tracking-tight">Geschiedenis van {stad.naam}</h1>
+      <Terug naar={`/stad/${stad.id}`} />
+      <h1 className="mt-1 text-2xl font-semibold tracking-tight">Geschiedenis van {stad.naam}</h1>
 
       <Kaartje className="mt-4 p-4">
         <p className="leading-relaxed whitespace-pre-line">

@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
 import type { Plaats } from '@/domein/schema';
 import { REISSCHEMA, STEDEN, laadPlaatsen, stadMet } from '@/data/content';
 import { vandaagOpReis } from '@/domein/highlight/vandaag';
@@ -119,10 +118,7 @@ export const DagplannerScherm = () => {
 
   return (
     <div className="mx-auto w-full max-w-2xl px-4 pt-4 pb-16">
-      <Link to="/" className="text-sm text-zegel underline underline-offset-2">
-        Alle steden
-      </Link>
-      <h1 className="mt-3 text-2xl font-semibold tracking-tight">Dagplanner</h1>
+      <h1 className="mt-1 text-2xl font-semibold tracking-tight">Dagplanner</h1>
       <p className="mt-2 mb-5 leading-relaxed text-inkt-zacht dark:text-papier/70">
         Vink punten aan; de app zet er een looproute van met tijden, en haalt eruit wat die dag
         gesloten is.

@@ -3,7 +3,7 @@ import { Link, useParams, useSearchParams } from 'react-router-dom';
 import type { EigenPunt, Plaats } from '@/domein/schema';
 import { laadPlaatsen, stadMet, tijdlijnVan } from '@/data/content';
 import { useApp } from '@/state/useApp';
-import { Kaartje, Label, Sectiekop } from '@/ui/basis';
+import { Kaartje, Label, Sectiekop, Terug } from '@/ui/basis';
 import { Kaart, laagVan, type KaartPunt } from '@/features/kaart/Kaart';
 import { OfflineKnop } from '@/features/kaart/OfflineKnop';
 import { VastzetKnop } from '@/features/steden/Hoofdmenu';
@@ -215,11 +215,9 @@ export const StadScherm = () => {
 
   return (
     <div className="mx-auto w-full max-w-2xl px-4 pt-4 pb-16">
-      <Link to="/" className="text-sm text-zegel underline underline-offset-2">
-        Alle steden
-      </Link>
+      <Terug naar="/" />
 
-      <header className="mt-3 mb-4">
+      <header className="mt-1 mb-4">
         <div className="flex flex-wrap items-center gap-2">
           <h1 className="text-2xl font-semibold tracking-tight">{stad.naam}</h1>
           {stad.naamLokaal && (

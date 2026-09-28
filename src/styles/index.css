@@ -15,6 +15,9 @@
   --color-inkt-zacht: #5c554c;
   --color-zegel: #8c2f39;
   --color-zegel-diep: #6d2029;
+  /* Het zegelrood voor op een donkere ondergrond: het gewone rood verdwijnt
+     daar bijna tegen de achtergrond. */
+  --color-zegel-licht: #e0707b;
   --color-indigo-reis: #2f4858;
   --color-nacht: #17150f;
   --color-nacht-diep: #211e17;

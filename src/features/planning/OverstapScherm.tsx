@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import type { Plaats } from '@/domein/schema';
 import { laadPlaatsen, stadMet } from '@/data/content';
 import { alsKlok, maakDagplan } from '@/domein/planning/dagplanner';
-import { Kaartje, Knop, Label, Sectiekop } from '@/ui/basis';
+import { Kaartje, Knop, Label, Sectiekop, Terug } from '@/ui/basis';
 import {
   RIT_MINUTEN,
   alsDuur,
@@ -119,10 +119,8 @@ export const OverstapScherm = () => {
 
   return (
     <div className="mx-auto w-full max-w-2xl px-4 pt-4 pb-16">
-      <Link to="/" className="text-sm text-zegel underline underline-offset-2">
-        Alle steden
-      </Link>
-      <h1 className="mt-3 text-2xl font-semibold tracking-tight">Overstap in Hanoi</h1>
+      <Terug naar="/meer" />
+      <h1 className="mt-1 text-2xl font-semibold tracking-tight">Overstap in Hanoi</h1>
       <p className="mt-2 mb-5 leading-relaxed text-inkt-zacht dark:text-papier/70">
         Vul je landings- en vertrektijd in. De app rekent met {RIT_MINUTEN} minuten tussen Noi Bai
         en het centrum, elke kant op, en zegt wat er overblijft.

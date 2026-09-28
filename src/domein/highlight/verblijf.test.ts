@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { verblijfIn } from './verblijf';
+import { isVoorbij, periodeVan, verblijfIn } from './verblijf';
 import type { Reisschema } from '@/domein/schema';
 
 const SCHEMA: Reisschema = {
@@ -45,5 +45,44 @@ describe('verblijfIn', () => {
 
   it('geeft een lege lijst voor een stad die niet in het schema staat', () => {
     expect(verblijfIn(SCHEMA, 'hakone')).toEqual([]);
+  });
+});
+
+describe('periodeVan', () => {
+  const periode = (van: string, tot: string) => periodeVan([{ van, tot }]);
+
+  it('schrijft één dag, twee dagen en een reeks dagen elk op hun eigen manier', () => {
+    expect(periode('2026-10-04', '2026-10-04')).toBe('4 okt');
+    expect(periode('2026-10-05', '2026-10-06')).toBe('5 en 6 okt');
+    expect(periode('2026-10-08', '2026-10-12')).toBe('8 t/m 12 okt');
+  });
+
+  it('noemt beide maanden als het bezoek over een maandgrens loopt', () => {
+    expect(periode('2026-09-30', '2026-10-02')).toBe('30 sep t/m 2 okt');
+    expect(periode('2026-10-31', '2026-11-01')).toBe('31 okt en 1 nov');
+  });
+
+  it('zet twee bezoeken achter elkaar, zoals Hanoi heen en terug', () => {
+    expect(periodeVan(verblijfIn(SCHEMA, 'hanoi'))).toBe('4 okt, 23 okt');
+  });
+
+  it('geeft niets voor een stad zonder datums', () => {
+    expect(periodeVan(verblijfIn(SCHEMA, 'nara'))).toBeNull();
+  });
+});
+
+describe('isVoorbij', () => {
+  it('is pas voorbij de dag na het laatste bezoek', () => {
+    const kanazawa = verblijfIn(SCHEMA, 'kanazawa');
+    expect(isVoorbij(kanazawa, '2026-10-15')).toBe(false);
+    expect(isVoorbij(kanazawa, '2026-10-16')).toBe(true);
+  });
+
+  it('telt een stad met nog een bezoek in het verschiet niet als voorbij', () => {
+    expect(isVoorbij(verblijfIn(SCHEMA, 'hanoi'), '2026-10-10')).toBe(false);
+  });
+
+  it('noemt een stad zonder datums nooit voorbij', () => {
+    expect(isVoorbij(verblijfIn(SCHEMA, 'nara'), '2026-12-31')).toBe(false);
   });
 });
