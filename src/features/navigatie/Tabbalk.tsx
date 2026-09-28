@@ -4,6 +4,7 @@ import {
   Languages,
   LayoutGrid,
   MapPinned,
+  Siren,
   Wallet,
   type LucideIcon,
 } from 'lucide-react';
@@ -26,6 +27,7 @@ interface Tab {
   icoon: LucideIcon;
   /** Bij welke adressen deze tab oplicht. */
   hoortBij: (pad: string) => boolean;
+  rood?: boolean;
 }
 
 const bij =
@@ -43,6 +45,9 @@ const TABS: Tab[] = [
   { pad: '/dagplanner', naam: 'Plannen', icoon: CalendarDays, hoortBij: bij('/dagplanner') },
   { pad: '/budget', naam: 'Budget', icoon: Wallet, hoortBij: bij('/budget') },
   { pad: '/context', naam: 'Taal', icoon: Languages, hoortBij: bij('/context') },
+  // Nood staat in de balk en niet onder Meer: in een noodgeval wil je niet
+  // zoeken. Het icoon is altijd rood, ook als de tab niet actief is.
+  { pad: '/nood', naam: 'Nood', icoon: Siren, hoortBij: bij('/nood'), rood: true },
 ];
 
 const MEER: Tab = {
@@ -60,8 +65,8 @@ export const Tabbalk = () => {
       aria-label="Hoofdmenu"
       className="fixed inset-x-0 bottom-0 z-[1100] border-t border-black/10 bg-papier/95 pb-[env(safe-area-inset-bottom)] backdrop-blur dark:border-white/10 dark:bg-nacht/95"
     >
-      <ul className="mx-auto grid max-w-2xl grid-cols-5">
-        {[...TABS, MEER].map(({ pad, naam, icoon: Icoon, hoortBij }) => {
+      <ul className="mx-auto grid max-w-2xl grid-cols-6">
+        {[...TABS, MEER].map(({ pad, naam, icoon: Icoon, hoortBij, rood }) => {
           const actief = hoortBij(pathname);
           return (
             <li key={pad} className="min-w-0">
@@ -69,9 +74,11 @@ export const Tabbalk = () => {
                 to={pad}
                 aria-current={actief ? 'page' : undefined}
                 className={`flex h-14 flex-col items-center justify-center gap-0.5 text-[11px] font-medium transition ${
-                  actief
-                    ? 'text-zegel dark:text-zegel-licht'
-                    : 'text-inkt-zacht hover:text-inkt dark:text-papier/55 dark:hover:text-papier'
+                  rood
+                    ? 'text-red-700 dark:text-red-400'
+                    : actief
+                      ? 'text-zegel dark:text-zegel-licht'
+                      : 'text-inkt-zacht hover:text-inkt dark:text-papier/55 dark:hover:text-papier'
                 }`}
               >
                 <Icoon className="size-[22px]" strokeWidth={actief ? 2.25 : 1.75} aria-hidden />

@@ -16,3 +16,4 @@ export * from './reisdag';
 export * from './allergeen';
 export * from './gegevens';
 export * from './opslag';
+export * from './nood';

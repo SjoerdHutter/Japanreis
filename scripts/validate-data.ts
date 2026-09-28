@@ -27,6 +27,7 @@ import {
 import { tipsBestandSchema } from '../src/domein/schema/tips';
 import { stationsBestandSchema } from '../src/domein/schema/station';
 import { reisdagenBestandSchema } from '../src/domein/schema/reisdag';
+import { allergenenBestandSchema, noodBestandSchema } from '../src/domein/schema/nood';
 import { binnenGebied } from '../src/domein/geo/afstand';
 
 const DATA = 'data';
@@ -82,6 +83,30 @@ const reisdagen = controleer(
 
 if (zinnen && new Set(zinnen.map((z) => z.id)).size !== zinnen.length) {
   fouten.push('zinnen.yaml: dubbele zin-id');
+}
+
+const nood = controleer(noodBestandSchema, lees(join(DATA, 'nood.yaml')), 'nood.yaml');
+controleer(allergenenBestandSchema, lees(join(DATA, 'allergenen.yaml')), 'allergenen.yaml');
+
+// De toonkaarten in het noodscherm verwijzen naar zinnen; een tikfout daarin
+// betekent een lege kaart op het moment dat je hem nodig hebt.
+if (nood && zinnen) {
+  const zinIds = new Set(zinnen.map((z) => z.id));
+  for (const land of nood.landen) {
+    for (const id of land.toonkaarten) {
+      if (!zinIds.has(id))
+        fouten.push(`nood.yaml: ${land.land} verwijst naar onbekende zin "${id}"`);
+    }
+  }
+  for (const id of ['allergie-lijst-ja', 'allergie-lijst-vn']) {
+    if (!zinIds.has(id)) fouten.push(`zinnen.yaml: de zin "${id}" voor de allergiekaart ontbreekt`);
+  }
+  const noodIds = [
+    ...nood.landen.flatMap((l) => [...l.nummers.map((n) => n.id), l.ambassade.id]),
+    ...nood.algemeen.map((n) => n.id),
+    ...nood.rampen.map((r) => r.id),
+  ];
+  if (new Set(noodIds).size !== noodIds.length) fouten.push('nood.yaml: dubbele id');
 }
 if (etiquette && new Set(etiquette.map((e) => e.id)).size !== etiquette.length) {
   fouten.push('etiquette.yaml: dubbele etiquette-id');

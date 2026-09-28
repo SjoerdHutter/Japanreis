@@ -9,6 +9,8 @@ import seizoenRuw from '../../../data/seizoen.yaml';
 import tipsRuw from '../../../data/tips.yaml';
 import stationsRuw from '../../../data/stations.yaml';
 import reisdagenRuw from '../../../data/reisdagen.yaml';
+import noodRuw from '../../../data/nood.yaml';
+import allergenenRuw from '../../../data/allergenen.yaml';
 import {
   appsBestandSchema,
   vervoerBestandSchema,
@@ -18,6 +20,8 @@ import {
   tipsBestandSchema,
   stationsBestandSchema,
   reisdagenBestandSchema,
+  noodBestandSchema,
+  allergenenBestandSchema,
   plaatsenBestandSchema,
   reisschemaSchema,
   stedenBestandSchema,
@@ -34,6 +38,8 @@ import {
   type TipsContent,
   type Station,
   type Reisdag,
+  type NoodContent,
+  type AllergeenVertaling,
 } from '@/domein/schema';
 
 /**
@@ -84,6 +90,14 @@ export const TIPS: TipsContent = parseer(tipsBestandSchema, tipsRuw, 'tips');
 export const STATIONS: Station[] = parseer(stationsBestandSchema, stationsRuw, 'stations');
 
 export const REISDAGEN: Reisdag[] = parseer(reisdagenBestandSchema, reisdagenRuw, 'reisdagen');
+
+export const NOOD: NoodContent = parseer(noodBestandSchema, noodRuw, 'nood');
+
+export const ALLERGEEN_VERTALINGEN: AllergeenVertaling[] = parseer(
+  allergenenBestandSchema,
+  allergenenRuw,
+  'allergenen',
+);
 
 export const stationMet = (id: string): Station | undefined => STATIONS.find((s) => s.id === id);
 

@@ -1,0 +1,54 @@
+# De allergenen uit Mijn gegevens in het Japans en het Vietnamees.
+#
+# Deze woorden komen op de kaart die je aan het personeel laat zien, en op de
+# kaarten in het noodscherm. Redactionele content, NIET door een moedertaal-
+# spreker nagekeken: `gecontroleerd: false` tot je dat hebt laten doen en het in
+# de app hebt aangevinkt.
+#
+# Bij vis, soja en alcohol staat met opzet wat erin verstopt zit: dashi en
+# vissaus, sojasaus en miso, mirin en sake. Daar gaat het in de praktijk mis.
+
+- id: gluten
+  japans: 小麦（グルテン）
+  vietnamees: bột mì (gluten)
+  gecontroleerd: false
+- id: schaaldieren
+  japans: えび・かに・貝類
+  vietnamees: tôm, cua, sò và hải sản có vỏ
+  gecontroleerd: false
+- id: vis
+  japans: 魚（だしを含む）
+  vietnamees: cá (kể cả nước mắm)
+  gecontroleerd: false
+- id: ei
+  japans: 卵
+  vietnamees: trứng
+  gecontroleerd: false
+- id: melk
+  japans: 乳製品（牛乳）
+  vietnamees: sữa và các sản phẩm từ sữa
+  gecontroleerd: false
+- id: soja
+  japans: 大豆（醤油・味噌を含む）
+  vietnamees: đậu nành (kể cả xì dầu)
+  gecontroleerd: false
+- id: pinda
+  japans: 落花生（ピーナッツ）
+  vietnamees: đậu phộng (lạc)
+  gecontroleerd: false
+- id: sesam
+  japans: ごま
+  vietnamees: vừng (mè)
+  gecontroleerd: false
+- id: noten
+  japans: ナッツ類（くるみ・アーモンドなど）
+  vietnamees: các loại hạt (óc chó, hạnh nhân)
+  gecontroleerd: false
+- id: varkensvlees
+  japans: 豚肉（ラードを含む）
+  vietnamees: thịt lợn (thịt heo)
+  gecontroleerd: false
+- id: alcohol
+  japans: アルコール（みりん・酒を含む）
+  vietnamees: rượu, bia và đồ có cồn
+  gecontroleerd: false

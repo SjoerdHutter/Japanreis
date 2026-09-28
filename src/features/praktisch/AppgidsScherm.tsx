@@ -1,7 +1,10 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import type { App } from '@/domein/schema';
 import { APPS } from '@/data/content';
+import { appFeitId } from '@/data/content/feiten';
 import { Kaartje, Label, Sectiekop, Terug } from '@/ui/basis';
+import { Controleren } from '@/ui/Controleren';
 
 /**
  * De appgids uit hoofdstuk 9.
@@ -35,6 +38,12 @@ const VOLGORDE: App['categorie'][] = ['vervoer', 'betalen', 'taal', 'eten', 'bes
 export const AppgidsScherm = () => {
   const [land, setLand] = useState<'alles' | 'japan' | 'vietnam'>('alles');
   const [alleenVooraf, setAlleenVooraf] = useState(false);
+  // Vanuit het noodscherm kom je hier voor één app; dan scrolt hij ernaartoe.
+  const [zoekparams] = useSearchParams();
+  const gevraagd = zoekparams.get('app');
+  useEffect(() => {
+    if (gevraagd) document.getElementById(`app-${gevraagd}`)?.scrollIntoView({ block: 'center' });
+  }, [gevraagd]);
 
   const zichtbaar = useMemo(
     () =>
@@ -81,7 +90,11 @@ export const AppgidsScherm = () => {
             <Sectiekop>{CATEGORIE_NAAM[categorie]}</Sectiekop>
             <div className="grid gap-2">
               {inCategorie.map((app) => (
-                <Kaartje key={app.id} className="p-3.5">
+                <Kaartje
+                  key={app.id}
+                  className={`scroll-mt-4 p-3.5 ${app.id === gevraagd ? 'ring-2 ring-zegel' : ''}`}
+                >
+                  <span id={`app-${app.id}`} />
                   <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
                     <span className="font-medium">{app.naam}</span>
                     <Label toon={OFFLINE_LABEL[app.offline].toon}>
@@ -91,6 +104,7 @@ export const AppgidsScherm = () => {
                       <Label toon="let-op">vooraf downloaden</Label>
                     )}
                     <Label>bespaart {app.bespaart}</Label>
+                    <Controleren id={appFeitId(app.id)} gecontroleerd={app.gecontroleerd} />
                   </div>
                   <p className="mt-1.5 text-sm leading-relaxed text-inkt-zacht dark:text-papier/70">
                     {app.waarvoor}

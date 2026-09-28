@@ -81,6 +81,17 @@ interface JapanreisDB extends DBSchema {
    * paspoortfoto's langs te lopen.
    */
   bijlagen: { key: string; value: Bijlage; indexes: { eigenaar: string } };
+  /**
+   * Welke meegeleverde feiten je zelf hebt nagekeken: een noodnummer, een
+   * vertaling, een laatste trein. Het vinkje is van jou, niet van de content.
+   */
+  controles: { key: string; value: Controle };
+}
+
+/** Een feit uit de content dat je hebt nagekeken. De id is `bron:id`, zoals `nood:japan-politie`. */
+export interface Controle {
+  id: string;
+  gecontroleerdOp: string;
 }
 
 /** Een reservering; het schema en de uitleg staan in domein/schema/opslag.ts. */
@@ -151,7 +162,7 @@ export interface OpgeslagenFoto {
 }
 
 const DB_NAAM = 'japanreis';
-const DB_VERSIE = 7;
+const DB_VERSIE = 8;
 
 let dbBelofte: Promise<IDBPDatabase<JapanreisDB>> | null = null;
 
@@ -196,6 +207,9 @@ export const getDb = (): Promise<IDBPDatabase<JapanreisDB>> => {
       if (!db.objectStoreNames.contains('bijlagen')) {
         const store = db.createObjectStore('bijlagen', { keyPath: 'id' });
         store.createIndex('eigenaar', 'eigenaar');
+      }
+      if (!db.objectStoreNames.contains('controles')) {
+        db.createObjectStore('controles', { keyPath: 'id' });
       }
     },
   });

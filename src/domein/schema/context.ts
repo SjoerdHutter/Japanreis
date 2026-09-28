@@ -36,6 +36,8 @@ export const zinSchema = z.object({
   /** De uitspraak in Nederlandse spelling, niet in officiële romaji. */
   uitspraak: z.string().min(1),
   wanneer: z.string().optional(),
+  /** Nog niet nagekeken door een moedertaalspreker; zie data/nood.yaml. */
+  gecontroleerd: z.boolean().optional(),
 });
 export type Zin = z.infer<typeof zinSchema>;
 export const zinnenBestandSchema = z.array(zinSchema);

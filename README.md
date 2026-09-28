@@ -146,6 +146,11 @@ Gebouwd:
   boekingsnummer en vouchers.
 - Backup en herstel: alles in één zip, via het deelvenster naar iCloud Drive,
   en weer terug met samenvoegen of vervangen.
+- Nood: een zesde tab met de alarmnummers van het land van vandaag, je
+  verzekering, je noodcontacten, kaarten om te tonen (ziekenhuis, apotheek,
+  politie en je allergieën in het Japans of Vietnamees) en wat je doet bij een
+  aardbeving of tyfoon. Plus Controleren: alle meegeleverde feiten die je voor
+  vertrek moet nakijken, met een vinkje.
 
 De app is daarmee compleet volgens de functiespecificatie.
 
@@ -412,3 +417,19 @@ Bij het opstarten vraagt de app de browser om je gegevens niet op te ruimen.
 Onder Meer staat of dat gelukt is en hoeveel ruimte de app gebruikt. Is je
 laatste backup ouder dan drie dagen en is er sindsdien iets bijgekomen, dan
 staat er in het hoofdmenu een herinnering.
+
+### Nood en controleren
+
+De tab Nood staat in de balk onderaan, dus hij is vanaf elk scherm één tik weg.
+Het land van vandaag staat vooraan, volgens het reisschema; voor en na de reis
+is dat Japan. Elk nummer is een knop die belt. De nummers, de ambassades en het
+advies bij aardbevingen en tyfoons staan in `data/nood.yaml`; de allergenen in
+het Japans en Vietnamees in `data/allergenen.yaml`; de zinnen voor de kaarten
+om te tonen in `data/zinnen.yaml`.
+
+Wat de app over de wereld beweert en wat je niet zelf hebt ingevuld, draagt
+`gecontroleerd: false`. Dat zijn feiten waar je op het slechtste moment van de
+reis op moet kunnen bouwen, en ze komen uit algemene kennis. De app zet er een
+label "controleren" bij. Tik erop en vink "gecontroleerd" aan als je het bij de
+bron hebt nagekeken; dat vinkje staat op je toestel en gaat mee in de backup.
+Onder Meer, Controleren staan ze allemaal onder elkaar.

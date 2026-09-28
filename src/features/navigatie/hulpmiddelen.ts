@@ -1,6 +1,7 @@
 import {
   Archive,
   CalendarDays,
+  ListChecks,
   Camera,
   Import,
   Landmark,
@@ -57,6 +58,12 @@ export const GROEPEN: Groep[] = [
         naam: 'Backup',
         uitleg: 'Alles in één bestand, en weer terugzetten',
         icoon: Archive,
+      },
+      {
+        pad: '/controleren',
+        naam: 'Controleren',
+        uitleg: 'Feiten om voor vertrek na te kijken',
+        icoon: ListChecks,
       },
     ],
   },

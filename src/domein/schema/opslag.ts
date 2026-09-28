@@ -102,3 +102,9 @@ export const overstapRecordSchema = z.object({
   plaatsIds: z.array(z.string()),
   bewaardOp: z.string().min(1),
 });
+
+/** Een feit dat je zelf hebt nagekeken. */
+export const controleRecordSchema = z.object({
+  id: z.string().min(1),
+  gecontroleerdOp: z.string().min(1),
+});

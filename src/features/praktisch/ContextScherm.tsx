@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import type { Zin } from '@/domein/schema';
 import { ETIQUETTE, SEIZOEN, STEDEN, ZINNEN } from '@/data/content';
 import { Kaartje, Label, Sectiekop } from '@/ui/basis';
+import { Controleren } from '@/ui/Controleren';
+import { zinFeitId } from '@/data/content/feiten';
 import {
   alsDatumtekst,
   bloeiStand,
@@ -126,8 +128,16 @@ export const ContextScherm = () => {
               <div className="grid gap-2">
                 {inCategorie.map((zin) => (
                   <Kaartje key={zin.id} className="p-3.5">
-                    <p className="text-sm text-inkt-zacht dark:text-papier/65">{zin.nederlands}</p>
-                    <p className="mt-1 text-xl leading-snug font-medium">{zin.lokaal}</p>
+                    <p className="text-sm text-inkt-zacht dark:text-papier/65">
+                      {zin.nederlands}{' '}
+                      <Controleren id={zinFeitId(zin.id)} gecontroleerd={zin.gecontroleerd} />
+                    </p>
+                    <p
+                      lang={land === 'japan' ? 'ja' : 'vi'}
+                      className="mt-1 text-xl leading-snug font-medium"
+                    >
+                      {zin.lokaal}
+                    </p>
                     <p className="mt-1 text-sm text-inkt-zacht dark:text-papier/55">
                       {zin.uitspraak}
                     </p>
