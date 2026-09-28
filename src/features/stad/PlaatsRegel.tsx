@@ -7,6 +7,10 @@ import { formatteerPrijs } from '@/domein/valuta/formatteer';
 import { looptijdMinuten } from '@/domein/filters/plaatsen';
 import { nuOpen, sluitingswaarschuwing, waarschuwingstekst } from '@/domein/openingstijden/status';
 import { tijdlijnVan } from '@/data/content';
+import { useOverschrijvingen, zetOverschrijving } from '@/data/overschrijvingen';
+import { eigenVelden } from '@/data/usePlaatsen';
+import { EigenWaarde } from '@/ui/EigenWaarde';
+import { DrukteBlok } from './DrukteBlok';
 
 /**
  * Eén punt in de lijst, dichtgeklapt tot je erop tikt.
@@ -32,6 +36,7 @@ export const PlaatsRegel = ({
 }) => {
   const { koersen } = useApp();
   const [open, setOpen] = useState(false);
+  const eigen = eigenVelden(useOverschrijvingen(), plaats.id);
 
   const waarschuwing = sluitingswaarschuwing(plaats, stad);
   const openNu = nuOpen(plaats, stad);
@@ -83,6 +88,9 @@ export const PlaatsRegel = ({
             {plaats.reservering === 'verplicht' && (
               <Label toon="let-op">reserveren verplicht</Label>
             )}
+            {plaats.alleenContant && (
+              <Label toon={eigen.has('alleenContant') ? 'eigen' : 'let-op'}>alleen contant</Label>
+            )}
             {(plaats.ekiStempel || plaats.goshuin) && (
               <Label>{plaats.ekiStempel ? 'eki stamp' : 'goshuin'}</Label>
             )}
@@ -116,12 +124,7 @@ export const PlaatsRegel = ({
 
           {waarschuwing?.opmerking && <Regel titel="Let op">{waarschuwing.opmerking}</Regel>}
 
-          {plaats.attractie?.drukte?.besteMoment && (
-            <Regel titel="Beste moment">{plaats.attractie.drukte.besteMoment}</Regel>
-          )}
-          {plaats.attractie?.drukte?.drukstMoment && (
-            <Regel titel="Drukst">{plaats.attractie.drukte.drukstMoment}</Regel>
-          )}
+          <DrukteBlok plaats={plaats} eigen={eigen} />
 
           {plaats.reservering && plaats.reservering !== 'niet-nodig' && (
             <Regel titel="Reserveren">
@@ -131,6 +134,30 @@ export const PlaatsRegel = ({
           )}
 
           {plaats.adres && <Regel titel="Adres">{plaats.adres}</Regel>}
+
+          <div className="mt-2 flex flex-wrap items-center gap-2 text-inkt-zacht dark:text-papier/65">
+            <strong className="font-medium text-inkt dark:text-papier">Betalen:</strong>
+            <select
+              aria-label="Alleen contant"
+              value={plaats.alleenContant === undefined ? '' : plaats.alleenContant ? 'ja' : 'nee'}
+              onChange={(e) =>
+                void zetOverschrijving(
+                  'plaats',
+                  plaats.id,
+                  'alleenContant',
+                  e.target.value === '' ? undefined : e.target.value === 'ja',
+                )
+              }
+              className="rounded-lg border border-black/10 bg-white px-2 py-1 text-sm dark:border-white/15 dark:bg-nacht"
+            >
+              <option value="">onbekend</option>
+              <option value="ja">alleen contant</option>
+              <option value="nee">kaart kan</option>
+            </select>
+            {eigen.has('alleenContant') && (
+              <EigenWaarde doel="plaats" doelId={plaats.id} veld="alleenContant" />
+            )}
+          </div>
 
           {plaats.coordinaatGeschat && (
             <Regel titel="Pin">

@@ -9,6 +9,9 @@ import seizoenRuw from '../../../data/seizoen.yaml';
 import tipsRuw from '../../../data/tips.yaml';
 import stationsRuw from '../../../data/stations.yaml';
 import reisdagenRuw from '../../../data/reisdagen.yaml';
+import noodRuw from '../../../data/nood.yaml';
+import allergenenRuw from '../../../data/allergenen.yaml';
+import laatsteTreinenRuw from '../../../data/laatste-treinen.yaml';
 import {
   appsBestandSchema,
   vervoerBestandSchema,
@@ -18,6 +21,11 @@ import {
   tipsBestandSchema,
   stationsBestandSchema,
   reisdagenBestandSchema,
+  noodBestandSchema,
+  allergenenBestandSchema,
+  laatsteTreinenBestandSchema,
+  kaartlagenBestandSchema,
+  menuBestandSchema,
   plaatsenBestandSchema,
   reisschemaSchema,
   stedenBestandSchema,
@@ -34,6 +42,11 @@ import {
   type TipsContent,
   type Station,
   type Reisdag,
+  type NoodContent,
+  type AllergeenVertaling,
+  type LaatsteTrein,
+  type Kaartlagen,
+  type MenuItem,
 } from '@/domein/schema';
 
 /**
@@ -85,6 +98,20 @@ export const STATIONS: Station[] = parseer(stationsBestandSchema, stationsRuw, '
 
 export const REISDAGEN: Reisdag[] = parseer(reisdagenBestandSchema, reisdagenRuw, 'reisdagen');
 
+export const NOOD: NoodContent = parseer(noodBestandSchema, noodRuw, 'nood');
+
+export const ALLERGEEN_VERTALINGEN: AllergeenVertaling[] = parseer(
+  allergenenBestandSchema,
+  allergenenRuw,
+  'allergenen',
+);
+
+export const LAATSTE_TREINEN: LaatsteTrein[] = parseer(
+  laatsteTreinenBestandSchema,
+  laatsteTreinenRuw,
+  'laatste-treinen',
+);
+
 export const stationMet = (id: string): Station | undefined => STATIONS.find((s) => s.id === id);
 
 export const stadMet = (id: string): Stad | undefined => STEDEN.find((s) => s.id === id);
@@ -125,4 +152,34 @@ export const laadPlaatsen = async (stadId: string): Promise<Plaats[]> => {
 export const laadAllePlaatsen = async (): Promise<Plaats[]> => {
   const perStad = await Promise.all(STEDEN.map((s) => laadPlaatsen(s.id)));
   return perStad.flat();
+};
+
+/**
+ * De kaartlagen per stad (geldautomaten, kluisjes, toiletten), net als de
+ * plaatsen als losse brokken die de service worker bij de installatie al heeft
+ * opgehaald. Null voor een stad zonder bestand.
+ */
+const kaartlaagBestanden = import.meta.glob<{ default: unknown }>(
+  '../../../data/kaartlagen/*.json',
+);
+
+export const laadKaartlagen = async (stadId: string): Promise<Kaartlagen | null> => {
+  const sleutel = Object.keys(kaartlaagBestanden).find((pad) => pad.endsWith(`/${stadId}.json`));
+  if (!sleutel) return null;
+  const module = await kaartlaagBestanden[sleutel]();
+  return parseer(kaartlagenBestandSchema, module.default, `kaartlagen/${stadId}`);
+};
+
+/**
+ * De menukaart, pas geladen als je hem opent: 180 gerechten die je bij het
+ * opstarten niet nodig hebt. Net als de plaatsen een los brok dat de service
+ * worker al heeft opgehaald.
+ */
+let menu: Promise<MenuItem[]> | undefined;
+
+export const laadMenu = (): Promise<MenuItem[]> => {
+  menu ??= import('../../../data/menu.yaml').then((module) =>
+    parseer(menuBestandSchema, module.default, 'menu'),
+  );
+  return menu;
 };

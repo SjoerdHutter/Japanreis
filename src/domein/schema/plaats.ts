@@ -1,5 +1,11 @@
 import { z } from 'zod';
-import { bronSchema, coordinaatSchema, openingstijdenSchema, prijsSchema } from './basis';
+import {
+  bronSchema,
+  coordinaatSchema,
+  openingstijdenSchema,
+  prijsSchema,
+  weekdagSchema,
+} from './basis';
 
 /**
  * Het centrale model van de app: één punt op de kaart.
@@ -90,6 +96,9 @@ export type Keuken = z.infer<typeof keukenSchema>;
 export const dagdeelSchema = z.enum(['ochtend', 'middag', 'avond', 'nacht']);
 export type Dagdeel = z.infer<typeof dagdeelSchema>;
 
+export const drukteniveauSchema = z.enum(['rustig', 'druk', 'zeer-druk']);
+export type Drukteniveau = z.infer<typeof drukteniveauSchema>;
+
 export const reserveringSchema = z.enum(['verplicht', 'aanbevolen', 'niet-nodig']);
 export type Reservering = z.infer<typeof reserveringSchema>;
 
@@ -104,6 +113,17 @@ export const attractieSchema = z.object({
     .object({
       besteMoment: z.string().optional(),
       drukstMoment: z.string().optional(),
+      /**
+       * Het rustigste moment als tijdvak dat de planner kan lezen: "voor
+       * 08:00", "na 17:00", "07:00 tot 09:00" of "bij opening". Zie
+       * domein/planning/drukte.ts.
+       */
+      besteTijdslot: z.string().optional(),
+      /** Hoe druk het is per dagdeel. */
+      perDagdeel: z.partialRecord(dagdeelSchema, drukteniveauSchema).optional(),
+      druksteDagen: z.array(weekdagSchema).optional(),
+      /** Uit algemene kennis; de app zet er "controleren" bij tot je het aanvinkt. */
+      gecontroleerd: z.boolean().optional(),
     })
     .optional(),
 });
@@ -173,6 +193,12 @@ export const plaatsSchema = z.object({
   geslotenOpmerking: z.string().optional(),
   prijs: prijsSchema.optional(),
   reservering: reserveringSchema.optional(),
+  /**
+   * Alleen contant, geen kaart. In Japan geldt dat voor veel kleine tempels,
+   * marktkramen en eettentjes, in Hanoi voor vrijwel alle straateten. Je zet
+   * het ook zelf per plaats, als eigen waarde.
+   */
+  alleenContant: z.boolean().optional(),
   /** Verwijzing naar de tijdvakken uit de tijdlijn; zie tijdlijn.ts. */
   tijdvakken: z.array(z.string()).optional(),
 

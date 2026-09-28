@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import type { Zin } from '@/domein/schema';
 import { ETIQUETTE, SEIZOEN, STEDEN, ZINNEN } from '@/data/content';
 import { Kaartje, Label, Sectiekop } from '@/ui/basis';
+import { Controleren } from '@/ui/Controleren';
+import { zinFeitId } from '@/data/content/feiten';
 import {
   alsDatumtekst,
   bloeiStand,
@@ -117,6 +119,18 @@ export const ContextScherm = () => {
           Het schrift staat er groot bij, zodat je het kunt laten zien. Wijzen werkt beter dan
           uitspreken. De uitspraak is in Nederlandse spelling en niet in officiële romaji.
         </p>
+        {land === 'japan' && (
+          <p className="mb-3 text-sm leading-relaxed">
+            Een Japanse kaart ontcijferen?{' '}
+            <Link
+              to="/menu"
+              className="font-medium text-zegel underline underline-offset-2 dark:text-zegel-licht"
+            >
+              Open de menukaart
+            </Link>
+            , met je allergieën erbij.
+          </p>
+        )}
         {CATEGORIE_VOLGORDE.map((categorie) => {
           const inCategorie = zinnen.filter((z) => z.categorie === categorie);
           if (inCategorie.length === 0) return null;
@@ -126,8 +140,16 @@ export const ContextScherm = () => {
               <div className="grid gap-2">
                 {inCategorie.map((zin) => (
                   <Kaartje key={zin.id} className="p-3.5">
-                    <p className="text-sm text-inkt-zacht dark:text-papier/65">{zin.nederlands}</p>
-                    <p className="mt-1 text-xl leading-snug font-medium">{zin.lokaal}</p>
+                    <p className="text-sm text-inkt-zacht dark:text-papier/65">
+                      {zin.nederlands}{' '}
+                      <Controleren id={zinFeitId(zin.id)} gecontroleerd={zin.gecontroleerd} />
+                    </p>
+                    <p
+                      lang={land === 'japan' ? 'ja' : 'vi'}
+                      className="mt-1 text-xl leading-snug font-medium"
+                    >
+                      {zin.lokaal}
+                    </p>
                     <p className="mt-1 text-sm text-inkt-zacht dark:text-papier/55">
                       {zin.uitspraak}
                     </p>

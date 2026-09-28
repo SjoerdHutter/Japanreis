@@ -1,0 +1,110 @@
+# Noodnummers, ambassades en wat je doet bij een aardbeving of tyfoon.
+#
+# Redactionele content uit algemene kennis, NIET ter plaatse geverifieerd. Elk
+# feit heeft `gecontroleerd: false`; de app toont daar een label "controleren"
+# bij tot je het in de app zelf hebt nagekeken en aangevinkt. Zet het hier pas
+# op true als je het bij de bron hebt gecontroleerd, bijvoorbeeld op
+# netherlandsworldwide.nl.
+#
+# Nummers voor het land zelf (110, 113) staan zoals je ze intoetst. Een nummer
+# met een plus is internationaal.
+#
+# `toonkaarten` verwijst naar zinnen in zinnen.yaml die je in grote letters aan
+# iemand laat zien: in het ziekenhuis, bij de apotheek, bij de politie.
+
+landen:
+  - land: japan
+    naam: Japan
+    nummers:
+      - id: japan-politie
+        naam: Politie
+        nummer: '110'
+        wanneer: Diefstal, een ongeluk, iets wat je wilt aangeven.
+        gecontroleerd: false
+      - id: japan-brandweer-ambulance
+        naam: Brandweer en ambulance
+        nummer: '119'
+        wanneer: >-
+          Brand, of iemand heeft nu een ambulance nodig. Zeg eerst "kyuukyuu"
+          voor een ambulance of "kaji" voor brand.
+        gecontroleerd: false
+      - id: japan-visitor-hotline
+        naam: Japan Visitor Hotline
+        nummer: '+81 50 3816 2787'
+        wanneer: >-
+          Dag en nacht, in het Engels, van de Japanse toeristenorganisatie. Voor
+          ziekte, een ongeluk, een ramp, of als je niet weet waar je heen moet.
+        gecontroleerd: false
+    ambassade:
+      id: ambassade-tokio
+      naam: Nederlandse ambassade in Tokio
+      adres: 3-6-3 Shibakoen, Minato-ku, Tokio 105-0011
+      adresLokaal: 〒105-0011 東京都港区芝公園3-6-3
+      telefoon: '+81 3 5776 5400'
+      url: https://www.netherlandsworldwide.nl/countries/japan
+      gecontroleerd: false
+    toonkaarten: [nood-ziekenhuis-ja, nood-apotheek-ja, nood-koban-ja]
+
+  - land: vietnam
+    naam: Vietnam
+    nummers:
+      - id: vietnam-politie
+        naam: Politie
+        nummer: '113'
+        gecontroleerd: false
+      - id: vietnam-brandweer
+        naam: Brandweer
+        nummer: '114'
+        gecontroleerd: false
+      - id: vietnam-ambulance
+        naam: Ambulance
+        nummer: '115'
+        wanneer: >-
+          De ambulance in Hanoi is traag en spreekt zelden Engels. Een taxi of
+          Grab naar een internationaal ziekenhuis is vaak sneller.
+        gecontroleerd: false
+    ambassade:
+      id: ambassade-hanoi
+      naam: Nederlandse ambassade in Hanoi
+      adres: Daeha Business Center, 7e verdieping, 360 Kim Ma, Ba Dinh, Hanoi
+      adresLokaal: Tầng 7, Tòa nhà Daeha, 360 Kim Mã, Ba Đình, Hà Nội
+      telefoon: '+84 24 3831 5650'
+      url: https://www.netherlandsworldwide.nl/countries/vietnam
+      gecontroleerd: false
+    toonkaarten: [nood-ziekenhuis-vn, nood-apotheek-vn, nood-politie-vn]
+
+algemeen:
+  - id: bz-contactcenter
+    naam: 24/7 BZ Contact Center
+    nummer: '+31 247 247 247'
+    wanneer: >-
+      Buitenlandse Zaken, dag en nacht, voor Nederlanders in nood in het
+      buitenland: een gestolen paspoort, een arrestatie, een ziekenhuisopname.
+    gecontroleerd: false
+
+rampen:
+  - id: aardbeving
+    titel: Aardbeving
+    land: [japan]
+    inleiding: >-
+      Japan heeft elke dag kleine bevingen; meestal merk je een korte schok en
+      gaat iedereen gewoon door. Kijk naar wat de mensen om je heen doen.
+    stappen:
+      - Tijdens het schudden niet naar buiten rennen. Kruip onder een stevige tafel of zak door je knieën en bescherm je hoofd, weg van ramen en kasten.
+      - In een trein of metro blijf je zitten en houd je je vast; de trein stopt vanzelf.
+      - Na het schudden de deur open zetten, want een kozijn kan klemmen. Neem de trap, niet de lift.
+      - Aan de kust na een sterke of lange beving meteen naar hoger gelegen grond, zonder op een alarm te wachten. Volg de borden 津波避難 (tsunami evacuatie).
+      - Volg in een hotel de aanwijzingen van het personeel, en kijk op NHK World of in de app Safety tips.
+    gecontroleerd: false
+  - id: tyfoon
+    titel: Tyfoon
+    land: [japan, vietnam]
+    inleiding: >-
+      Oktober valt nog in het tyfoonseizoen. Een tyfoon zie je dagen van
+      tevoren aankomen, dus je hebt tijd om je plan aan te passen.
+    stappen:
+      - Volg de verwachting van het Japanse weerinstituut (JMA) of NHK World; in Vietnam het nieuws en je hotel.
+      - Treinen en de Shinkansen worden vaak een dag vooraf stilgelegd (計画運休, gepland uitval). Kijk de avond ervoor of je trein rijdt.
+      - Blijf tijdens de storm binnen en weg van ramen. Zorg voor water, iets te eten en een volle powerbank.
+      - Na de storm kunnen treinen nog uren stilstaan en straten onder water staan, in Hanoi zeker. Plan die dag niets wat niet kan wachten.
+    gecontroleerd: false

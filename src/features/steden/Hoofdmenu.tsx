@@ -12,6 +12,11 @@ import { datumIn } from '@/domein/tijd/zones';
 import { isVoorbij, periodeVan, verblijfIn } from '@/domein/highlight/verblijf';
 import { JetlagVandaag } from '@/features/jetlag/JetlagVandaag';
 import { ReisdagVandaag } from '@/features/reizen/ReisdagVandaag';
+import { NogInTeVullen } from '@/features/gegevens/NogInTeVullen';
+import { BackupHerinnering } from '@/features/backup/BackupHerinnering';
+import { WindVandaag } from '@/features/weer/WindVandaag';
+import { VerblijfVandaag } from '@/features/verblijf/VerblijfVandaag';
+import { NotitieVanavond } from '@/features/reizen/NotitieVanavond';
 
 /**
  * Het hoofdmenu: één highlight bovenaan, alle andere steden eronder.
@@ -143,7 +148,12 @@ export const Hoofdmenu = () => {
       )}
 
       <ReisdagVandaag />
+      <VerblijfVandaag />
+      <WindVandaag />
       <JetlagVandaag />
+      <NotitieVanavond />
+      <BackupHerinnering />
+      <NogInTeVullen />
 
       <section>
         <Sectiekop

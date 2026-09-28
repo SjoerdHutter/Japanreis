@@ -320,3 +320,27 @@ describe('keuzesUit', () => {
     expect(keuzesUit(ALLE).tijdvakken.sort()).toEqual(['edo', 'heian']);
   });
 });
+
+describe('filter op contant', () => {
+  const basis = ALLE[0];
+  const contant = { ...basis, id: 'contant', alleenContant: true };
+  const kaart = { ...basis, id: 'kaart', alleenContant: false };
+  const onbekend = { ...basis, id: 'onbekend' };
+  const lijst = [contant, kaart, onbekend];
+
+  it('toont alleen wat contant moet', () => {
+    expect(ids(filterPlaatsen(lijst, { contant: 'alleen' }, KYOTO, NU))).toEqual(['contant']);
+  });
+
+  it('laat bij "kaart kan" ook de onbekende staan', () => {
+    expect(ids(filterPlaatsen(lijst, { contant: 'zonder' }, KYOTO, NU))).toEqual([
+      'kaart',
+      'onbekend',
+    ]);
+  });
+
+  it('telt mee in de keuzes en in een actief filter', () => {
+    expect(keuzesUit(lijst).heeftContant).toBe(true);
+    expect(filterActief({ contant: 'alleen' })).toBe(true);
+  });
+});

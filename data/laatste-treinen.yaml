@@ -1,0 +1,242 @@
+# Ongeveer de laatste praktische vertrektijd van een knooppunt in de reis naar
+# een station waar je waarschijnlijk 's avonds heen moet.
+#
+# LET OP: dit is een BENADERING uit algemene kennis, niet uit een dienstregeling.
+# De laatste trein verschilt per weekdag en per seizoen, en "praktisch" is hier
+# de laatste die je nog zonder gedoe haalt, niet de allerlaatste die misschien
+# rijdt. Elke regel heeft `gecontroleerd: false`; kijk de tijden na in Google
+# Maps of Jorudan en vul in de app je eigen tijd in waar je het beter weet.
+#
+# `stad` is de stad van het knooppunt (waar je je dag plant), `naar` het
+# station waar je naartoe moet en `naarStad` de stad daarvan. Een tijd voor
+# 04:00 telt als na middernacht.
+#
+# De app kiest het knooppunt dat het dichtst bij je laatste stop ligt en zoekt
+# de regel waarvan `naar` overeenkomt met het terugstation van je verblijf in
+# Mijn gegevens. Takayama en Hanoi staan er niet in: in Takayama loop je, in
+# Hanoi neem je een Grab.
+
+- id: kyoto-shijo-kyoto-station
+  stad: kyoto
+  van: Shijo (metro)
+  vanCoordinaten: { lat: 35.0037, lon: 135.7596 }
+  naar: Kyoto Station
+  naarStad: kyoto
+  lijn: metro Karasuma-lijn, richting Takeda
+  laatsteVertrek: '23:30'
+  gecontroleerd: false
+
+- id: kyoto-kawaramachi-kyoto-station
+  stad: kyoto
+  van: Shijo-Kawaramachi (bus)
+  vanCoordinaten: { lat: 35.0037, lon: 135.7690 }
+  naar: Kyoto Station
+  naarStad: kyoto
+  lijn: stadsbus 4, 5 of 205
+  laatsteVertrek: '22:30'
+  opmerking: Na de laatste bus is het ongeveer een half uur lopen, of een taxi.
+  gecontroleerd: false
+
+- id: kyoto-arashiyama-kyoto-station
+  stad: kyoto
+  van: Saga-Arashiyama
+  vanCoordinaten: { lat: 35.0184, lon: 135.6813 }
+  naar: Kyoto Station
+  naarStad: kyoto
+  lijn: JR Sagano-lijn
+  laatsteVertrek: '23:30'
+  gecontroleerd: false
+
+- id: kyoto-inari-kyoto-station
+  stad: kyoto
+  van: Inari
+  vanCoordinaten: { lat: 34.9667, lon: 135.7702 }
+  naar: Kyoto Station
+  naarStad: kyoto
+  lijn: JR Nara-lijn
+  laatsteVertrek: '23:30'
+  gecontroleerd: false
+
+- id: nara-jr-kyoto-station
+  stad: nara
+  van: JR Nara
+  vanCoordinaten: { lat: 34.681, lon: 135.8196 }
+  naar: Kyoto Station
+  naarStad: kyoto
+  lijn: JR Nara-lijn
+  laatsteVertrek: '22:15'
+  gecontroleerd: false
+
+- id: nara-kintetsu-kyoto-station
+  stad: nara
+  van: Kintetsu Nara
+  vanCoordinaten: { lat: 34.6843, lon: 135.8279 }
+  naar: Kyoto Station
+  naarStad: kyoto
+  lijn: Kintetsu Kyoto-lijn
+  laatsteVertrek: '22:30'
+  gecontroleerd: false
+
+- id: nara-kintetsu-namba
+  stad: nara
+  van: Kintetsu Nara
+  vanCoordinaten: { lat: 34.6843, lon: 135.8279 }
+  naar: Namba
+  naarStad: osaka
+  lijn: Kintetsu Nara-lijn
+  laatsteVertrek: '23:00'
+  gecontroleerd: false
+
+- id: osaka-namba-umeda
+  stad: osaka
+  van: Namba
+  vanCoordinaten: { lat: 34.6663, lon: 135.501 }
+  naar: Umeda
+  naarStad: osaka
+  lijn: metro Midosuji-lijn
+  laatsteVertrek: '23:45'
+  gecontroleerd: false
+
+- id: osaka-umeda-namba
+  stad: osaka
+  van: Umeda
+  vanCoordinaten: { lat: 34.7024, lon: 135.4959 }
+  naar: Namba
+  naarStad: osaka
+  lijn: metro Midosuji-lijn
+  laatsteVertrek: '23:45'
+  gecontroleerd: false
+
+- id: osaka-usj-osaka-station
+  stad: osaka
+  van: Universal City
+  vanCoordinaten: { lat: 34.6679, lon: 135.4353 }
+  naar: Osaka Station
+  naarStad: osaka
+  lijn: JR Yumesaki-lijn
+  laatsteVertrek: '23:15'
+  opmerking: Na sluiting van het park is het perron overvol; reken op een paar treinen wachten.
+  gecontroleerd: false
+
+- id: osaka-usj-namba
+  stad: osaka
+  van: Universal City
+  vanCoordinaten: { lat: 34.6679, lon: 135.4353 }
+  naar: Namba
+  naarStad: osaka
+  lijn: JR naar Nishikujo, dan de Hanshin Namba-lijn
+  laatsteVertrek: '23:00'
+  gecontroleerd: false
+
+- id: hiroshima-miyajima-hiroshima-station
+  stad: hiroshima
+  van: Miyajima (veerboot)
+  vanCoordinaten: { lat: 34.3006, lon: 132.3222 }
+  naar: Hiroshima Station
+  naarStad: hiroshima
+  lijn: veerboot naar Miyajimaguchi, dan de JR Sanyo-lijn
+  laatsteVertrek: '21:45'
+  opmerking: De tijd is die van de veerboot; daarna moet je nog de trein halen.
+  gecontroleerd: false
+
+- id: hiroshima-dome-hiroshima-station
+  stad: hiroshima
+  van: Genbaku Dome-mae (tram)
+  vanCoordinaten: { lat: 34.3947, lon: 132.454 }
+  naar: Hiroshima Station
+  naarStad: hiroshima
+  lijn: tram 2 of 6
+  laatsteVertrek: '22:30'
+  gecontroleerd: false
+
+- id: kanazawa-korinbo-kanazawa-station
+  stad: kanazawa
+  van: Korinbo (bus)
+  vanCoordinaten: { lat: 36.562, lon: 136.656 }
+  naar: Kanazawa Station
+  naarStad: kanazawa
+  lijn: stadsbus of de Kanazawa Loop Bus
+  laatsteVertrek: '22:00'
+  opmerking: Het station ligt ook op twintig minuten lopen.
+  gecontroleerd: false
+
+- id: tokio-shibuya-shinjuku
+  stad: tokio
+  van: Shibuya
+  vanCoordinaten: { lat: 35.658, lon: 139.7016 }
+  naar: Shinjuku
+  naarStad: tokio
+  lijn: JR Yamanote-lijn
+  laatsteVertrek: '00:30'
+  gecontroleerd: false
+
+- id: tokio-shinjuku-shibuya
+  stad: tokio
+  van: Shinjuku
+  vanCoordinaten: { lat: 35.6896, lon: 139.7006 }
+  naar: Shibuya
+  naarStad: tokio
+  lijn: JR Yamanote-lijn
+  laatsteVertrek: '00:30'
+  gecontroleerd: false
+
+- id: tokio-shinjuku-tokyo-station
+  stad: tokio
+  van: Shinjuku
+  vanCoordinaten: { lat: 35.6896, lon: 139.7006 }
+  naar: Tokyo Station
+  naarStad: tokio
+  lijn: JR Chuo-lijn
+  laatsteVertrek: '00:15'
+  gecontroleerd: false
+
+- id: tokio-tokyo-station-shinjuku
+  stad: tokio
+  van: Tokyo Station
+  vanCoordinaten: { lat: 35.6812, lon: 139.7671 }
+  naar: Shinjuku
+  naarStad: tokio
+  lijn: JR Chuo-lijn
+  laatsteVertrek: '00:15'
+  gecontroleerd: false
+
+- id: tokio-asakusa-ueno
+  stad: tokio
+  van: Asakusa
+  vanCoordinaten: { lat: 35.711, lon: 139.7966 }
+  naar: Ueno
+  naarStad: tokio
+  lijn: metro Ginza-lijn
+  laatsteVertrek: '00:00'
+  gecontroleerd: false
+
+- id: tokio-asakusa-shibuya
+  stad: tokio
+  van: Asakusa
+  vanCoordinaten: { lat: 35.711, lon: 139.7966 }
+  naar: Shibuya
+  naarStad: tokio
+  lijn: metro Ginza-lijn
+  laatsteVertrek: '23:45'
+  gecontroleerd: false
+
+- id: tokio-ginza-shinjuku
+  stad: tokio
+  van: Ginza
+  vanCoordinaten: { lat: 35.6717, lon: 139.765 }
+  naar: Shinjuku
+  naarStad: tokio
+  lijn: metro Marunouchi-lijn
+  laatsteVertrek: '00:00'
+  gecontroleerd: false
+
+- id: fuji-kawaguchiko-shinjuku
+  stad: fujikawaguchiko
+  van: Kawaguchiko Station
+  vanCoordinaten: { lat: 35.4984, lon: 138.7684 }
+  naar: Shinjuku
+  naarStad: tokio
+  lijn: snelbus naar Busta Shinjuku
+  laatsteVertrek: '19:00'
+  opmerking: De Fuji Excursion rijdt 's middags al voor het laatst terug; de bus gaat later. Reserveer hem.
+  gecontroleerd: false

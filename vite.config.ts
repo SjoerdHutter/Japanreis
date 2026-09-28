@@ -78,7 +78,14 @@ export default defineConfig({
         ],
       },
       workbox: {
-        globPatterns: ['**/*.{js,css,html,svg,png,webp,woff2}'],
+        // mjs voor de worker van pdf.js, die als los bestand meekomt. Zonder
+        // staat hij niet op het toestel en opent een pdf offline niet.
+        globPatterns: ['**/*.{js,mjs,css,html,svg,png,webp,woff2}'],
+        // pdf.js en heic2any zijn elk ruim een megabyte. De standaardgrens van
+        // twee megabyte per bestand laat ze nog net door, maar zonder marge;
+        // een update van een van beide zou ze dan stilletjes uit de offline
+        // voorraad laten vallen.
+        maximumFileSizeToCacheInBytes: 4 * 1024 * 1024,
         navigateFallback: `${BASE}index.html`,
         runtimeCaching: [
           {

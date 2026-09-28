@@ -12,7 +12,7 @@ import { useApp } from '@/state/useApp';
  * en een halve blik op je telefoon doorheen moet kunnen.
  */
 
-const Chip = ({
+export const Chip = ({
   aan,
   onClick,
   children,
@@ -249,6 +249,23 @@ export const Filterbalk = ({
               gratis
             </Chip>
           )}
+        </Rij>
+      )}
+
+      {(tab === 'attracties' || tab === 'eten') && (
+        <Rij label="Betalen">
+          <Chip
+            aan={filter.contant === 'alleen'}
+            onClick={() => zet({ contant: filter.contant === 'alleen' ? undefined : 'alleen' })}
+          >
+            alleen contant
+          </Chip>
+          <Chip
+            aan={filter.contant === 'zonder'}
+            onClick={() => zet({ contant: filter.contant === 'zonder' ? undefined : 'zonder' })}
+          >
+            kaart kan
+          </Chip>
         </Rij>
       )}
 

@@ -27,6 +27,11 @@ import {
 import { tipsBestandSchema } from '../src/domein/schema/tips';
 import { stationsBestandSchema } from '../src/domein/schema/station';
 import { reisdagenBestandSchema } from '../src/domein/schema/reisdag';
+import { allergenenBestandSchema, noodBestandSchema } from '../src/domein/schema/nood';
+import { laatsteTreinenBestandSchema } from '../src/domein/schema/trein';
+import { kaartlagenBestandSchema } from '../src/domein/schema/kaartlaag';
+import { menuBestandSchema } from '../src/domein/schema/menu';
+import { existsSync } from 'node:fs';
 import { binnenGebied } from '../src/domein/geo/afstand';
 
 const DATA = 'data';
@@ -83,12 +88,80 @@ const reisdagen = controleer(
 if (zinnen && new Set(zinnen.map((z) => z.id)).size !== zinnen.length) {
   fouten.push('zinnen.yaml: dubbele zin-id');
 }
+
+const nood = controleer(noodBestandSchema, lees(join(DATA, 'nood.yaml')), 'nood.yaml');
+controleer(allergenenBestandSchema, lees(join(DATA, 'allergenen.yaml')), 'allergenen.yaml');
+
+// De toonkaarten in het noodscherm verwijzen naar zinnen; een tikfout daarin
+// betekent een lege kaart op het moment dat je hem nodig hebt.
+if (nood && zinnen) {
+  const zinIds = new Set(zinnen.map((z) => z.id));
+  for (const land of nood.landen) {
+    for (const id of land.toonkaarten) {
+      if (!zinIds.has(id))
+        fouten.push(`nood.yaml: ${land.land} verwijst naar onbekende zin "${id}"`);
+    }
+  }
+  for (const id of ['allergie-lijst-ja', 'allergie-lijst-vn']) {
+    if (!zinIds.has(id)) fouten.push(`zinnen.yaml: de zin "${id}" voor de allergiekaart ontbreekt`);
+  }
+  const noodIds = [
+    ...nood.landen.flatMap((l) => [...l.nummers.map((n) => n.id), l.ambassade.id]),
+    ...nood.algemeen.map((n) => n.id),
+    ...nood.rampen.map((r) => r.id),
+  ];
+  if (new Set(noodIds).size !== noodIds.length) fouten.push('nood.yaml: dubbele id');
+}
 if (etiquette && new Set(etiquette.map((e) => e.id)).size !== etiquette.length) {
   fouten.push('etiquette.yaml: dubbele etiquette-id');
 }
 
 if (apps && new Set(apps.map((a) => a.id)).size !== apps.length) {
   fouten.push('apps.yaml: dubbele app-id');
+}
+
+const laatsteTreinen = controleer(
+  laatsteTreinenBestandSchema,
+  lees(join(DATA, 'laatste-treinen.yaml')),
+  'laatste-treinen.yaml',
+);
+if (laatsteTreinen && steden) {
+  const stadIds = new Set(steden.map((s) => s.id));
+  if (new Set(laatsteTreinen.map((t) => t.id)).size !== laatsteTreinen.length) {
+    fouten.push('laatste-treinen.yaml: dubbele id');
+  }
+  for (const trein of laatsteTreinen) {
+    for (const stad of [trein.stad, trein.naarStad]) {
+      if (!stadIds.has(stad))
+        fouten.push(`laatste-treinen.yaml: ${trein.id} kent stad "${stad}" niet`);
+    }
+  }
+}
+
+const menu = controleer(menuBestandSchema, lees(join(DATA, 'menu.yaml')), 'menu.yaml');
+if (menu) {
+  const gezien = new Set<string>();
+  for (const item of menu) {
+    if (gezien.has(item.id)) fouten.push(`menu.yaml: dubbele id ${item.id}`);
+    gezien.add(item.id);
+  }
+}
+
+// De kaartlagen uit scripts/kaartlagen.ts: geldig, van een bekende stad, en
+// klein genoeg om met de app mee te reizen.
+const kaartlagenMap = join(DATA, 'kaartlagen');
+if (existsSync(kaartlagenMap) && steden) {
+  for (const bestand of readdirSync(kaartlagenMap).filter((b) => extname(b) === '.json')) {
+    const pad = join(kaartlagenMap, bestand);
+    const ruw = readFileSync(pad, 'utf8');
+    const lagen = controleer(kaartlagenBestandSchema, JSON.parse(ruw), `kaartlagen/${bestand}`);
+    if (lagen && !steden.some((s) => s.id === basename(bestand, '.json'))) {
+      fouten.push(`kaartlagen/${bestand}: er is geen stad met die naam`);
+    }
+    if (Buffer.byteLength(ruw) > 300 * 1024) {
+      fouten.push(`kaartlagen/${bestand}: groter dan 300 kB`);
+    }
+  }
 }
 
 if (steden && tijdlijnen && reisschema) {
@@ -267,7 +340,7 @@ if (steden && tijdlijnen && reisschema) {
 
   const aantalTips = tips?.groepen.reduce((n, g) => n + g.tips.length, 0) ?? 0;
   console.log(
-    `Gecontroleerd: ${steden.length} steden, ${plaatsIds.size} plaatsen, ${apps?.length ?? 0} apps, ${vervoer?.trajecten.length ?? 0} trajecten, ${etiquette?.length ?? 0} etiquettekaarten, ${zinnen?.length ?? 0} zinnen, ${aantalTips} tips, ${stations?.length ?? 0} stations, ${reisdagen?.length ?? 0} reisdagen.`,
+    `Gecontroleerd: ${steden.length} steden, ${plaatsIds.size} plaatsen, ${apps?.length ?? 0} apps, ${vervoer?.trajecten.length ?? 0} trajecten, ${etiquette?.length ?? 0} etiquettekaarten, ${zinnen?.length ?? 0} zinnen, ${aantalTips} tips, ${stations?.length ?? 0} stations, ${reisdagen?.length ?? 0} reisdagen, ${menu?.length ?? 0} gerechten.`,
   );
 }
 

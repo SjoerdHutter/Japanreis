@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Sectiekop } from '@/ui/basis';
 import { GROEPEN } from './hulpmiddelen';
+import { OpslagStatus } from '@/features/backup/OpslagStatus';
 
 /**
  * Meer: alles wat de app kan, als tegels met een icoon en een regel uitleg.
@@ -36,6 +37,10 @@ export const MeerScherm = () => (
         </div>
       </section>
     ))}
+
+    <section className="mt-6">
+      <OpslagStatus />
+    </section>
 
     <p className="mt-10 text-center text-xs text-inkt-zacht dark:text-papier/40">
       Versie {__APP_VERSIE__}

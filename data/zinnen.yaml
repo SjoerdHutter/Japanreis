@@ -331,3 +331,98 @@
   nederlands: Ik ben allergisch voor pinda's
   lokaal: Tôi bị dị ứng với đậu phộng
   uitspraak: toi bie zie ung voi dauw fong
+
+# Kaarten om te tonen in het noodscherm: in het ziekenhuis, bij de apotheek, bij
+# de politie, en de kop boven je allergieën. Nieuw toegevoegd en nog niet door
+# een moedertaalspreker nagekeken, vandaar `gecontroleerd: false`.
+
+- id: nood-ziekenhuis-ja
+  categorie: nood
+  land: japan
+  nederlands: Breng me alstublieft naar een ziekenhuis
+  lokaal: 病院に連れて行ってください
+  uitspraak: bjooien nie tsoerete itte koedasai
+  gecontroleerd: false
+
+- id: nood-apotheek-ja
+  categorie: nood
+  land: japan
+  nederlands: Waar is een apotheek
+  lokaal: 薬局はどこですか
+  uitspraak: jakkjokoe wa doko des ka
+  gecontroleerd: false
+
+- id: nood-koban-ja
+  categorie: nood
+  land: japan
+  nederlands: Waar is de politiepost (koban)
+  lokaal: 交番はどこですか
+  uitspraak: kooban wa doko des ka
+  wanneer: Een koban is een klein politiebureau op de hoek; ook voor verloren spullen en de weg.
+  gecontroleerd: false
+
+- id: allergie-lijst-ja
+  categorie: allergie
+  land: japan
+  nederlands: Ik ben allergisch voor het volgende. Wilt u een gerecht zonder deze dingen?
+  lokaal: 私は次の食べ物にアレルギーがあります。これらを使っていない料理をお願いします。
+  uitspraak: watasji wa tsoegie no tabemono nie arerugie ga arimas. korera o tsoekatte inai rjoori o onegai sjimas
+  gecontroleerd: false
+
+- id: allergie-gerecht-ja
+  categorie: allergie
+  land: japan
+  nederlands: Zit er iets van het volgende in dit gerecht?
+  lokaal: この料理に次のものは入っていますか？
+  uitspraak: kono rjoori nie tsoegie no mono wa haitte imas ka
+  gecontroleerd: false
+
+- id: nood-ziekenhuis-vn
+  categorie: nood
+  land: vietnam
+  nederlands: Breng me alstublieft naar een ziekenhuis
+  lokaal: Làm ơn đưa tôi đến bệnh viện
+  uitspraak: laam uhn duhua toi deen ben viejen
+  gecontroleerd: false
+
+- id: nood-apotheek-vn
+  categorie: nood
+  land: vietnam
+  nederlands: Waar is een apotheek
+  lokaal: Nhà thuốc ở đâu?
+  uitspraak: nja toewok uh dauw
+  gecontroleerd: false
+
+- id: nood-politie-vn
+  categorie: nood
+  land: vietnam
+  nederlands: Waar is het politiebureau
+  lokaal: Đồn công an ở đâu?
+  uitspraak: don kong an uh dauw
+  gecontroleerd: false
+
+- id: allergie-lijst-vn
+  categorie: allergie
+  land: vietnam
+  nederlands: Ik ben allergisch voor het volgende. Wilt u het niet in mijn eten doen?
+  lokaal: Tôi bị dị ứng với những thứ sau. Xin đừng cho vào món ăn của tôi.
+  uitspraak: toi bie zie ung voi njung tuh sauw. sien dung tsjo vauw mon an koea toi
+  gecontroleerd: false
+
+# Voor de taxichauffeur, boven het adres van je verblijf.
+
+- id: taxi-adres-ja
+  categorie: onderweg
+  land: japan
+  nederlands: Naar dit adres alstublieft
+  lokaal: この住所までお願いします
+  uitspraak: kono dzjoesjo made onegai sjimas
+  gecontroleerd: false
+
+- id: taxi-adres-vn
+  categorie: onderweg
+  land: vietnam
+  nederlands: Breng me alstublieft naar dit adres
+  lokaal: Làm ơn chở tôi đến địa chỉ này
+  uitspraak: laam uhn tsjuh toi deen die tsjie nai
+  gecontroleerd: false

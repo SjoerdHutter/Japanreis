@@ -25,6 +25,8 @@ export const appSchema = z.object({
   bespaart: z.enum(['geld', 'tijd']),
   opmerking: z.string().optional(),
   land: z.array(z.enum(['japan', 'vietnam'])).min(1),
+  /** Nieuw toegevoegd en nog niet nagekeken; toont een label "controleren". */
+  gecontroleerd: z.boolean().optional(),
 });
 export type App = z.infer<typeof appSchema>;
 

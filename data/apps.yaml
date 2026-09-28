@@ -158,6 +158,20 @@
   opmerking: Zet de meldingen aan, anders doet hij niets.
   land: [japan]
 
+- id: safety-tips
+  naam: Safety tips
+  categorie: overig
+  waarvoor: >-
+    De officiële app van de Japanse toeristenorganisatie voor aardbevingen,
+    tsunami's, tyfoons en hitte. Meldingen in het Engels, een kaart met
+    evacuatieplekken en zinnen om hulp te vragen.
+  offline: deels
+  voorafDownloaden: ja
+  bespaart: tijd
+  opmerking: Zet de meldingen aan voordat je vertrekt.
+  land: [japan]
+  gecontroleerd: false
+
 - id: toiletten-en-wifi
   naam: Toiletten- en wifikaart
   categorie: overig

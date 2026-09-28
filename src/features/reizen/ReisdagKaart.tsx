@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import { ExternalLink, Luggage } from 'lucide-react';
 import type { Reisdag, Reisstap } from '@/domein/schema';
@@ -69,19 +70,29 @@ const StapRegel = ({ stap }: { stap: Reisstap }) => {
 export const ReisdagKaart = ({
   reisdag,
   gemarkeerd = false,
+  ingebed = false,
 }: {
   reisdag: Reisdag;
   gemarkeerd?: boolean;
+  /** Binnen de kaart van een dag: zonder eigen rand en zonder datum erboven. */
+  ingebed?: boolean;
 }) => {
   const route = hoofdroute(reisdag);
   const anders = alternatieven(reisdag);
   const overstappen = route.length - 1;
+  const Houder = ingebed ? IngebedHouder : Kaartje;
   return (
-    <Kaartje className={`scroll-mt-4 p-4 ${gemarkeerd ? 'ring-2 ring-zegel' : ''}`}>
-      <p className="text-sm text-inkt-zacht dark:text-papier/60">
-        {reisdag.datum ? alsDagLabel(reisdag.datum) : reisdag.wanneer}
-      </p>
-      <h2 className="text-lg font-semibold tracking-tight">{reisdag.titel}</h2>
+    <Houder
+      className={`scroll-mt-4 ${ingebed ? '' : 'p-4'} ${gemarkeerd ? 'ring-2 ring-zegel' : ''}`}
+    >
+      {!ingebed && (
+        <p className="text-sm text-inkt-zacht dark:text-papier/60">
+          {reisdag.datum ? alsDagLabel(reisdag.datum) : reisdag.wanneer}
+        </p>
+      )}
+      <h2 className={ingebed ? 'font-semibold' : 'text-lg font-semibold tracking-tight'}>
+        {reisdag.titel}
+      </h2>
       <p className="mt-0.5 text-sm text-inkt-zacht dark:text-papier/60">
         Ongeveer {alsReistijd(reistijd(reisdag))} onderweg
         {overstappen > 0 && `, ${overstappen} ${overstappen === 1 ? 'overstap' : 'overstappen'}`}.
@@ -117,6 +128,12 @@ export const ReisdagKaart = ({
           {reisdag.opmerking}
         </p>
       )}
-    </Kaartje>
+    </Houder>
   );
 };
+
+const IngebedHouder = ({ className, children }: { className?: string; children: ReactNode }) => (
+  <div className={`border-t border-black/5 pt-3 dark:border-white/10 ${className ?? ''}`}>
+    {children}
+  </div>
+);

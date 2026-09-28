@@ -18,6 +18,8 @@ import {
   type Uitkomst,
 } from '@/domein/highlight/bepaal';
 import { lees, schrijf, verwijder } from '@/data/db/idb';
+import { leesWeer, ververseWeer } from '@/data/weer';
+import type { WeerVanStad } from '@/domein/weer/verwachting';
 
 /**
  * De toestand die de hele app deelt: de wisselkoers, waar je bent, en welke
@@ -43,6 +45,10 @@ export interface AppToestand {
   /** Terug naar de automatische bepaling. */
   laatLos: () => void;
   onthoudBezoek: (stadId: string) => void;
+  /** De laatst opgehaalde weersverwachting per stad; leeg tot er iets is. */
+  weer: Record<string, WeerVanStad>;
+  /** Of de app nu bereik denkt te hebben. Voor "laatst bijgewerkt". */
+  online: boolean;
 }
 
 export const AppContext = createContext<AppToestand | null>(null);
@@ -57,7 +63,42 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [keuze, setKeuze] = useState<Keuze | undefined>();
   const [laatstBekeken, setLaatstBekeken] = useState<string | undefined>();
   const [nu, setNu] = useState(() => new Date());
+  const [weer, setWeer] = useState<Record<string, WeerVanStad>>({});
+  const [online, setOnline] = useState(() => navigator.onLine);
   const kijker = useRef<number | null>(null);
+
+  // Het weer: eerst wat er al op het toestel staat, dan ververst als er bereik
+  // is en het ouder is dan drie uur. Bij terugkomen in de app en bij het
+  // terugkrijgen van bereik opnieuw kijken; ververseWeer slaat zelf over wat
+  // nog vers is.
+  useEffect(() => {
+    let levend = true;
+    const ververs = () =>
+      void ververseWeer().then(async (nieuw) => {
+        if (nieuw && levend) setWeer(await leesWeer());
+      });
+    void leesWeer().then((bewaard) => {
+      if (levend) setWeer(bewaard);
+      ververs();
+    });
+    const bijTerugkeer = () => {
+      if (!document.hidden) ververs();
+    };
+    const bijOnline = () => {
+      setOnline(true);
+      ververs();
+    };
+    const bijOffline = () => setOnline(false);
+    document.addEventListener('visibilitychange', bijTerugkeer);
+    window.addEventListener('online', bijOnline);
+    window.addEventListener('offline', bijOffline);
+    return () => {
+      levend = false;
+      document.removeEventListener('visibilitychange', bijTerugkeer);
+      window.removeEventListener('online', bijOnline);
+      window.removeEventListener('offline', bijOffline);
+    };
+  }, []);
 
   // De klok laten lopen. Zonder dit blijft een keuze na middernacht hangen tot
   // je de app opnieuw opent, en dat is precies de ochtend waarop je in een
@@ -178,6 +219,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       kiesStad,
       laatLos,
       onthoudBezoek,
+      weer,
+      online,
     }),
     [
       koersen,
@@ -190,6 +233,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       kiesStad,
       laatLos,
       onthoudBezoek,
+      weer,
+      online,
     ],
   );
 

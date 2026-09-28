@@ -139,6 +139,50 @@ Gebouwd:
   zelf en de avond ervoor, stationsgidsen met de uitgangen op de kaart, en de
   borden en zinnen voor op het station onder Taal.
 
+- Mijn gegevens: verzekering, noodcontacten, medische info, reisdocumenten,
+  vluchten en verblijven, met bijlagen (pdf en foto, ook HEIC) die offline over
+  het hele scherm openen, een JSON sjabloon om op je laptop in te vullen, en in
+  het hoofdmenu wat er nog ontbreekt. Reserveringen kregen een tijd, een
+  boekingsnummer en vouchers.
+- Backup en herstel: alles in één zip, via het deelvenster naar iCloud Drive,
+  en weer terug met samenvoegen of vervangen.
+- Nood: een zesde tab met de alarmnummers van het land van vandaag, je
+  verzekering, je noodcontacten, kaarten om te tonen (ziekenhuis, apotheek,
+  politie en je allergieën in het Japans of Vietnamees) en wat je doet bij een
+  aardbeving of tyfoon. Plus Controleren: alle meegeleverde feiten die je voor
+  vertrek moet nakijken, met een vinkje.
+- Weer: de verwachting van Open-Meteo per stad en per dag, in de reisdagen
+  (nu dag voor dag, elke dag van de reis) en in de dagplanner. Een regendag
+  zet het regenvoorstel in de planner aan, harde wind geeft een waarschuwing.
+  De planner onthoudt je keuze per dag.
+- Naar je agenda: vluchten, in- en uitchecken, geboekte reserveringen en de
+  kaartverkoop als .ics-bestand, met herinneringen.
+- Laatste trein: de dagplanner waarschuwt als de laatste stop van een avond te
+  dicht op de laatste trein naar je terugstation eindigt. Tijden kun je zelf
+  aanpassen; overal in de app kun je meegeleverde waarden overschrijven met een
+  eigen waarde.
+- Accommodatiekaarten: bij elke dag en in het hoofdmenu waar je vannacht slaapt,
+  met het adres in lokaal schrift, een knop voor de taxichauffeur, kopiëren en
+  route; en de avond voor je verkast een herinnering aan takkyubin met het
+  volgende adres.
+- Kaartlagen: geldautomaten die een buitenlandse pas nemen, kluisjes en
+  toiletten uit OpenStreetMap, als lagen in de kaart van elke stad; en per
+  plaats "alleen contant", met een filter.
+- Drukte: bij de grote trekpleisters het rustigste moment, de drukte per
+  dagdeel en de drukste dagen; de dagplanner zet ze op dat moment en zegt
+  waarom.
+- Menukaart: 180 gerechten en termen om op te zoeken in kanji, kana, romaji
+  of het Nederlands, met de allergenen die er gewoonlijk in zitten. Staat je
+  allergie in Mijn gegevens, dan krijgt elk gerecht waar hij in zit een rode
+  rand, en vraag je het met één tik aan het personeel.
+- Gelopen routes: GPX-bestanden uit Strava, Komoot of je horloge op de
+  fotokaart, per dag, met afstand, klimmen en tijd in beweging, en als kleine
+  omtrek in het reisverslag.
+- Dagnotitie: bij elke dag in de reisdagen een notitie en een hoogtepunt, die
+  zichzelf bewaren; 's avonds een zacht zetje in het hoofdmenu als je nog
+  niets schreef. Notities gaan mee in de backup en staan in het reisverslag
+  bij hun dag.
+
 De app is daarmee compleet volgens de functiespecificatie.
 
 - Een startset van 61 punten over zeven steden.
@@ -310,8 +354,11 @@ tijd, vergeleken op de wandklok. Ligt er niets binnen anderhalf uur, dan komt er
 geen voorstel: een foto uit het midden van een vlucht van zes uur ergens
 neerzetten is geen hulp maar een verzinsel.
 
-Het reisverslag is één los HTML-bestand met de route, de dagen en de plekken, en
-zonder foto's. Zo kun je het delen zonder je fotorol mee te sturen.
+Het reisverslag is één los HTML-bestand, dag voor dag over de hele reis: waar
+je was, je hoogtepunt en notitie, de plekken van je foto's en je gelopen
+routes, en geen foto's. Zo kun je het delen zonder je fotorol mee te sturen.
+Waar je sliep staat er alleen in als je "persoonlijke gegevens meenemen"
+aanvinkt; adressen en boekingsnummers nooit.
 
 ### Een Instagram collectie importeren
 
@@ -351,3 +398,248 @@ attractie brengt het tijdvaklabel je naar dat tijdvak in de landtijdlijn; vanaf
 een tijdvak brengt de stadsnaam je terug naar die stad, gefilterd op dat
 tijdvak. Dat filter komt uit de link (`?tijdvak=edo`) en niet uit de
 schermtoestand, zodat een gedeelde link hetzelfde laat zien.
+
+### Mijn gegevens
+
+Onder Meer, Mijn gegevens staat wat alleen jij weet: je verzekering en het
+noodnummer, wie ze thuis moeten bellen, je allergieën en medicijnen, je
+reisdocumenten, je vluchten en waar je slaapt. Niets daarvan staat in deze
+repository en niets komt er ooit in; het wordt op de telefoon ingevuld en
+blijft in IndexedDB. Het verlaat het toestel alleen via een export die je zelf
+start, en het staat nooit in een link.
+
+Bij bijna alles kun je bijlagen zetten: een pdf uit je mail, een foto van je
+paspoortpagina, de QR-code van een ticket. Op een iPhone biedt de bestandskiezer
+Foto's, de camera en Bestanden aan. Een pdf tekent de app zelf met pdf.js, alle
+pagina's; een HEIC-foto uit Bestanden wordt naast het origineel ook als JPEG
+bewaard, met heic2any als de browser het zelf niet kan. Beide bibliotheken zijn
+groot en worden pas geladen als je ze nodig hebt, maar de service worker haalt
+ze bij de installatie al binnen, zodat het ook offline werkt. Dat kost ruwweg
+drie megabyte extra op het toestel.
+
+Polisnummers en boekingscodes staan als puntjes tot je erop tikt, en gaan na een
+halve minuut vanzelf weer dicht.
+
+Alles in één keer invullen gaat met het sjabloon: download het, vul het op je
+laptop in met je boekingsmails ernaast, en lees het op je telefoon weer in. Je
+ziet eerst wat er nieuw is en wat verandert; pas daarna wordt er iets bewaard.
+Een leeg veld in het bestand laat staan wat er al in de app stond.
+
+### Backup en herstel
+
+Onder Meer, Backup zet alles wat je in de app hebt gezet in één zip:
+`japanreis_backup_JJJJ_MM_DD.zip`. Daarin een manifest (versie, datum en
+aantallen), per onderdeel een JSON-bestand, en de foto's en bijlagen als losse
+bestanden. Op een iPhone opent het deelvenster, zodat je hem met "Bewaar in
+Bestanden" in iCloud Drive zet. Foto's en persoonlijke documenten kun je
+weglaten; het scherm laat zien hoe groot het bestand ongeveer wordt.
+
+Een backup bevat altijd je polisnummer en boekingsnummers, en met documenten
+ook je paspoort. Bewaar hem op een plek die alleen van jou is.
+
+Terugzetten laat eerst zien wat erin zit en wat er zou veranderen. Samenvoegen
+voegt toe wat er nog niet is en vervangt een regel alleen als die in de backup
+nieuwer is. Vervangen maakt eerst leeg wat in de backup zit, en vraagt je
+daarvoor VERVANGEN te typen. Wat niet in de backup zit blijft staan.
+
+Niet in de backup: de kaarttegels (die haal je opnieuw op), de wisselkoers en
+het weer, en welke stad je het laatst bekeek. Een test bewaakt dat elke store
+met eigen gegevens wel meegaat, zodat een nieuwe functie niet stilletjes buiten
+de backup valt.
+
+Bij het opstarten vraagt de app de browser om je gegevens niet op te ruimen.
+Onder Meer staat of dat gelukt is en hoeveel ruimte de app gebruikt. Is je
+laatste backup ouder dan drie dagen en is er sindsdien iets bijgekomen, dan
+staat er in het hoofdmenu een herinnering.
+
+### Nood en controleren
+
+De tab Nood staat in de balk onderaan, dus hij is vanaf elk scherm één tik weg.
+Het land van vandaag staat vooraan, volgens het reisschema; voor en na de reis
+is dat Japan. Elk nummer is een knop die belt. De nummers, de ambassades en het
+advies bij aardbevingen en tyfoons staan in `data/nood.yaml`; de allergenen in
+het Japans en Vietnamees in `data/allergenen.yaml`; de zinnen voor de kaarten
+om te tonen in `data/zinnen.yaml`.
+
+Wat de app over de wereld beweert en wat je niet zelf hebt ingevuld, draagt
+`gecontroleerd: false`. Dat zijn feiten waar je op het slechtste moment van de
+reis op moet kunnen bouwen, en ze komen uit algemene kennis. De app zet er een
+label "controleren" bij. Tik erop en vink "gecontroleerd" aan als je het bij de
+bron hebt nagekeken; dat vinkje staat op je toestel en gaat mee in de backup.
+Onder Meer, Controleren staan ze allemaal onder elkaar.
+
+### Weer in de planner
+
+De app haalt de verwachting op bij Open-Meteo (zonder sleutel), per stad uit het
+reisschema en voor de dagen dat je er bent: minimum en maximum, kans op regen,
+millimeters en de zwaarste windstoot. Dat gebeurt bij het openen van de app en
+bij terugkomen, als er bereik is en de vorige keer langer dan drie uur geleden
+is. De verwachting gaat in IndexedDB; zonder bereik staat erbij wanneer hij is
+opgehaald. Verder dan zestien dagen vooruit staat er "nog geen verwachting",
+want wat daarna komt is een gok.
+
+De reisdagen zijn nu dag voor dag: elke dag van de reis heeft een kaart met de
+stad, het weer, en de trein als je die dag verkast. De dagtrip naar de Fuji,
+waarvan de datum nog openligt, staat onderaan onder "Nog zonder datum".
+
+Een regendag is een dag met minstens zestig procent kans of minstens vijf
+millimeter. Op zo'n dag houdt de dagplanner alleen wat bij regen kan (hetzelfde
+filter als "bij regen" op het stadsscherm) plus het eten; wat je buiten had
+gekozen staat apart onder "Bij regen overgeslagen". Eén knop zet dat uit.
+Windstoten vanaf 60 km/h geven een waarschuwing, vanaf 90 km/h een rode met
+het advies om het tyfoonnieuws en de treinen na te kijken. Die staat voor
+vandaag en morgen ook in het hoofdmenu.
+
+De dagplanner onthoudt per dag en per stad wat je koos, en die keuzes gaan mee
+in de backup.
+
+### Naar je agenda
+
+Onder Meer, Naar je agenda maakt een .ics-bestand van je vluchten, het in- en
+uitchecken, je geboekte reserveringen en het moment dat een kaartverkoop opent.
+Alles, één dag, of alleen de kaartverkoop. Met een herinnering een dag en een
+kwartier voor de kaartverkoop, drie uur voor een vlucht en een uur voor het
+uitchecken.
+
+De tijden staan in UTC in het bestand; je agenda zet ze om naar de tijd van
+waar je bent. Een vlucht die om 00:15 uit Hanoi vertrekt staat zo op het goede
+moment, ook als je telefoon nog op Amsterdam staat. Elke afspraak heeft een
+vaste id, zodat een agenda die dat respecteert hem bij een nieuwe export
+bijwerkt in plaats van verdubbelt.
+
+Adressen en boekingsnummers gaan er alleen in als je "persoonlijke gegevens
+meenemen" aanvinkt.
+
+### De laatste trein en eigen waarden
+
+In `data/laatste-treinen.yaml` staat per knooppunt ongeveer de laatste
+praktische vertrektijd naar een station waar je 's avonds heen moet: van Gion
+naar Kyoto Station, van Shibuya naar Shinjuku, van Kawaguchiko terug naar Tokio.
+Een benadering, geen dienstregeling, en daarom met het label "controleren".
+
+De dagplanner kijkt naar de laatste stop van je dag, het verblijf van die nacht
+en het terugstation dat je daar in Mijn gegevens bij zette, en neemt het
+knooppunt dat het dichtst bij die stop ligt. Eindigt de stop later dan een half
+uur voor die trein, dan staat er een waarschuwing bij, met een knop naar Google
+Maps voor de echte vertrektijden. Ligt je verblijf op loopafstand, dan zegt de
+planner niets. Weet de app het niet, dan staat er "laatste trein onbekend" en
+vul je de tijd zelf in.
+
+Dat laatste is een algemene regel in de app: wat de app meebrengt en wat jij
+beter weet, overschrijf je met een eigen waarde. Die staat apart op je toestel
+(en in de backup), krijgt het label "eigen waarde", en met "terugzetten" ga je
+terug naar wat de app meebracht. De content zelf blijft onaangeroerd.
+
+### Waar je vannacht slaapt
+
+Elke dag in de reisdagen, en tijdens de reis ook het hoofdmenu, toont het
+verblijf van die nacht uit Mijn gegevens: de naam, het adres in lokaal schrift
+en in het Latijnse schrift, in- en uitchecken, station en uitgang, het
+telefoonnummer, het boekingsnummer achter puntjes en de bijlagen. "Toon aan
+taxichauffeur" zet naam en adres in groot Japans of Vietnamees schrift over het
+hele scherm, met het nummer en een kaartje. "Kopieer adres" en "Route in Google
+Maps" staan eronder; de route wordt pas bij de tik gemaakt, zodat je adres niet
+vooraf in een link staat.
+
+Wat het reisschema over het verblijf weet (via wie, betaald, ontbijt) staat er
+klein bij, en betaald en ontbijt pas je aan met een eigen waarde.
+
+De avond voor je verkast staat er een herinnering aan takkyubin, met het adres
+van het volgende verblijf klaar om te kopiëren. Staat een verblijf nog niet in
+Mijn gegevens, dan zegt de kaart "Vul deze accommodatie aan" en brengt hij je
+naar het formulier, met de stad en de datums al ingevuld.
+
+### Geldautomaten, kluisjes en toiletten
+
+`npm run kaartlagen` haalt per stad uit OpenStreetMap (via de Overpass API) de
+geldautomaten die een buitenlandse pas nemen, de kluisjes en de openbare
+toiletten, binnen het kaartgebied uit `steden.yaml`. Het schrijft één klein
+JSON-bestand per stad in `data/kaartlagen/`, hoogstens 300 kB; commit die, dan
+reizen ze met de app mee en werken ze offline. Het script draai je met de hand,
+nooit in de browser. Met `npm run kaartlagen kyoto nara` doe je alleen die
+steden.
+
+In Japan tellen als geldautomaat die van Seven Bank en Japan Post. Omdat de
+automaat zelf in OpenStreetMap vaak niet los staat, tellen ook elke 7-Eleven en
+elk postkantoor mee, tenzij er al een automaat binnen dertig meter staat. In
+Hanoi telt elke automaat.
+
+In de kaart van een stad staan ze onder de lagenknop rechtsboven, standaard
+uit. De spelden worden pas gemaakt als je een laag aanzet, en samengevoegd tot
+bolletjes met een getal; drieduizend toiletten zijn anders traag op een
+telefoon. Welke lagen aan staan onthoudt het toestel.
+
+Per plaats kun je aangeven of hij alleen contant neemt; dat is een eigen waarde
+en komt als label op de kaart van de plaats. Het filter "Betalen" op het
+stadsscherm toont alleen wat contant moet, of juist alleen waar een kaart kan.
+
+### Drukte
+
+Bij Fushimi Inari, Kiyomizu-dera, het bamboebos van Arashiyama, Sensō-ji,
+Shibuya Crossing, Nara park en Itsukushima staat hoe druk het is per dagdeel,
+wat de drukste dagen zijn, en het rustigste moment in een vorm die de planner
+leest: "voor 08:00", "na 18:00", "07:00 tot 09:00" of "bij opening". Uit
+algemene kennis, dus met "controleren".
+
+De dagplanner zet zulke plekken vooraan of achteraan de dag, op dat rustige
+moment, als de openingstijden dat toelaten; de rest volgt de looproute
+ertussen. Bij de stop staat in één regel waarom. Begint je dag te laat voor
+het rustige moment, dan zegt hij dat ook.
+
+Weet je het ter plekke beter, tik dan bij de plaats op "drukte aanpassen". Wat
+je invult is een eigen waarde, en de planner rekent er meteen mee.
+
+### De menukaart
+
+Op /menu staan 180 gerechten en termen van een Japanse kaart, in negen groepen:
+ramen, sushi, izakaya, donburi, udon en soba, de konbini, zoet, drinken en de
+kooktermen die in een naam terugkomen (yaki, age, nabe). Zoek op wat je ziet.
+ラーメン, らーめん, rāmen en ramen vinden hetzelfde, net als shōyu en shouyu of
+tempura en tenpura; een Nederlands woord zoekt in de omschrijving.
+
+De allergenen per gerecht zijn wat er gewoonlijk in zit, uit dezelfde lijst als
+Mijn gegevens. Heb je daar een allergie ingevuld, dan krijgt elk gerecht waar
+die in zit een rode rand, en toont "Vraag het na" het gerecht in groot schrift
+met de vraag of er iets van jouw lijst in zit, je allergenen in het Japans
+eronder. Dashi, sojasaus en mirin zitten op onverwachte plekken; neem de kaart
+dus als begin van het gesprek, niet als antwoord.
+
+Niets hiervan is door een kok of moedertaalspreker nagekeken, dus elk gerecht
+heeft "controleren". De menukaart laadt pas als je hem opent, maar reist wel
+mee in de offline versie.
+
+### Gelopen routes
+
+Op de fotokaart (/fotos) lees je GPX-bestanden in: uit Strava, Komoot, je
+horloge of een app als Open GPX Tracker. Bewaar het bestand eerst in Bestanden
+en kies het daar; meerdere tegelijk mag. Elk spoor in een bestand wordt een
+eigen route, en een geplande route zonder tijden kan ook.
+
+Per route zie je de afstand, hoeveel je klom (met een drempel van drie meter,
+zodat het heen en weer schommelen van GPS-hoogte op een vlakke kade niet
+meetelt), de tijd in beweging (stilstaan en gaten in de opname tellen niet) en
+de dag. Die dag komt uit het eerste tijdstip, in de tijdzone van de stad waar
+de route begint; een ochtendloop in Tokio hoort bij de dag in Tokio en niet bij
+de avond ervoor in Nederland. Naam, kleur en dag pas je aan met het potlood.
+
+Bewaard wordt een vereenvoudigde lijn die op een paar meter na hetzelfde loopt
+(Douglas-Peucker), niet elk punt uit het bestand. Dat houdt de kaart vlot en de
+backup klein; de cijfers zijn bij het inlezen al uit alle punten berekend. Op
+de kaart zet je de routes per dag aan en uit, en de tijdbalk zoomt in op een
+dag. In het reisverslag staat bij elke dag de omtrek van de route als klein
+plaatje, met de cijfers.
+
+### De dagnotitie
+
+Bij elke dag in /reisdagen staat een notitie en een kort "hoogtepunt van de
+dag". Er is geen bewaarknop: wat je typt staat er een tel later in, ook als je
+de app wegdrukt of het scherm op slot zet voordat die tel voorbij is. Bij de
+dag van vandaag staan de velden meteen open, bij de andere dagen achter
+"Schrijf een notitie".
+
+Na acht uur 's avonds, in de tijdzone van de stad waar je bent, vraagt het
+hoofdmenu "Hoe was je dag?" zolang de notitie van vandaag leeg is. Tik erop en
+je schrijft ter plekke. Voor en na de reis vraagt het niets.
+
+Notities gaan mee in de backup (als "Dagnotities") en staan in het reisverslag
+bij hun dag, naast de foto's en de gelopen routes van die dag.

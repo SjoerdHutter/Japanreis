@@ -1,5 +1,8 @@
 import {
+  Archive,
   CalendarDays,
+  CalendarPlus,
+  ListChecks,
   Camera,
   Import,
   Landmark,
@@ -9,10 +12,12 @@ import {
   Plane,
   Route,
   ScrollText,
+  ShieldUser,
   Signpost,
   Smartphone,
   Stamp,
   TrainFront,
+  UtensilsCrossed,
   Wallet,
   type LucideIcon,
 } from 'lucide-react';
@@ -42,12 +47,35 @@ export interface Groep {
 
 export const GROEPEN: Groep[] = [
   {
+    naam: 'Persoonlijk',
+    middelen: [
+      {
+        pad: '/gegevens',
+        naam: 'Mijn gegevens',
+        uitleg: 'Verzekering, vluchten, verblijven en documenten',
+        icoon: ShieldUser,
+      },
+      {
+        pad: '/backup',
+        naam: 'Backup',
+        uitleg: 'Alles in één bestand, en weer terugzetten',
+        icoon: Archive,
+      },
+      {
+        pad: '/controleren',
+        naam: 'Controleren',
+        uitleg: 'Feiten om voor vertrek na te kijken',
+        icoon: ListChecks,
+      },
+    ],
+  },
+  {
     naam: 'Plannen',
     middelen: [
       {
         pad: '/reisdagen',
         naam: 'Reisdagen',
-        uitleg: 'Welke trein of bus, en je koffer',
+        uitleg: 'Dag voor dag: weer, trein en je koffer',
         icoon: Route,
       },
       {
@@ -61,6 +89,12 @@ export const GROEPEN: Groep[] = [
         naam: 'Dagplanner',
         uitleg: 'Een route met tijden, en je reserveringen',
         icoon: CalendarDays,
+      },
+      {
+        pad: '/agenda',
+        naam: 'Naar je agenda',
+        uitleg: 'Vluchten, verblijven en kaartverkoop',
+        icoon: CalendarPlus,
       },
       {
         pad: '/jetlag',
@@ -92,6 +126,12 @@ export const GROEPEN: Groep[] = [
         icoon: Wallet,
       },
       {
+        pad: '/menu',
+        naam: 'Menukaart',
+        uitleg: 'Wat er op de kaart staat, en je allergieën',
+        icoon: UtensilsCrossed,
+      },
+      {
         pad: '/context',
         naam: 'Etiquette en taal',
         uitleg: 'Zinnen om te laten zien, en het seizoen',
@@ -117,7 +157,7 @@ export const GROEPEN: Groep[] = [
       {
         pad: '/fotos',
         naam: 'Fotokaart',
-        uitleg: 'Je reis als lijn op de kaart',
+        uitleg: "Je foto's en gelopen routes op de kaart",
         icoon: Camera,
       },
       {
