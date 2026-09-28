@@ -46,6 +46,15 @@ const zoneOffsetMs = (tijdzone: string, moment: Date): number => {
   return alsUtc - Math.floor(moment.getTime() / 1000) * 1000;
 };
 
+/**
+ * Hoeveel minuten de wandklok in deze zone voorloopt op UTC, op dit moment.
+ *
+ * Voor het jetlagplan, dat met het verschil tussen klokken rekent en niet met
+ * datums. Thuis verandert dit getal twee keer per jaar; in Japan en Vietnam nooit.
+ */
+export const utcOffsetMinuten = (tijdzone: string, moment: Date = new Date()): number =>
+  Math.round(zoneOffsetMs(tijdzone, moment) / 60_000);
+
 /** De datum in deze tijdzone, als YYYY-MM-DD. */
 export const datumIn = (tijdzone: string, moment: Date = new Date()): string =>
   new Intl.DateTimeFormat('en-CA', {

@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { dagdeelIn, datumIn, momentInZone, uurIn, volgendeMiddernacht } from './zones';
+import {
+  dagdeelIn,
+  datumIn,
+  momentInZone,
+  utcOffsetMinuten,
+  uurIn,
+  volgendeMiddernacht,
+} from './zones';
 
 const TOKIO = 'Asia/Tokyo';
 const HANOI = 'Asia/Ho_Chi_Minh';
@@ -20,6 +27,19 @@ describe('datumIn', () => {
     expect(datumIn(TOKIO, moment)).toBe('2026-04-11');
     expect(datumIn(HANOI, moment)).toBe('2026-04-11');
     expect(datumIn(THUIS, moment)).toBe('2026-04-10');
+  });
+});
+
+describe('utcOffsetMinuten', () => {
+  it('kent de vaste verschillen van Japan en Vietnam', () => {
+    const moment = new Date('2026-10-10T12:00:00Z');
+    expect(utcOffsetMinuten(TOKIO, moment)).toBe(540);
+    expect(utcOffsetMinuten(HANOI, moment)).toBe(420);
+  });
+
+  it('volgt de wintertijd thuis, die in 2026 op 25 oktober ingaat', () => {
+    expect(utcOffsetMinuten(THUIS, new Date('2026-10-24T12:00:00Z'))).toBe(120);
+    expect(utcOffsetMinuten(THUIS, new Date('2026-10-25T12:00:00Z'))).toBe(60);
   });
 });
 
