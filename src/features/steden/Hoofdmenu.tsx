@@ -9,6 +9,7 @@ import { TIJDLIJNEN, REISSCHEMA } from '@/data/content';
 import type { Reden } from '@/domein/highlight/bepaal';
 import { bepaalReisstatus, type Reisstatus } from '@/domein/highlight/reisstatus';
 import { datumIn } from '@/domein/tijd/zones';
+import { JetlagVandaag } from '@/features/jetlag/JetlagVandaag';
 
 /**
  * Het hoofdmenu: één highlight bovenaan, alle andere steden eronder.
@@ -139,6 +140,8 @@ export const Hoofdmenu = () => {
         </section>
       )}
 
+      <JetlagVandaag />
+
       <section>
         <Sectiekop
           extra={
@@ -212,6 +215,9 @@ export const Hoofdmenu = () => {
         </Link>
         <Link to="/overstap" className="text-sm text-zegel underline underline-offset-2">
           Overstap Hanoi
+        </Link>
+        <Link to="/jetlag" className="text-sm text-zegel underline underline-offset-2">
+          Jetlag
         </Link>
         <Link to="/context" className="text-sm text-zegel underline underline-offset-2">
           Etiquette en taal

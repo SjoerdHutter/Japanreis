@@ -13,6 +13,7 @@ import { BudgetScherm } from '@/features/praktisch/BudgetScherm';
 import { DagplannerScherm } from '@/features/planning/DagplannerScherm';
 import { OverstapScherm } from '@/features/planning/OverstapScherm';
 import { ContextScherm } from '@/features/praktisch/ContextScherm';
+import { JetlagScherm } from '@/features/jetlag/JetlagScherm';
 
 const App = () => (
   <AppProvider>
@@ -29,6 +30,7 @@ const App = () => (
       <Route path="/dagplanner" element={<DagplannerScherm />} />
       <Route path="/overstap" element={<OverstapScherm />} />
       <Route path="/context" element={<ContextScherm />} />
+      <Route path="/jetlag" element={<JetlagScherm />} />
       <Route path="/tijdlijn/:tijdlijnId" element={<TijdlijnScherm />} />
       <Route path="/geschiedenis/:stadId" element={<StadGeschiedenisScherm />} />
       {/* Onbekend pad hoort niet op een lege pagina uit te komen; terug naar

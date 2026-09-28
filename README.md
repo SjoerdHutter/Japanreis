@@ -128,6 +128,8 @@ Gebouwd:
 - Fase 7: de dagplanner, de reserveringsagenda en de Hanoi overstapplanner.
 - Fase 8: etiquette, offline zinnen met schrift, seizoen en weer, de Hanoi
   visumcheck, je lijst delen, en de volledige offline test.
+- Fase 9: het jetlagplan, heen en terug, met een regel voor vandaag in het
+  hoofdmenu.
 
 De app is daarmee compleet volgens de functiespecificatie.
 
@@ -223,6 +225,40 @@ De datum is optioneel, want vaak plan je dit voordat de vlucht vaststaat. Vul je
 hem in, dan gaat het voorstel door de dagplanner en houdt het rekening met
 openingstijden en sluitingsdagen. Dat scheelt: het Ho Chi Minh mausoleum sluit om
 10:30 en is op maandag en vrijdag dicht.
+
+### Het jetlagplan
+
+Een plan per dag voor je lichaamsklok: wanneer je opstaat en naar bed gaat, en
+vooral wanneer je fel licht zoekt en wanneer je het juist mijdt. Dat laatste is
+het hele punt. Je lichaamsklok heeft een koudste moment in de nacht; licht in de
+uren daarna zet de klok vooruit, licht in de uren ervoor zet hem terug. Wie na
+een vlucht naar het oosten meteen de ochtendzon in loopt terwijl zijn lichaam
+nog in de nacht zit, duwt zijn klok de verkeerde kant op.
+
+Het plan volgt uit het reisschema en je gewone slaaptijden, die je in het scherm
+invult en die op je toestel blijven:
+
+- **Voorbereiding.** Tot drie dagen voor vertrek elke dag een uur eerder slapen
+  en opstaan, met direct fel licht. Elke dag die je thuis vervroegt scheelt ter
+  plaatse ongeveer een dag.
+- **Onderweg.** De overstap in Hanoi rekent al naar Japan toe, in de tijd van
+  Hanoi. In Japan volg je vanaf de eerste dag de lokale klok, en het licht
+  schuift elke dag een uur op tot je klok gelijk loopt.
+- **Terug.** Naar het westen gaat het sneller, ongeveer anderhalf uur per dag,
+  met het licht in de avond. De wintertijd van 25 oktober telt mee: je lichaam
+  moet dan acht uur schuiven in plaats van zeven.
+
+Het model rekent voorzichtig: een uur per dag naar het oosten, anderhalf naar
+het westen, en op reisdagen niets. Een plan dat te snel rekent stuurt je de dag
+erna naar licht op het verkeerde moment. Alle lichttijden hangen aan een
+schatting van het koudste moment van je nacht, drie uur voor je gewone wektijd.
+Melatonine staat er alleen in als je dat aanzet. De grondslag is het werk van
+Eastman en Burgess (Sleep Medicine Clinics, 2009) en de Cochrane review over
+melatonine bij jetlag; het is geen medisch advies.
+
+De vertrekdag is de dag voor de eerste dag in het reisschema, en de eerste dag
+thuis de dag na de laatste. Voor een vlucht van Europa naar Azië klopt dat
+altijd, want die landt de volgende dag.
 
 ### De JR Pass rekentool
 

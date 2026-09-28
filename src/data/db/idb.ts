@@ -3,6 +3,7 @@ import type { Cachestatus, Coordinaat, EigenPunt } from '@/domein/schema';
 import type { Opname, Uitgave } from '@/domein/budget/uitgaven';
 import type { Koersen } from '@/domein/valuta/koers';
 import type { Keuze } from '@/domein/highlight/bepaal';
+import type { JetlagInstellingen } from '@/domein/jetlag/protocol';
 
 /**
  * Alles wat op het toestel blijft staan.
@@ -24,6 +25,8 @@ export interface SleutelWaarde {
   'stad.laatstBekeken': string;
   'koers.laatste': Koersen;
   'stempelboek.tipGetoond': boolean;
+  /** Je gewone slaaptijden en je keuzes voor het jetlagplan. */
+  'jetlag.instellingen': JetlagInstellingen;
 }
 
 interface JapanreisDB extends DBSchema {
