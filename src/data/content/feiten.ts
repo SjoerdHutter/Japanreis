@@ -1,5 +1,12 @@
 import { ALLERGEEN_NAAM } from '@/domein/schema';
-import { ALLERGEEN_VERTALINGEN, APPS, LAATSTE_TREINEN, NOOD, ZINNEN } from './index';
+import {
+  ALLERGEEN_VERTALINGEN,
+  APPS,
+  LAATSTE_TREINEN,
+  NOOD,
+  ZINNEN,
+  laadAllePlaatsen,
+} from './index';
 
 /**
  * Alle meegeleverde feiten die je voor vertrek nog moet nakijken, per groep.
@@ -29,6 +36,7 @@ export const allergeenFeitId = (id: string) => `allergeen:${id}`;
 export const zinFeitId = (id: string) => `zin:${id}`;
 export const appFeitId = (id: string) => `app:${id}`;
 export const treinFeitId = (id: string) => `trein:${id}`;
+export const druktFeitId = (plaatsId: string) => `drukte:${plaatsId}`;
 
 const vasteGroepen = (): Feitengroep[] => [
   {
@@ -113,5 +121,24 @@ const vasteGroepen = (): Feitengroep[] => [
  * Alle groepen. Asynchroon, omdat sommige content (de menukaart, de plaatsen)
  * pas wordt geladen als je hem opent.
  */
-export const laadFeitgroepen = async (): Promise<Feitengroep[]> =>
-  vasteGroepen().filter((g) => g.feiten.length > 0);
+export const laadFeitgroepen = async (): Promise<Feitengroep[]> => {
+  const plaatsen = await laadAllePlaatsen();
+  const drukte: Feitengroep = {
+    id: 'drukte',
+    naam: 'Drukte bij de grote trekpleisters',
+    pad: '/',
+    feiten: plaatsen
+      .filter((p) => p.attractie?.drukte?.gecontroleerd !== undefined)
+      .map((p) => ({
+        id: druktFeitId(p.id),
+        titel: p.naam,
+        detail: [
+          p.attractie?.drukte?.besteTijdslot && `het rustigst ${p.attractie.drukte.besteTijdslot}`,
+        ]
+          .filter(Boolean)
+          .join(''),
+        gecontroleerd: p.attractie?.drukte?.gecontroleerd ?? true,
+      })),
+  };
+  return [...vasteGroepen(), drukte].filter((g) => g.feiten.length > 0);
+};

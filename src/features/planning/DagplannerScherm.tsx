@@ -2,7 +2,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { CloudRain } from 'lucide-react';
 import type { Plaats } from '@/domein/schema';
-import { STEDEN, laadPlaatsen, stadMet } from '@/data/content';
+import { STEDEN, stadMet } from '@/data/content';
+import { usePlaatsen } from '@/data/usePlaatsen';
 import { bewaarIn, leesEen } from '@/data/db/idb';
 import { THUIS_TIJDZONE, datumIn } from '@/domein/tijd/zones';
 import { Kaartje, Knop, Label, Sectiekop } from '@/ui/basis';
@@ -30,6 +31,7 @@ import { LaatsteTreinMelding } from './LaatsteTreinMelding';
  * dat uit te zetten.
  */
 
+const GEEN_PLAATSEN: Plaats[] = [];
 const STANDAARD_START = '09:00';
 const STANDAARD_EIND = '18:00';
 
@@ -52,7 +54,6 @@ const Dagplanner = () => {
     if (uitLink && stadMet(uitLink)) return uitLink;
     return highlight.stadId ?? STEDEN[0]?.id ?? '';
   });
-  const [plaatsen, setPlaatsen] = useState<Plaats[]>([]);
   const [gekozen, setGekozen] = useState<Set<string>>(new Set());
   const [gekozenDatum, setGekozenDatum] = useState<string | null>(() => zoekparams.get('datum'));
   const [start, setStart] = useState(STANDAARD_START);
@@ -70,13 +71,14 @@ const Dagplanner = () => {
   const datum = gekozenDatum ?? datumIn(stad?.tijdzone ?? THUIS_TIJDZONE, new Date());
   const planId = `${datum}_${stadId}`;
 
-  // De plaatsen van de stad en wat je eerder voor deze dag koos.
+  // De plaatsen van de stad, met je eigen waarden eroverheen (zoals een ander
+  // rustig moment), en wat je eerder voor deze dag koos.
+  const plaatsen = usePlaatsen(stadId) ?? GEEN_PLAATSEN;
   useEffect(() => {
     if (!stadId) return;
     let levend = true;
-    void Promise.all([laadPlaatsen(stadId), leesEen('dagplannen', planId)]).then(([p, bewaard]) => {
+    void leesEen('dagplannen', planId).then((bewaard) => {
       if (!levend) return;
-      setPlaatsen(p);
       setGekozen(new Set(bewaard?.plaatsIds ?? []));
       setStart(bewaard?.start ?? STANDAARD_START);
       setEind(bewaard?.eind ?? STANDAARD_EIND);
@@ -324,6 +326,9 @@ const Dagplanner = () => {
                   <span className="font-medium">{stop.plaats.naam}</span>
                   {stop.looptijd > 0 && <Label>{stop.looptijd} min lopen</Label>}
                 </div>
+                {stop.uitleg && (
+                  <p className="mt-1.5 text-sm text-sky-800 dark:text-sky-200">{stop.uitleg}</p>
+                )}
                 {stop.waarschuwingen.map((w) => (
                   <p key={w} className="mt-1.5 text-sm text-zegel">
                     {w}

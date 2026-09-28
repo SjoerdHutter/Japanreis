@@ -2,6 +2,7 @@ import type { Plaats, Stad, Weekdag } from '@/domein/schema';
 import { afstandKm } from '@/domein/geo/afstand';
 import { looptijdMinuten } from '@/domein/filters/plaatsen';
 import { dagstatus, vasteSluitingsdagen, weekdagIn } from '@/domein/openingstijden/status';
+import { ankerVan, leesTijdslot, type Anker, type Tijdslot } from './drukte';
 
 /**
  * De slimme dagplanner uit hoofdstuk 12.
@@ -33,6 +34,8 @@ export interface Stop {
   looptijd: number;
   /** Wat er mis is met deze stop op deze dag. */
   waarschuwingen: string[];
+  /** Waarom de stop op dit moment staat, als dat om de drukte is. Eén regel. */
+  uitleg?: string;
 }
 
 export interface Dagplan {
@@ -133,7 +136,26 @@ export const maakDagplan = (invoer: PlanInvoer): Dagplan => {
   // morgen de relevante.
   const dag = weekdagIn(stad.tijdzone, new Date(`${datum}T12:00:00Z`));
 
-  const route = looproute(plaatsen);
+  // Drukke plekken met een rustig moment gaan vooraan of achteraan de dag,
+  // als de openingstijden dat toelaten; de rest volgt de looproute ertussen.
+  const slotVan = new Map<string, { slot: Tijdslot; anker: Anker }>();
+  for (const plaats of plaatsen) {
+    const slot = leesTijdslot(plaats.attractie?.drukte?.besteTijdslot);
+    const anker = ankerVan(slot, venster(plaats, dag));
+    if (slot && anker) slotVan.set(plaats.id, { slot, anker });
+  }
+  const moment = (p: Plaats) => {
+    const s = slotVan.get(p.id)?.slot;
+    return s?.van ?? s?.tot ?? venster(p, dag)?.van ?? 0;
+  };
+  const vroeg = plaatsen
+    .filter((p) => slotVan.get(p.id)?.anker === 'vroeg')
+    .sort((a, b) => moment(a) - moment(b));
+  const laat = plaatsen
+    .filter((p) => slotVan.get(p.id)?.anker === 'laat')
+    .sort((a, b) => moment(a) - moment(b));
+  const rest = plaatsen.filter((p) => !slotVan.has(p.id));
+  const route = [...vroeg, ...looproute(rest, vroeg[vroeg.length - 1]), ...laat];
   const stops: Stop[] = [];
   const nietGepland: Plaats[] = [];
   const waarschuwingen: string[] = [];
@@ -155,6 +177,22 @@ export const maakDagplan = (invoer: PlanInvoer): Dagplan => {
 
     let aankomst = klok + looptijd;
     const raam = venster(plaats, dag);
+    const drukte = slotVan.get(plaats.id);
+    const slotTekst = plaats.attractie?.drukte?.besteTijdslot;
+    let uitleg: string | undefined;
+    if (drukte?.anker === 'laat' && drukte.slot.van !== undefined) {
+      if (aankomst < drukte.slot.van) aankomst = drukte.slot.van;
+      uitleg = `Laat op de dag ingepland: ${slotTekst} is het hier het rustigst.`;
+    } else if (drukte?.anker === 'vroeg') {
+      const tot = drukte.slot.tot;
+      if (drukte.slot.van !== undefined && aankomst < drukte.slot.van) aankomst = drukte.slot.van;
+      uitleg =
+        tot !== undefined && aankomst > tot
+          ? `Het rustigst ${slotTekst}; begin je dag eerder om dat te halen.`
+          : drukte.slot.opening
+            ? 'Bij opening ingepland: dan is het hier het rustigst.'
+            : `Vroeg ingepland: ${slotTekst} is het hier het rustigst.`;
+    }
 
     if (raam) {
       // Te vroeg: wachten tot de deur opengaat.
@@ -196,7 +234,7 @@ export const maakDagplan = (invoer: PlanInvoer): Dagplan => {
       stopWaarschuwingen.push('Reserveren is hier verplicht; regel dat vooraf.');
     }
 
-    stops.push({ plaats, aankomst, vertrek, looptijd, waarschuwingen: stopWaarschuwingen });
+    stops.push({ plaats, aankomst, vertrek, looptijd, waarschuwingen: stopWaarschuwingen, uitleg });
     looptijdTotaal += looptijd;
     klok = vertrek;
     vorige = plaats;

@@ -88,6 +88,10 @@
     dagdeel: [ochtend, middag]
     drukte:
       besteMoment: Eerste boot of laat in de middag, als de dagtrips weg zijn.
+      besteTijdslot: voor 09:00
+      perDagdeel: { ochtend: rustig, middag: zeer-druk, avond: druk }
+      druksteDagen: [zaterdag, zondag]
+      gecontroleerd: false
   goshuin:
     waar: Bij de uitgang van de schrijn, in het kantoor links.
     prijs: { bedrag: 300, valuta: JPY }

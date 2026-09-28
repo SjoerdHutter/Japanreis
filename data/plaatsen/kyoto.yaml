@@ -22,6 +22,10 @@
     dagdeel: [ochtend, avond, nacht]
     drukte:
       besteMoment: Voor 08:00 of na 17:00. In het donker is de berg verlicht.
+      besteTijdslot: voor 08:00
+      perDagdeel: { ochtend: druk, middag: zeer-druk, avond: rustig }
+      druksteDagen: [zaterdag, zondag]
+      gecontroleerd: false
       drukstMoment: 10:00 tot 16:00.
   goshuin:
     waar: Bij de hoofdhal, en nog een tweede bij de Okusha halverwege de poorten.
@@ -83,6 +87,10 @@
     dagdeel: [ochtend, avond]
     drukte:
       besteMoment: Bij openen om 06:00, dan is de heuvel leeg.
+      besteTijdslot: voor 08:00
+      perDagdeel: { ochtend: druk, middag: zeer-druk, avond: druk }
+      druksteDagen: [zaterdag, zondag]
+      gecontroleerd: false
   goshuin:
     waar: In het kantoor bij de uitgang van de hoofdhal.
     prijs: { bedrag: 300, valuta: JPY }
@@ -142,6 +150,10 @@
     dagdeel: [ochtend]
     drukte:
       besteMoment: Voor 07:30.
+      besteTijdslot: voor 07:30
+      perDagdeel: { ochtend: druk, middag: zeer-druk, avond: rustig }
+      druksteDagen: [zaterdag, zondag]
+      gecontroleerd: false
       drukstMoment: 10:00 tot 16:00.
   tags: [google-maps-lijst]
 

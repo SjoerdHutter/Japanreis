@@ -68,6 +68,14 @@
     bezoekduurMinuten: 60
     regenbestendig: false
     dagdeel: [ochtend, middag]
+    drukte:
+      besteMoment: >-
+        Voor 09:00, voordat de dagjesmensen uit Kyoto en Osaka aankomen. De
+        herten zijn dan ook het rustigst.
+      besteTijdslot: voor 09:00
+      perDagdeel: { ochtend: rustig, middag: zeer-druk, avond: rustig }
+      druksteDagen: [zaterdag, zondag]
+      gecontroleerd: false
 
 - id: kofuku-ji
   naam: Kōfuku-ji

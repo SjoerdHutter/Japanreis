@@ -10,6 +10,7 @@ import { tijdlijnVan } from '@/data/content';
 import { useOverschrijvingen, zetOverschrijving } from '@/data/overschrijvingen';
 import { eigenVelden } from '@/data/usePlaatsen';
 import { EigenWaarde } from '@/ui/EigenWaarde';
+import { DrukteBlok } from './DrukteBlok';
 
 /**
  * Eén punt in de lijst, dichtgeklapt tot je erop tikt.
@@ -123,12 +124,7 @@ export const PlaatsRegel = ({
 
           {waarschuwing?.opmerking && <Regel titel="Let op">{waarschuwing.opmerking}</Regel>}
 
-          {plaats.attractie?.drukte?.besteMoment && (
-            <Regel titel="Beste moment">{plaats.attractie.drukte.besteMoment}</Regel>
-          )}
-          {plaats.attractie?.drukte?.drukstMoment && (
-            <Regel titel="Drukst">{plaats.attractie.drukte.drukstMoment}</Regel>
-          )}
+          <DrukteBlok plaats={plaats} eigen={eigen} />
 
           {plaats.reservering && plaats.reservering !== 'niet-nodig' && (
             <Regel titel="Reserveren">

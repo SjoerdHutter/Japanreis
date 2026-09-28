@@ -28,6 +28,10 @@
     dagdeel: [ochtend, avond]
     drukte:
       besteMoment: Voor 08:00 of na 18:00.
+      besteTijdslot: voor 08:00
+      perDagdeel: { ochtend: druk, middag: zeer-druk, avond: rustig }
+      druksteDagen: [zaterdag, zondag]
+      gecontroleerd: false
       drukstMoment: 11:00 tot 16:00, en het hele weekend.
   goshuin:
     waar: Rechts van de hoofdhal, in het kantoor naast de Yogodo-hal.
@@ -178,6 +182,14 @@
     bezoekduurMinuten: 30
     regenbestendig: false
     dagdeel: [avond, nacht]
+    drukte:
+      besteMoment: >-
+        Na zonsondergang, als de schermen aan zijn. Het is dan druk, maar dat is
+        precies waar je voor komt; wie het rustig wil, komt voor 08:00.
+      besteTijdslot: na 18:00
+      perDagdeel: { ochtend: rustig, middag: druk, avond: zeer-druk }
+      druksteDagen: [vrijdag, zaterdag]
+      gecontroleerd: false
 
 - id: tsukiji-buitenmarkt
   naam: Tsukiji buitenmarkt

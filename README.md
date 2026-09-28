@@ -168,6 +168,9 @@ Gebouwd:
 - Kaartlagen: geldautomaten die een buitenlandse pas nemen, kluisjes en
   toiletten uit OpenStreetMap, als lagen in de kaart van elke stad; en per
   plaats "alleen contant", met een filter.
+- Drukte: bij de grote trekpleisters het rustigste moment, de drukte per
+  dagdeel en de drukste dagen; de dagplanner zet ze op dat moment en zegt
+  waarom.
 
 De app is daarmee compleet volgens de functiespecificatie.
 
@@ -555,3 +558,19 @@ telefoon. Welke lagen aan staan onthoudt het toestel.
 Per plaats kun je aangeven of hij alleen contant neemt; dat is een eigen waarde
 en komt als label op de kaart van de plaats. Het filter "Betalen" op het
 stadsscherm toont alleen wat contant moet, of juist alleen waar een kaart kan.
+
+### Drukte
+
+Bij Fushimi Inari, Kiyomizu-dera, het bamboebos van Arashiyama, Sensō-ji,
+Shibuya Crossing, Nara park en Itsukushima staat hoe druk het is per dagdeel,
+wat de drukste dagen zijn, en het rustigste moment in een vorm die de planner
+leest: "voor 08:00", "na 18:00", "07:00 tot 09:00" of "bij opening". Uit
+algemene kennis, dus met "controleren".
+
+De dagplanner zet zulke plekken vooraan of achteraan de dag, op dat rustige
+moment, als de openingstijden dat toelaten; de rest volgt de looproute
+ertussen. Bij de stop staat in één regel waarom. Begint je dag te laat voor
+het rustige moment, dan zegt hij dat ook.
+
+Weet je het ter plekke beter, tik dan bij de plaats op "drukte aanpassen". Wat
+je invult is een eigen waarde, en de planner rekent er meteen mee.
