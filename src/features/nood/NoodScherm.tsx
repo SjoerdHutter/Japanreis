@@ -31,6 +31,7 @@ import { useMijnGegevens } from '@/features/gegevens/gedeeld';
 import { Kaartje, Knop, Label, Sectiekop } from '@/ui/basis';
 import { Controleren } from '@/ui/Controleren';
 import { Toonscherm } from '@/ui/Toonscherm';
+import { TaxiScherm } from '@/features/verblijf/TaxiScherm';
 import { Verborgen } from '@/ui/Verborgen';
 
 /**
@@ -45,10 +46,7 @@ import { Verborgen } from '@/ui/Verborgen';
 const landVanVandaag = (): Land =>
   stadVolgensSchema(STEDEN, REISSCHEMA, new Date())?.stad.land ?? 'japan';
 
-type Toonkaart =
-  | { soort: 'zin'; id: string }
-  | { soort: 'allergie' }
-  | { soort: 'verblijf'; naam: string; adres: string };
+type Toonkaart = { soort: 'zin'; id: string } | { soort: 'allergie' } | { soort: 'verblijf' };
 
 export const NoodScherm = () => {
   const [vandaagLand] = useState<Land>(landVanVandaag);
@@ -219,17 +217,8 @@ export const NoodScherm = () => {
                 </a>
               )}
               {vannacht.adresLokaal && (
-                <Knop
-                  klein
-                  onClick={() =>
-                    setKaart({
-                      soort: 'verblijf',
-                      naam: vannacht.naamLokaal ?? vannacht.naam,
-                      adres: vannacht.adresLokaal!,
-                    })
-                  }
-                >
-                  Toon het adres
+                <Knop klein onClick={() => setKaart({ soort: 'verblijf' })}>
+                  Toon aan taxichauffeur
                 </Knop>
               )}
             </div>
@@ -373,19 +362,8 @@ export const NoodScherm = () => {
       {kaart?.soort === 'allergie' && (
         <AllergieKaart medisch={medisch} land={land} onSluit={() => setKaart(null)} />
       )}
-      {kaart?.soort === 'verblijf' && (
-        <Toonscherm
-          titel="Adres van vannacht"
-          taal={taal}
-          lokaal={
-            <>
-              <span className="block text-2xl text-black/70">{kaart.naam}</span>
-              {kaart.adres}
-            </>
-          }
-          nederlands="Breng me alstublieft naar dit adres."
-          onSluit={() => setKaart(null)}
-        />
+      {kaart?.soort === 'verblijf' && vannacht && (
+        <TaxiScherm verblijf={vannacht} onSluit={() => setKaart(null)} />
       )}
     </div>
   );

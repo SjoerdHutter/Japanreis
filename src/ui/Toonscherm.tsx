@@ -24,7 +24,12 @@ export const Toonscherm = ({
   children?: ReactNode;
   onSluit: () => void;
 }) => (
-  <Volscherm titel={titel} helder onSluit={onSluit}>
+  <Volscherm
+    titel={titel}
+    helder
+    tip="Zet je scherm op maximale helderheid, dan is het goed te lezen."
+    onSluit={onSluit}
+  >
     <div
       lang={taal}
       className="pt-4 text-[2.1rem] leading-snug font-semibold break-words text-black"

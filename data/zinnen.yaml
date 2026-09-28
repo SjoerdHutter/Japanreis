@@ -400,3 +400,21 @@
   lokaal: Tôi bị dị ứng với những thứ sau. Xin đừng cho vào món ăn của tôi.
   uitspraak: toi bie zie ung voi njung tuh sauw. sien dung tsjo vauw mon an koea toi
   gecontroleerd: false
+
+# Voor de taxichauffeur, boven het adres van je verblijf.
+
+- id: taxi-adres-ja
+  categorie: onderweg
+  land: japan
+  nederlands: Naar dit adres alstublieft
+  lokaal: この住所までお願いします
+  uitspraak: kono dzjoesjo made onegai sjimas
+  gecontroleerd: false
+
+- id: taxi-adres-vn
+  categorie: onderweg
+  land: vietnam
+  nederlands: Breng me alstublieft naar dit adres
+  lokaal: Làm ơn chở tôi đến địa chỉ này
+  uitspraak: laam uhn tsjuh toi deen die tsjie nai
+  gecontroleerd: false

@@ -15,12 +15,15 @@ export const Volscherm = ({
   titel,
   onSluit,
   helder = false,
+  tip = 'Zet je scherm op maximale helderheid, dan leest een scanner de code het best.',
   acties,
   children,
 }: {
   titel: string;
   onSluit: () => void;
   helder?: boolean;
+  /** De regel over helderheid bovenaan een helder scherm. */
+  tip?: string;
   /** Knoppen naast de sluitknop, zoals delen. */
   acties?: ReactNode;
   children: ReactNode;
@@ -86,11 +89,7 @@ export const Volscherm = ({
           Sluiten
         </button>
       </div>
-      {helder && (
-        <p className="px-4 pb-2 text-sm text-black/70">
-          Zet je scherm op maximale helderheid, dan leest een scanner de code het best.
-        </p>
-      )}
+      {helder && tip && <p className="px-4 pb-2 text-sm text-black/70">{tip}</p>}
       <div className="min-h-0 flex-1 overflow-auto overscroll-contain px-4 pb-6">{children}</div>
     </div>,
     document.body,

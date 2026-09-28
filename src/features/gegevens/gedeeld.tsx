@@ -1,17 +1,42 @@
-import { useMemo, useState, type ChangeEvent, type ReactNode } from 'react';
+import { useState, useSyncExternalStore, type ChangeEvent, type ReactNode } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { leesGegevens } from '@/data/gegevens';
-import { useOpslag } from '@/data/db/useOpslag';
+import { opWijziging } from '@/data/db/wijzigingen';
 import { orden, type MijnGegevens } from '@/domein/gegevens/orden';
-import type { Gegeven } from '@/domein/schema';
 import { Kaartje } from '@/ui/basis';
 
-/** Mijn gegevens, op volgorde, en bijgewerkt zodra er ergens iets verandert. */
-export const useMijnGegevens = (): { gegevens: MijnGegevens; geladen: boolean } => {
-  const { waarde, geladen } = useOpslag(leesGegevens, [] as Gegeven[], ['gegevens']);
-  const gegevens = useMemo(() => orden(waarde), [waarde]);
-  return { gegevens, geladen };
+/**
+ * Mijn gegevens, op volgorde, en bijgewerkt zodra er ergens iets verandert.
+ *
+ * Eén gedeelde kopie in het geheugen: de reisdagen hebben twintig kaarten die
+ * elk willen weten waar je slaapt, en die gaan niet elk apart de database langs.
+ */
+let gedeeld: { gegevens: MijnGegevens; geladen: boolean } = {
+  gegevens: orden([]),
+  geladen: false,
 };
+let bezig: Promise<void> | null = null;
+const luisteraars = new Set<() => void>();
+
+const laad = (): Promise<void> =>
+  (bezig ??= leesGegevens().then((regels) => {
+    gedeeld = { gegevens: orden(regels), geladen: true };
+    for (const luisteraar of luisteraars) luisteraar();
+  }));
+
+opWijziging(['gegevens'], () => {
+  bezig = null;
+  void laad();
+});
+
+const abonneer = (luisteraar: () => void) => {
+  luisteraars.add(luisteraar);
+  if (!gedeeld.geladen) void laad();
+  return () => luisteraars.delete(luisteraar);
+};
+
+export const useMijnGegevens = (): { gegevens: MijnGegevens; geladen: boolean } =>
+  useSyncExternalStore(abonneer, () => gedeeld);
 
 export const nu = (): string => new Date().toISOString();
 

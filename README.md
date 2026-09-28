@@ -161,6 +161,10 @@ Gebouwd:
   dicht op de laatste trein naar je terugstation eindigt. Tijden kun je zelf
   aanpassen; overal in de app kun je meegeleverde waarden overschrijven met een
   eigen waarde.
+- Accommodatiekaarten: bij elke dag en in het hoofdmenu waar je vannacht slaapt,
+  met het adres in lokaal schrift, een knop voor de taxichauffeur, kopiëren en
+  route; en de avond voor je verkast een herinnering aan takkyubin met het
+  volgende adres.
 
 De app is daarmee compleet volgens de functiespecificatie.
 
@@ -505,3 +509,22 @@ Dat laatste is een algemene regel in de app: wat de app meebrengt en wat jij
 beter weet, overschrijf je met een eigen waarde. Die staat apart op je toestel
 (en in de backup), krijgt het label "eigen waarde", en met "terugzetten" ga je
 terug naar wat de app meebracht. De content zelf blijft onaangeroerd.
+
+### Waar je vannacht slaapt
+
+Elke dag in de reisdagen, en tijdens de reis ook het hoofdmenu, toont het
+verblijf van die nacht uit Mijn gegevens: de naam, het adres in lokaal schrift
+en in het Latijnse schrift, in- en uitchecken, station en uitgang, het
+telefoonnummer, het boekingsnummer achter puntjes en de bijlagen. "Toon aan
+taxichauffeur" zet naam en adres in groot Japans of Vietnamees schrift over het
+hele scherm, met het nummer en een kaartje. "Kopieer adres" en "Route in Google
+Maps" staan eronder; de route wordt pas bij de tik gemaakt, zodat je adres niet
+vooraf in een link staat.
+
+Wat het reisschema over het verblijf weet (via wie, betaald, ontbijt) staat er
+klein bij, en betaald en ontbijt pas je aan met een eigen waarde.
+
+De avond voor je verkast staat er een herinnering aan takkyubin, met het adres
+van het volgende verblijf klaar om te kopiëren. Staat een verblijf nog niet in
+Mijn gegevens, dan zegt de kaart "Vul deze accommodatie aan" en brengt hij je
+naar het formulier, met de stad en de datums al ingevuld.

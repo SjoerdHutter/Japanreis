@@ -7,6 +7,8 @@ import { WeerRegel } from '@/features/weer/WeerRegel';
 import { WindWaarschuwing } from '@/features/weer/WindWaarschuwing';
 import { Kaartje, Label } from '@/ui/basis';
 import { ReisdagKaart } from './ReisdagKaart';
+import { VerblijfKaart } from '@/features/verblijf/VerblijfKaart';
+import { VerhuisHerinnering } from '@/features/verblijf/VerhuisHerinnering';
 
 /**
  * Eén dag van de reis: waar je bent, het weer, de trein als je verkast, en een
@@ -68,6 +70,9 @@ export const DagKaart = ({
           <ReisdagKaart reisdag={reisdag} ingebed gemarkeerd={reisdag.id === gekozenReisdag} />
         </div>
       ))}
+
+      <VerblijfKaart datum={dag.datum} nachtStadId={dag.nachtStadId} />
+      <VerhuisHerinnering datum={dag.datum} />
 
       {planLink && (
         <Link

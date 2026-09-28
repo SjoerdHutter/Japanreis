@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import type { Valuta } from '@/domein/schema';
 import { REISSCHEMA, STEDEN } from '@/data/content';
 import { vandaagOpReis } from '@/domein/highlight/vandaag';
@@ -69,6 +70,13 @@ export const BudgetScherm = () => {
   useEffect(() => {
     void haalOp().then(toon);
   }, [haalOp, toon]);
+
+  // Vanuit een reisdag kom je hier voor takkyubin, onder Bagage.
+  const [zoekparams] = useSearchParams();
+  const sectie = zoekparams.get('sectie');
+  useEffect(() => {
+    if (sectie) document.getElementById(sectie)?.scrollIntoView({ block: 'start' });
+  }, [sectie]);
 
   const cijfers = useMemo(() => totalen(uitgaven, koersen), [uitgaven, koersen]);
   const voorraad = useMemo(() => contantVoorraad(opnames, uitgaven), [opnames, uitgaven]);
@@ -338,7 +346,7 @@ export const BudgetScherm = () => {
         </Kaartje>
       </section>
 
-      <section>
+      <section id="bagage" className="scroll-mt-4">
         <Sectiekop>Bagage</Sectiekop>
         <Kaartje className="p-4 text-sm leading-relaxed">
           <p>
