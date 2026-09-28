@@ -1,17 +1,12 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import type { Plaats } from '@/domein/schema';
-import { REISSCHEMA, STEDEN, laadPlaatsen, stadMet } from '@/data/content';
-import { vandaagOpReis } from '@/domein/highlight/vandaag';
+import { STEDEN, laadPlaatsen, stadMet } from '@/data/content';
 import { THUIS_TIJDZONE, datumIn } from '@/domein/tijd/zones';
-import { Kaartje, Knop, Label, Sectiekop } from '@/ui/basis';
+import { Kaartje, Label, Sectiekop } from '@/ui/basis';
 import { alsKlok, maakDagplan } from '@/domein/planning/dagplanner';
 import { alsMinuten } from '@/domein/planning/overstap';
-import {
-  bewaarReservering,
-  leesReserveringen,
-  verwijderReservering,
-  type Reservering,
-} from '@/data/db/idb';
+import { Reserveringen } from './Reserveringen';
 
 /**
  * De dagplanner en de reserveringsagenda uit hoofdstuk 12.
@@ -22,9 +17,6 @@ import {
  * verdwijnen.
  */
 
-const NIEUWE_ID = () =>
-  globalThis.crypto?.randomUUID?.() ?? `res-${Date.now()}-${Math.random().toString(36).slice(2)}`;
-
 export const DagplannerScherm = () => {
   const [stadId, setStadId] = useState(STEDEN[0]?.id ?? '');
   const [plaatsen, setPlaatsen] = useState<Plaats[]>([]);
@@ -33,10 +25,8 @@ export const DagplannerScherm = () => {
   const [start, setStart] = useState('09:00');
   const [eind, setEind] = useState('18:00');
 
-  const [reserveringen, setReserveringen] = useState<Reservering[]>([]);
-  const [wat, setWat] = useState('');
-  const [resDatum, setResDatum] = useState('');
-  const [verkoopVanaf, setVerkoopVanaf] = useState('');
+  const [zoekparams] = useSearchParams();
+  const naarSectie = zoekparams.get('sectie');
 
   const stad = stadMet(stadId);
   /**
@@ -47,7 +37,6 @@ export const DagplannerScherm = () => {
    * maandag dicht zijn.
    */
   const datum = gekozenDatum ?? datumIn(stad?.tijdzone ?? THUIS_TIJDZONE, new Date());
-  const haalRes = useCallback(() => leesReserveringen(), []);
 
   useEffect(() => {
     if (!stadId) return;
@@ -63,9 +52,12 @@ export const DagplannerScherm = () => {
     };
   }, [stadId]);
 
+  // Vanuit het hoofdmenu of Mijn gegevens kom je hier voor de reserveringen.
   useEffect(() => {
-    void haalRes().then(setReserveringen);
-  }, [haalRes]);
+    if (naarSectie === 'reserveringen') {
+      document.getElementById('reserveringen')?.scrollIntoView({ block: 'start' });
+    }
+  }, [naarSectie]);
 
   const plan = useMemo(() => {
     if (!stad) return null;
@@ -84,37 +76,6 @@ export const DagplannerScherm = () => {
       else nieuw.add(id);
       return nieuw;
     });
-
-  const voegReserveringToe = async () => {
-    if (!wat.trim()) return;
-    await bewaarReservering({
-      id: NIEUWE_ID(),
-      wat: wat.trim(),
-      datum: resDatum || undefined,
-      verkoopVanaf: verkoopVanaf || undefined,
-      stadId: stadId || undefined,
-      status: 'te-regelen',
-    });
-    setWat('');
-    setResDatum('');
-    setVerkoopVanaf('');
-    setReserveringen(await haalRes());
-  };
-
-  const wisselStatus = async (reservering: Reservering) => {
-    await bewaarReservering({
-      ...reservering,
-      status: reservering.status === 'geboekt' ? 'te-regelen' : 'geboekt',
-    });
-    setReserveringen(await haalRes());
-  };
-
-  const teRegelen = reserveringen
-    .filter((r) => r.status === 'te-regelen')
-    .sort((a, b) =>
-      (a.verkoopVanaf ?? a.datum ?? '9').localeCompare(b.verkoopVanaf ?? b.datum ?? '9'),
-    );
-  const geboekt = reserveringen.filter((r) => r.status === 'geboekt');
 
   return (
     <div className="mx-auto w-full max-w-2xl px-4 pt-4 pb-16">
@@ -274,148 +235,7 @@ export const DagplannerScherm = () => {
         </section>
       )}
 
-      <section>
-        <Sectiekop>Reserveringen</Sectiekop>
-        <p className="mb-3 text-sm leading-relaxed text-inkt-zacht dark:text-papier/65">
-          Eén plek voor restaurants, ryokan, het Ghibli Museum en teamLab. Vul in wanneer de
-          kaartverkoop opengaat: het Ghibli Museum verkoopt op de tiende van de maand ervoor en is
-          binnen minuten weg.
-        </p>
-
-        <Kaartje className="mb-4 p-4">
-          <div className="grid gap-3">
-            <input
-              value={wat}
-              onChange={(e) => setWat(e.target.value)}
-              placeholder="Wat, bijvoorbeeld Ghibli Museum"
-              className="w-full rounded-lg border border-black/10 bg-white px-3 py-2 dark:border-white/15 dark:bg-nacht"
-            />
-            <div className="grid gap-2 sm:grid-cols-2">
-              <label className="block">
-                <span className="mb-1 block text-xs text-inkt-zacht dark:text-papier/55">
-                  Datum van het bezoek
-                </span>
-                <input
-                  type="date"
-                  value={resDatum}
-                  onChange={(e) => setResDatum(e.target.value)}
-                  className="w-full rounded-lg border border-black/10 bg-white px-3 py-2 dark:border-white/15 dark:bg-nacht"
-                />
-              </label>
-              <label className="block">
-                <span className="mb-1 block text-xs text-inkt-zacht dark:text-papier/55">
-                  Kaartverkoop opent
-                </span>
-                <input
-                  type="date"
-                  value={verkoopVanaf}
-                  onChange={(e) => setVerkoopVanaf(e.target.value)}
-                  className="w-full rounded-lg border border-black/10 bg-white px-3 py-2 dark:border-white/15 dark:bg-nacht"
-                />
-              </label>
-            </div>
-            <div>
-              <Knop soort="nadruk" disabled={!wat.trim()} onClick={() => void voegReserveringToe()}>
-                Toevoegen
-              </Knop>
-            </div>
-          </div>
-        </Kaartje>
-
-        {teRegelen.length > 0 && (
-          <div className="mb-4">
-            <p className="mb-1.5 text-sm font-medium">Nog te regelen</p>
-            <div className="grid gap-2">
-              {teRegelen.map((r) => (
-                <ReserveringRegel
-                  key={r.id}
-                  reservering={r}
-                  onWissel={() => void wisselStatus(r)}
-                  onWeg={() => void verwijderReservering(r.id).then(haalRes).then(setReserveringen)}
-                />
-              ))}
-            </div>
-          </div>
-        )}
-
-        {geboekt.length > 0 && (
-          <div>
-            <p className="mb-1.5 text-sm font-medium">Geboekt</p>
-            <div className="grid gap-2">
-              {geboekt.map((r) => (
-                <ReserveringRegel
-                  key={r.id}
-                  reservering={r}
-                  onWissel={() => void wisselStatus(r)}
-                  onWeg={() => void verwijderReservering(r.id).then(haalRes).then(setReserveringen)}
-                />
-              ))}
-            </div>
-          </div>
-        )}
-
-        {reserveringen.length === 0 && (
-          <p className="text-sm text-inkt-zacht dark:text-papier/60">Nog niets in de agenda.</p>
-        )}
-      </section>
+      <Reserveringen stadId={stadId} />
     </div>
-  );
-};
-
-const ReserveringRegel = ({
-  reservering,
-  onWissel,
-  onWeg,
-}: {
-  reservering: Reservering;
-  onWissel: () => void;
-  onWeg: () => void;
-}) => {
-  // Een kaartverkoop opent op een dag van de plek zelf: het Ghibli Museum op de
-  // tiende in Japan, niet op de tiende thuis. Zonder stad telt waar je bent.
-  const zone = stadMet(reservering.stadId ?? '')?.tijdzone;
-  const vandaag = zone ? datumIn(zone, new Date()) : vandaagOpReis(STEDEN, REISSCHEMA);
-  const verkoopOpen = reservering.verkoopVanaf !== undefined && reservering.verkoopVanaf <= vandaag;
-
-  return (
-    <Kaartje className="p-3">
-      <div className="flex items-start gap-3">
-        <div className="min-w-0 flex-1">
-          <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-            <span className="font-medium">{reservering.wat}</span>
-            {reservering.datum && <Label>{reservering.datum}</Label>}
-            {reservering.status === 'geboekt' && <Label toon="gratis">geboekt</Label>}
-            {reservering.verkoopVanaf && reservering.status === 'te-regelen' && (
-              <Label toon={verkoopOpen ? 'let-op' : 'gewoon'}>
-                {verkoopOpen
-                  ? `verkoop staat open sinds ${reservering.verkoopVanaf}`
-                  : `verkoop opent ${reservering.verkoopVanaf}`}
-              </Label>
-            )}
-          </div>
-          {reservering.stadId && (
-            <p className="mt-1 text-xs text-inkt-zacht dark:text-papier/50">
-              {stadMet(reservering.stadId)?.naam ?? reservering.stadId}
-            </p>
-          )}
-        </div>
-        <div className="flex shrink-0 flex-col items-end gap-1">
-          <Knop
-            klein
-            soort={reservering.status === 'geboekt' ? 'gewoon' : 'nadruk'}
-            onClick={onWissel}
-          >
-            {reservering.status === 'geboekt' ? 'Terugzetten' : 'Geboekt'}
-          </Knop>
-          <button
-            type="button"
-            onClick={onWeg}
-            className="text-xs text-zegel underline underline-offset-2"
-          >
-            weg
-          </button>
-        </div>
-      </div>
-    </Kaartje>
   );
 };

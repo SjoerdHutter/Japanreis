@@ -19,6 +19,7 @@ import { Tabbalk } from '@/features/navigatie/Tabbalk';
 import { ReisdagenScherm } from '@/features/reizen/ReisdagenScherm';
 import { StationScherm } from '@/features/reizen/StationScherm';
 import { StationsScherm } from '@/features/reizen/StationsScherm';
+import { GegevensScherm } from '@/features/gegevens/GegevensScherm';
 
 const App = () => (
   <AppProvider>
@@ -43,6 +44,7 @@ const App = () => (
         <Route path="/reisdagen" element={<ReisdagenScherm />} />
         <Route path="/stations" element={<StationsScherm />} />
         <Route path="/station/:stationId" element={<StationScherm />} />
+        <Route path="/gegevens" element={<GegevensScherm />} />
         <Route path="/tijdlijn/:tijdlijnId" element={<TijdlijnScherm />} />
         <Route path="/geschiedenis/:stadId" element={<StadGeschiedenisScherm />} />
         {/* Onbekend pad hoort niet op een lege pagina uit te komen; terug naar

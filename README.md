@@ -139,6 +139,12 @@ Gebouwd:
   zelf en de avond ervoor, stationsgidsen met de uitgangen op de kaart, en de
   borden en zinnen voor op het station onder Taal.
 
+- Mijn gegevens: verzekering, noodcontacten, medische info, reisdocumenten,
+  vluchten en verblijven, met bijlagen (pdf en foto, ook HEIC) die offline over
+  het hele scherm openen, een JSON sjabloon om op je laptop in te vullen, en in
+  het hoofdmenu wat er nog ontbreekt. Reserveringen kregen een tijd, een
+  boekingsnummer en vouchers.
+
 De app is daarmee compleet volgens de functiespecificatie.
 
 - Een startset van 61 punten over zeven steden.
@@ -351,3 +357,29 @@ attractie brengt het tijdvaklabel je naar dat tijdvak in de landtijdlijn; vanaf
 een tijdvak brengt de stadsnaam je terug naar die stad, gefilterd op dat
 tijdvak. Dat filter komt uit de link (`?tijdvak=edo`) en niet uit de
 schermtoestand, zodat een gedeelde link hetzelfde laat zien.
+
+### Mijn gegevens
+
+Onder Meer, Mijn gegevens staat wat alleen jij weet: je verzekering en het
+noodnummer, wie ze thuis moeten bellen, je allergieën en medicijnen, je
+reisdocumenten, je vluchten en waar je slaapt. Niets daarvan staat in deze
+repository en niets komt er ooit in; het wordt op de telefoon ingevuld en
+blijft in IndexedDB. Het verlaat het toestel alleen via een export die je zelf
+start, en het staat nooit in een link.
+
+Bij bijna alles kun je bijlagen zetten: een pdf uit je mail, een foto van je
+paspoortpagina, de QR-code van een ticket. Op een iPhone biedt de bestandskiezer
+Foto's, de camera en Bestanden aan. Een pdf tekent de app zelf met pdf.js, alle
+pagina's; een HEIC-foto uit Bestanden wordt naast het origineel ook als JPEG
+bewaard, met heic2any als de browser het zelf niet kan. Beide bibliotheken zijn
+groot en worden pas geladen als je ze nodig hebt, maar de service worker haalt
+ze bij de installatie al binnen, zodat het ook offline werkt. Dat kost ruwweg
+drie megabyte extra op het toestel.
+
+Polisnummers en boekingscodes staan als puntjes tot je erop tikt, en gaan na een
+halve minuut vanzelf weer dicht.
+
+Alles in één keer invullen gaat met het sjabloon: download het, vul het op je
+laptop in met je boekingsmails ernaast, en lees het op je telefoon weer in. Je
+ziet eerst wat er nieuw is en wat verandert; pas daarna wordt er iets bewaard.
+Een leeg veld in het bestand laat staan wat er al in de app stond.

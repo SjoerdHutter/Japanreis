@@ -9,6 +9,7 @@ import {
   Plane,
   Route,
   ScrollText,
+  ShieldUser,
   Signpost,
   Smartphone,
   Stamp,
@@ -41,6 +42,17 @@ export interface Groep {
 }
 
 export const GROEPEN: Groep[] = [
+  {
+    naam: 'Persoonlijk',
+    middelen: [
+      {
+        pad: '/gegevens',
+        naam: 'Mijn gegevens',
+        uitleg: 'Verzekering, vluchten, verblijven en documenten',
+        icoon: ShieldUser,
+      },
+    ],
+  },
   {
     naam: 'Plannen',
     middelen: [

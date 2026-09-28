@@ -13,3 +13,6 @@ export * from './context';
 export * from './tips';
 export * from './station';
 export * from './reisdag';
+export * from './allergeen';
+export * from './gegevens';
+export * from './opslag';
