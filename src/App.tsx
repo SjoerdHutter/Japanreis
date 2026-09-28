@@ -24,6 +24,7 @@ import { BackupScherm } from '@/features/backup/BackupScherm';
 import { NoodScherm } from '@/features/nood/NoodScherm';
 import { ControlerenScherm } from '@/features/controleren/ControlerenScherm';
 import { AgendaScherm } from '@/features/agenda/AgendaScherm';
+import { MenuScherm } from '@/features/menu/MenuScherm';
 
 const App = () => (
   <AppProvider>
@@ -53,6 +54,7 @@ const App = () => (
         <Route path="/nood" element={<NoodScherm />} />
         <Route path="/controleren" element={<ControlerenScherm />} />
         <Route path="/agenda" element={<AgendaScherm />} />
+        <Route path="/menu" element={<MenuScherm />} />
         <Route path="/tijdlijn/:tijdlijnId" element={<TijdlijnScherm />} />
         <Route path="/geschiedenis/:stadId" element={<StadGeschiedenisScherm />} />
         {/* Onbekend pad hoort niet op een lege pagina uit te komen; terug naar

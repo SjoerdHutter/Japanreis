@@ -1,0 +1,1555 @@
+# De menukaart: gerechten en termen die je op een Japanse kaart tegenkomt.
+#
+# Per regel het schrift (kanji als dat gebruikelijk is), de kana, de romaji
+# zoals je hem op een Engelstalige kaart ziet, een Nederlandse omschrijving en
+# de allergenen die er gewoonlijk in zitten. Dat laatste is een vuistregel:
+# elke zaak doet het anders, en dashi, sojasaus en mirin zitten op onverwachte
+# plekken. Vraag het na met de kaart "toon aan personeel".
+#
+# Redactionele content, NIET door een moedertaalspreker of kok nagekeken; elke
+# regel heeft daarom `gecontroleerd: false`.
+
+- id: ramen
+  categorie: ramen
+  kana: 'ラーメン'
+  romaji: 'rāmen'
+  nederlands: 'Tarwenoedels in bouillon, met varkensvlees, ei en lente-ui erop. De bouillon bepaalt de naam.'
+  allergenen: [gluten, soja]
+  gecontroleerd: false
+
+- id: shoyu-ramen
+  categorie: ramen
+  kanji: '醤油ラーメン'
+  kana: 'しょうゆラーメン'
+  romaji: 'shōyu rāmen'
+  nederlands: 'Heldere bruine bouillon op basis van sojasaus, vaak met kip en vis.'
+  allergenen: [gluten, soja, vis]
+  gecontroleerd: false
+
+- id: miso-ramen
+  categorie: ramen
+  kanji: '味噌ラーメン'
+  kana: 'みそラーメン'
+  romaji: 'miso rāmen'
+  nederlands: 'Stevige bouillon met miso, de specialiteit van Sapporo.'
+  allergenen: [gluten, soja]
+  gecontroleerd: false
+
+- id: shio-ramen
+  categorie: ramen
+  kanji: '塩ラーメン'
+  kana: 'しおラーメン'
+  romaji: 'shio rāmen'
+  nederlands: 'Lichte, heldere bouillon op zout, vaak met zeevruchten of kip.'
+  allergenen: [gluten, vis]
+  gecontroleerd: false
+
+- id: tonkotsu-ramen
+  categorie: ramen
+  kanji: '豚骨ラーメン'
+  kana: 'とんこつラーメン'
+  romaji: 'tonkotsu rāmen'
+  nederlands: 'Romige, witte bouillon van urenlang getrokken varkensbotten.'
+  allergenen: [gluten, varkensvlees, soja]
+  gecontroleerd: false
+
+- id: tantanmen
+  categorie: ramen
+  kanji: '担々麺'
+  kana: 'たんたんめん'
+  romaji: 'tantanmen'
+  nederlands: 'Pittige noedels met sesampasta en gehakt.'
+  allergenen: [gluten, sesam, varkensvlees, soja]
+  gecontroleerd: false
+
+- id: tsukemen
+  categorie: ramen
+  kanji: 'つけ麺'
+  kana: 'つけめん'
+  romaji: 'tsukemen'
+  nederlands: 'Dikke noedels apart van een geconcentreerde dipsaus.'
+  allergenen: [gluten, soja, vis]
+  gecontroleerd: false
+
+- id: hiyashi-chuka
+  categorie: ramen
+  kanji: '冷やし中華'
+  kana: 'ひやしちゅうか'
+  romaji: 'hiyashi chūka'
+  nederlands: 'Koude noedels met reepjes ei, ham en komkommer en een zure saus. Vooral in de zomer.'
+  allergenen: [gluten, ei, soja, sesam, varkensvlees]
+  gecontroleerd: false
+
+- id: chashu
+  categorie: ramen
+  kanji: '叉焼'
+  kana: 'チャーシュー'
+  romaji: 'chāshū'
+  nederlands: 'Plakken gestoofde of geroosterde varkensbuik.'
+  allergenen: [varkensvlees, soja, gluten]
+  gecontroleerd: false
+
+- id: ajitama
+  categorie: ramen
+  kanji: '味玉'
+  kana: 'あじたま'
+  romaji: 'ajitama'
+  nederlands: 'Zachtgekookt ei, gemarineerd in sojasaus.'
+  allergenen: [ei, soja, gluten]
+  gecontroleerd: false
+
+- id: menma
+  categorie: ramen
+  kana: 'メンマ'
+  romaji: 'menma'
+  nederlands: 'Gefermenteerde bamboescheuten.'
+  allergenen: [soja]
+  gecontroleerd: false
+
+- id: negi
+  categorie: ramen
+  kanji: '葱'
+  kana: 'ねぎ'
+  romaji: 'negi'
+  nederlands: 'Lente-ui of prei.'
+  gecontroleerd: false
+
+- id: nori
+  categorie: ramen
+  kanji: '海苔'
+  kana: 'のり'
+  romaji: 'nori'
+  nederlands: 'Vel geroosterd zeewier.'
+  gecontroleerd: false
+
+- id: kaedama
+  categorie: ramen
+  kanji: '替え玉'
+  kana: 'かえだま'
+  romaji: 'kaedama'
+  nederlands: 'Extra portie noedels voor de bouillon die je nog hebt; vooral bij tonkotsu.'
+  allergenen: [gluten]
+  gecontroleerd: false
+
+- id: men-katame
+  categorie: ramen
+  kanji: '麺かため'
+  kana: 'めんかため'
+  romaji: 'men katame'
+  nederlands: 'Noedels stevig gekookt. Yawarakame is zacht, futsū is gewoon.'
+  gecontroleerd: false
+
+- id: seabura
+  categorie: ramen
+  kanji: '背脂'
+  kana: 'せあぶら'
+  romaji: 'seabura'
+  nederlands: 'Varkensrugvet dat over de bouillon wordt gestrooid.'
+  allergenen: [varkensvlees]
+  gecontroleerd: false
+
+- id: gyoza
+  categorie: ramen
+  kanji: '餃子'
+  kana: 'ぎょうざ'
+  romaji: 'gyōza'
+  nederlands: 'Dumplings met varkensgehakt en kool, gebakken.'
+  allergenen: [gluten, varkensvlees, soja, sesam]
+  gecontroleerd: false
+
+- id: chahan
+  categorie: ramen
+  kanji: '炒飯'
+  kana: 'チャーハン'
+  romaji: 'chāhan'
+  nederlands: 'Gebakken rijst met ei, vaak met varkensvlees.'
+  allergenen: [ei, soja, varkensvlees]
+  gecontroleerd: false
+
+- id: sushi
+  categorie: sushi
+  kanji: '寿司'
+  kana: 'すし'
+  romaji: 'sushi'
+  nederlands: 'Rijst met azijn, met vis of iets anders erop of erin.'
+  allergenen: [vis]
+  gecontroleerd: false
+
+- id: sashimi
+  categorie: sushi
+  kanji: '刺身'
+  kana: 'さしみ'
+  romaji: 'sashimi'
+  nederlands: 'Plakjes rauwe vis zonder rijst.'
+  allergenen: [vis]
+  gecontroleerd: false
+
+- id: nigiri
+  categorie: sushi
+  kanji: '握り'
+  kana: 'にぎり'
+  romaji: 'nigiri'
+  nederlands: 'Met de hand gevormd rijstblokje met een plak vis erop.'
+  allergenen: [vis]
+  gecontroleerd: false
+
+- id: makizushi
+  categorie: sushi
+  kanji: '巻き寿司'
+  kana: 'まきずし'
+  romaji: 'makizushi'
+  nederlands: 'Rol van rijst en zeewier met vulling.'
+  gecontroleerd: false
+
+- id: gunkan
+  categorie: sushi
+  kanji: '軍艦巻き'
+  kana: 'ぐんかんまき'
+  romaji: 'gunkanmaki'
+  nederlands: 'Rijst met een rand van zeewier, gevuld met iets wat anders van de rijst valt, zoals kuit.'
+  allergenen: [vis]
+  gecontroleerd: false
+
+- id: temaki
+  categorie: sushi
+  kanji: '手巻き'
+  kana: 'てまき'
+  romaji: 'temaki'
+  nederlands: 'Zelf gerolde kegel van zeewier met rijst en vulling.'
+  gecontroleerd: false
+
+- id: chirashi
+  categorie: sushi
+  kanji: 'ちらし寿司'
+  kana: 'ちらしずし'
+  romaji: 'chirashizushi'
+  nederlands: 'Kom rijst met stukjes rauwe vis erover.'
+  allergenen: [vis]
+  gecontroleerd: false
+
+- id: inari
+  categorie: sushi
+  kanji: '稲荷寿司'
+  kana: 'いなりずし'
+  romaji: 'inarizushi'
+  nederlands: 'Rijst in een zoet zakje gefrituurde tofu.'
+  allergenen: [soja, gluten]
+  gecontroleerd: false
+
+- id: maguro
+  categorie: sushi
+  kanji: '鮪'
+  kana: 'まぐろ'
+  romaji: 'maguro'
+  nederlands: 'Tonijn, het magere rode deel.'
+  allergenen: [vis]
+  gecontroleerd: false
+
+- id: chutoro
+  categorie: sushi
+  kanji: '中トロ'
+  kana: 'ちゅうとろ'
+  romaji: 'chūtoro'
+  nederlands: 'Half vette tonijn.'
+  allergenen: [vis]
+  gecontroleerd: false
+
+- id: otoro
+  categorie: sushi
+  kanji: '大トロ'
+  kana: 'おおとろ'
+  romaji: 'ōtoro'
+  nederlands: 'De vetste tonijn, van de buik.'
+  allergenen: [vis]
+  gecontroleerd: false
+
+- id: sake-vis
+  categorie: sushi
+  kanji: '鮭'
+  kana: 'さけ'
+  romaji: 'sake, sāmon'
+  nederlands: 'Zalm. Op een menu vaak als サーモン (sāmon).'
+  allergenen: [vis]
+  gecontroleerd: false
+
+- id: hamachi
+  categorie: sushi
+  kanji: '鰤'
+  kana: 'はまち'
+  romaji: 'hamachi, buri'
+  nederlands: 'Geelstaartmakreel. Buri is de volwassen vis, hamachi de jonge.'
+  allergenen: [vis]
+  gecontroleerd: false
+
+- id: tai
+  categorie: sushi
+  kanji: '鯛'
+  kana: 'たい'
+  romaji: 'tai'
+  nederlands: 'Zeebrasem, witte vis.'
+  allergenen: [vis]
+  gecontroleerd: false
+
+- id: aji
+  categorie: sushi
+  kanji: '鯵'
+  kana: 'あじ'
+  romaji: 'aji'
+  nederlands: 'Horsmakreel, vaak met gember en lente-ui.'
+  allergenen: [vis]
+  gecontroleerd: false
+
+- id: saba
+  categorie: sushi
+  kanji: '鯖'
+  kana: 'さば'
+  romaji: 'saba'
+  nederlands: 'Makreel, meestal gezouten en in azijn gemarineerd.'
+  allergenen: [vis]
+  gecontroleerd: false
+
+- id: unagi
+  categorie: sushi
+  kanji: '鰻'
+  kana: 'うなぎ'
+  romaji: 'unagi'
+  nederlands: 'Zoetwaterpaling, gegrild met een zoete saus.'
+  allergenen: [vis, soja, gluten, alcohol]
+  gecontroleerd: false
+
+- id: anago
+  categorie: sushi
+  kanji: '穴子'
+  kana: 'あなご'
+  romaji: 'anago'
+  nederlands: 'Zeepaling, gekookt en licht zoet.'
+  allergenen: [vis, soja]
+  gecontroleerd: false
+
+- id: ebi
+  categorie: sushi
+  kanji: '海老'
+  kana: 'えび'
+  romaji: 'ebi'
+  nederlands: 'Garnaal, meestal gekookt.'
+  allergenen: [schaaldieren]
+  gecontroleerd: false
+
+- id: amaebi
+  categorie: sushi
+  kanji: '甘海老'
+  kana: 'あまえび'
+  romaji: 'amaebi'
+  nederlands: 'Zoete rauwe garnaal.'
+  allergenen: [schaaldieren]
+  gecontroleerd: false
+
+- id: ika
+  categorie: sushi
+  kanji: '烏賊'
+  kana: 'いか'
+  romaji: 'ika'
+  nederlands: 'Inktvis, een weekdier. Wie niet tegen schelpdieren kan, let hier ook op.'
+  allergenen: [schaaldieren]
+  gecontroleerd: false
+
+- id: tako
+  categorie: sushi
+  kanji: '蛸'
+  kana: 'たこ'
+  romaji: 'tako'
+  nederlands: 'Octopus, gekookt. Een weekdier.'
+  allergenen: [schaaldieren]
+  gecontroleerd: false
+
+- id: hotate
+  categorie: sushi
+  kanji: '帆立'
+  kana: 'ほたて'
+  romaji: 'hotate'
+  nederlands: 'Sint-jakobsschelp.'
+  allergenen: [schaaldieren]
+  gecontroleerd: false
+
+- id: ikura
+  categorie: sushi
+  kanji: 'いくら'
+  kana: 'いくら'
+  romaji: 'ikura'
+  nederlands: 'Zalmeitjes, groot en oranje.'
+  allergenen: [vis]
+  gecontroleerd: false
+
+- id: uni
+  categorie: sushi
+  kanji: '雲丹'
+  kana: 'うに'
+  romaji: 'uni'
+  nederlands: 'Zee-egel. Geen vis en geen schaaldier, maar wie op zeevruchten reageert kan beter oppassen.'
+  allergenen: [schaaldieren]
+  gecontroleerd: false
+
+- id: tamago-sushi
+  categorie: sushi
+  kanji: '玉子'
+  kana: 'たまご'
+  romaji: 'tamago'
+  nederlands: 'Zoete omelet in laagjes, met dashi.'
+  allergenen: [ei, vis]
+  gecontroleerd: false
+
+- id: kappamaki
+  categorie: sushi
+  kanji: 'かっぱ巻き'
+  kana: 'かっぱまき'
+  romaji: 'kappamaki'
+  nederlands: 'Dunne rol met komkommer.'
+  gecontroleerd: false
+
+- id: tekkamaki
+  categorie: sushi
+  kanji: '鉄火巻き'
+  kana: 'てっかまき'
+  romaji: 'tekkamaki'
+  nederlands: 'Dunne rol met tonijn.'
+  allergenen: [vis]
+  gecontroleerd: false
+
+- id: wasabi
+  categorie: sushi
+  kanji: '山葵'
+  kana: 'わさび'
+  romaji: 'wasabi'
+  nederlands: 'Groene mierikswortel, scherp.'
+  gecontroleerd: false
+
+- id: sabinuki
+  categorie: sushi
+  kanji: 'さび抜き'
+  kana: 'さびぬき'
+  romaji: 'sabinuki'
+  nederlands: 'Zonder wasabi.'
+  gecontroleerd: false
+
+- id: gari
+  categorie: sushi
+  kana: 'ガリ'
+  romaji: 'gari'
+  nederlands: 'Ingelegde gember, om tussendoor je mond te spoelen.'
+  gecontroleerd: false
+
+- id: shoyu
+  categorie: sushi
+  kanji: '醤油'
+  kana: 'しょうゆ'
+  romaji: 'shōyu'
+  nederlands: 'Sojasaus. Er zit ook tarwe in.'
+  allergenen: [soja, gluten]
+  gecontroleerd: false
+
+- id: kaitenzushi
+  categorie: sushi
+  kanji: '回転寿司'
+  kana: 'かいてんずし'
+  romaji: 'kaitenzushi'
+  nederlands: 'Sushi van de lopende band; je betaalt per bordje, de kleur is de prijs.'
+  gecontroleerd: false
+
+- id: izakaya
+  categorie: izakaya
+  kanji: '居酒屋'
+  kana: 'いざかや'
+  romaji: 'izakaya'
+  nederlands: 'Kroeg waar je kleine gerechten deelt bij de drank.'
+  gecontroleerd: false
+
+- id: otoshi
+  categorie: izakaya
+  kanji: 'お通し'
+  kana: 'おとおし'
+  romaji: 'otōshi'
+  nederlands: 'Klein hapje dat je zonder te vragen krijgt en dat op de rekening komt, als een soort couvert.'
+  gecontroleerd: false
+
+- id: yakitori
+  categorie: izakaya
+  kanji: '焼き鳥'
+  kana: 'やきとり'
+  romaji: 'yakitori'
+  nederlands: 'Spiesjes kip van de grill, met zout of met zoete saus.'
+  allergenen: [soja, gluten, alcohol]
+  gecontroleerd: false
+
+- id: tare
+  categorie: izakaya
+  kanji: 'たれ'
+  kana: 'たれ'
+  romaji: 'tare'
+  nederlands: 'Zoete saus van sojasaus en mirin; het alternatief is shio, zout.'
+  allergenen: [soja, gluten, alcohol]
+  gecontroleerd: false
+
+- id: tsukune
+  categorie: izakaya
+  kanji: 'つくね'
+  kana: 'つくね'
+  romaji: 'tsukune'
+  nederlands: 'Balletjes of staafjes kipgehakt, vaak met een rauw eigeel om in te dippen.'
+  allergenen: [ei, soja, gluten]
+  gecontroleerd: false
+
+- id: negima
+  categorie: izakaya
+  kanji: 'ねぎま'
+  kana: 'ねぎま'
+  romaji: 'negima'
+  nederlands: 'Kip afgewisseld met stukjes prei.'
+  gecontroleerd: false
+
+- id: kawa
+  categorie: izakaya
+  kanji: '皮'
+  kana: 'かわ'
+  romaji: 'kawa'
+  nederlands: 'Kippenvel, knapperig gegrild.'
+  gecontroleerd: false
+
+- id: sunagimo
+  categorie: izakaya
+  kanji: '砂肝'
+  kana: 'すなぎも'
+  romaji: 'sunagimo'
+  nederlands: 'Kippenmaag, stevig en knapperig.'
+  gecontroleerd: false
+
+- id: karaage
+  categorie: izakaya
+  kanji: '唐揚げ'
+  kana: 'からあげ'
+  romaji: 'karaage'
+  nederlands: 'Gefrituurde stukjes gemarineerde kip.'
+  allergenen: [gluten, soja]
+  gecontroleerd: false
+
+- id: edamame
+  categorie: izakaya
+  kanji: '枝豆'
+  kana: 'えだまめ'
+  romaji: 'edamame'
+  nederlands: 'Gekookte jonge sojabonen in de peul, met zout.'
+  allergenen: [soja]
+  gecontroleerd: false
+
+- id: hiyayakko
+  categorie: izakaya
+  kanji: '冷奴'
+  kana: 'ひややっこ'
+  romaji: 'hiyayakko'
+  nederlands: 'Koude tofu met gember, lente-ui en bonitovlokken.'
+  allergenen: [soja, vis]
+  gecontroleerd: false
+
+- id: agedashi
+  categorie: izakaya
+  kanji: '揚げ出し豆腐'
+  kana: 'あげだしどうふ'
+  romaji: 'agedashi dōfu'
+  nederlands: 'Gefrituurde tofu in dashi.'
+  allergenen: [soja, vis, gluten]
+  gecontroleerd: false
+
+- id: dashimaki
+  categorie: izakaya
+  kanji: 'だし巻き卵'
+  kana: 'だしまきたまご'
+  romaji: 'dashimaki tamago'
+  nederlands: 'Opgerolde omelet met dashi.'
+  allergenen: [ei, vis]
+  gecontroleerd: false
+
+- id: moriawase
+  categorie: izakaya
+  kanji: '盛り合わせ'
+  kana: 'もりあわせ'
+  romaji: 'moriawase'
+  nederlands: 'Gemengde schotel, zoals sashimi moriawase.'
+  gecontroleerd: false
+
+- id: poteto-sarada
+  categorie: izakaya
+  kana: 'ポテトサラダ'
+  romaji: 'poteto sarada'
+  nederlands: 'Aardappelsalade met Japanse mayonaise.'
+  allergenen: [ei]
+  gecontroleerd: false
+
+- id: takowasa
+  categorie: izakaya
+  kanji: 'たこわさ'
+  kana: 'たこわさ'
+  romaji: 'takowasa'
+  nederlands: 'Rauwe octopus met wasabi.'
+  allergenen: [schaaldieren]
+  gecontroleerd: false
+
+- id: hokke
+  categorie: izakaya
+  kana: 'ホッケ'
+  romaji: 'hokke'
+  nederlands: 'Gegrilde, opengeslagen makreel uit Hokkaido.'
+  allergenen: [vis]
+  gecontroleerd: false
+
+- id: kushikatsu
+  categorie: izakaya
+  kanji: '串カツ'
+  kana: 'くしかつ'
+  romaji: 'kushikatsu'
+  nederlands: 'Gefrituurde spiesjes vlees en groente, de specialiteit van Osaka. Niet twee keer in de gedeelde saus dippen.'
+  allergenen: [gluten, ei, varkensvlees]
+  gecontroleerd: false
+
+- id: okonomiyaki
+  categorie: izakaya
+  kanji: 'お好み焼き'
+  kana: 'おこのみやき'
+  romaji: 'okonomiyaki'
+  nederlands: 'Hartige pannenkoek met kool, vaak met varkensvlees, bonitovlokken en saus.'
+  allergenen: [gluten, ei, varkensvlees, vis, soja]
+  gecontroleerd: false
+
+- id: takoyaki
+  categorie: izakaya
+  kanji: 'たこ焼き'
+  kana: 'たこやき'
+  romaji: 'takoyaki'
+  nederlands: 'Balletjes beslag met een stukje octopus, met saus en bonitovlokken.'
+  allergenen: [gluten, ei, schaaldieren, vis]
+  gecontroleerd: false
+
+- id: motsuni
+  categorie: izakaya
+  kanji: 'もつ煮'
+  kana: 'もつに'
+  romaji: 'motsuni'
+  nederlands: 'Stoofpot van ingewanden, meestal van het varken, in miso.'
+  allergenen: [varkensvlees, soja]
+  gecontroleerd: false
+
+- id: nomihodai
+  categorie: izakaya
+  kanji: '飲み放題'
+  kana: 'のみほうだい'
+  romaji: 'nomihōdai'
+  nederlands: 'Onbeperkt drinken voor een vaste prijs en tijd.'
+  allergenen: [alcohol]
+  gecontroleerd: false
+
+- id: tabehodai
+  categorie: izakaya
+  kanji: '食べ放題'
+  kana: 'たべほうだい'
+  romaji: 'tabehōdai'
+  nederlands: 'Onbeperkt eten voor een vaste prijs en tijd.'
+  gecontroleerd: false
+
+- id: okaikei
+  categorie: izakaya
+  kanji: 'お会計'
+  kana: 'おかいけい'
+  romaji: 'okaikei'
+  nederlands: 'De rekening. Je betaalt meestal bij de kassa, niet aan tafel.'
+  gecontroleerd: false
+
+- id: donburi
+  categorie: donburi
+  kanji: '丼'
+  kana: 'どんぶり'
+  romaji: 'donburi'
+  nederlands: 'Kom rijst met iets erop. Achter een naam wordt het vaak -don.'
+  gecontroleerd: false
+
+- id: gyudon
+  categorie: donburi
+  kanji: '牛丼'
+  kana: 'ぎゅうどん'
+  romaji: 'gyūdon'
+  nederlands: 'Dun gesneden rundvlees en ui, gestoofd in een zoete saus.'
+  allergenen: [soja, gluten, alcohol]
+  gecontroleerd: false
+
+- id: oyakodon
+  categorie: donburi
+  kanji: '親子丼'
+  kana: 'おやこどん'
+  romaji: 'oyakodon'
+  nederlands: 'Kip en ei samen gegaard in dashi, letterlijk ouder en kind.'
+  allergenen: [ei, soja, gluten, vis]
+  gecontroleerd: false
+
+- id: katsudon
+  categorie: donburi
+  kanji: 'カツ丼'
+  kana: 'かつどん'
+  romaji: 'katsudon'
+  nederlands: 'Gepaneerde varkenskotelet met ei op rijst.'
+  allergenen: [varkensvlees, ei, gluten, soja]
+  gecontroleerd: false
+
+- id: tendon
+  categorie: donburi
+  kanji: '天丼'
+  kana: 'てんどん'
+  romaji: 'tendon'
+  nederlands: 'Tempura op rijst met saus.'
+  allergenen: [gluten, ei, schaaldieren, soja]
+  gecontroleerd: false
+
+- id: kaisendon
+  categorie: donburi
+  kanji: '海鮮丼'
+  kana: 'かいせんどん'
+  romaji: 'kaisendon'
+  nederlands: 'Rauwe vis en zeevruchten op rijst.'
+  allergenen: [vis, schaaldieren]
+  gecontroleerd: false
+
+- id: unadon
+  categorie: donburi
+  kanji: '鰻丼'
+  kana: 'うなどん'
+  romaji: 'unadon, unajū'
+  nederlands: 'Gegrilde paling op rijst; unajū is hetzelfde in een lakdoos.'
+  allergenen: [vis, soja, gluten, alcohol]
+  gecontroleerd: false
+
+- id: butadon
+  categorie: donburi
+  kanji: '豚丼'
+  kana: 'ぶたどん'
+  romaji: 'butadon'
+  nederlands: 'Gegrild varkensvlees met zoete saus.'
+  allergenen: [varkensvlees, soja, gluten]
+  gecontroleerd: false
+
+- id: tekkadon
+  categorie: donburi
+  kanji: '鉄火丼'
+  kana: 'てっかどん'
+  romaji: 'tekkadon'
+  nederlands: 'Rauwe tonijn op rijst.'
+  allergenen: [vis]
+  gecontroleerd: false
+
+- id: tkg
+  categorie: donburi
+  kanji: '卵かけご飯'
+  kana: 'たまごかけごはん'
+  romaji: 'tamago kake gohan'
+  nederlands: 'Rauw ei en sojasaus door warme rijst.'
+  allergenen: [ei, soja, gluten]
+  gecontroleerd: false
+
+- id: kare-raisu
+  categorie: donburi
+  kana: 'カレーライス'
+  romaji: 'karē raisu'
+  nederlands: 'Japanse curry: zoet, mild en gebonden met bloem. De roux bevat vaak ook melk.'
+  allergenen: [gluten, melk]
+  gecontroleerd: false
+
+- id: omuraisu
+  categorie: donburi
+  kana: 'オムライス'
+  romaji: 'omuraisu'
+  nederlands: 'Omelet over gebakken rijst met ketchup.'
+  allergenen: [ei, melk]
+  gecontroleerd: false
+
+- id: teishoku
+  categorie: donburi
+  kanji: '定食'
+  kana: 'ていしょく'
+  romaji: 'teishoku'
+  nederlands: 'Vast menu met rijst, soep en bijgerechten.'
+  gecontroleerd: false
+
+- id: udon
+  categorie: noedels
+  kanji: '饂飩'
+  kana: 'うどん'
+  romaji: 'udon'
+  nederlands: 'Dikke, zachte tarwenoedels.'
+  allergenen: [gluten]
+  gecontroleerd: false
+
+- id: soba
+  categorie: noedels
+  kanji: '蕎麦'
+  kana: 'そば'
+  romaji: 'soba'
+  nederlands: 'Boekweitnoedels. Er zit bijna altijd ook tarwe in, tenzij er juwari (十割) staat.'
+  allergenen: [gluten]
+  gecontroleerd: false
+
+- id: zaru
+  categorie: noedels
+  kanji: 'ざる'
+  kana: 'ざる'
+  romaji: 'zaru'
+  nederlands: 'Koude noedels op een bamboemat, met een dipsaus.'
+  allergenen: [soja, vis, gluten]
+  gecontroleerd: false
+
+- id: kake
+  categorie: noedels
+  kanji: 'かけ'
+  kana: 'かけ'
+  romaji: 'kake'
+  nederlands: 'Noedels in alleen hete bouillon.'
+  allergenen: [soja, vis, gluten]
+  gecontroleerd: false
+
+- id: kitsune
+  categorie: noedels
+  kanji: 'きつね'
+  kana: 'きつね'
+  romaji: 'kitsune'
+  nederlands: 'Met een plak zoete gefrituurde tofu.'
+  allergenen: [soja]
+  gecontroleerd: false
+
+- id: tanuki
+  categorie: noedels
+  kanji: 'たぬき'
+  kana: 'たぬき'
+  romaji: 'tanuki'
+  nederlands: 'Met knapperige stukjes tempurabeslag.'
+  allergenen: [gluten, ei]
+  gecontroleerd: false
+
+- id: tsukimi
+  categorie: noedels
+  kanji: '月見'
+  kana: 'つきみ'
+  romaji: 'tsukimi'
+  nederlands: 'Met een rauw ei erop, de volle maan.'
+  allergenen: [ei]
+  gecontroleerd: false
+
+- id: tempura-soba
+  categorie: noedels
+  kanji: '天ぷらそば'
+  kana: 'てんぷらそば'
+  romaji: 'tempura soba'
+  nederlands: 'Soba met een tempura garnaal erop.'
+  allergenen: [gluten, ei, schaaldieren, soja, vis]
+  gecontroleerd: false
+
+- id: kare-udon
+  categorie: noedels
+  kanji: 'カレーうどん'
+  kana: 'カレーうどん'
+  romaji: 'karē udon'
+  nederlands: 'Udon in currybouillon.'
+  allergenen: [gluten, melk, soja, vis]
+  gecontroleerd: false
+
+- id: yakisoba
+  categorie: noedels
+  kanji: '焼きそば'
+  kana: 'やきそば'
+  romaji: 'yakisoba'
+  nederlands: 'Gebakken tarwenoedels met varkensvlees, kool en een dikke saus.'
+  allergenen: [gluten, varkensvlees, soja]
+  gecontroleerd: false
+
+- id: somen
+  categorie: noedels
+  kanji: '素麺'
+  kana: 'そうめん'
+  romaji: 'sōmen'
+  nederlands: 'Heel dunne tarwenoedels, koud gegeten.'
+  allergenen: [gluten]
+  gecontroleerd: false
+
+- id: chanpon
+  categorie: noedels
+  kana: 'ちゃんぽん'
+  romaji: 'chanpon'
+  nederlands: 'Noedelsoep uit Nagasaki met varkensvlees, zeevruchten en groente.'
+  allergenen: [gluten, schaaldieren, varkensvlees, vis]
+  gecontroleerd: false
+
+- id: juwari
+  categorie: noedels
+  kanji: '十割'
+  kana: 'じゅうわり'
+  romaji: 'jūwari'
+  nederlands: 'Soba van alleen boekweit, zonder tarwe. Let op: de bouillon bevat meestal wel sojasaus.'
+  gecontroleerd: false
+
+- id: onigiri
+  categorie: konbini
+  kanji: 'お握り'
+  kana: 'おにぎり'
+  romaji: 'onigiri'
+  nederlands: 'Driehoekige rijstbal met vulling, in zeewier. Trek de folie los volgens de nummers 1, 2, 3.'
+  gecontroleerd: false
+
+- id: ume
+  categorie: konbini
+  kanji: '梅'
+  kana: 'うめ'
+  romaji: 'ume'
+  nederlands: 'Zuur ingelegde pruim, een klassieke vulling.'
+  gecontroleerd: false
+
+- id: tsuna-mayo
+  categorie: konbini
+  kana: 'ツナマヨ'
+  romaji: 'tsuna mayo'
+  nederlands: 'Tonijn met mayonaise.'
+  allergenen: [vis, ei]
+  gecontroleerd: false
+
+- id: shake
+  categorie: konbini
+  kanji: '鮭'
+  kana: 'しゃけ'
+  romaji: 'shake'
+  nederlands: 'Gezouten zalm.'
+  allergenen: [vis]
+  gecontroleerd: false
+
+- id: mentaiko
+  categorie: konbini
+  kanji: '明太子'
+  kana: 'めんたいこ'
+  romaji: 'mentaiko'
+  nederlands: 'Pittige kuit van koolvis.'
+  allergenen: [vis]
+  gecontroleerd: false
+
+- id: konbu
+  categorie: konbini
+  kanji: '昆布'
+  kana: 'こんぶ'
+  romaji: 'konbu'
+  nederlands: 'Zoet gestoofd zeewier.'
+  allergenen: [soja]
+  gecontroleerd: false
+
+- id: okaka
+  categorie: konbini
+  kanji: 'おかか'
+  kana: 'おかか'
+  romaji: 'okaka'
+  nederlands: 'Bonitovlokken met sojasaus.'
+  allergenen: [vis, soja]
+  gecontroleerd: false
+
+- id: tamago-sando
+  categorie: konbini
+  kanji: '卵サンド'
+  kana: 'たまごサンド'
+  romaji: 'tamago sando'
+  nederlands: 'Witte sandwich met eiersalade.'
+  allergenen: [gluten, ei, melk]
+  gecontroleerd: false
+
+- id: nikuman
+  categorie: konbini
+  kanji: '肉まん'
+  kana: 'にくまん'
+  romaji: 'nikuman'
+  nederlands: 'Gestoomd broodje met varkensgehakt, uit de warme vitrine bij de kassa.'
+  allergenen: [gluten, varkensvlees, soja]
+  gecontroleerd: false
+
+- id: oden
+  categorie: konbini
+  kanji: 'おでん'
+  kana: 'おでん'
+  romaji: 'oden'
+  nederlands: 'Ei, radijs, tofu en viskoek in dashi, uit de pan bij de kassa.'
+  allergenen: [vis, soja, ei, gluten]
+  gecontroleerd: false
+
+- id: bento
+  categorie: konbini
+  kanji: '弁当'
+  kana: 'べんとう'
+  romaji: 'bentō'
+  nederlands: 'Maaltijd in een doosje.'
+  gecontroleerd: false
+
+- id: atatame
+  categorie: konbini
+  kanji: '温めますか'
+  kana: 'あたためますか'
+  romaji: 'atatamemasu ka'
+  nederlands: 'Zal ik het opwarmen? Ja is hai, nee is iie of daijōbu desu.'
+  gecontroleerd: false
+
+- id: ohashi
+  categorie: konbini
+  kanji: 'お箸'
+  kana: 'おはし'
+  romaji: 'ohashi'
+  nederlands: 'Eetstokjes. Ze vragen of je ze wilt.'
+  gecontroleerd: false
+
+- id: fukuro
+  categorie: konbini
+  kanji: '袋'
+  kana: 'ふくろ'
+  romaji: 'fukuro'
+  nederlands: 'Tasje; die kost een paar yen.'
+  gecontroleerd: false
+
+- id: natto
+  categorie: konbini
+  kanji: '納豆'
+  kana: 'なっとう'
+  romaji: 'nattō'
+  nederlands: 'Gefermenteerde sojabonen, draderig en sterk van smaak.'
+  allergenen: [soja]
+  gecontroleerd: false
+
+- id: kappu-men
+  categorie: konbini
+  kanji: 'カップ麺'
+  kana: 'カップめん'
+  romaji: 'kappu men'
+  nederlands: 'Instantnoedels in een beker; heet water staat vaak bij de kassa.'
+  allergenen: [gluten, soja]
+  gecontroleerd: false
+
+- id: sarada-chikin
+  categorie: konbini
+  kana: 'サラダチキン'
+  romaji: 'sarada chikin'
+  nederlands: 'Gekookte, gekruide kipfilet in een zakje.'
+  gecontroleerd: false
+
+- id: wagashi
+  categorie: zoet
+  kanji: '和菓子'
+  kana: 'わがし'
+  romaji: 'wagashi'
+  nederlands: 'Japanse zoetigheid, vaak van rijst en zoete bonen, bij de thee.'
+  gecontroleerd: false
+
+- id: dango
+  categorie: zoet
+  kanji: '団子'
+  kana: 'だんご'
+  romaji: 'dango'
+  nederlands: 'Balletjes van rijstmeel aan een stokje.'
+  gecontroleerd: false
+
+- id: mitarashi
+  categorie: zoet
+  kanji: 'みたらし団子'
+  kana: 'みたらしだんご'
+  romaji: 'mitarashi dango'
+  nederlands: 'Dango met een zoet-zoute saus van sojasaus.'
+  allergenen: [soja, gluten]
+  gecontroleerd: false
+
+- id: mochi
+  categorie: zoet
+  kanji: '餅'
+  kana: 'もち'
+  romaji: 'mochi'
+  nederlands: 'Taai gestampte kleefrijst. Kleine hapjes nemen.'
+  gecontroleerd: false
+
+- id: daifuku
+  categorie: zoet
+  kanji: '大福'
+  kana: 'だいふく'
+  romaji: 'daifuku'
+  nederlands: 'Mochi gevuld met zoete bonenpasta, soms met een aardbei.'
+  gecontroleerd: false
+
+- id: anko
+  categorie: zoet
+  kanji: '餡子'
+  kana: 'あんこ'
+  romaji: 'anko'
+  nederlands: 'Zoete pasta van rode bonen.'
+  gecontroleerd: false
+
+- id: dorayaki
+  categorie: zoet
+  kanji: 'どら焼き'
+  kana: 'どらやき'
+  romaji: 'dorayaki'
+  nederlands: 'Twee pannenkoekjes met bonenpasta ertussen.'
+  allergenen: [gluten, ei]
+  gecontroleerd: false
+
+- id: taiyaki
+  categorie: zoet
+  kanji: 'たい焼き'
+  kana: 'たいやき'
+  romaji: 'taiyaki'
+  nederlands: 'Visvormig wafeltje met bonenpasta of custard.'
+  allergenen: [gluten, ei, melk]
+  gecontroleerd: false
+
+- id: matcha
+  categorie: zoet
+  kanji: '抹茶'
+  kana: 'まっちゃ'
+  romaji: 'matcha'
+  nederlands: 'Fijngemalen groene thee, ook als smaak in ijs en zoetigheid.'
+  gecontroleerd: false
+
+- id: kakigori
+  categorie: zoet
+  kanji: 'かき氷'
+  kana: 'かきごおり'
+  romaji: 'kakigōri'
+  nederlands: 'Geschaafd ijs met siroop.'
+  gecontroleerd: false
+
+- id: sofuto
+  categorie: zoet
+  kana: 'ソフトクリーム'
+  romaji: 'sofuto kurīmu'
+  nederlands: 'Softijs, vaak in een seizoens of streeksmaak.'
+  allergenen: [melk]
+  gecontroleerd: false
+
+- id: kasutera
+  categorie: zoet
+  kana: 'カステラ'
+  romaji: 'kasutera'
+  nederlands: 'Luchtige eiercake uit Nagasaki.'
+  allergenen: [gluten, ei]
+  gecontroleerd: false
+
+- id: yatsuhashi
+  categorie: zoet
+  kanji: '八ツ橋'
+  kana: 'やつはし'
+  romaji: 'yatsuhashi'
+  nederlands: 'Kyoto: dunne rijstmeelvelletjes met kaneel, gevouwen om bonenpasta.'
+  gecontroleerd: false
+
+- id: warabimochi
+  categorie: zoet
+  kanji: 'わらび餅'
+  kana: 'わらびもち'
+  romaji: 'warabimochi'
+  nederlands: 'Gelei met geroosterd sojameel (kinako).'
+  allergenen: [soja]
+  gecontroleerd: false
+
+- id: yokan
+  categorie: zoet
+  kanji: '羊羹'
+  kana: 'ようかん'
+  romaji: 'yōkan'
+  nederlands: 'Stevige gelei van bonenpasta.'
+  gecontroleerd: false
+
+- id: purin
+  categorie: zoet
+  kana: 'プリン'
+  romaji: 'purin'
+  nederlands: 'Karamelpudding.'
+  allergenen: [ei, melk]
+  gecontroleerd: false
+
+- id: kinako
+  categorie: zoet
+  kanji: 'きな粉'
+  kana: 'きなこ'
+  romaji: 'kinako'
+  nederlands: 'Geroosterd sojameel om over zoetigheid te strooien.'
+  allergenen: [soja]
+  gecontroleerd: false
+
+- id: mizu
+  categorie: drank
+  kanji: '水'
+  kana: 'みず'
+  romaji: 'mizu'
+  nederlands: 'Water. Kraanwater krijg je gratis, vaak als ohiya.'
+  gecontroleerd: false
+
+- id: ohiya
+  categorie: drank
+  kanji: 'お冷'
+  kana: 'おひや'
+  romaji: 'ohiya'
+  nederlands: 'Een glas koud water, gratis.'
+  gecontroleerd: false
+
+- id: ocha
+  categorie: drank
+  kanji: 'お茶'
+  kana: 'おちゃ'
+  romaji: 'ocha'
+  nederlands: 'Thee, meestal groen en gratis bij het eten.'
+  gecontroleerd: false
+
+- id: hojicha
+  categorie: drank
+  kanji: 'ほうじ茶'
+  kana: 'ほうじちゃ'
+  romaji: 'hōjicha'
+  nederlands: 'Geroosterde groene thee, bruin en mild.'
+  gecontroleerd: false
+
+- id: mugicha
+  categorie: drank
+  kanji: '麦茶'
+  kana: 'むぎちゃ'
+  romaji: 'mugicha'
+  nederlands: 'Koude gerstethee.'
+  allergenen: [gluten]
+  gecontroleerd: false
+
+- id: genmaicha
+  categorie: drank
+  kanji: '玄米茶'
+  kana: 'げんまいちゃ'
+  romaji: 'genmaicha'
+  nederlands: 'Groene thee met geroosterde rijst.'
+  gecontroleerd: false
+
+- id: nihonshu
+  categorie: drank
+  kanji: '日本酒'
+  kana: 'にほんしゅ'
+  romaji: 'nihonshu'
+  nederlands: 'Rijstwijn. Sake betekent in Japan alcohol in het algemeen.'
+  allergenen: [alcohol]
+  gecontroleerd: false
+
+- id: shochu
+  categorie: drank
+  kanji: '焼酎'
+  kana: 'しょうちゅう'
+  romaji: 'shōchū'
+  nederlands: 'Gedistilleerd van zoete aardappel, gerst of rijst.'
+  allergenen: [alcohol]
+  gecontroleerd: false
+
+- id: umeshu
+  categorie: drank
+  kanji: '梅酒'
+  kana: 'うめしゅ'
+  romaji: 'umeshu'
+  nederlands: 'Zoete pruimenlikeur.'
+  allergenen: [alcohol]
+  gecontroleerd: false
+
+- id: biru
+  categorie: drank
+  kana: 'ビール'
+  romaji: 'bīru'
+  nederlands: 'Bier. Nama is van de tap.'
+  allergenen: [alcohol, gluten]
+  gecontroleerd: false
+
+- id: haibaru
+  categorie: drank
+  kana: 'ハイボール'
+  romaji: 'haibōru'
+  nederlands: 'Whisky met sodawater.'
+  allergenen: [alcohol, gluten]
+  gecontroleerd: false
+
+- id: chuhai
+  categorie: drank
+  kana: 'チューハイ'
+  romaji: 'chūhai'
+  nederlands: 'Shōchū met prik en een smaakje, ook als sawā.'
+  allergenen: [alcohol]
+  gecontroleerd: false
+
+- id: non-aru
+  categorie: drank
+  kana: 'ノンアルコール'
+  romaji: 'non arukōru'
+  nederlands: 'Alcoholvrij.'
+  gecontroleerd: false
+
+- id: karupisu
+  categorie: drank
+  kana: 'カルピス'
+  romaji: 'karupisu'
+  nederlands: 'Zoete, lichtzure frisdrank op basis van melk.'
+  allergenen: [melk]
+  gecontroleerd: false
+
+- id: tonyu
+  categorie: drank
+  kanji: '豆乳'
+  kana: 'とうにゅう'
+  romaji: 'tōnyū'
+  nederlands: 'Sojamelk.'
+  allergenen: [soja]
+  gecontroleerd: false
+
+- id: amazake
+  categorie: drank
+  kanji: '甘酒'
+  kana: 'あまざけ'
+  romaji: 'amazake'
+  nederlands: 'Zoete, warme rijstdrank. Soms met een beetje alcohol.'
+  allergenen: [alcohol]
+  gecontroleerd: false
+
+- id: oyuwari
+  categorie: drank
+  kanji: 'お湯割り'
+  kana: 'おゆわり'
+  romaji: 'oyuwari'
+  nederlands: 'Met heet water aangelengd, meestal shōchū.'
+  allergenen: [alcohol]
+  gecontroleerd: false
+
+- id: yaki
+  categorie: kookterm
+  kanji: '焼き'
+  kana: 'やき'
+  romaji: 'yaki'
+  nederlands: 'Gegrild of gebakken.'
+  gecontroleerd: false
+
+- id: age
+  categorie: kookterm
+  kanji: '揚げ'
+  kana: 'あげ'
+  romaji: 'age'
+  nederlands: 'Gefrituurd.'
+  gecontroleerd: false
+
+- id: nimono
+  categorie: kookterm
+  kanji: '煮物'
+  kana: 'にもの'
+  romaji: 'nimono'
+  nederlands: 'Gestoofd in dashi en sojasaus.'
+  allergenen: [vis, soja, gluten]
+  gecontroleerd: false
+
+- id: mushi
+  categorie: kookterm
+  kanji: '蒸し'
+  kana: 'むし'
+  romaji: 'mushi'
+  nederlands: 'Gestoomd.'
+  gecontroleerd: false
+
+- id: nama
+  categorie: kookterm
+  kanji: '生'
+  kana: 'なま'
+  romaji: 'nama'
+  nederlands: 'Rauw, of vers van de tap.'
+  gecontroleerd: false
+
+- id: aburi
+  categorie: kookterm
+  kanji: '炙り'
+  kana: 'あぶり'
+  romaji: 'aburi'
+  nederlands: 'Kort geschroeid met een vlam.'
+  gecontroleerd: false
+
+- id: tempura
+  categorie: kookterm
+  kanji: '天ぷら'
+  kana: 'てんぷら'
+  romaji: 'tempura'
+  nederlands: 'In een licht beslag gefrituurd.'
+  allergenen: [gluten, ei]
+  gecontroleerd: false
+
+- id: furai
+  categorie: kookterm
+  kana: 'フライ'
+  romaji: 'furai'
+  nederlands: 'Gepaneerd en gefrituurd.'
+  allergenen: [gluten, ei]
+  gecontroleerd: false
+
+- id: teriyaki
+  categorie: kookterm
+  kanji: '照り焼き'
+  kana: 'てりやき'
+  romaji: 'teriyaki'
+  nederlands: 'Gegrild met een glanzende zoete saus.'
+  allergenen: [soja, gluten, alcohol]
+  gecontroleerd: false
+
+- id: shioyaki
+  categorie: kookterm
+  kanji: '塩焼き'
+  kana: 'しおやき'
+  romaji: 'shioyaki'
+  nederlands: 'Met alleen zout gegrild.'
+  gecontroleerd: false
+
+- id: sunomono
+  categorie: kookterm
+  kanji: '酢の物'
+  kana: 'すのもの'
+  romaji: 'sunomono'
+  nederlands: 'Aangemaakt met azijn.'
+  gecontroleerd: false
+
+- id: goma
+  categorie: kookterm
+  kanji: '胡麻'
+  kana: 'ごま'
+  romaji: 'goma'
+  nederlands: 'Sesam, ook als ごま和え (goma-ae): aangemaakt met sesamsaus.'
+  allergenen: [sesam]
+  gecontroleerd: false
+
+- id: dashi
+  categorie: kookterm
+  kanji: '出汁'
+  kana: 'だし'
+  romaji: 'dashi'
+  nederlands: 'Bouillon van gedroogde bonito en zeewier. Zit in bijna alles, ook waar geen vis te zien is.'
+  allergenen: [vis]
+  gecontroleerd: false
+
+- id: katsuobushi
+  categorie: kookterm
+  kanji: '鰹節'
+  kana: 'かつおぶし'
+  romaji: 'katsuobushi'
+  nederlands: 'Gedroogde bonitovlokken die op warm eten bewegen.'
+  allergenen: [vis]
+  gecontroleerd: false
+
+- id: miso
+  categorie: kookterm
+  kanji: '味噌'
+  kana: 'みそ'
+  romaji: 'miso'
+  nederlands: 'Gefermenteerde pasta van sojabonen.'
+  allergenen: [soja]
+  gecontroleerd: false
+
+- id: misoshiru
+  categorie: kookterm
+  kanji: '味噌汁'
+  kana: 'みそしる'
+  romaji: 'misoshiru'
+  nederlands: 'Misosoep, op dashi.'
+  allergenen: [soja, vis]
+  gecontroleerd: false
+
+- id: mirin
+  categorie: kookterm
+  kanji: '味醂'
+  kana: 'みりん'
+  romaji: 'mirin'
+  nederlands: 'Zoete kookwijn van rijst.'
+  allergenen: [alcohol]
+  gecontroleerd: false
+
+- id: buta
+  categorie: kookterm
+  kanji: '豚'
+  kana: 'ぶた'
+  romaji: 'buta'
+  nederlands: 'Varkensvlees.'
+  allergenen: [varkensvlees]
+  gecontroleerd: false
+
+- id: gyu
+  categorie: kookterm
+  kanji: '牛'
+  kana: 'ぎゅう'
+  romaji: 'gyū'
+  nederlands: 'Rundvlees.'
+  gecontroleerd: false
+
+- id: tori
+  categorie: kookterm
+  kanji: '鶏'
+  kana: 'とり'
+  romaji: 'tori'
+  nederlands: 'Kip.'
+  gecontroleerd: false
+
+- id: tamago
+  categorie: kookterm
+  kanji: '卵'
+  kana: 'たまご'
+  romaji: 'tamago'
+  nederlands: 'Ei, ook als 玉子.'
+  allergenen: [ei]
+  gecontroleerd: false
+
+- id: komugi
+  categorie: kookterm
+  kanji: '小麦'
+  kana: 'こむぎ'
+  romaji: 'komugi'
+  nederlands: 'Tarwe.'
+  allergenen: [gluten]
+  gecontroleerd: false
+
+- id: rakkasei
+  categorie: kookterm
+  kanji: '落花生'
+  kana: 'らっかせい'
+  romaji: 'rakkasei, pīnattsu'
+  nederlands: 'Pinda, ook als ピーナッツ.'
+  allergenen: [pinda]
+  gecontroleerd: false
+
+- id: kurumi
+  categorie: kookterm
+  kanji: '胡桃'
+  kana: 'くるみ'
+  romaji: 'kurumi'
+  nederlands: 'Walnoot.'
+  allergenen: [noten]
+  gecontroleerd: false
+
+- id: karai
+  categorie: kookterm
+  kanji: '辛い'
+  kana: 'からい'
+  romaji: 'karai'
+  nederlands: 'Pittig. Amai is zoet.'
+  gecontroleerd: false
+
+- id: nami
+  categorie: kookterm
+  kanji: '並'
+  kana: 'なみ'
+  romaji: 'nami'
+  nederlands: 'Gewone portie; ōmori (大盛り) is groot, tokumori (特盛) extra groot.'
+  gecontroleerd: false
+
+- id: kisetsu
+  categorie: kookterm
+  kanji: '季節限定'
+  kana: 'きせつげんてい'
+  romaji: 'kisetsu gentei'
+  nederlands: 'Alleen dit seizoen.'
+  gecontroleerd: false
+
+- id: osusume
+  categorie: kookterm
+  kanji: '本日のおすすめ'
+  kana: 'ほんじつのおすすめ'
+  romaji: 'honjitsu no osusume'
+  nederlands: 'Aanrader van vandaag.'
+  gecontroleerd: false

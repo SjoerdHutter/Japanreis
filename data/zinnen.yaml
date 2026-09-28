@@ -369,6 +369,14 @@
   uitspraak: watasji wa tsoegie no tabemono nie arerugie ga arimas. korera o tsoekatte inai rjoori o onegai sjimas
   gecontroleerd: false
 
+- id: allergie-gerecht-ja
+  categorie: allergie
+  land: japan
+  nederlands: Zit er iets van het volgende in dit gerecht?
+  lokaal: この料理に次のものは入っていますか？
+  uitspraak: kono rjoori nie tsoegie no mono wa haitte imas ka
+  gecontroleerd: false
+
 - id: nood-ziekenhuis-vn
   categorie: nood
   land: vietnam

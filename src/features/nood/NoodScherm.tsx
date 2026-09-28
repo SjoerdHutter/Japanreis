@@ -24,6 +24,7 @@ import {
   type Bijlage,
   type Land,
   type Medisch,
+  type MenuItem,
   type Noodnummer,
 } from '@/domein/schema';
 import { BijlageWeergave } from '@/features/gegevens/BijlageWeergave';
@@ -506,19 +507,31 @@ const ZinKaart = ({
  * De allergiekaart: een zin in de taal van het land en je allergenen eronder,
  * elk op een eigen regel en in groot schrift. Wat je zelf in vrije tekst schreef
  * staat er klein onder, want dat heeft niemand vertaald.
+ *
+ * Met een `gerecht` erbij, vanaf de menukaart, staat de naam van dat gerecht
+ * bovenaan en vraagt de zin of er iets van jouw lijst in zit.
  */
 export const AllergieKaart = ({
   medisch,
   land,
+  gerecht,
   onSluit,
 }: {
   medisch?: Medisch;
   land: Land;
+  gerecht?: MenuItem;
   onSluit: () => void;
 }) => {
   const taal = land === 'japan' ? 'ja' : 'vi';
+  const metGerecht = land === 'japan' ? gerecht : undefined;
   const kop = ZINNEN.find(
-    (z) => z.id === (land === 'japan' ? 'allergie-lijst-ja' : 'allergie-lijst-vn'),
+    (z) =>
+      z.id ===
+      (metGerecht
+        ? 'allergie-gerecht-ja'
+        : land === 'japan'
+          ? 'allergie-lijst-ja'
+          : 'allergie-lijst-vn'),
   );
   const allergenen = medisch?.allergenen ?? [];
   if (allergenen.length === 0 && !medisch?.allergieOverig) {
@@ -542,11 +555,21 @@ export const AllergieKaart = ({
   }
   return (
     <Toonscherm
-      titel="Mijn allergieën"
+      titel={metGerecht ? metGerecht.romaji : 'Mijn allergieën'}
       taal={taal}
-      lokaal={<span className="block text-2xl leading-snug">{kop?.lokaal}</span>}
+      lokaal={
+        <>
+          {metGerecht && (
+            <span className="mb-3 block text-[2.6rem] leading-tight font-bold">
+              {metGerecht.kanji ?? metGerecht.kana}
+            </span>
+          )}
+          <span className="block text-2xl leading-snug">{kop?.lokaal}</span>
+        </>
+      }
       nederlands={
         <>
+          {metGerecht && `${metGerecht.romaji}: ${metGerecht.nederlands} `}
           {kop?.nederlands} Allergisch voor: {allergenen.map((a) => ALLERGEEN_NAAM[a]).join(', ')}.
           {medisch?.allergieOverig && (
             <span className="mt-2 block">

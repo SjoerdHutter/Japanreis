@@ -12,7 +12,7 @@ import { useApp } from '@/state/useApp';
  * en een halve blik op je telefoon doorheen moet kunnen.
  */
 
-const Chip = ({
+export const Chip = ({
   aan,
   onClick,
   children,

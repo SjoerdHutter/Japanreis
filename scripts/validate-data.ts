@@ -30,6 +30,7 @@ import { reisdagenBestandSchema } from '../src/domein/schema/reisdag';
 import { allergenenBestandSchema, noodBestandSchema } from '../src/domein/schema/nood';
 import { laatsteTreinenBestandSchema } from '../src/domein/schema/trein';
 import { kaartlagenBestandSchema } from '../src/domein/schema/kaartlaag';
+import { menuBestandSchema } from '../src/domein/schema/menu';
 import { existsSync } from 'node:fs';
 import { binnenGebied } from '../src/domein/geo/afstand';
 
@@ -134,6 +135,15 @@ if (laatsteTreinen && steden) {
       if (!stadIds.has(stad))
         fouten.push(`laatste-treinen.yaml: ${trein.id} kent stad "${stad}" niet`);
     }
+  }
+}
+
+const menu = controleer(menuBestandSchema, lees(join(DATA, 'menu.yaml')), 'menu.yaml');
+if (menu) {
+  const gezien = new Set<string>();
+  for (const item of menu) {
+    if (gezien.has(item.id)) fouten.push(`menu.yaml: dubbele id ${item.id}`);
+    gezien.add(item.id);
   }
 }
 
@@ -330,7 +340,7 @@ if (steden && tijdlijnen && reisschema) {
 
   const aantalTips = tips?.groepen.reduce((n, g) => n + g.tips.length, 0) ?? 0;
   console.log(
-    `Gecontroleerd: ${steden.length} steden, ${plaatsIds.size} plaatsen, ${apps?.length ?? 0} apps, ${vervoer?.trajecten.length ?? 0} trajecten, ${etiquette?.length ?? 0} etiquettekaarten, ${zinnen?.length ?? 0} zinnen, ${aantalTips} tips, ${stations?.length ?? 0} stations, ${reisdagen?.length ?? 0} reisdagen.`,
+    `Gecontroleerd: ${steden.length} steden, ${plaatsIds.size} plaatsen, ${apps?.length ?? 0} apps, ${vervoer?.trajecten.length ?? 0} trajecten, ${etiquette?.length ?? 0} etiquettekaarten, ${zinnen?.length ?? 0} zinnen, ${aantalTips} tips, ${stations?.length ?? 0} stations, ${reisdagen?.length ?? 0} reisdagen, ${menu?.length ?? 0} gerechten.`,
   );
 }
 

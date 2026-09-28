@@ -25,6 +25,7 @@ import {
   allergenenBestandSchema,
   laatsteTreinenBestandSchema,
   kaartlagenBestandSchema,
+  menuBestandSchema,
   plaatsenBestandSchema,
   reisschemaSchema,
   stedenBestandSchema,
@@ -45,6 +46,7 @@ import {
   type AllergeenVertaling,
   type LaatsteTrein,
   type Kaartlagen,
+  type MenuItem,
 } from '@/domein/schema';
 
 /**
@@ -166,4 +168,18 @@ export const laadKaartlagen = async (stadId: string): Promise<Kaartlagen | null>
   if (!sleutel) return null;
   const module = await kaartlaagBestanden[sleutel]();
   return parseer(kaartlagenBestandSchema, module.default, `kaartlagen/${stadId}`);
+};
+
+/**
+ * De menukaart, pas geladen als je hem opent: 180 gerechten die je bij het
+ * opstarten niet nodig hebt. Net als de plaatsen een los brok dat de service
+ * worker al heeft opgehaald.
+ */
+let menu: Promise<MenuItem[]> | undefined;
+
+export const laadMenu = (): Promise<MenuItem[]> => {
+  menu ??= import('../../../data/menu.yaml').then((module) =>
+    parseer(menuBestandSchema, module.default, 'menu'),
+  );
+  return menu;
 };

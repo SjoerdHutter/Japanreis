@@ -17,6 +17,7 @@ import {
   Smartphone,
   Stamp,
   TrainFront,
+  UtensilsCrossed,
   Wallet,
   type LucideIcon,
 } from 'lucide-react';
@@ -123,6 +124,12 @@ export const GROEPEN: Groep[] = [
         naam: 'Budget',
         uitleg: 'Uitgaven en je contante geld',
         icoon: Wallet,
+      },
+      {
+        pad: '/menu',
+        naam: 'Menukaart',
+        uitleg: 'Wat er op de kaart staat, en je allergieën',
+        icoon: UtensilsCrossed,
       },
       {
         pad: '/context',

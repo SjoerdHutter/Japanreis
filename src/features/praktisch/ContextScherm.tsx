@@ -119,6 +119,18 @@ export const ContextScherm = () => {
           Het schrift staat er groot bij, zodat je het kunt laten zien. Wijzen werkt beter dan
           uitspreken. De uitspraak is in Nederlandse spelling en niet in officiële romaji.
         </p>
+        {land === 'japan' && (
+          <p className="mb-3 text-sm leading-relaxed">
+            Een Japanse kaart ontcijferen?{' '}
+            <Link
+              to="/menu"
+              className="font-medium text-zegel underline underline-offset-2 dark:text-zegel-licht"
+            >
+              Open de menukaart
+            </Link>
+            , met je allergieën erbij.
+          </p>
+        )}
         {CATEGORIE_VOLGORDE.map((categorie) => {
           const inCategorie = zinnen.filter((z) => z.categorie === categorie);
           if (inCategorie.length === 0) return null;

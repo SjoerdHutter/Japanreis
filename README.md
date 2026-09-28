@@ -171,6 +171,10 @@ Gebouwd:
 - Drukte: bij de grote trekpleisters het rustigste moment, de drukte per
   dagdeel en de drukste dagen; de dagplanner zet ze op dat moment en zegt
   waarom.
+- Menukaart: 180 gerechten en termen om op te zoeken in kanji, kana, romaji
+  of het Nederlands, met de allergenen die er gewoonlijk in zitten. Staat je
+  allergie in Mijn gegevens, dan krijgt elk gerecht waar hij in zit een rode
+  rand, en vraag je het met één tik aan het personeel.
 
 De app is daarmee compleet volgens de functiespecificatie.
 
@@ -574,3 +578,22 @@ het rustige moment, dan zegt hij dat ook.
 
 Weet je het ter plekke beter, tik dan bij de plaats op "drukte aanpassen". Wat
 je invult is een eigen waarde, en de planner rekent er meteen mee.
+
+### De menukaart
+
+Op /menu staan 180 gerechten en termen van een Japanse kaart, in negen groepen:
+ramen, sushi, izakaya, donburi, udon en soba, de konbini, zoet, drinken en de
+kooktermen die in een naam terugkomen (yaki, age, nabe). Zoek op wat je ziet.
+ラーメン, らーめん, rāmen en ramen vinden hetzelfde, net als shōyu en shouyu of
+tempura en tenpura; een Nederlands woord zoekt in de omschrijving.
+
+De allergenen per gerecht zijn wat er gewoonlijk in zit, uit dezelfde lijst als
+Mijn gegevens. Heb je daar een allergie ingevuld, dan krijgt elk gerecht waar
+die in zit een rode rand, en toont "Vraag het na" het gerecht in groot schrift
+met de vraag of er iets van jouw lijst in zit, je allergenen in het Japans
+eronder. Dashi, sojasaus en mirin zitten op onverwachte plekken; neem de kaart
+dus als begin van het gesprek, niet als antwoord.
+
+Niets hiervan is door een kok of moedertaalspreker nagekeken, dus elk gerecht
+heeft "controleren". De menukaart laadt pas als je hem opent, maar reist wel
+mee in de offline versie.

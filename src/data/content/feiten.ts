@@ -1,4 +1,4 @@
-import { ALLERGEEN_NAAM } from '@/domein/schema';
+import { ALLERGEEN_NAAM, MENU_CATEGORIE_NAAM } from '@/domein/schema';
 import {
   ALLERGEEN_VERTALINGEN,
   APPS,
@@ -6,6 +6,7 @@ import {
   NOOD,
   ZINNEN,
   laadAllePlaatsen,
+  laadMenu,
 } from './index';
 
 /**
@@ -37,6 +38,7 @@ export const zinFeitId = (id: string) => `zin:${id}`;
 export const appFeitId = (id: string) => `app:${id}`;
 export const treinFeitId = (id: string) => `trein:${id}`;
 export const druktFeitId = (plaatsId: string) => `drukte:${plaatsId}`;
+export const menuFeitId = (id: string) => `menu:${id}`;
 
 const vasteGroepen = (): Feitengroep[] => [
   {
@@ -122,7 +124,7 @@ const vasteGroepen = (): Feitengroep[] => [
  * pas wordt geladen als je hem opent.
  */
 export const laadFeitgroepen = async (): Promise<Feitengroep[]> => {
-  const plaatsen = await laadAllePlaatsen();
+  const [plaatsen, menu] = await Promise.all([laadAllePlaatsen(), laadMenu()]);
   const drukte: Feitengroep = {
     id: 'drukte',
     naam: 'Drukte bij de grote trekpleisters',
@@ -140,5 +142,21 @@ export const laadFeitgroepen = async (): Promise<Feitengroep[]> => {
         gecontroleerd: p.attractie?.drukte?.gecontroleerd ?? true,
       })),
   };
-  return [...vasteGroepen(), drukte].filter((g) => g.feiten.length > 0);
+  const menukaart: Feitengroep = {
+    id: 'menu',
+    naam: 'Menukaart',
+    pad: '/menu',
+    feiten: menu.map((m) => ({
+      id: menuFeitId(m.id),
+      titel: `${m.kanji ?? m.kana}, ${m.romaji}`,
+      detail: [
+        MENU_CATEGORIE_NAAM[m.categorie],
+        m.allergenen.length > 0 && `met ${m.allergenen.map((a) => ALLERGEEN_NAAM[a]).join(', ')}`,
+      ]
+        .filter(Boolean)
+        .join(', '),
+      gecontroleerd: m.gecontroleerd,
+    })),
+  };
+  return [...vasteGroepen(), drukte, menukaart].filter((g) => g.feiten.length > 0);
 };
