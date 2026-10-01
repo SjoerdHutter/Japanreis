@@ -31,6 +31,7 @@ import { allergenenBestandSchema, noodBestandSchema } from '../src/domein/schema
 import { laatsteTreinenBestandSchema } from '../src/domein/schema/trein';
 import { kaartlagenBestandSchema } from '../src/domein/schema/kaartlaag';
 import { menuBestandSchema } from '../src/domein/schema/menu';
+import { sumoSchema } from '../src/domein/schema/sumo';
 import { existsSync } from 'node:fs';
 import { binnenGebied } from '../src/domein/geo/afstand';
 
@@ -118,6 +119,13 @@ if (etiquette && new Set(etiquette.map((e) => e.id)).size !== etiquette.length) 
 
 if (apps && new Set(apps.map((a) => a.id)).size !== apps.length) {
   fouten.push('apps.yaml: dubbele app-id');
+}
+
+// De sumogids. Twee secties met dezelfde id zouden de knoppen bovenaan de
+// pagina allebei naar de eerste laten springen.
+const sumo = controleer(sumoSchema, lees(join(DATA, 'sumo.yaml')), 'sumo.yaml');
+if (sumo && new Set(sumo.secties.map((s) => s.id)).size !== sumo.secties.length) {
+  fouten.push('sumo.yaml: dubbele sectie-id');
 }
 
 const laatsteTreinen = controleer(

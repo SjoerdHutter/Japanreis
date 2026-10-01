@@ -1,0 +1,297 @@
+# De sumogids onder Meer, Sumo. De tekeningen staan in de app
+# (src/features/sumo/tekeningen.tsx); hier wijst `tekening` ernaar.
+#
+# Regels en technieken volgen de Japanse Sumobond. De data van de toernee in
+# oktober komen uit de schema's van de toernee en zijn niet bij de bond zelf
+# nagekeken.
+
+intro: >-
+  Sumo is makkelijk te volgen: twee worstelaars, een ronde ring, en wie als
+  eerste buiten de ring stapt of de grond raakt met iets anders dan zijn
+  voetzolen, verliest. Er zijn geen gewichtsklassen en geen rondes. Een partij
+  duurt vaak maar een paar seconden, het ritueel ervoor een paar minuten.
+
+secties:
+  - id: ring
+    titel: De ring
+    kort: Ring
+    tekeningen: [ring]
+    tekst:
+      - >-
+        De ring heet dohyo: een verhoogd vierkant van aangestampte klei met
+        daarin een cirkel van 4,55 meter, afgezet met strobalen (tawara) die half
+        in de klei zitten. Op vier plekken ligt een baal iets naar buiten; daar
+        heb je een paar centimeter meer ruimte.
+      - >-
+        In het midden liggen twee witte strepen, de startlijnen. Buiten de
+        balen ligt een rand fijn zand, zodat de scheidsrechter ziet of iemand
+        met een teen buiten is geweest. Op de balen staan mag nog, die horen bij
+        de ring.
+
+  - id: winnen
+    titel: Hoe je wint
+    kort: Winnen
+    tekeningen: [uit-de-ring, grond-geraakt]
+    punten:
+      - titel: Hij raakt de grond buiten de ring
+        tekst: >-
+          Met wat dan ook: een teen, een hiel, een hand, zelfs zijn haarknot. Hij
+          mag wel buiten de ring hangen of zweven, zolang hij niets raakt.
+      - titel: Hij raakt binnen de ring de grond met iets anders dan zijn voetzolen
+        tekst: >-
+          Een knie, een hand, een elleboog, een vingertop. Vallen ze samen, dan
+          verliest wie als eerste raakt. Zet de winnaar zijn hand neer om zijn
+          vallende tegenstander te sparen, dan telt die hand niet.
+      - titel: En verder
+        tekst: >-
+          Een verboden greep betekent direct verlies, en wie zijn mawashi
+          verliest, verliest ook de partij. Dat laatste gebeurt in het echte
+          sumo bijna nooit.
+
+  - id: verloop
+    titel: Zo verloopt een partij
+    kort: Verloop
+    tekeningen: [shikiri, tachiai]
+    stappen: true
+    punten:
+      - titel: Stampen
+        lokaal: 四股 shiko
+        tekst: >-
+          Been hoog in de lucht, en met kracht neer. Dat verjaagt kwade geesten
+          uit de ring en maakt de heupen los.
+      - titel: Zout strooien
+        lokaal: 塩 shio
+        tekst: >-
+          Een handvol zout over de ring om hem te zuiveren. Sumo komt uit het
+          shinto, en de ring is een heilige plek.
+      - titel: Tegenover elkaar
+        lokaal: 仕切り shikiri
+        tekst: >-
+          Ze hurken achter hun lijn en kijken elkaar aan. In het echte sumo staan
+          ze een paar keer op en gaan ze weer zitten om de spanning op te
+          bouwen, tot de scheidsrechter laat weten dat de tijd om is.
+      - titel: De start
+        lokaal: 立ち合い tachiai
+        tekst: >-
+          Er is geen startschot. Beide worstelaars zetten hun vuisten op de grond
+          en springen tegelijk op, als ze er allebei klaar voor zijn. Gaat er een
+          te vroeg, dan beginnen ze opnieuw. De eerste klap beslist vaak de
+          partij.
+      - titel: Hakkeyoi, nokotta
+        lokaal: はっけよい、残った
+        tekst: >-
+          Tijdens het gevecht roept de scheidsrechter hakkeyoi om ze aan te
+          sporen, en nokotta, nog binnen, als iemand de rand nadert maar nog in
+          de ring staat. Na afloop buigen ze naar elkaar.
+
+  - id: technieken
+    titel: Technieken die je het vaakst ziet
+    kort: Technieken
+    tekst:
+      - >-
+        Er zijn 82 officiële winnende technieken (kimarite), maar een handvol
+        beslist de meeste partijen. Yorikiri en oshidashi zijn samen goed voor
+        ongeveer de helft. Grofweg zijn er twee stijlen: duwen en stoten
+        (oshi-zumo), of de tegenstander aan zijn mawashi vastpakken (yotsu-zumo).
+        Rood wint in de tekeningen.
+    punten:
+      - titel: Naar buiten lopen
+        lokaal: 寄り切り yorikiri
+        tekening: yorikiri
+        tekst: >-
+          Met een greep in zijn mawashi loop je hem lichaam tegen lichaam
+          achteruit de ring uit. Laag blijven, kleine passen.
+      - titel: Naar buiten duwen
+        lokaal: 押し出し oshidashi
+        tekening: oshidashi
+        tekst: >-
+          Duwen zonder zijn mawashi vast te houden, met je handen tegen zijn borst
+          of in zijn oksels, tot hij buiten de ring stapt.
+      - titel: Naar buiten stoten
+        lokaal: 突き出し tsukidashi
+        tekening: tsukidashi
+        tekst: >-
+          Met snelle stoten van de open hand (tsuppari) sla je hem achteruit tot
+          buiten de ring. Altijd met de vlakke hand, nooit met een vuist.
+      - titel: Neerslaan
+        lokaal: 叩き込み hatakikomi
+        tekening: hatakikomi
+        tekst: >-
+          Duikt hij laag naar voren, dan stap je opzij en sla je hem op zijn rug of
+          schouders neer. Zijn eigen vaart doet het werk. Mis je het moment, dan
+          duwt hij je zo de ring uit.
+      - titel: Worp over de arm
+        lokaal: 上手投げ uwatenage
+        tekening: uwatenage
+        tekst: >-
+          Je pakt zijn mawashi met je arm over de zijne heen, draait weg en
+          trekt hem om je heup heen tegen de grond.
+      - titel: Van achteren naar buiten
+        lokaal: 送り出し okuridashi
+        tekening: okuridashi
+        tekst: >-
+          Draait hij zich verkeerd, dan kom je achter hem en duw je hem van achteren
+          de ring uit. Simpel en vernederend.
+
+  - id: verboden
+    titel: Wat niet mag
+    kort: Verboden
+    tekst:
+      - >-
+        Wie een van deze grepen gebruikt, verliest meteen. Bij de shows gelden ze
+        net zo goed, ook voor jou.
+    punten:
+      - titel: Slaan met een vuist
+        verbod: vuist
+        tekst: Stoten en slaan mag, maar alleen met de open hand.
+      - titel: Aan het haar trekken
+        verbod: haar
+        tekst: Ook niet per ongeluk aan de haarknot, de chonmage.
+      - titel: In de ogen of de maag prikken
+        verbod: ogen
+        tekst: Geen vingers in de ogen, en geen stoot in de maagstreek.
+      - titel: Op beide oren tegelijk slaan
+        verbod: oren
+        tekst: Met twee handen tegelijk op de oren, dat kan het trommelvlies kapotmaken.
+      - titel: Het kruisstuk van de mawashi grijpen
+        verbod: mawashi
+        tekst: Je pakt de mawashi bij de band rond de heupen, niet bij het stuk voorlangs.
+      - titel: De keel vastpakken
+        verbod: keel
+        tekst: Een hand tegen de keel duwen mag, de keel omklemmen niet.
+      - titel: Trappen tegen borst of buik
+        verbod: trappen
+        tekst: Een voet vegen of haken mag wel, schoppen niet.
+      - titel: Vingers omverbuigen
+        verbod: vingers
+        tekst: Een of twee vingers van de ander naar achteren buigen.
+
+  - id: zelf
+    titel: Als je zelf de ring in gaat
+    kort: Zelf meedoen
+    tekeningen: [houding, suri-ashi]
+    punten:
+      - titel: Wat je kunt verwachten
+        tekst: >-
+          Je vecht tegen een oud-worstelaar van rond de 150 kilo, die je heel
+          laat. Meestal mag je een keer winnen, of tilt hij je speels de ring
+          uit. Het is een show, dus speel mee en overdrijf
+          gerust.
+      - titel: Kleding
+        tekst: >-
+          Je krijgt een opgevuld sumopak of een mawashi over je kleren, en je
+          staat op blote voeten. Draag iets wat makkelijk zit, doe sieraden,
+          horloge en bril af, haal je zakken leeg en knip je nagels kort.
+      - titel: Laag staan
+        tekst: >-
+          Voeten iets wijder dan je schouders, knieën diep gebogen, rug recht en
+          hoofd omhoog, ogen op zijn borst. Wie lager staat, wint: van onderaf
+          duw je iemand omhoog en uit zijn evenwicht.
+      - titel: Starten vanuit je benen
+        tekst: >-
+          Vuisten op de lijn, en dan schiet je vanuit je benen naar voren, niet
+          vanuit je rug. Kom van onder hem, niet ertegen.
+      - titel: Handen in zijn oksels
+        tekst: >-
+          Duw met je handen tegen zijn borst of in zijn oksels, ellebogen tegen
+          je lichaam, en duw schuin omhoog. Zo verliest hij grip en grond. Duim en
+          vingers vormen een V onder zijn oksel; dat heet hazu.
+      - titel: Schuiven, niet stappen
+        tekst: >-
+          Schuif met kleine passen over de grond (suri-ashi): voeten laag houden en
+          nooit kruisen. Met één voet in de lucht ben je zo uit balans.
+      - titel: Niet te ver voorover
+        tekst: >-
+          Komt je hoofd lager dan je heupen, dan stapt hij opzij en lig je plat.
+          Dat is precies de hatakikomi van hierboven.
+      - titel: Buigen
+        tekst: >-
+          Buig als je de ring in stapt en als je eruit gaat, ook als je verloren
+          hebt. Doet de worstelaar shiko voor, stamp dan mee.
+      - titel: Je beurt
+        tekst: >-
+          Bij Asakusa Sumo Club, Kyoto Sumo Club, SUMOLAND en Tokyo Sumo Room mag
+          in principe wie wil. Bij Hirakuza in Osaka en Ginza wordt geloot, tenzij
+          je een duurdere stoel met een zekere uitdaging neemt. Boek ruim vooraf,
+          zeker in het weekend.
+      - titel: Eten
+        tekst: >-
+          De chanko komt meestal voor of tijdens de show. Eet je buik niet vol als
+          je straks de ring in wilt.
+      - titel: Gezondheid
+        tekst: >-
+          Met klachten aan je rug, nek of knieën, een zwakke schouder of als je
+          zwanger bent: liever kijken. Een worstelaar die voorzichtig doet, weegt
+          nog steeds het dubbele van jou.
+      - titel: Foto's
+        tekst: >-
+          Geef je telefoon aan je reisgenoot of aan het personeel voor je de ring
+          in stapt. Na afloop is er bijna altijd een fotomoment met de
+          worstelaars.
+      - titel: Vrouwen
+        tekst: >-
+          In het professionele sumo mogen vrouwen niet op de dohyo, dat is een
+          oude en omstreden regel. Bij deze shows doen vrouwen en kinderen gewoon
+          mee.
+
+  - id: kijken
+    titel: Echte sumo zien in oktober
+    kort: Kijken
+    punten:
+      - titel: Geen toernooi, wel een toernee
+        tekst: >-
+          De grote toernooien (basho) zijn in januari, maart, mei, juli, september
+          en november. In oktober trekt de hele sumowereld op toernee (jungyo)
+          door het land, met open training, demonstraties en partijen. Daardoor
+          is er in oktober bij de stallen in Tokio ook vrijwel nooit
+          ochtendtraining te zien.
+      - titel: De toernee langs je route
+        tekst: >-
+          Kanazawa op maandag 12 oktober, een dag voor je er aankomt. Takayama op
+          woensdag 14 oktober, als je nog in Kanazawa zit. Kyoto op vrijdag 16
+          oktober en Osaka (Maishima) op zaterdag 17 oktober, als je in Takayama
+          bent. Kaartjes gaan via Ticket Pia en e+. Kijk de data na, ze komen uit
+          de schema's van de toernee.
+      - titel: Het sumomuseum
+        tekst: >-
+          In de Kokugikan in Ryogoku, de sumohal van Tokio, zit een klein gratis
+          museum met prenten en banners van oude kampioenen. Op werkdagen open.
+          Combineer het met SUMOLAND, op tien minuten lopen.
+
+woorden:
+  - woord: dohyo
+    lokaal: 土俵
+    uitleg: De ring.
+  - woord: rikishi
+    lokaal: 力士
+    uitleg: Een worstelaar. In het dagelijks leven zeg je osumo-san.
+  - woord: mawashi
+    lokaal: 廻し
+    uitleg: De gordel, het enige wat een worstelaar draagt.
+  - woord: tawara
+    lokaal: 俵
+    uitleg: De strobalen die de rand van de ring vormen.
+  - woord: gyoji
+    lokaal: 行司
+    uitleg: De scheidsrechter, in zijden kimono en met een waaier.
+  - woord: tachiai
+    lokaal: 立ち合い
+    uitleg: De start, het moment van de eerste botsing.
+  - woord: shiko
+    lokaal: 四股
+    uitleg: Het stampen met een hoog geheven been.
+  - woord: kimarite
+    lokaal: 決まり手
+    uitleg: De techniek waarmee een partij gewonnen is.
+  - woord: chanko
+    lokaal: ちゃんこ
+    uitleg: De eiwitrijke stoofpot die worstelaars elke dag eten.
+  - woord: yokozuna
+    lokaal: 横綱
+    uitleg: De hoogste rang. Wie hem haalt, verliest hem nooit meer, maar stopt als hij niet meer wint.
+  - woord: heya
+    lokaal: 部屋
+    uitleg: Een stal, waar worstelaars samen wonen, trainen en eten.
+  - woord: hakkeyoi
+    lokaal: はっけよい
+    uitleg: De aanmoediging van de scheidsrechter tijdens het gevecht.

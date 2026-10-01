@@ -106,3 +106,37 @@ body {
   padding: 8px 10px;
   border-radius: 12px;
 }
+
+/* De sumotekeningen. Twee worstelaars die je in beide modi uit elkaar houdt, een
+   gordel die tegen allebei afsteekt, en een vlak met vaste kleur: de witte rand
+   rond armen en benen moet precies de achtergrond zijn, anders zie je hem. */
+.sumo-tekening {
+  --sumo-vlak: #fffcf6;
+  --sumo-rood: #a23441;
+  --sumo-rood-diep: #6d2029;
+  --sumo-blauw: #3b6680;
+  --sumo-blauw-diep: #24435a;
+  --sumo-band: #b8901f;
+  --sumo-lijn: #24201c;
+  --sumo-klei: #dcc7a1;
+  --sumo-zand: #efe6d2;
+  --sumo-stro: #a8894a;
+  --sumo-markering: #c2410c;
+  --sumo-goed: #2f855a;
+  background: var(--sumo-vlak);
+}
+
+.dark .sumo-tekening {
+  --sumo-vlak: #211e17;
+  --sumo-rood: #e0707b;
+  --sumo-rood-diep: #a9505a;
+  --sumo-blauw: #8fb3c7;
+  --sumo-blauw-diep: #5f8296;
+  --sumo-band: #d9b44a;
+  --sumo-lijn: #faf7f2;
+  --sumo-klei: #4d4232;
+  --sumo-zand: #5e5240;
+  --sumo-stro: #a58c52;
+  --sumo-markering: #fb923c;
+  --sumo-goed: #68d391;
+}
