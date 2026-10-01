@@ -537,3 +537,140 @@
       url: https://www.2ndstreet.jp/shop/details
       gecontroleerdOp: 2026-09-06
   tags: [google-maps-lijst, vintage]
+
+# Sumo: shows met oud-worstelaars waar je zelf de ring in kunt. Gevonden via de
+# eigen sites en boekingssites in oktober 2026, niet bezocht. Tijden en prijzen
+# wisselen, dus kijk ze na als je reserveert. De spelregels, technieken en tips
+# staan in de app onder Meer, Sumo.
+
+- id: asakusa-sumo-club
+  naam: Asakusa Sumo Club
+  naamLokaal: 浅草相撲部屋
+  stad: tokio
+  categorie: attractie
+  coordinaten: { lat: 35.7142, lon: 139.7932 }
+  adres: 2-10-12 Asakusa, Taito, 111-0032
+  beschrijving: >-
+    De bekendste sumoshow van Tokio, vijf minuten lopen van de Sensō-ji. Een
+    Engelstalige presentator legt de regels uit, twee oud-worstelaars laten hun
+    training zien en vechten drie partijen, en daarna mag wie wil in een sumopak
+    de ring in tegen een van hen. Met kip-chanko waarvan je kunt bijbestellen,
+    een drankje en een foto. Op Tripadvisor rond de 4,8 uit ruim vierhonderd
+    recensies.
+  openingstijden:
+    standaard: 12:00-22:30
+    opmerking: Voorstellingen om 12:00, 15:00, 18:00 en 20:30, elk twee uur.
+  prijs:
+    bedrag: 16000
+    tot: 60000
+    valuta: JPY
+    toelichting: Per persoon met eten, afhankelijk van de stoel
+  reservering: verplicht
+  attractie:
+    type: ervaring
+    bezoekduurMinuten: 120
+    regenbestendig: true
+    dagdeel: [middag, avond]
+  bronnen:
+    - naam: Asakusa Sumo Club
+      url: https://asakusa-sumo.com/
+  tags: [sumo]
+
+- id: tokyo-sumo-beya
+  naam: Tokyo Sumo Room
+  naamLokaal: 東京相撲部屋
+  stad: tokio
+  categorie: attractie
+  coordinaten: { lat: 35.6848, lon: 139.7958 }
+  coordinaatGeschat: true
+  adres: 2-10-11 Kiyosumi, Koto, 135-0024
+  beschrijving: >-
+    De enige show in een echte sumostal: dit was de stal van yokozuna
+    Kitanoumi. Oud-worstelaar Tokitsuumi, die in de hoogste divisie vocht, leidt
+    het. Je ziet training en partijen van een paar meter afstand en stapt daarna
+    zelf op de dohyo, waar de worstelaars je de basis leren. Kleiner en minder
+    show dan Asakusa. Op GetYourGuide 4,8 uit ruim drieduizend recensies, de
+    meest beoordeelde sumo-ervaring van Tokio. Vier minuten lopen van
+    Kiyosumi-Shirakawa, uitgang A1.
+  openingstijden:
+    standaard: 08:30-16:30
+    opmerking: >-
+      Voorstellingen om 08:30, 11:00 en 15:00, elk anderhalf uur. Die van 11:00
+      kan met lunch.
+  prijs:
+    bedrag: 14000
+    tot: 17000
+    valuta: JPY
+    toelichting: Met lunch het hoogste bedrag; rechtstreeks geboekt soms goedkoper
+  reservering: verplicht
+  attractie:
+    type: ervaring
+    bezoekduurMinuten: 90
+    regenbestendig: true
+    dagdeel: [ochtend, middag]
+  bronnen:
+    - naam: Tokyo Sumo Room
+      url: https://www.tokyosumobeya.com/
+  tags: [sumo]
+
+- id: sumoland-ryogoku
+  naam: SUMOLAND Tokyo Ryogoku
+  naamLokaal: 相撲ランド
+  stad: tokio
+  categorie: attractie
+  coordinaten: { lat: 35.6947, lon: 139.7953 }
+  adres: 4-32-19 Ryogoku, Sumida, Takashima Ryogoku Mansion 1F
+  beschrijving: >-
+    In Ryogoku, de sumowijk rond de Kokugikan, onder toezicht van oud-yokozuna
+    Asahifuji. Een show met oud-worstelaars uit de hoogste divisie, daarna een
+    sumo-uitdaging voor wie wil, ook voor vrouwen en kinderen, en mochi stampen
+    met de worstelaars. Met kip-chanko. Drie minuten van station Ryogoku,
+    oostuitgang.
+  openingstijden:
+    opmerking: Drie voorstellingen per dag van twee uur; de tijden zie je bij het reserveren.
+  prijs:
+    bedrag: 16000
+    valuta: JPY
+    toelichting: Per persoon met eten; kinderen van 2 tot 12 jaar 12.000 yen
+  reservering: verplicht
+  attractie:
+    type: ervaring
+    bezoekduurMinuten: 120
+    regenbestendig: true
+  bronnen:
+    - naam: SUMOLAND
+      url: https://sumoland.jp/
+  tags: [sumo]
+
+- id: hirakuza-ginza
+  naam: Hirakuza Ginza
+  naamLokaal: 日楽座 GINZA TOKYO
+  stad: tokio
+  categorie: attractie
+  coordinaten: { lat: 35.674, lon: 139.7682 }
+  coordinaatGeschat: true
+  adres: 1-9-13 Ginza, Chuo, Prime Ginza Yanagi-dori Building B1
+  beschrijving: >-
+    De chicste, sinds januari 2026 in Ginza: een kaiseki-diner met sake bij een
+    show met trommels, een ringceremonie, uitleg van de regels en verboden
+    grepen, en echte partijen. Aan het eind mogen een paar gasten in een sumopak
+    tegen een worstelaar, maar die worden vooraf geloot, dus een beurt is niet
+    zeker. Tokyo Cheapo noemt het de beste sumoshow van de stad. Een minuut van
+    Ginza-itchome, uitgang 10.
+  openingstijden:
+    opmerking: Voorstellingen om 12:00, 17:00 en 20:30.
+  prijs:
+    bedrag: 15000
+    tot: 27000
+    valuta: JPY
+    toelichting: De lunch is het goedkoopst, 's avonds vanaf 17.000 yen
+  reservering: verplicht
+  attractie:
+    type: ervaring
+    bezoekduurMinuten: 120
+    regenbestendig: true
+    dagdeel: [middag, avond]
+  bronnen:
+    - naam: Hirakuza Ginza
+      url: https://hirakuza.net/tokyo/
+  tags: [sumo]

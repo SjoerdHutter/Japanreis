@@ -12,6 +12,7 @@ import reisdagenRuw from '../../../data/reisdagen.yaml';
 import noodRuw from '../../../data/nood.yaml';
 import allergenenRuw from '../../../data/allergenen.yaml';
 import laatsteTreinenRuw from '../../../data/laatste-treinen.yaml';
+import sumoRuw from '../../../data/sumo.yaml';
 import {
   appsBestandSchema,
   vervoerBestandSchema,
@@ -24,6 +25,7 @@ import {
   noodBestandSchema,
   allergenenBestandSchema,
   laatsteTreinenBestandSchema,
+  sumoSchema,
   kaartlagenBestandSchema,
   menuBestandSchema,
   plaatsenBestandSchema,
@@ -45,6 +47,7 @@ import {
   type NoodContent,
   type AllergeenVertaling,
   type LaatsteTrein,
+  type SumoGids,
   type Kaartlagen,
   type MenuItem,
 } from '@/domein/schema';
@@ -111,6 +114,8 @@ export const LAATSTE_TREINEN: LaatsteTrein[] = parseer(
   laatsteTreinenRuw,
   'laatste-treinen',
 );
+
+export const SUMO: SumoGids = parseer(sumoSchema, sumoRuw, 'sumo');
 
 export const stationMet = (id: string): Station | undefined => STATIONS.find((s) => s.id === id);
 

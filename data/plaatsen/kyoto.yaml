@@ -709,3 +709,70 @@
       url: http://www.noru.cc/
       gecontroleerdOp: 2026-09-06
   tags: [google-maps-lijst]
+
+# Sumo. Zie de kop van het sumoblok in tokio.yaml: gevonden via de eigen sites en
+# boekingssites in oktober 2026, niet bezocht.
+
+- id: kyoto-sumo-club
+  naam: Kyoto Sumo Club
+  naamLokaal: 京都相撲部屋
+  stad: kyoto
+  categorie: attractie
+  coordinaten: { lat: 35.0058, lon: 135.7686 }
+  coordinaatGeschat: true
+  adres: 525-1 Higashigawa-cho, Nakagyo, Passaggio 5F
+  beschrijving: >-
+    Sinds december 2025 de Kyotose vestiging van de Asakusa Sumo Club, in de
+    overdekte winkelstraat Shinkyogoku, net onder Takoyakushi. Hetzelfde recept:
+    uitleg in het Engels, oud-worstelaars die trainen en vechten, en aan het eind
+    een sumo-uitdaging waarbij gasten zelf de ring in gaan. Eten en drinken
+    onbeperkt. Drie minuten van station Kyoto-Kawaramachi.
+  openingstijden:
+    standaard: 12:00-21:00
+    opmerking: Voorstellingen om 12:00, 15:30 en 19:00, elk twee uur. Elke dag open.
+  prijs:
+    bedrag: 16000
+    tot: 25000
+    valuta: JPY
+    toelichting: Met onbeperkt eten en drinken en een souvenir
+  reservering: verplicht
+  attractie:
+    type: ervaring
+    bezoekduurMinuten: 120
+    regenbestendig: true
+    dagdeel: [middag, avond]
+  bronnen:
+    - naam: Kyoto Sumo Club
+      url: https://asakusa-sumo.com/kyoto-jp/
+  tags: [sumo]
+
+- id: sumoan-kyoto
+  naam: Sumoan Kyoto
+  naamLokaal: 相撲庵京都
+  stad: kyoto
+  categorie: attractie
+  coordinaten: { lat: 35.016, lon: 135.7596 }
+  coordinaatGeschat: true
+  adres: 260 Makieya-cho, Nakagyo, Kyoto Shimbun Trust Building B1
+  beschrijving: >-
+    Kleiner en intiemer, sinds februari 2026 in een kelder vlak bij het
+    Keizerlijk Paleis. Oud-worstelaars uit de hoogste divisie laten training en
+    partijen zien, een presentator legt in het Engels uit, en per voorstelling
+    mogen tot acht gasten de ring in om tegen een worstelaar te duwen. Iedereen
+    doet mee aan het zoutstrooien. Met chanko. Rond de 4,9 op boekingssites.
+    Twee minuten van metrostation Marutamachi, uitgang 6.
+  openingstijden:
+    opmerking: Voorstellingen van anderhalf tot twee uur; de tijden zie je bij het reserveren.
+  prijs:
+    bedrag: 12800
+    valuta: JPY
+    toelichting: Met chanko en een drankje; met alleen een drankje 10.000 yen
+  reservering: verplicht
+  attractie:
+    type: ervaring
+    bezoekduurMinuten: 120
+    regenbestendig: true
+  bronnen:
+    - naam: Sumoan Kyoto
+      url: https://www.sumoan-kyoto.com/
+  tags: [sumo]

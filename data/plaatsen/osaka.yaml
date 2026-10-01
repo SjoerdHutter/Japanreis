@@ -311,3 +311,37 @@
     standaard: 09:00-18:00
     perDag: { zondag: gesloten }
   tags: [google-maps-lijst, vintage, tassen]
+
+# Sumo. Zie de kop van het sumoblok in tokio.yaml: gevonden via de eigen site en
+# boekingssites in oktober 2026, niet bezocht.
+
+- id: hirakuza-osaka
+  naam: Hirakuza Osaka
+  naamLokaal: THE SUMO HALL 日楽座 OSAKA
+  stad: osaka
+  categorie: attractie
+  coordinaten: { lat: 34.6618, lon: 135.5021 }
+  adres: 2-10-70 Nambanaka, Naniwa, Namba Parks 8F
+  beschrijving: >-
+    Een sumotheater op de achtste verdieping van Namba Parks, naast station
+    Nankai Namba. Een uur show met oud-worstelaars: technieken, het zoutritueel
+    en partijen, met een bento of een zakje snacks en een drankje. Wie de ring in
+    mag wordt geloot; met een Premium BL-stoel mag één persoon per stoel zeker
+    de uitdaging aan. Op sommige dagen is er ook een workshop waarin
+    oud-worstelaars je de basis leren en je zelf traint, met chanko erbij.
+  openingstijden:
+    opmerking: Meerdere voorstellingen per dag; de tijden zie je bij het reserveren.
+  prijs:
+    bedrag: 12500
+    tot: 16000
+    valuta: JPY
+    toelichting: Plus 700 yen servicekosten; de stoel met een zekere uitdaging is duurder
+  reservering: verplicht
+  attractie:
+    type: ervaring
+    bezoekduurMinuten: 60
+    regenbestendig: true
+  bronnen:
+    - naam: Hirakuza Osaka
+      url: https://hirakuza.net/osaka/
+  tags: [sumo]

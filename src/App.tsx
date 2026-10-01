@@ -1,4 +1,5 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Navigate, Route, Routes, useLocation, useNavigationType } from 'react-router-dom';
 import { AppProvider } from '@/state/AppProvider';
 import { Hoofdmenu } from '@/features/steden/Hoofdmenu';
 import { StadScherm } from '@/features/stad/StadScherm';
@@ -25,12 +26,31 @@ import { NoodScherm } from '@/features/nood/NoodScherm';
 import { ControlerenScherm } from '@/features/controleren/ControlerenScherm';
 import { AgendaScherm } from '@/features/agenda/AgendaScherm';
 import { MenuScherm } from '@/features/menu/MenuScherm';
+import { SumoScherm } from '@/features/sumo/SumoScherm';
+
+/**
+ * Een nieuw scherm begint bovenaan. Zonder dit bleef de scrollpositie van het
+ * vorige scherm staan, en kwam je vanaf een tegel onderaan Meer halverwege een
+ * lange pagina uit. Terug (POP) laat de browser zijn eigen positie herstellen.
+ *
+ * Dit staat vóór de schermen zodat het eerst draait; een scherm dat zelf naar
+ * een anker springt, zoals de tijdlijn, doet dat daarna en wint.
+ */
+const NaarBoven = () => {
+  const { pathname } = useLocation();
+  const soort = useNavigationType();
+  useEffect(() => {
+    if (soort !== 'POP') window.scrollTo(0, 0);
+  }, [pathname, soort]);
+  return null;
+};
 
 const App = () => (
   <AppProvider>
     {/* Ruimte onder elk scherm voor de balk onderaan, zodat die nooit het
         laatste stuk van een pagina afdekt. */}
     <div className="pb-14">
+      <NaarBoven />
       <Routes>
         <Route path="/" element={<Hoofdmenu />} />
         <Route path="/stad/:stadId" element={<StadScherm />} />
@@ -55,6 +75,7 @@ const App = () => (
         <Route path="/controleren" element={<ControlerenScherm />} />
         <Route path="/agenda" element={<AgendaScherm />} />
         <Route path="/menu" element={<MenuScherm />} />
+        <Route path="/sumo" element={<SumoScherm />} />
         <Route path="/tijdlijn/:tijdlijnId" element={<TijdlijnScherm />} />
         <Route path="/geschiedenis/:stadId" element={<StadGeschiedenisScherm />} />
         {/* Onbekend pad hoort niet op een lege pagina uit te komen; terug naar

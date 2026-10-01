@@ -1,5 +1,6 @@
 import {
   Archive,
+  BicepsFlexed,
   CalendarDays,
   CalendarPlus,
   ListChecks,
@@ -136,6 +137,12 @@ export const GROEPEN: Groep[] = [
         naam: 'Etiquette en taal',
         uitleg: 'Zinnen om te laten zien, en het seizoen',
         icoon: Languages,
+      },
+      {
+        pad: '/sumo',
+        naam: 'Sumo',
+        uitleg: 'Spelregels, technieken, en waar je zelf de ring in kunt',
+        icoon: BicepsFlexed,
       },
       {
         pad: '/apps',

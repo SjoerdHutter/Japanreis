@@ -63,6 +63,7 @@ aanloopt.
 | `data/plaatsen/<stad>.yaml` | De punten van die stad: attracties, eten, stempels |
 | `data/stations.yaml`        | Stationsgidsen: uitgangen, Shinkansen, overstappen |
 | `data/reisdagen.yaml`       | Per reisdag welke trein of bus, en je koffer       |
+| `data/sumo.yaml`            | De sumogids: regels, technieken, tips en woorden   |
 
 > **Let op:** de startset in `data/plaatsen/` is redactionele content uit
 > algemene kennis en is niet ter plaatse geverifieerd. Openingstijden en prijzen
@@ -182,6 +183,10 @@ Gebouwd:
   zichzelf bewaren; 's avonds een zacht zetje in het hoofdmenu als je nog
   niets schreef. Notities gaan mee in de backup en staan in het reisverslag
   bij hun dag.
+- Sumo: shows waar je zelf tegen een oud-worstelaar de ring in kunt, in Tokio,
+  Osaka en Kyoto, als plaatsen van het nieuwe type "ervaring"; en onder Meer
+  een gids met de regels, de technieken die je het vaakst ziet, de verboden
+  grepen en tips voor je eigen partij, met tekeningen.
 
 De app is daarmee compleet volgens de functiespecificatie.
 
@@ -643,3 +648,21 @@ je schrijft ter plekke. Voor en na de reis vraagt het niets.
 
 Notities gaan mee in de backup (als "Dagnotities") en staan in het reisverslag
 bij hun dag, naast de foto's en de gelopen routes van die dag.
+
+### Sumo
+
+Zeven shows waar je na afloop zelf de ring in kunt: vier in Tokio (Asakusa Sumo
+Club, Tokyo Sumo Room, SUMOLAND en Hirakuza Ginza), Hirakuza in Osaka en twee in
+Kyoto (Kyoto Sumo Club en Sumoan). Ze staan als gewone plaatsen in
+`data/plaatsen/`, met het type "ervaring" en de tag `sumo`, dus ook op de kaart,
+in de filters en in de dagplanner. In de andere steden langs de route is er
+niets vergelijkbaars. De shows zijn gevonden via hun eigen sites en
+boekingssites en niet bezocht; prijzen en tijden wisselen.
+
+Op /sumo staan ze bovenaan, gevolgd door de gids uit `data/sumo.yaml`: de ring,
+hoe je wint, het verloop van een partij, zes technieken, de acht verboden
+grepen, tips voor als je zelf de ring in gaat, de toernee in oktober en een
+woordenlijst. De tekeningen zijn SVG in `src/features/sumo/tekeningen.tsx`: een
+worstelaar is een pictogram waarvan per houding alleen heup, schouders, hoofd,
+handen en voeten vastliggen; knieën en ellebogen worden uitgerekend. Ze werken
+offline en in de donkere modus.

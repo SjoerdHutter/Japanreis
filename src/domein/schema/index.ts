@@ -20,3 +20,4 @@ export * from './nood';
 export * from './trein';
 export * from './kaartlaag';
 export * from './menu';
+export * from './sumo';

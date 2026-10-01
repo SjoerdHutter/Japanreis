@@ -28,11 +28,14 @@ export const PlaatsRegel = ({
   plaats,
   stad,
   vanaf,
+  metGids = true,
 }: {
   plaats: Plaats;
   stad: Stad;
   /** Vertrekpunt voor de looptijd; meestal je eigen locatie. */
   vanaf?: Coordinaat | null;
+  /** Een verwijzing naar de sumogids; uit op de gids zelf. */
+  metGids?: boolean;
 }) => {
   const { koersen } = useApp();
   const [open, setOpen] = useState(false);
@@ -134,6 +137,16 @@ export const PlaatsRegel = ({
           )}
 
           {plaats.adres && <Regel titel="Adres">{plaats.adres}</Regel>}
+
+          {metGids && plaats.tags?.includes('sumo') && (
+            <Regel titel="Sumo">
+              Wil je de ring in? Lees vooraf{' '}
+              <Link to="/sumo" className="font-medium text-zegel dark:text-zegel-licht">
+                de spelregels, technieken en tips
+              </Link>
+              .
+            </Regel>
+          )}
 
           <div className="mt-2 flex flex-wrap items-center gap-2 text-inkt-zacht dark:text-papier/65">
             <strong className="font-medium text-inkt dark:text-papier">Betalen:</strong>

@@ -56,6 +56,10 @@ export const attractieTypeSchema = z.enum([
   'water',
   'pretpark',
   'aquarium',
+  // Iets wat je doet in plaats van bekijkt, zoals een sumoshow waar je zelf de
+  // ring in stapt. Onder `museum` zou het opduiken bij wie een tentoonstelling
+  // zoekt, en het is net als een pretpark betaald, binnen en vooraf te boeken.
+  'ervaring',
 ]);
 export type AttractieType = z.infer<typeof attractieTypeSchema>;
 
