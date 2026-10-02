@@ -21,10 +21,12 @@ describe('splitsBijRegen', () => {
         plaats('bamboe', { attractie: { type: 'park', regenbestendig: false } }),
         plaats('tempel', { attractie: { type: 'tempel' } }),
         plaats('ramen', { categorie: 'eten', eten: { keuken: 'ramen' } }),
+        plaats('bia-hoi', { categorie: 'eten', eten: { keuken: 'bar', regenbestendig: false } }),
+        plaats('spa', { categorie: 'spa', spa: { regenbestendig: true } }),
       ],
       STAD,
     );
-    expect(binnen.map((p) => p.id)).toEqual(['museum', 'ramen']);
-    expect(buiten.map((p) => p.id)).toEqual(['bamboe', 'tempel']);
+    expect(binnen.map((p) => p.id)).toEqual(['museum', 'ramen', 'spa']);
+    expect(buiten.map((p) => p.id)).toEqual(['bamboe', 'tempel', 'bia-hoi']);
   });
 });

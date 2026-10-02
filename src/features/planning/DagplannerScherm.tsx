@@ -1,13 +1,13 @@
-import { useEffect, useMemo, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { CloudRain } from 'lucide-react';
+import { Fragment, useEffect, useMemo, useState } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
+import { CloudRain, UtensilsCrossed } from 'lucide-react';
 import type { Plaats } from '@/domein/schema';
 import { STEDEN, stadMet } from '@/data/content';
 import { usePlaatsen } from '@/data/usePlaatsen';
 import { bewaarIn, leesEen } from '@/data/db/idb';
 import { THUIS_TIJDZONE, datumIn } from '@/domein/tijd/zones';
 import { Kaartje, Knop, Label, Sectiekop } from '@/ui/basis';
-import { alsKlok, maakDagplan } from '@/domein/planning/dagplanner';
+import { alsKlok, maakDagplan, type Maaltijdvoorstel } from '@/domein/planning/dagplanner';
 import { alsMinuten } from '@/domein/planning/overstap';
 import { splitsBijRegen } from '@/domein/planning/regen';
 import { isRegendag } from '@/domein/weer/verwachting';
@@ -29,6 +29,10 @@ import { LaatsteTreinMelding } from './LaatsteTreinMelding';
  * kunt plannen en hem daar weer terugvindt. Is het een regendag volgens de
  * verwachting, dan houdt het voorstel alleen wat bij regen kan, met een knop om
  * dat uit te zetten.
+ *
+ * Valt er een moment voor lunch of diner tussen twee stops, dan staat daar een
+ * eetplek als voorstel: eerst een die bij een van die stops hoort, anders de
+ * dichtstbijzijnde die dan open is. Het voorstel verandert de dag zelf niet.
  */
 
 const GEEN_PLAATSEN: Plaats[] = [];
@@ -119,7 +123,10 @@ const Dagplanner = () => {
   const regenActief = regendag && !regenUit;
 
   const kiesbaar = useMemo(
-    () => plaatsen.filter((p) => p.categorie === 'attractie' || p.categorie === 'eten'),
+    () =>
+      plaatsen.filter(
+        (p) => p.categorie === 'attractie' || p.categorie === 'eten' || p.categorie === 'spa',
+      ),
     [plaatsen],
   );
   const bijRegen = useMemo(
@@ -136,8 +143,16 @@ const Dagplanner = () => {
     if (startMinuten === null || eindMinuten === null) return null;
     const selectie = zichtbaar.filter((p) => gekozen.has(p.id));
     if (selectie.length === 0) return null;
-    return maakDagplan({ plaatsen: selectie, stad, datum, startMinuten, eindMinuten });
-  }, [stad, zichtbaar, gekozen, datum, start, eind]);
+    return maakDagplan({
+      plaatsen: selectie,
+      stad,
+      datum,
+      startMinuten,
+      eindMinuten,
+      alle: plaatsen,
+      regen: regenActief,
+    });
+  }, [stad, zichtbaar, gekozen, datum, start, eind, plaatsen, regenActief]);
 
   const wisselen = (id: string) => {
     const nieuw = new Set(gekozen);
@@ -218,7 +233,7 @@ const Dagplanner = () => {
               <CloudRain className="size-4 shrink-0" aria-hidden />
               <span className="min-w-0 flex-1">
                 {regenActief
-                  ? 'Regendag verwacht. Het voorstel houdt alleen wat bij regen kan: musea, overdekte plekken en eten.'
+                  ? 'Regendag verwacht. Het voorstel houdt alleen wat bij regen kan: musea, overdekte plekken, en eten en spa binnen.'
                   : 'Regendag verwacht, maar het regenvoorstel staat uit: alles staat erin.'}
               </span>
               <Knop
@@ -317,33 +332,45 @@ const Dagplanner = () => {
           )}
 
           <div className="grid gap-2">
+            {plan.maaltijden
+              .filter((m) => !m.na)
+              .map((m) => (
+                <MaaltijdKaart key={m.maaltijd} voorstel={m} />
+              ))}
             {plan.stops.map((stop) => (
-              <Kaartje key={stop.plaats.id} className="p-3.5">
-                <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
-                  <span className="font-medium tabular-nums">
-                    {alsKlok(stop.aankomst)} tot {alsKlok(stop.vertrek)}
-                  </span>
-                  <span className="font-medium">{stop.plaats.naam}</span>
-                  {stop.looptijd > 0 && <Label>{stop.looptijd} min lopen</Label>}
-                </div>
-                {stop.uitleg && (
-                  <p className="mt-1.5 text-sm text-sky-800 dark:text-sky-200">{stop.uitleg}</p>
-                )}
-                {stop.waarschuwingen.map((w) => (
-                  <p key={w} className="mt-1.5 text-sm text-zegel">
-                    {w}
-                  </p>
-                ))}
-                {stop === plan.stops[plan.stops.length - 1] && (
-                  <LaatsteTreinMelding stadId={stadId} datum={datum} stop={stop} />
-                )}
-              </Kaartje>
+              <Fragment key={stop.plaats.id}>
+                <Kaartje className="p-3.5">
+                  <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1">
+                    <span className="font-medium tabular-nums">
+                      {alsKlok(stop.aankomst)} tot {alsKlok(stop.vertrek)}
+                    </span>
+                    <span className="font-medium">{stop.plaats.naam}</span>
+                    {stop.looptijd > 0 && <Label>{stop.looptijd} min lopen</Label>}
+                  </div>
+                  {stop.uitleg && (
+                    <p className="mt-1.5 text-sm text-sky-800 dark:text-sky-200">{stop.uitleg}</p>
+                  )}
+                  {stop.waarschuwingen.map((w) => (
+                    <p key={w} className="mt-1.5 text-sm text-zegel">
+                      {w}
+                    </p>
+                  ))}
+                  {stop === plan.stops[plan.stops.length - 1] && (
+                    <LaatsteTreinMelding stadId={stadId} datum={datum} stop={stop} />
+                  )}
+                </Kaartje>
+                {plan.maaltijden
+                  .filter((m) => m.na === stop.plaats)
+                  .map((m) => (
+                    <MaaltijdKaart key={m.maaltijd} voorstel={m} />
+                  ))}
+              </Fragment>
             ))}
           </div>
 
           {plan.nietGepland.length > 0 && (
             <div className="mt-3">
-              <p className="mb-1.5 text-sm font-medium">Paste er niet in</p>
+              <p className="mb-1.5 text-sm font-medium">Niet in je dag</p>
               <p className="flex flex-wrap gap-1.5">
                 {plan.nietGepland.map((p) => (
                   <Label key={p.id} toon="let-op">
@@ -360,3 +387,28 @@ const Dagplanner = () => {
     </div>
   );
 };
+
+/** Een eetplek bij lunch of diner, als voorstel tussen de stops in. */
+const MaaltijdKaart = ({ voorstel }: { voorstel: Maaltijdvoorstel }) => (
+  <div className="flex gap-2.5 rounded-2xl border border-dashed border-black/15 p-3.5 text-sm leading-relaxed dark:border-white/20">
+    <UtensilsCrossed className="mt-0.5 size-4 shrink-0 text-zegel" aria-hidden />
+    <div className="min-w-0">
+      <p>
+        <span className="font-medium">
+          {voorstel.maaltijd === 'lunch' ? 'Lunch' : 'Diner'} rond {alsKlok(voorstel.moment)}:
+        </span>{' '}
+        <Link
+          to={`/plaats/${voorstel.plaats.id}`}
+          className="font-medium text-zegel underline underline-offset-2"
+        >
+          {voorstel.plaats.naam}
+        </Link>
+      </p>
+      <p className="text-inkt-zacht dark:text-papier/70">
+        {voorstel.gekoppeld ? 'Hoort bij' : 'Vlak bij'} {voorstel.bij.naam}
+        {voorstel.minuten !== null && `, ${voorstel.minuten} min lopen`}. Een voorstel; het staat
+        niet in je dag.
+      </p>
+    </div>
+  </div>
+);
