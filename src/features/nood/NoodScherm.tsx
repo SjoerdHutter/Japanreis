@@ -32,7 +32,7 @@ import { useMijnGegevens } from '@/features/gegevens/gedeeld';
 import { Kaartje, Knop, Label, Sectiekop } from '@/ui/basis';
 import { Controleren } from '@/ui/Controleren';
 import { Toonscherm } from '@/ui/Toonscherm';
-import { TaxiScherm } from '@/features/verblijf/TaxiScherm';
+import { TaxiScherm, verblijfAlsDoel } from '@/features/verblijf/TaxiScherm';
 import { Verborgen } from '@/ui/Verborgen';
 
 /**
@@ -364,7 +364,7 @@ export const NoodScherm = () => {
         <AllergieKaart medisch={medisch} land={land} onSluit={() => setKaart(null)} />
       )}
       {kaart?.soort === 'verblijf' && vannacht && (
-        <TaxiScherm verblijf={vannacht} onSluit={() => setKaart(null)} />
+        <TaxiScherm doel={verblijfAlsDoel(vannacht)} onSluit={() => setKaart(null)} />
       )}
     </div>
   );

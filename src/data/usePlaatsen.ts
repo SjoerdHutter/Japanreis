@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import type { Plaats } from '@/domein/schema';
 import { pasToe, type Overschrijving } from '@/domein/overschrijven/samenvoegen';
-import { laadPlaatsen } from './content';
+import { laadAllePlaatsen, laadPlaatsen } from './content';
 import { useOverschrijvingen } from './overschrijvingen';
 
 /**
@@ -30,6 +30,31 @@ export const usePlaatsen = (stadId: string | undefined): Plaats[] | null => {
     if (!ruw || ruw.stadId !== stadId) return null;
     return ruw.plaatsen.map((p) => pasToe(p, overschrijvingen, 'plaats', p.id).waarde);
   }, [ruw, stadId, overschrijvingen]);
+};
+
+/**
+ * Alle plaatsen van alle steden, met je eigen waarden eroverheen. Voor de
+ * pagina van één plek, die vanuit overal te openen is en dan zijn buren in de
+ * stad nodig heeft. Null zolang ze laden.
+ */
+export const useAllePlaatsen = (): Plaats[] | null => {
+  const [ruw, setRuw] = useState<Plaats[] | null>(null);
+  const overschrijvingen = useOverschrijvingen();
+
+  useEffect(() => {
+    let levend = true;
+    void laadAllePlaatsen().then((plaatsen) => {
+      if (levend) setRuw(plaatsen);
+    });
+    return () => {
+      levend = false;
+    };
+  }, []);
+
+  return useMemo(
+    () => ruw?.map((p) => pasToe(p, overschrijvingen, 'plaats', p.id).waarde) ?? null,
+    [ruw, overschrijvingen],
+  );
 };
 
 /** Welke velden van deze plaats een eigen waarde hebben. */

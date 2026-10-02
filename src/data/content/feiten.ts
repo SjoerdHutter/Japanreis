@@ -1,9 +1,11 @@
 import { ALLERGEEN_NAAM, MENU_CATEGORIE_NAAM } from '@/domein/schema';
+import { alsLangeDatum } from '@/domein/tijd/datums';
 import {
   ALLERGEEN_VERTALINGEN,
   APPS,
   LAATSTE_TREINEN,
   NOOD,
+  STEDEN,
   ZINNEN,
   laadAllePlaatsen,
   laadMenu,
@@ -22,6 +24,10 @@ export interface Feit {
   titel: string;
   detail?: string;
   gecontroleerd: boolean;
+  /** Waar dit ene feit staat, als dat preciezer is dan de groep. */
+  pad?: string;
+  /** Waar je het nakijkt. */
+  bron?: { naam: string; url?: string };
 }
 
 export interface Feitengroep {
@@ -39,6 +45,7 @@ export const appFeitId = (id: string) => `app:${id}`;
 export const treinFeitId = (id: string) => `trein:${id}`;
 export const druktFeitId = (plaatsId: string) => `drukte:${plaatsId}`;
 export const menuFeitId = (id: string) => `menu:${id}`;
+export const plaatsFeitId = (id: string) => `plaats:${id}`;
 
 const vasteGroepen = (): Feitengroep[] => [
   {
@@ -158,5 +165,31 @@ export const laadFeitgroepen = async (): Promise<Feitengroep[]> => {
       gecontroleerd: m.gecontroleerd,
     })),
   };
-  return [...vasteGroepen(), drukte, menukaart].filter((g) => g.feiten.length > 0);
+  // De uitgezochte plekken, per stad: openingstijden, prijzen en sluitingen
+  // uit openbare bronnen, die je voor je in die stad bent nakijkt.
+  const uitgezocht: Feitengroep[] = STEDEN.map((stad) => ({
+    id: `plaatsen-${stad.id}`,
+    naam: `Uitgezochte plekken in ${stad.naam}`,
+    pad: `/stad/${stad.id}`,
+    feiten: plaatsen
+      .filter((p) => p.stad === stad.id && p.gecontroleerd !== undefined)
+      .sort((a, b) => (a.rang ?? 99) - (b.rang ?? 99) || a.naam.localeCompare(b.naam))
+      .map((p) => ({
+        id: plaatsFeitId(p.id),
+        titel: p.naam,
+        detail: [
+          p.sluitingen?.length && 'sluiting',
+          p.status === 'onzeker' && 'status onzeker',
+          p.prijzen?.some((r) => r.indicatief) && 'indicatieve prijs',
+          !p.openingstijden?.osm && !p.openingstijden?.standaard && 'openingstijden onbekend',
+          p.gecheckt && `gecheckt op ${alsLangeDatum(p.gecheckt)}`,
+        ]
+          .filter(Boolean)
+          .join(', '),
+        gecontroleerd: p.gecontroleerd ?? true,
+        pad: `/plaats/${p.id}`,
+        bron: p.bronnen?.[0],
+      })),
+  }));
+  return [...vasteGroepen(), ...uitgezocht, drukte, menukaart].filter((g) => g.feiten.length > 0);
 };

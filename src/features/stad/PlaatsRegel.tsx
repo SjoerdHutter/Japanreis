@@ -4,7 +4,8 @@ import type { Coordinaat, Plaats, Stad } from '@/domein/schema';
 import { useApp } from '@/state/useApp';
 import { Kaartje, Knop, Label } from '@/ui/basis';
 import { formatteerPrijs } from '@/domein/valuta/formatteer';
-import { looptijdMinuten } from '@/domein/filters/plaatsen';
+import { bezoekduurVan, looptijdMinuten } from '@/domein/filters/plaatsen';
+import { PlaatsControleren, PlaatsLabels } from '@/features/plaats/PlaatsLabels';
 import { mapsLink } from '@/domein/geo/link';
 import { nuOpen, sluitingswaarschuwing, waarschuwingstekst } from '@/domein/openingstijden/status';
 import { tijdlijnVan } from '@/data/content';
@@ -45,6 +46,7 @@ export const PlaatsRegel = ({
   const waarschuwing = sluitingswaarschuwing(plaats, stad);
   const openNu = nuOpen(plaats, stad);
   const lopen = vanaf && plaats.coordinaten ? looptijdMinuten(vanaf, plaats.coordinaten) : null;
+  const duur = bezoekduurVan(plaats);
   const tijdlijn = tijdlijnVan(stad);
   const tijdvakken = (plaats.tijdvakken ?? [])
     .map((id) => tijdlijn?.tijdvakken.find((v) => v.id === id))
@@ -70,14 +72,15 @@ export const PlaatsRegel = ({
           <span className="mt-1.5 flex flex-wrap gap-1.5">
             {plaats.attractie && <Label>{plaats.attractie.type}</Label>}
             {plaats.eten && <Label>{plaats.eten.keuken.replace('-', ' en ')}</Label>}
+            {plaats.categorie === 'spa' && <Label>spa en wellness</Label>}
             {plaats.prijs === 'gratis' ? (
               <Label toon="gratis">gratis</Label>
             ) : (
               plaats.prijs && <Label>{formatteerPrijs(plaats.prijs, koersen)}</Label>
             )}
-            {plaats.attractie?.bezoekduurMinuten && (
-              <Label>{plaats.attractie.bezoekduurMinuten} min</Label>
-            )}
+            {duur !== undefined && <Label>{duur} min</Label>}
+            <PlaatsLabels plaats={plaats} controleren={false} />
+            {!plaats.coordinaten && <Label toon="let-op">locatie ontbreekt</Label>}
             {lopen !== null && <Label>{lopen} min lopen</Label>}
             {openNu === true && <Label toon="gratis">nu open</Label>}
             {openNu === false && !waarschuwing?.vandaagGesloten && <Label>nu dicht</Label>}
@@ -105,6 +108,11 @@ export const PlaatsRegel = ({
           {open ? '–' : '+'}
         </span>
       </button>
+      {plaats.gecontroleerd === false && (
+        <div className="mt-1.5">
+          <PlaatsControleren plaats={plaats} />
+        </div>
+      )}
 
       {open && (
         <div className="mt-3 border-t border-black/5 pt-3 text-sm leading-relaxed dark:border-white/10">
@@ -220,6 +228,12 @@ export const PlaatsRegel = ({
           )}
 
           <div className="mt-3 flex flex-wrap gap-2">
+            <Link
+              to={`/plaats/${plaats.id}`}
+              className="inline-flex items-center rounded-full bg-papier-diep px-3 py-1.5 text-sm font-medium text-inkt dark:bg-nacht-diep dark:text-papier"
+            >
+              Alles over deze plek
+            </Link>
             <Knop
               klein
               soort="stil"

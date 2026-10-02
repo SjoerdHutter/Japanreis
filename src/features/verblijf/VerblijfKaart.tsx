@@ -15,7 +15,7 @@ import { Knop } from '@/ui/basis';
 import { EigenWaarde } from '@/ui/EigenWaarde';
 import { Keuze } from '@/ui/formulier';
 import { Verborgen } from '@/ui/Verborgen';
-import { TaxiScherm } from './TaxiScherm';
+import { TaxiScherm, verblijfAlsDoel } from './TaxiScherm';
 
 /**
  * Waar je vannacht slaapt, met alles wat je onderweg nodig hebt: het adres in
@@ -214,7 +214,7 @@ export const VerblijfKaart = ({
         </div>
       </details>
 
-      {taxi && <TaxiScherm verblijf={verblijf} onSluit={() => setTaxi(false)} />}
+      {taxi && <TaxiScherm doel={verblijfAlsDoel(verblijf)} onSluit={() => setTaxi(false)} />}
     </div>
   );
 };

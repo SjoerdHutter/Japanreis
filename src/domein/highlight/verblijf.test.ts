@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { isVoorbij, periodeVan, verblijfIn } from './verblijf';
+import { dagenIn, isVoorbij, periodeVan, verblijfIn } from './verblijf';
 import type { Reisschema } from '@/domein/schema';
 
 const SCHEMA: Reisschema = {
@@ -16,6 +16,14 @@ const SCHEMA: Reisschema = {
     { stad: 'nara' },
   ],
 };
+
+describe('dagenIn', () => {
+  it('geeft elke dag in de stad, ook over meerdere verblijven', () => {
+    expect(dagenIn(SCHEMA, 'hanoi')).toEqual(['2026-10-04', '2026-10-23']);
+    expect(dagenIn(SCHEMA, 'kanazawa')).toEqual(['2026-10-13', '2026-10-14', '2026-10-15']);
+    expect(dagenIn(SCHEMA, 'nara')).toEqual([]);
+  });
+});
 
 describe('verblijfIn', () => {
   it('neemt de nachten over uit het schema in plaats van ze te berekenen', () => {

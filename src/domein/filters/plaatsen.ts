@@ -86,8 +86,14 @@ export const filterActief = (filter: Filter): boolean =>
     return waarde !== false;
   });
 
-const normaliseer = (tekst: string): string =>
-  tekst.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+/**
+ * Tekst vergelijkbaar maken: kleine letters en geen accenten, zodat je "hoan
+ * kiem" typt en "Hoàn Kiếm" vindt. De Vietnamese đ is geen d met een accent
+ * maar een eigen letter, en blijft na het weghalen van accenten staan; die gaat
+ * daarom apart.
+ */
+export const normaliseer = (tekst: string): string =>
+  tekst.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[đĐ]/g, 'd').toLowerCase();
 
 const raaktZoekterm = (plaats: Plaats, term: string): boolean => {
   const naald = normaliseer(term.trim());
@@ -98,8 +104,11 @@ const raaktZoekterm = (plaats: Plaats, term: string): boolean => {
       plaats.naamLokaal,
       plaats.beschrijving,
       plaats.adres,
+      plaats.adresLokaal,
       plaats.attractie?.type,
       plaats.eten?.keuken,
+      plaats.eten?.keukenTekst,
+      plaats.onderscheiding,
       ...(plaats.tags ?? []),
     ]
       .filter(Boolean)
@@ -110,6 +119,20 @@ const raaktZoekterm = (plaats: Plaats, term: string): boolean => {
 };
 
 const prijsIsGratis = (prijs: Prijs | undefined): boolean => prijs === 'gratis';
+
+/** De bezoekduur, waar die ook staat: bij een attractie, een eetplek of een spa. */
+export const bezoekduurVan = (plaats: Plaats): number | undefined =>
+  plaats.attractie?.bezoekduurMinuten ??
+  plaats.eten?.bezoekduurMinuten ??
+  plaats.spa?.bezoekduurMinuten;
+
+/** Of een plek geschikt is bij regen, waar dat ook staat. */
+export const regenbestendigVan = (plaats: Plaats): boolean | undefined =>
+  plaats.attractie?.regenbestendig ?? plaats.eten?.regenbestendig ?? plaats.spa?.regenbestendig;
+
+/** Het blok drukte, waar het ook staat. */
+export const drukteVan = (plaats: Plaats) =>
+  plaats.attractie?.drukte ?? plaats.eten?.drukte ?? plaats.spa?.drukte;
 
 /**
  * Past het filter toe. `stad` is nodig voor alles wat met tijd te maken heeft,
@@ -133,12 +156,12 @@ export const filterPlaatsen = (
       if (!plaats.attractie || !filter.typen.includes(plaats.attractie.type)) return false;
     }
     if (filter.maxBezoekduur !== undefined) {
-      const duur = plaats.attractie?.bezoekduurMinuten;
+      const duur = bezoekduurVan(plaats);
       // Een punt zonder opgegeven duur valt niet af: dat de content iets niet
       // weet is geen reden om het te verbergen.
       if (duur !== undefined && duur > filter.maxBezoekduur) return false;
     }
-    if (filter.regenbestendig === true && plaats.attractie?.regenbestendig !== true) return false;
+    if (filter.regenbestendig === true && regenbestendigVan(plaats) !== true) return false;
     if (filter.dagdelen?.length) {
       const dagdelen = plaats.attractie?.dagdeel;
       if (!dagdelen || !filter.dagdelen.some((d) => dagdelen.includes(d))) return false;
@@ -241,8 +264,8 @@ export const keuzesUit = (plaatsen: Plaats[]): Keuzes => {
     if (plaats.attractie) {
       typen.add(plaats.attractie.type);
       for (const d of plaats.attractie.dagdeel ?? []) dagdelen.add(d);
-      if (plaats.attractie.regenbestendig) heeftRegenbestendig = true;
     }
+    if (regenbestendigVan(plaats)) heeftRegenbestendig = true;
     if (plaats.eten) {
       keukens.add(plaats.eten.keuken);
       if (plaats.eten.ontbijt) heeftOntbijt = true;

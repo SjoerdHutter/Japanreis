@@ -79,6 +79,20 @@ const weekdagVanDatum = (datum: string): Weekdag => {
 };
 
 /**
+ * De regels uit een tijd in de notatie van OpenStreetMap, of null als ze niet
+ * te lezen zijn. De meegeleverde tijden zijn bij de build al gecontroleerd, maar
+ * een eigen waarde die je in de app invult niet; die mag het scherm niet laten
+ * vastlopen, en wordt dan onbekend.
+ */
+const veiligLezen = (osm: string): OsmRegel[] | null => {
+  try {
+    return leesOsm(osm);
+  } catch {
+    return null;
+  }
+};
+
+/**
  * Open of dicht op een datum (YYYY-MM-DD), met de blokken van die dag. Een
  * sluitingsperiode gaat voor alles.
  */
@@ -91,7 +105,9 @@ export const tijdenOp = (
 
   const tijden = plaats.openingstijden;
   if (tijden?.osm) {
-    const uitkomst = osmOp(leesOsm(tijden.osm), datum);
+    const regels = veiligLezen(tijden.osm);
+    if (!regels) return { soort: 'onbekend' };
+    const uitkomst = osmOp(regels, datum);
     return uitkomst.soort === 'open'
       ? { soort: 'open', blokken: uitkomst.blokken }
       : { soort: 'gesloten' };
@@ -126,7 +142,9 @@ const wekelijks = (regels: OsmRegel[]): OsmRegel[] => regels.filter((r) => !r.pe
  */
 export const vasteSluitingsdagen = (tijden: Openingstijden | undefined): Weekdag[] => {
   if (tijden?.osm) {
-    const regels = wekelijks(leesOsm(tijden.osm));
+    const alleRegels = veiligLezen(tijden.osm);
+    if (!alleRegels) return [];
+    const regels = wekelijks(alleRegels);
     return WEEKDAGEN.filter((_, weekdag) => {
       for (let maand = 1; maand <= 12; maand++) {
         // Een willekeurige week in die maand; 2026 begint op een donderdag, dus

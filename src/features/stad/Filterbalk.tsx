@@ -69,7 +69,7 @@ export const Filterbalk = ({
   aantal,
   totaal,
 }: {
-  tab: 'attracties' | 'eten' | 'winkels' | 'stempels' | 'eigen';
+  tab: 'attracties' | 'eten' | 'spa' | 'winkels' | 'stempels' | 'eigen';
   filter: Filter;
   keuzes: Keuzes;
   stad: Stad;
@@ -148,6 +148,20 @@ export const Filterbalk = ({
         </>
       )}
 
+      {tab === 'spa' && (
+        <Rij label="Prijs">
+          {prijsklassen.map((klasse) => (
+            <Chip
+              key={klasse.id}
+              aan={filter.prijsklassen?.includes(klasse.id) ?? false}
+              onClick={() => zet({ prijsklassen: wissel(filter.prijsklassen, klasse.id) })}
+            >
+              {formatteerPrijsklasse(klasse, koersen)}
+            </Chip>
+          ))}
+        </Rij>
+      )}
+
       {tab === 'eten' && (
         <>
           {keuzes.keukens.length > 1 && (
@@ -221,11 +235,19 @@ export const Filterbalk = ({
                 reserveren verplicht
               </Chip>
             )}
+            {keuzes.heeftRegenbestendig && (
+              <Chip
+                aan={filter.regenbestendig === true}
+                onClick={() => zet({ regenbestendig: filter.regenbestendig ? undefined : true })}
+              >
+                bij regen
+              </Chip>
+            )}
           </Rij>
         </>
       )}
 
-      {(tab === 'attracties' || tab === 'eten') && (
+      {(tab === 'attracties' || tab === 'eten' || tab === 'spa') && (
         <Rij label="Nu">
           <Chip
             aan={filter.nuOpen === true}

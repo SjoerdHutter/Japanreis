@@ -76,6 +76,28 @@ export const ControlerenScherm = () => {
                                 {feit.detail}
                               </span>
                             )}
+                            {(feit.pad || feit.bron?.url) && (
+                              <span className="mt-0.5 flex flex-wrap gap-x-3 text-xs">
+                                {feit.pad && (
+                                  <Link
+                                    to={feit.pad}
+                                    className="text-zegel underline underline-offset-2 dark:text-zegel-licht"
+                                  >
+                                    bekijk
+                                  </Link>
+                                )}
+                                {feit.bron?.url && (
+                                  <a
+                                    href={feit.bron.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-zegel underline underline-offset-2 dark:text-zegel-licht"
+                                  >
+                                    bron: {feit.bron.naam}
+                                  </a>
+                                )}
+                              </span>
+                            )}
                           </span>
                         </label>
                       </li>

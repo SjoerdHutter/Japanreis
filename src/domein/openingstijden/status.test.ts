@@ -272,3 +272,12 @@ describe('sluitingTijdens', () => {
     expect(sluitingTijdens(plek, ['2026-11-03'])).toBeUndefined();
   });
 });
+
+describe('een eigen waarde die niet te lezen is', () => {
+  it('maakt de tijden onbekend in plaats van het scherm te laten vastlopen', () => {
+    const plek: Plaats = { ...museum, openingstijden: { osm: 'elke dag behalve als het regent' } };
+    expect(tijdenOp(plek, '2026-10-15')).toEqual({ soort: 'onbekend' });
+    expect(vasteSluitingsdagen(plek.openingstijden)).toEqual([]);
+    expect(openOp(plek, '2026-10-15', 600)).toBeNull();
+  });
+});

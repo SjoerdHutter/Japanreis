@@ -1,29 +1,58 @@
 import { Phone } from 'lucide-react';
 import { ZINNEN, stadMet } from '@/data/content';
-import { telLink, type Accommodatie } from '@/domein/schema';
+import { telLink, type Accommodatie, type Coordinaat, type Plaats } from '@/domein/schema';
 import { Kaart } from '@/features/kaart/Kaart';
 import { Volscherm } from '@/ui/Volscherm';
 
 /**
- * Voor de taxichauffeur: naam en adres van je verblijf in groot lokaal schrift,
- * het telefoonnummer, en een kaartje met de pin. Een chauffeur in Kyoto leest
+ * Voor de taxichauffeur: naam en adres in groot lokaal schrift, het
+ * telefoonnummer, en een kaartje met de pin. Een chauffeur in Kyoto leest
  * geen Latijns schrift, maar tikt een Japans adres zo in zijn navigatie, en
- * belt anders het hotel.
+ * belt anders het hotel. Hetzelfde geldt in Hanoi voor een museum of restaurant.
  *
  * Werkt zonder bereik; het kaartje heeft alleen tegels als je de kaart van die
  * stad offline hebt opgeslagen.
  */
-export const TaxiScherm = ({
-  verblijf,
-  onSluit,
-}: {
-  verblijf: Accommodatie;
-  onSluit: () => void;
-}) => {
-  const stad = stadMet(verblijf.stadId);
+
+/** Wat de chauffeur moet zien, voor een verblijf of een plek. */
+export interface TaxiDoel {
+  id: string;
+  stadId: string;
+  naam: string;
+  naamLokaal?: string;
+  adresLokaal?: string;
+  adresLatijn?: string;
+  telefoon?: string;
+  coordinaten?: Coordinaat;
+}
+
+export const verblijfAlsDoel = (verblijf: Accommodatie): TaxiDoel => ({
+  id: verblijf.id,
+  stadId: verblijf.stadId,
+  naam: verblijf.naam,
+  naamLokaal: verblijf.naamLokaal,
+  adresLokaal: verblijf.adresLokaal,
+  adresLatijn: verblijf.adresLatijn,
+  telefoon: verblijf.telefoon,
+  coordinaten: verblijf.coordinaten,
+});
+
+export const plaatsAlsDoel = (plaats: Plaats): TaxiDoel => ({
+  id: plaats.id,
+  stadId: plaats.stad,
+  naam: plaats.naam,
+  naamLokaal: plaats.naamLokaal,
+  adresLokaal: plaats.adresLokaal,
+  adresLatijn: plaats.adres,
+  telefoon: plaats.telefoon,
+  coordinaten: plaats.coordinaten,
+});
+
+export const TaxiScherm = ({ doel, onSluit }: { doel: TaxiDoel; onSluit: () => void }) => {
+  const stad = stadMet(doel.stadId);
   const taal = stad?.land === 'vietnam' ? 'vi' : 'ja';
   const zin = ZINNEN.find((z) => z.id === (taal === 'ja' ? 'taxi-adres-ja' : 'taxi-adres-vn'));
-  const pin = verblijf.coordinaten;
+  const pin = doel.coordinaten;
 
   return (
     <Volscherm
@@ -34,23 +63,23 @@ export const TaxiScherm = ({
     >
       <div lang={taal} className="grid gap-4 pt-3 text-black">
         {zin && <p className="text-2xl leading-snug font-semibold">{zin.lokaal}</p>}
-        <p className="text-3xl leading-tight font-bold">{verblijf.naamLokaal ?? verblijf.naam}</p>
-        {verblijf.naamLokaal && <p className="-mt-3 text-lg">{verblijf.naam}</p>}
+        <p className="text-3xl leading-tight font-bold">{doel.naamLokaal ?? doel.naam}</p>
+        {doel.naamLokaal && <p className="-mt-3 text-lg">{doel.naam}</p>}
         <p className="text-[2rem] leading-snug font-bold break-words">
-          {verblijf.adresLokaal ?? verblijf.adresLatijn ?? 'Nog geen adres ingevuld'}
+          {doel.adresLokaal ?? doel.adresLatijn ?? 'Nog geen adres ingevuld'}
         </p>
-        {verblijf.telefoon && (
+        {doel.telefoon && (
           <a
-            href={telLink(verblijf.telefoon)}
+            href={telLink(doel.telefoon)}
             className="inline-flex w-fit items-center gap-2 rounded-xl bg-black px-4 py-3 text-2xl font-semibold text-white tabular-nums"
           >
             <Phone className="size-6" aria-hidden />
-            {verblijf.telefoon}
+            {doel.telefoon}
           </a>
         )}
         {pin && (
           <Kaart
-            punten={[{ id: verblijf.id, naam: verblijf.naam, coordinaten: pin, laag: 'eigen' }]}
+            punten={[{ id: doel.id, naam: doel.naam, coordinaten: pin, laag: 'eigen' }]}
             gebied={{
               zuidwest: { lat: pin.lat - 0.004, lon: pin.lon - 0.005 },
               noordoost: { lat: pin.lat + 0.004, lon: pin.lon + 0.005 },
@@ -61,7 +90,7 @@ export const TaxiScherm = ({
         )}
       </div>
       <p className="mt-5 text-sm text-black/60">
-        {zin?.nederlands}.{verblijf.adresLatijn && ` ${verblijf.adresLatijn}`}
+        {zin?.nederlands}.{doel.adresLatijn && ` ${doel.adresLatijn}`}
       </p>
     </Volscherm>
   );
