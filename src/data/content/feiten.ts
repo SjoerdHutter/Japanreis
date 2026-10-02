@@ -41,6 +41,7 @@ export interface Feitengroep {
 export const noodFeitId = (id: string) => `nood:${id}`;
 export const allergeenFeitId = (id: string) => `allergeen:${id}`;
 export const zinFeitId = (id: string) => `zin:${id}`;
+export const antwoordenFeitId = (id: string) => `antwoorden:${id}`;
 export const appFeitId = (id: string) => `app:${id}`;
 export const treinFeitId = (id: string) => `trein:${id}`;
 export const druktFeitId = (plaatsId: string) => `drukte:${plaatsId}`;
@@ -106,12 +107,20 @@ const vasteGroepen = (): Feitengroep[] => [
     id: 'zinnen',
     naam: 'Zinnen om te tonen',
     pad: '/context',
-    feiten: ZINNEN.filter((z) => z.gecontroleerd !== undefined).map((z) => ({
-      id: zinFeitId(z.id),
-      titel: z.nederlands,
-      detail: z.lokaal,
-      gecontroleerd: z.gecontroleerd ?? true,
-    })),
+    feiten: [
+      ...ZINNEN.filter((z) => z.gecontroleerd !== undefined).map((z) => ({
+        id: zinFeitId(z.id),
+        titel: z.nederlands,
+        detail: z.lokaal,
+        gecontroleerd: z.gecontroleerd ?? true,
+      })),
+      ...ZINNEN.filter((z) => z.antwoorden && z.antwoordenGecontroleerd !== undefined).map((z) => ({
+        id: antwoordenFeitId(z.id),
+        titel: `Antwoorden op: ${z.nederlands}`,
+        detail: z.antwoorden!.map((a) => a.lokaal).join(' · '),
+        gecontroleerd: z.antwoordenGecontroleerd ?? true,
+      })),
+    ],
   },
   {
     id: 'apps',

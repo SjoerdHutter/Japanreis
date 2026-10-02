@@ -23,6 +23,16 @@ export const etiquetteSchema = z.object({
 export type Etiquette = z.infer<typeof etiquetteSchema>;
 export const etiquetteBestandSchema = z.array(etiquetteSchema);
 
+/** Wat je terug kunt horen op een zin: in het schrift, met uitspraak en betekenis. */
+export const antwoordSchema = z.object({
+  lokaal: z.string().min(1),
+  uitspraak: z.string().min(1),
+  nederlands: z.string().min(1),
+  /** Wat erachter zit, als het antwoord meer zegt dan de woorden. */
+  uitleg: z.string().optional(),
+});
+export type Antwoord = z.infer<typeof antwoordSchema>;
+
 export const zinSchema = z.object({
   id: z
     .string()
@@ -38,6 +48,17 @@ export const zinSchema = z.object({
   wanneer: z.string().optional(),
   /** Nog niet nagekeken door een moedertaalspreker; zie data/nood.yaml. */
   gecontroleerd: z.boolean().optional(),
+  /**
+   * De antwoorden die je kunt verwachten. Een rijtje dat bij meer zinnen hoort,
+   * zoals de richtingen bij elke "waar is", staat één keer in de YAML met een
+   * anker en komt elders terug als alias; dat wordt hier één platte lijst.
+   */
+  antwoorden: z
+    .array(z.union([antwoordSchema, z.array(antwoordSchema)]))
+    .transform((lijst) => lijst.flat())
+    .optional(),
+  /** Of de antwoorden zijn nagekeken door een moedertaalspreker. */
+  antwoordenGecontroleerd: z.boolean().optional(),
 });
 export type Zin = z.infer<typeof zinSchema>;
 export const zinnenBestandSchema = z.array(zinSchema);

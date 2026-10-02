@@ -239,6 +239,17 @@ dan een Engelsman en het erom gaat dat het aankomt. De allergiezinnen staan apar
 inclusief de vraag naar dashi en nuoc mam, die in vrijwel alles zitten ook waar
 het gerecht vegetarisch heet.
 
+Onder elke zin staat "Wat je terug kunt horen": de gangbare antwoorden in het
+schrift, met uitspraak en betekenis, en bovenaan in de taal van het land het
+verzoek om een antwoord aan te wijzen. Een vraag stellen lukt wel; het antwoord
+verstaan is het lastige deel. Zo houd je je telefoon op en wijst de ander.
+"Alle antwoorden openklappen" zet ze in één keer open. Op de noodkaarten, de
+allergiekaart en het taxischerm staan ze altijd open en groot. De antwoorden
+staan onder `antwoorden` in `data/zinnen.yaml`; een rijtje dat bij meer zinnen
+hoort, zoals de richtingen bij elke "waar is", staat er één keer met een YAML
+anker. Ze zijn nog niet nagekeken door een moedertaalspreker en staan daarom op
+controleren.
+
 De seizoensdata zijn langjarige gemiddelden en geen voorspelling. De bloei
 schuift elk jaar met de winter mee, soms tien dagen. De officiële voorspelling
 verschijnt in januari en wordt tot in maart bijgesteld; die haalt de app niet op,

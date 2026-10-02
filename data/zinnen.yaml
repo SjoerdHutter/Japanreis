@@ -6,6 +6,13 @@
 # De uitspraak staat er in het Nederlands bij, niet in officiële romaji. "Sumimasen"
 # lees je als Nederlander anders dan een Engelsman, en het gaat erom dat het
 # aankomt.
+#
+# Onder `antwoorden` staat wat je terug kunt horen, in het schrift, zodat de
+# ander het kan aanwijzen. Een rijtje dat bij meer zinnen hoort staat één keer
+# met een anker (`- &richting-ja`) en komt elders terug als `- *richting-ja`;
+# daarna kun je er per zin eigen antwoorden onder zetten. Het anker moet boven
+# de eerste alias staan. De antwoorden zijn nieuw en nog niet nagekeken door een
+# moedertaalspreker, vandaar `antwoordenGecontroleerd: false`.
 
 - id: sorry-excuseer
   categorie: basis
@@ -14,6 +21,21 @@
   lokaal: すみません
   uitspraak: soemiemasen
   wanneer: Werkt als sorry, pardon en ober tegelijk. De nuttigste zin die er is.
+  antwoorden:
+    - lokaal: はい
+      uitspraak: hai
+      nederlands: Ja? Zegt u het maar
+    - lokaal: はい、どうぞ
+      uitspraak: hai, doozo
+      nederlands: Ja, gaat uw gang
+    - lokaal: 少々お待ちください
+      uitspraak: sjoosjoo omatsji koedasai
+      nederlands: Een momentje alstublieft
+    - lokaal: ただいま伺います
+      uitspraak: tadaima oekagaimas
+      nederlands: Ik kom zo bij u
+      uitleg: Hoor je in een restaurant als je de ober roept.
+  antwoordenGecontroleerd: false
 
 - id: dank
   categorie: basis
@@ -21,6 +43,17 @@
   nederlands: Dank u wel
   lokaal: ありがとうございます
   uitspraak: arigatoo gozaimas
+  antwoorden:
+    - lokaal: どういたしまして
+      uitspraak: doo itasjimasjite
+      nederlands: Graag gedaan
+    - lokaal: いえいえ
+      uitspraak: ie ie
+      nederlands: Niets te danken
+    - lokaal: こちらこそ
+      uitspraak: kotsjira koso
+      nederlands: Ik moet u juist bedanken
+  antwoordenGecontroleerd: false
 
 - id: engels
   categorie: basis
@@ -28,6 +61,24 @@
   nederlands: Spreekt u Engels
   lokaal: 英語は話せますか
   uitspraak: eego wa hanasemas ka
+  antwoorden:
+    - lokaal: はい、少し
+      uitspraak: hai, soekosji
+      nederlands: Ja, een beetje
+    - lokaal: いいえ
+      uitspraak: iie
+      nederlands: Nee
+    - lokaal: 英語はちょっと…
+      uitspraak: eego wa tsjotto
+      nederlands: Engels is een beetje lastig
+      uitleg: Een beleefd nee. Ga over op wijzen of een vertaalapp.
+    - lokaal: 話せません
+      uitspraak: hanasemasen
+      nederlands: Dat spreek ik niet
+    - lokaal: 英語ができる人を呼びます
+      uitspraak: eego ga dekiru hito o jobimas
+      nederlands: Ik haal iemand die Engels spreekt
+  antwoordenGecontroleerd: false
 
 - id: begrijp-niet
   categorie: basis
@@ -35,6 +86,20 @@
   nederlands: Ik begrijp het niet
   lokaal: わかりません
   uitspraak: wakarimasen
+  antwoorden:
+    - lokaal: 大丈夫です
+      uitspraak: daidzjoeboe des
+      nederlands: Geen probleem
+    - lokaal: もう一度言いますね
+      uitspraak: moo itsjido iimas ne
+      nederlands: Ik zeg het nog een keer
+    - lokaal: 書きますね
+      uitspraak: kakimas ne
+      nederlands: Ik schrijf het op
+    - lokaal: ちょっと待ってください
+      uitspraak: tsjotto matte koedasai
+      nederlands: Wacht even
+  antwoordenGecontroleerd: false
 
 - id: rekening
   categorie: eten
@@ -42,6 +107,31 @@
   nederlands: De rekening graag
   lokaal: お会計をお願いします
   uitspraak: okaikee o onegai sjimas
+  antwoorden:
+    - lokaal: かしこまりました
+      uitspraak: kasjikomarimasjita
+      nederlands: Begrepen, komt eraan
+    - lokaal: レジでお願いします
+      uitspraak: redzji de onegai sjimas
+      nederlands: Betalen bij de kassa graag
+      uitleg: >-
+        Heel gewoon in Japan: je neemt het bonnetje van je tafel mee naar de
+        kassa bij de uitgang.
+    - lokaal: お席でお待ちください
+      uitspraak: oseki de omatsji koedasai
+      nederlands: Blijft u zitten, we komen naar u toe
+    - lokaal: お支払いはどうなさいますか
+      uitspraak: osjiharai wa doo nasaimas ka
+      nederlands: Hoe wilt u betalen?
+      uitleg: Zeg dan kaado voor je kaart of genkin voor contant.
+    - lokaal: 現金のみです
+      uitspraak: genkin nomi des
+      nederlands: Alleen contant
+    - lokaal: 〇〇円になります
+      uitspraak: … en ni narimas
+      nederlands: Dat wordt … yen
+      uitleg: Het bedrag staat bijna altijd ook in cijfers op het scherm van de kassa.
+  antwoordenGecontroleerd: false
 
 - id: lekker
   categorie: eten
@@ -50,6 +140,18 @@
   lokaal: ごちそうさまでした
   uitspraak: gotsjisoosama desjita
   wanneer: Zeg je bij het weggaan. Wordt zeer gewaardeerd.
+  antwoorden:
+    - lokaal: ありがとうございました
+      uitspraak: arigatoo gozaimasjita
+      nederlands: Dank u wel voor uw komst
+    - lokaal: またお越しください
+      uitspraak: mata okosji koedasai
+      nederlands: Kom nog eens terug
+    - lokaal: お粗末さまでした
+      uitspraak: osomatsoe sama desjita
+      nederlands: Graag gedaan, het was maar eenvoudig
+      uitleg: Het vaste, bescheiden antwoord op gotsjisoosama.
+  antwoordenGecontroleerd: false
 
 - id: vegetarisch
   categorie: eten
@@ -60,6 +162,27 @@
   wanneer: >-
     Let op: dashi, de bouillon die vrijwel overal in zit, is van vis gemaakt.
     Vraag er apart naar met de zin hieronder.
+  antwoorden:
+    - lokaal: 大丈夫です
+      uitspraak: daidzjoeboe des
+      nederlands: Dat is goed, dat kan
+      uitleg: >-
+        Daidzjoeboe betekent in orde, maar kan ook een beleefd nee zijn. Vraag
+        bij twijfel door.
+    - lokaal: できます
+      uitspraak: dekimas
+      nederlands: Dat kunnen we maken
+    - lokaal: 難しいです
+      uitspraak: moezoekasjii des
+      nederlands: Dat is lastig
+      uitleg: Een beleefd nee.
+    - lokaal: 出汁に魚が入っています
+      uitspraak: dasji ni sakana ga haitte imas
+      nederlands: In de bouillon zit vis
+    - lokaal: 野菜だけの料理はありません
+      uitspraak: jasai dake no rjoori wa arimasen
+      nederlands: We hebben geen gerecht met alleen groente
+  antwoordenGecontroleerd: false
 
 - id: dashi
   categorie: eten
@@ -67,6 +190,24 @@
   nederlands: Zit hier vissenbouillon in
   lokaal: これに出汁（魚）は入っていますか
   uitspraak: kore ni dasji wa haitte imas ka
+  antwoorden:
+    - lokaal: はい、入っています
+      uitspraak: hai, haitte imas
+      nederlands: Ja, dat zit erin
+    - lokaal: いいえ、入っていません
+      uitspraak: iie, haitte imasen
+      nederlands: Nee, dat zit er niet in
+    - lokaal: かつお出汁です
+      uitspraak: katsoeo dasji des
+      nederlands: Bouillon van bonito, dus van vis
+    - lokaal: 昆布出汁です
+      uitspraak: konboe dasji des
+      nederlands: Bouillon van kombu, een zeewier
+      uitleg: Zonder vis, tenzij ze er ook katsoeo bij noemen.
+    - lokaal: 確認します
+      uitspraak: kakoenin sjimas
+      nederlands: Ik vraag het even na
+  antwoordenGecontroleerd: false
 
 - id: allergie-noten
   categorie: allergie
@@ -75,6 +216,37 @@
   lokaal: ナッツアレルギーがあります。これに入っていますか
   uitspraak: nattsoe arerugii ga arimas. kore ni haitte imas ka
   wanneer: Toon dit scherm aan het personeel; wijzen werkt beter dan uitspreken.
+  antwoorden:
+    - &allergie-ja
+      - lokaal: 入っています
+        uitspraak: haitte imas
+        nederlands: Het zit erin
+      - lokaal: 入っていません
+        uitspraak: haitte imasen
+        nederlands: Het zit er niet in
+      - lokaal: 少し入っています
+        uitspraak: soekosji haitte imas
+        nederlands: Er zit een beetje in
+      - lokaal: 確認します
+        uitspraak: kakoenin sjimas
+        nederlands: Ik vraag het even na
+      - lokaal: 大丈夫です
+        uitspraak: daidzjoeboe des
+        nederlands: Het is in orde
+        uitleg: >-
+          Daidzjoeboe zegt niet altijd dat het er niet in zit. Vraag bij twijfel
+          opnieuw, en wijs het woord voor je allergie aan.
+      - lokaal: わかりません
+        uitspraak: wakarimasen
+        nederlands: Dat weet ik niet
+        uitleg: Dan liever niet eten.
+      - lokaal: アレルギー対応はできません
+        uitspraak: arerugii taioo wa dekimasen
+        nederlands: We kunnen geen rekening houden met allergieën
+        uitleg: >-
+          Komt voor in kleine zaken en ketens. Dan zoek je beter een andere
+          plek.
+  antwoordenGecontroleerd: false
 
 - id: allergie-schaaldieren
   categorie: allergie
@@ -82,6 +254,9 @@
   nederlands: Ik ben allergisch voor schaal- en schelpdieren
   lokaal: 甲殻類アレルギーがあります
   uitspraak: kookakoeroei arerugii ga arimas
+  antwoorden:
+    - *allergie-ja
+  antwoordenGecontroleerd: false
 
 - id: allergie-ei-melk
   categorie: allergie
@@ -89,6 +264,9 @@
   nederlands: Ik ben allergisch voor ei en melk
   lokaal: 卵と乳製品のアレルギーがあります
   uitspraak: tamago to njoeuseehin no arerugii ga arimas
+  antwoorden:
+    - *allergie-ja
+  antwoordenGecontroleerd: false
 
 - id: ziekenhuis
   categorie: nood
@@ -96,6 +274,26 @@
   nederlands: Ik heb een dokter nodig
   lokaal: 医者が必要です
   uitspraak: isja ga hitsoejoo des
+  antwoorden:
+    - lokaal: 救急車を呼びますか
+      uitspraak: kjoekjoesja o jobimas ka
+      nederlands: Zal ik een ambulance bellen?
+      uitleg: Knik of zeg hai voor ja.
+    - lokaal: どこが痛いですか
+      uitspraak: doko ga itai des ka
+      nederlands: Waar doet het pijn?
+      uitleg: Wijs het aan. Itai betekent pijn.
+    - lokaal: 病院へ行きましょう
+      uitspraak: bjooin e ikimasjoo
+      nederlands: Laten we naar het ziekenhuis gaan
+    - lokaal: 保険証はありますか
+      uitspraak: hokensjoo wa arimas ka
+      nederlands: Hebt u een verzekeringspas?
+      uitleg: Laat je reisverzekering zien; die staat onder Nood.
+    - lokaal: パスポートを見せてください
+      uitspraak: pasoepooto o misete koedasai
+      nederlands: Mag ik uw paspoort zien?
+  antwoordenGecontroleerd: false
 
 - id: station
   categorie: onderweg
@@ -103,6 +301,43 @@
   nederlands: Waar is het station
   lokaal: 駅はどこですか
   uitspraak: eki wa doko des ka
+  antwoorden:
+    - &richting-ja
+      - lokaal: まっすぐです
+        uitspraak: massoegoe des
+        nederlands: Rechtdoor
+      - lokaal: 右です
+        uitspraak: migi des
+        nederlands: Rechts
+      - lokaal: 左です
+        uitspraak: hidari des
+        nederlands: Links
+      - lokaal: あそこです
+        uitspraak: asoko des
+        nederlands: Daar
+        uitleg: Meestal wijzen ze erbij.
+      - lokaal: この先です
+        uitspraak: kono saki des
+        nederlands: Verderop
+      - lokaal: 近いです
+        uitspraak: tsjikai des
+        nederlands: Dichtbij
+      - lokaal: 遠いです
+        uitspraak: tooi des
+        nederlands: Ver weg
+      - lokaal: 信号を渡ってください
+        uitspraak: sjingoo o watatte koedasai
+        nederlands: Steek bij het stoplicht over
+      - lokaal: 一緒に行きましょう
+        uitspraak: issjo ni ikimasjoo
+        nederlands: Ik loop wel even mee
+        uitleg: >-
+          Gebeurt echt, vooral bij oudere mensen. Een buiging en arigatoo is
+          genoeg als dank.
+    - lokaal: 歩いて〇分です
+      uitspraak: aroeite … foen des
+      nederlands: Het is … minuten lopen
+  antwoordenGecontroleerd: false
 
 - id: hoeveel
   categorie: onderweg
@@ -110,6 +345,27 @@
   nederlands: Hoeveel kost dit
   lokaal: いくらですか
   uitspraak: ikoera des ka
+  antwoorden:
+    - lokaal: 〇〇円です
+      uitspraak: … en des
+      nederlands: Het kost … yen
+    - lokaal: 千、万
+      uitspraak: sen, man
+      nederlands: Duizend, tienduizend
+      uitleg: >-
+        Zo klinken de grote getallen: drieduizend is sanzen, tienduizend is
+        itsjiman. Op de kassa staat het bedrag ook in cijfers.
+    - lokaal: 税込みです
+      uitspraak: zeekomi des
+      nederlands: Inclusief belasting
+    - lokaal: 税抜きです
+      uitspraak: zeenoeki des
+      nederlands: Exclusief belasting
+      uitleg: Dan komt er nog 10 procent bij, of 8 procent op eten om mee te nemen.
+    - lokaal: 無料です
+      uitspraak: moerjoo des
+      nederlands: Gratis
+  antwoordenGecontroleerd: false
 
 # Op het station. Eerst de borden, want die lees je vaker dan je iets vraagt:
 # een Japans station is goed bewegwijzerd, maar het Engels staat er kleiner bij
@@ -230,6 +486,24 @@
   lokaal: 京都行きは何番線ですか
   uitspraak: kjooto-joeki wa nanbansen des ka
   wanneer: Wijs voor een andere bestemming de naam aan op je kaartje of in de app.
+  antwoorden:
+    - lokaal: 〇番線です
+      uitspraak: … bansen des
+      nederlands: Spoor …
+    - lokaal: 一、二、三、四、五
+      uitspraak: itsji, ni, san, jon, go
+      nederlands: Een, twee, drie, vier, vijf
+      uitleg: 'Zes tot tien: rokoe, nana, hatsji, kjoe, dzjoe.'
+    - lokaal: 向かいのホームです
+      uitspraak: moekai no hoomoe des
+      nederlands: Het perron aan de overkant
+    - lokaal: 階段を上がってください
+      uitspraak: kaidan o agatte koedasai
+      nederlands: Ga de trap op
+    - lokaal: 乗り換えです
+      uitspraak: norikae des
+      nederlands: U moet overstappen
+  antwoordenGecontroleerd: false
 
 - id: stopt-deze-trein
   categorie: station
@@ -238,6 +512,23 @@
   lokaal: この電車はここに止まりますか
   uitspraak: kono densja wa koko ni tomarimas ka
   wanneer: Wijs daarbij het station aan op je kaartje of op de kaart.
+  antwoorden:
+    - lokaal: 止まります
+      uitspraak: tomarimas
+      nederlands: Ja, hij stopt hier
+    - lokaal: 止まりません
+      uitspraak: tomarimasen
+      nederlands: Nee, hij stopt hier niet
+    - lokaal: 各駅停車に乗ってください
+      uitspraak: kakoeeki teesja ni notte koedasai
+      nederlands: Neem de stoptrein
+    - lokaal: 次の電車です
+      uitspraak: tsoegi no densja des
+      nederlands: De volgende trein
+    - lokaal: 〇〇で乗り換えてください
+      uitspraak: … de norikaete koedasai
+      nederlands: Stap over in …
+  antwoordenGecontroleerd: false
 
 - id: waar-uitgang
   categorie: station
@@ -245,6 +536,21 @@
   nederlands: Waar is de uitgang
   lokaal: 出口はどこですか
   uitspraak: degoetsji wa doko des ka
+  antwoorden:
+    - *richting-ja
+    - lokaal: 〇番出口です
+      uitspraak: … ban degoetsji des
+      nederlands: Uitgang nummer …
+    - lokaal: 東口です
+      uitspraak: higasji goetsji des
+      nederlands: De oostuitgang
+      uitleg: >-
+        Noord is kita goetsji (北口), zuid minami goetsji (南口), west nisji goetsji
+        (西口).
+    - lokaal: 改札を出て右です
+      uitspraak: kaisatsoe o dete migi des
+      nederlands: Door de poortjes en dan rechts
+  antwoordenGecontroleerd: false
 
 - id: waar-lockers
   categorie: station
@@ -252,6 +558,19 @@
   nederlands: Waar zijn de kluisjes
   lokaal: コインロッカーはどこですか
   uitspraak: koin rokkaa wa doko des ka
+  antwoorden:
+    - *richting-ja
+    - lokaal: 改札の中です
+      uitspraak: kaisatsoe no naka des
+      nederlands: Binnen de poortjes
+    - lokaal: 改札の外です
+      uitspraak: kaisatsoe no soto des
+      nederlands: Buiten de poortjes
+    - lokaal: いっぱいです
+      uitspraak: ippai des
+      nederlands: Ze zijn allemaal vol
+      uitleg: Vraag dan naar het bagagedepot, nimotsoe azoekarisjo (荷物預かり所).
+  antwoordenGecontroleerd: false
 
 - id: plaats-reserveren
   categorie: station
@@ -260,6 +579,27 @@
   lokaal: 新幹線の指定席をお願いします
   uitspraak: sjinkansen no sjiteeseki o onegai sjimas
   wanneer: Aan het loket of bij de automaat met een medewerker. Wijs de trein en de tijd aan in de app.
+  antwoorden:
+    - lokaal: どちらまでですか
+      uitspraak: dotsjira made des ka
+      nederlands: Naar welk station?
+    - lokaal: 何時の電車ですか
+      uitspraak: nandzji no densja des ka
+      nederlands: Welke trein, hoe laat?
+    - lokaal: 何名様ですか
+      uitspraak: nanmeesama des ka
+      nederlands: Voor hoeveel personen?
+    - lokaal: 窓側と通路側、どちらがいいですか
+      uitspraak: madogawa to tsoerogawa, dotsjira ga ii des ka
+      nederlands: Bij het raam of aan het gangpad?
+      uitleg: Zeg madogawa voor het raam, tsoerogawa voor het gangpad.
+    - lokaal: 満席です
+      uitspraak: manseki des
+      nederlands: Alles is vol
+    - lokaal: 自由席なら空いています
+      uitspraak: dzjijoeseki nara aite imas
+      nederlands: In de vrije wagons is nog plek
+  antwoordenGecontroleerd: false
 
 - id: plaats-koffer
   categorie: station
@@ -271,6 +611,22 @@
     In de Shinkansen tussen Tokio, Osaka en Hiroshima moet je voor een koffer
     van meer dan 160 cm (lengte, breedte en hoogte bij elkaar) zo'n plaats
     reserveren. Zonder reservering betaal je aan boord bij.
+  antwoorden:
+    - lokaal: かしこまりました
+      uitspraak: kasjikomarimasjita
+      nederlands: Begrepen
+    - lokaal: 最後列の席になります
+      uitspraak: saikooretsoe no seki ni narimas
+      nederlands: Dan wordt het een stoel op de achterste rij
+      uitleg: Je koffer staat dan achter je stoel.
+    - lokaal: 何センチですか
+      uitspraak: nan sentsji des ka
+      nederlands: Hoe groot is de koffer?
+      uitleg: Lengte, breedte en hoogte bij elkaar opgeteld.
+    - lokaal: 満席です
+      uitspraak: manseki des
+      nederlands: Die plaatsen zijn vol
+  antwoordenGecontroleerd: false
 
 - id: kaart-werkt-niet
   categorie: station
@@ -279,6 +635,24 @@
   lokaal: ICカードが通りません
   uitspraak: ai sii kaado ga toorimasen
   wanneer: Zeg dit bij het hokje naast de poortjes. Meestal staat er te weinig op of ben je vergeten in te checken.
+  antwoorden:
+    - lokaal: チャージしてください
+      uitspraak: tsjaadzji sjite koedasai
+      nederlands: Laad hem op
+    - lokaal: 残高が足りません
+      uitspraak: zandaka ga tarimasen
+      nederlands: Er staat te weinig op
+    - lokaal: 入場の記録がありません
+      uitspraak: njoedzjoo no kirokoe ga arimasen
+      nederlands: Je bent niet ingecheckt
+    - lokaal: どこから乗りましたか
+      uitspraak: doko kara norimasjita ka
+      nederlands: Waar ben je ingestapt?
+    - lokaal: 精算機で精算してください
+      uitspraak: seesanki de seesan sjite koedasai
+      nederlands: Betaal bij aan de automaat
+      uitleg: De automaat vlak voor de poortjes, met 精算 erop.
+  antwoordenGecontroleerd: false
 
 - id: bus-naar
   categorie: station
@@ -286,6 +660,26 @@
   nederlands: Gaat deze bus naar Shirakawa-go
   lokaal: このバスは白川郷に行きますか
   uitspraak: kono basoe wa sjirakawagoo ni ikimas ka
+  antwoorden:
+    - lokaal: 行きます
+      uitspraak: ikimas
+      nederlands: Ja, die gaat erheen
+    - lokaal: 行きません
+      uitspraak: ikimasen
+      nederlands: Nee, die gaat er niet heen
+    - lokaal: 〇番乗り場です
+      uitspraak: … ban noriba des
+      nederlands: Halte nummer …
+    - lokaal: 次のバスです
+      uitspraak: tsoegi no basoe des
+      nederlands: De volgende bus
+    - lokaal: 予約が必要です
+      uitspraak: jojakoe ga hitsoejoo des
+      nederlands: Je moet reserveren
+    - lokaal: 満席です
+      uitspraak: manseki des
+      nederlands: De bus is vol
+  antwoordenGecontroleerd: false
 
 - id: hallo-vn
   categorie: basis
@@ -293,6 +687,20 @@
   nederlands: Hallo
   lokaal: Xin chào
   uitspraak: sin tsjaao
+  antwoorden:
+    - lokaal: Xin chào
+      uitspraak: sin tsjaao
+      nederlands: Hallo
+    - lokaal: Chào bạn
+      uitspraak: tsjaao baan
+      nederlands: Hallo, tegen iemand van je eigen leeftijd
+    - lokaal: Bạn cần gì?
+      uitspraak: baan kun zie
+      nederlands: Waarmee kan ik u helpen?
+    - lokaal: Mời vào
+      uitspraak: mui vauw
+      nederlands: Kom binnen
+  antwoordenGecontroleerd: false
 
 - id: dank-vn
   categorie: basis
@@ -300,6 +708,14 @@
   nederlands: Dank u wel
   lokaal: Cảm ơn
   uitspraak: kaam un
+  antwoorden:
+    - lokaal: Không có gì
+      uitspraak: kong ko zie
+      nederlands: Graag gedaan
+    - lokaal: Cảm ơn bạn
+      uitspraak: kaam un baan
+      nederlands: Jij ook bedankt
+  antwoordenGecontroleerd: false
 
 - id: hoeveel-vn
   categorie: onderweg
@@ -307,6 +723,29 @@
   nederlands: Hoeveel kost dit
   lokaal: Bao nhiêu tiền
   uitspraak: bao njieuw tien
+  antwoorden:
+    - lokaal: … nghìn
+      uitspraak: … ngien
+      nederlands: … duizend dong
+      uitleg: >-
+        In Hanoi zeggen ze nghìn, in het zuiden ngàn. Op bordjes staat vaak een
+        k: een k achter het getal betekent duizend.
+    - lokaal: … trăm nghìn
+      uitspraak: … tsjam ngien
+      nederlands: … honderdduizend dong
+    - lokaal: một, hai, ba, bốn, năm
+      uitspraak: moot, haai, baa, bon, nam
+      nederlands: Een, twee, drie, vier, vijf
+      uitleg: >-
+        Zes tot tien: sáu (sauw), bảy (baai), tám (tam), chín (tsjien), mười
+        (muhoi).
+    - lokaal: Không bớt được
+      uitspraak: kong but duhuk
+      nederlands: Er kan niets af
+    - lokaal: Giá cố định
+      uitspraak: zaa ko dinh
+      nederlands: Vaste prijs
+  antwoordenGecontroleerd: false
 
 - id: vegetarisch-vn
   categorie: eten
@@ -317,6 +756,23 @@
   wanneer: >-
     Ook hier zit vissaus (nuoc mam) in vrijwel alles, ook in gerechten die
     vegetarisch heten. Vraag er apart naar.
+  antwoorden:
+    - lokaal: Có
+      uitspraak: ko
+      nederlands: Ja, dat hebben we
+    - lokaal: Không có
+      uitspraak: kong ko
+      nederlands: Nee, dat hebben we niet
+    - lokaal: Được
+      uitspraak: duhuk
+      nederlands: Dat kan
+    - lokaal: Không được
+      uitspraak: kong duhuk
+      nederlands: Dat kan niet
+    - lokaal: Có nước mắm
+      uitspraak: ko nuuk mam
+      nederlands: Er zit vissaus in
+  antwoordenGecontroleerd: false
 
 - id: geen-vissaus-vn
   categorie: eten
@@ -324,6 +780,20 @@
   nederlands: Zonder vissaus alstublieft
   lokaal: Không nước mắm
   uitspraak: kong nuuk mam
+  antwoorden:
+    - lokaal: Được
+      uitspraak: duhuk
+      nederlands: Goed, dat kan
+    - lokaal: Không được
+      uitspraak: kong duhuk
+      nederlands: Dat kan niet
+    - lokaal: Có sẵn nước mắm rồi
+      uitspraak: ko san nuuk mam zooi
+      nederlands: Er zit al vissaus in
+    - lokaal: Nước tương được không?
+      uitspraak: nuuk tuhung duhuk kong
+      nederlands: Is sojasaus goed?
+  antwoordenGecontroleerd: false
 
 - id: allergie-vn
   categorie: allergie
@@ -331,6 +801,31 @@
   nederlands: Ik ben allergisch voor pinda's
   lokaal: Tôi bị dị ứng với đậu phộng
   uitspraak: toi bie zie ung voi dauw fong
+  antwoorden:
+    - &allergie-vn
+      - lokaal: Có
+        uitspraak: ko
+        nederlands: Ja, het zit erin
+      - lokaal: Không có
+        uitspraak: kong ko
+        nederlands: Nee, het zit er niet in
+      - lokaal: Để tôi hỏi
+        uitspraak: dee toi hoi
+        nederlands: Ik vraag het even na
+      - lokaal: Không biết
+        uitspraak: kong biet
+        nederlands: Dat weet ik niet
+        uitleg: Dan liever niet eten.
+    - lokaal: Có lạc
+      uitspraak: ko laak
+      nederlands: Er zitten pinda's in
+      uitleg: >-
+        In Hanoi heet een pinda lạc. Đậu phộng, zoals in de zin hierboven,
+        zeggen ze vooral in het zuiden; ze begrijpen allebei.
+    - lokaal: Không có lạc
+      uitspraak: kong ko laak
+      nederlands: Er zitten geen pinda's in
+  antwoordenGecontroleerd: false
 
 # Kaarten om te tonen in het noodscherm: in het ziekenhuis, bij de apotheek, bij
 # de politie, en de kop boven je allergieën. Nieuw toegevoegd en nog niet door
@@ -343,6 +838,24 @@
   lokaal: 病院に連れて行ってください
   uitspraak: bjooien nie tsoerete itte koedasai
   gecontroleerd: false
+  antwoorden:
+    - lokaal: 救急車を呼びます
+      uitspraak: kjoekjoesja o jobimas
+      nederlands: Ik bel een ambulance
+    - lokaal: 大丈夫ですか
+      uitspraak: daidzjoeboe des ka
+      nederlands: Gaat het?
+    - lokaal: どこが痛いですか
+      uitspraak: doko ga itai des ka
+      nederlands: Waar doet het pijn?
+      uitleg: Wijs het aan.
+    - lokaal: タクシーを呼びます
+      uitspraak: takoesii o jobimas
+      nederlands: Ik bel een taxi
+    - lokaal: こちらへどうぞ
+      uitspraak: kotsjira e doozo
+      nederlands: Deze kant op
+  antwoordenGecontroleerd: false
 
 - id: nood-apotheek-ja
   categorie: nood
@@ -351,6 +864,19 @@
   lokaal: 薬局はどこですか
   uitspraak: jakkjokoe wa doko des ka
   gecontroleerd: false
+  antwoorden:
+    - *richting-ja
+    - lokaal: ドラッグストアにあります
+      uitspraak: doraggoe soetoa ni arimas
+      nederlands: Bij de drogisterij
+      uitleg: Grote drogisterijen hebben vaak een balie voor medicijnen op recept.
+    - lokaal: 処方箋はありますか
+      uitspraak: sjohoosen wa arimas ka
+      nederlands: Hebt u een recept?
+    - lokaal: 今日は閉まっています
+      uitspraak: kjoo wa sjimatte imas
+      nederlands: Vandaag dicht
+  antwoordenGecontroleerd: false
 
 - id: nood-koban-ja
   categorie: nood
@@ -360,6 +886,13 @@
   uitspraak: kooban wa doko des ka
   wanneer: Een koban is een klein politiebureau op de hoek; ook voor verloren spullen en de weg.
   gecontroleerd: false
+  antwoorden:
+    - *richting-ja
+    - lokaal: 110番に電話してください
+      uitspraak: hjakoe toeban ni denwa sjite koedasai
+      nederlands: Bel 110
+      uitleg: Het alarmnummer van de politie.
+  antwoordenGecontroleerd: false
 
 - id: allergie-lijst-ja
   categorie: allergie
@@ -368,6 +901,16 @@
   lokaal: 私は次の食べ物にアレルギーがあります。これらを使っていない料理をお願いします。
   uitspraak: watasji wa tsoegie no tabemono nie arerugie ga arimas. korera o tsoekatte inai rjoori o onegai sjimas
   gecontroleerd: false
+  antwoorden:
+    - *allergie-ja
+    - lokaal: これなら大丈夫です
+      uitspraak: kore nara daidzjoeboe des
+      nederlands: Dit gerecht kan wel
+      uitleg: Meestal wijzen ze dan een gerecht op de kaart aan.
+    - lokaal: 全部に入っています
+      uitspraak: zenboe ni haitte imas
+      nederlands: Het zit overal in
+  antwoordenGecontroleerd: false
 
 - id: allergie-gerecht-ja
   categorie: allergie
@@ -376,6 +919,9 @@
   lokaal: この料理に次のものは入っていますか？
   uitspraak: kono rjoori nie tsoegie no mono wa haitte imas ka
   gecontroleerd: false
+  antwoorden:
+    - *allergie-ja
+  antwoordenGecontroleerd: false
 
 - id: nood-ziekenhuis-vn
   categorie: nood
@@ -384,6 +930,25 @@
   lokaal: Làm ơn đưa tôi đến bệnh viện
   uitspraak: laam uhn duhua toi deen ben viejen
   gecontroleerd: false
+  antwoorden:
+    - lokaal: Tôi gọi xe cấp cứu
+      uitspraak: toi goi se kup kuu
+      nederlands: Ik bel een ambulance
+    - lokaal: Đau ở đâu?
+      uitspraak: dauw uh dauw
+      nederlands: Waar doet het pijn?
+      uitleg: Wijs het aan.
+    - lokaal: Đi theo tôi
+      uitspraak: die teo toi
+      nederlands: Volg mij
+    - lokaal: Bạn có bảo hiểm không?
+      uitspraak: baan ko bao hiem kong
+      nederlands: Bent u verzekerd?
+    - lokaal: Gọi 115
+      uitspraak: goi mot mot nam
+      nederlands: Bel 115
+      uitleg: Het nummer van de ambulance in Vietnam.
+  antwoordenGecontroleerd: false
 
 - id: nood-apotheek-vn
   categorie: nood
@@ -392,6 +957,34 @@
   lokaal: Nhà thuốc ở đâu?
   uitspraak: nja toewok uh dauw
   gecontroleerd: false
+  antwoorden:
+    - &richting-vn
+      - lokaal: Đi thẳng
+        uitspraak: die tang
+        nederlands: Rechtdoor
+      - lokaal: Rẽ trái
+        uitspraak: zè tsjaai
+        nederlands: Links af
+      - lokaal: Rẽ phải
+        uitspraak: zè faai
+        nederlands: Rechts af
+      - lokaal: Ở đằng kia
+        uitspraak: uh dang kia
+        nederlands: Daar
+        uitleg: Meestal wijzen ze erbij.
+      - lokaal: Gần đây
+        uitspraak: gun dai
+        nederlands: Dichtbij
+      - lokaal: Xa lắm
+        uitspraak: saa lam
+        nederlands: Ver weg
+      - lokaal: Bên kia đường
+        uitspraak: ben kia duhung
+        nederlands: Aan de overkant van de straat
+    - lokaal: Nhà thuốc đóng cửa rồi
+      uitspraak: nja toewok dong kua zooi
+      nederlands: De apotheek is al dicht
+  antwoordenGecontroleerd: false
 
 - id: nood-politie-vn
   categorie: nood
@@ -400,6 +993,13 @@
   lokaal: Đồn công an ở đâu?
   uitspraak: don kong an uh dauw
   gecontroleerd: false
+  antwoorden:
+    - *richting-vn
+    - lokaal: Gọi 113
+      uitspraak: goi mot mot baa
+      nederlands: Bel 113
+      uitleg: Het nummer van de politie in Vietnam.
+  antwoordenGecontroleerd: false
 
 - id: allergie-lijst-vn
   categorie: allergie
@@ -408,6 +1008,15 @@
   lokaal: Tôi bị dị ứng với những thứ sau. Xin đừng cho vào món ăn của tôi.
   uitspraak: toi bie zie ung voi njung tuh sauw. sien dung tsjo vauw mon an koea toi
   gecontroleerd: false
+  antwoorden:
+    - *allergie-vn
+    - lokaal: Được
+      uitspraak: duhuk
+      nederlands: Dat kan
+    - lokaal: Không được
+      uitspraak: kong duhuk
+      nederlands: Dat kan niet
+  antwoordenGecontroleerd: false
 
 # Voor de taxichauffeur, boven het adres van je verblijf.
 
@@ -418,6 +1027,29 @@
   lokaal: この住所までお願いします
   uitspraak: kono dzjoesjo made onegai sjimas
   gecontroleerd: false
+  antwoorden:
+    - lokaal: かしこまりました
+      uitspraak: kasjikomarimasjita
+      nederlands: Begrepen
+    - lokaal: 住所がわかりません
+      uitspraak: dzjoesjo ga wakarimasen
+      nederlands: Ik ken dit adres niet
+    - lokaal: 電話番号はありますか
+      uitspraak: denwa bangoo wa arimas ka
+      nederlands: Hebt u een telefoonnummer?
+      uitleg: >-
+        Japanse taxi’s zoeken in de navigatie vaak op telefoonnummer. Laat het
+        nummer van je verblijf zien.
+    - lokaal: シートベルトをお願いします
+      uitspraak: siitoberoto o onegai sjimas
+      nederlands: Doe uw gordel om
+    - lokaal: 着きました
+      uitspraak: tsoekimasjita
+      nederlands: We zijn er
+    - lokaal: カードでも大丈夫です
+      uitspraak: kaado demo daidzjoeboe des
+      nederlands: Met een kaart kan ook
+  antwoordenGecontroleerd: false
 
 - id: taxi-adres-vn
   categorie: onderweg
@@ -425,4 +1057,39 @@
   nederlands: Breng me alstublieft naar dit adres
   lokaal: Làm ơn chở tôi đến địa chỉ này
   uitspraak: laam uhn tsjuh toi deen die tsjie nai
+  gecontroleerd: false
+  antwoorden:
+    - lokaal: Được
+      uitspraak: duhuk
+      nederlands: Oké
+    - lokaal: Không biết chỗ này
+      uitspraak: kong biet tsjo nai
+      nederlands: Ik ken deze plek niet
+    - lokaal: Có số điện thoại không?
+      uitspraak: ko so dien tooai kong
+      nederlands: Hebt u een telefoonnummer?
+    - lokaal: Đến rồi
+      uitspraak: deen zooi
+      nederlands: We zijn er
+  antwoordenGecontroleerd: false
+
+# Bovenaan de antwoorden, in de taal van het land: zo weet de ander dat hij
+# een antwoord mag aanwijzen. Nieuw en nog niet nagekeken.
+
+- id: wijs-antwoord-ja
+  categorie: basis
+  land: japan
+  nederlands: Wilt u het antwoord aanwijzen?
+  lokaal: 答えを指さしてください
+  uitspraak: kotae o joebisasjite koedasai
+  wanneer: Staat ook boven de antwoorden bij elke zin. Laat de ander daar het antwoord aanwijzen.
+  gecontroleerd: false
+
+- id: wijs-antwoord-vn
+  categorie: basis
+  land: vietnam
+  nederlands: Wilt u het antwoord aanwijzen?
+  lokaal: Xin hãy chỉ vào câu trả lời
+  uitspraak: sin haai tsjie vauw kau tsjaa loi
+  wanneer: Staat ook boven de antwoorden bij elke zin. Laat de ander daar het antwoord aanwijzen.
   gecontroleerd: false

@@ -7,7 +7,8 @@ import { Volscherm } from './Volscherm';
  * Nederlandse betekenis klein eronder zodat jij weet wat je laat zien.
  *
  * `taal` zet het lang-attribuut, zodat de telefoon de Japanse vorm van een
- * teken kiest en niet de Chinese.
+ * teken kiest en niet de Chinese. `onderaan` komt na de betekenis, zoals de
+ * antwoorden die de ander kan aanwijzen.
  */
 export const Toonscherm = ({
   titel,
@@ -15,6 +16,7 @@ export const Toonscherm = ({
   lokaal,
   nederlands,
   children,
+  onderaan,
   onSluit,
 }: {
   titel: string;
@@ -22,6 +24,7 @@ export const Toonscherm = ({
   lokaal: ReactNode;
   nederlands?: ReactNode;
   children?: ReactNode;
+  onderaan?: ReactNode;
   onSluit: () => void;
 }) => (
   <Volscherm
@@ -38,5 +41,6 @@ export const Toonscherm = ({
     </div>
     {children}
     {nederlands && <div className="mt-6 text-base leading-relaxed text-black/60">{nederlands}</div>}
+    {onderaan}
   </Volscherm>
 );
