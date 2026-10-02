@@ -1,5 +1,6 @@
 import { Phone } from 'lucide-react';
 import { ZINNEN, stadMet } from '@/data/content';
+import { AntwoordenOmAanTeWijzen } from '@/features/praktisch/Antwoorden';
 import { telLink, type Accommodatie, type Coordinaat, type Plaats } from '@/domein/schema';
 import { Kaart } from '@/features/kaart/Kaart';
 import { Volscherm } from '@/ui/Volscherm';
@@ -92,6 +93,7 @@ export const TaxiScherm = ({ doel, onSluit }: { doel: TaxiDoel; onSluit: () => v
       <p className="mt-5 text-sm text-black/60">
         {zin?.nederlands}.{doel.adresLatijn && ` ${doel.adresLatijn}`}
       </p>
+      {zin && <AntwoordenOmAanTeWijzen zin={zin} taal={taal} />}
     </Volscherm>
   );
 };

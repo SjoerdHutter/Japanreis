@@ -5,6 +5,7 @@ import { ETIQUETTE, SEIZOEN, STEDEN, ZINNEN } from '@/data/content';
 import { Kaartje, Label, Sectiekop } from '@/ui/basis';
 import { Controleren } from '@/ui/Controleren';
 import { zinFeitId } from '@/data/content/feiten';
+import { Antwoorden } from './Antwoorden';
 import {
   alsDatumtekst,
   bloeiStand,
@@ -51,6 +52,7 @@ const BLOEI_TEKST: Record<BloeiStand, string> = {
 
 export const ContextScherm = () => {
   const [land, setLand] = useState<'japan' | 'vietnam'>('japan');
+  const [alleAntwoorden, setAlleAntwoorden] = useState(false);
   const nu = useMemo(() => new Date(), []);
 
   const zinnen = useMemo(() => ZINNEN.filter((z) => z.land === land), [land]);
@@ -119,6 +121,17 @@ export const ContextScherm = () => {
           Het schrift staat er groot bij, zodat je het kunt laten zien. Wijzen werkt beter dan
           uitspreken. De uitspraak is in Nederlandse spelling en niet in officiële romaji.
         </p>
+        <p className="mb-3 text-sm leading-relaxed">
+          Onder elke zin staat wat je terug kunt horen, ook in het schrift. Klap het open en laat de
+          ander het antwoord aanwijzen.{' '}
+          <button
+            type="button"
+            onClick={() => setAlleAntwoorden(!alleAntwoorden)}
+            className="font-medium text-zegel underline underline-offset-2 dark:text-zegel-licht"
+          >
+            {alleAntwoorden ? 'Alle antwoorden inklappen' : 'Alle antwoorden openklappen'}
+          </button>
+        </p>
         {land === 'japan' && (
           <p className="mb-3 text-sm leading-relaxed">
             Een Japanse kaart ontcijferen?{' '}
@@ -156,6 +169,12 @@ export const ContextScherm = () => {
                     {zin.wanneer && (
                       <p className="mt-2 text-sm leading-relaxed text-zegel">{zin.wanneer}</p>
                     )}
+                    <Antwoorden
+                      key={`${zin.id}-${alleAntwoorden}`}
+                      zin={zin}
+                      taal={land === 'japan' ? 'ja' : 'vi'}
+                      open={alleAntwoorden}
+                    />
                   </Kaartje>
                 ))}
               </div>

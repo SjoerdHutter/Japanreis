@@ -12,6 +12,7 @@ import {
   Siren,
 } from 'lucide-react';
 import { ALLERGEEN_VERTALINGEN, NOOD, REISSCHEMA, STEDEN, ZINNEN } from '@/data/content';
+import { AntwoordenOmAanTeWijzen } from '@/features/praktisch/Antwoorden';
 import { appFeitId, allergeenFeitId, noodFeitId, zinFeitId } from '@/data/content/feiten';
 import { useOpslag } from '@/data/db/useOpslag';
 import { leesBijlagen } from '@/data/gegevens';
@@ -498,6 +499,7 @@ const ZinKaart = ({
           <Controleren id={zinFeitId(zin.id)} gecontroleerd={zin.gecontroleerd} />
         </>
       }
+      onderaan={<AntwoordenOmAanTeWijzen zin={zin} taal={taal} />}
       onSluit={onSluit}
     />
   );
@@ -578,6 +580,7 @@ export const AllergieKaart = ({
           )}
         </>
       }
+      onderaan={kop && <AntwoordenOmAanTeWijzen zin={kop} taal={taal} />}
       onSluit={onSluit}
     >
       <ul lang={taal} className="mt-5 grid gap-3">
