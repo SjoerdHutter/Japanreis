@@ -799,8 +799,11 @@
   categorie: allergie
   land: vietnam
   nederlands: Ik ben allergisch voor pinda's
-  lokaal: Tôi bị dị ứng với đậu phộng
-  uitspraak: toi bie zie ung voi dauw fong
+  lokaal: Tôi bị dị ứng với lạc
+  uitspraak: toi bie zie ung voi laak
+  wanneer: >-
+    In Hanoi heet een pinda lạc. In het zuiden zeggen ze đậu phộng (dauw fong);
+    dat begrijpen ze in Hanoi ook.
   antwoorden:
     - &allergie-vn
       - lokaal: Có
@@ -819,9 +822,6 @@
     - lokaal: Có lạc
       uitspraak: ko laak
       nederlands: Er zitten pinda's in
-      uitleg: >-
-        In Hanoi heet een pinda lạc. Đậu phộng, zoals in de zin hierboven,
-        zeggen ze vooral in het zuiden; ze begrijpen allebei.
     - lokaal: Không có lạc
       uitspraak: kong ko laak
       nederlands: Er zitten geen pinda's in
