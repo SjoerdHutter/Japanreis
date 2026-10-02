@@ -3,35 +3,69 @@
 # Hanoi is in deze app een volwaardige stad en geen bijlage. De punten hieronder
 # liggen vrijwel allemaal binnen een halfuur lopen van het Hoan Kiem-meer, zodat
 # ze ook met een korte overstap haalbaar zijn.
+#
+# Op 1 oktober 2026 is hier een onderzochte set plekken bij gekomen: een Top 20
+# van bezienswaardigheden (veld rang), eten en drinken bij die plekken, en vijf
+# spa's. De feiten komen uit openbare bronnen en staan op gecontroleerd: false,
+# zodat de app er "controleren" bij zet tot je ze zelf hebt nagekeken. Tien van
+# die plekken stonden er al; daar zijn alleen de velden aangevuld die nog
+# ontbraken en is niets bestaands overschreven. Nieuwe plekken zonder
+# coördinaten krijgen die met `npm run geocodeer`; tot dan staan ze in de app
+# onder "Locatie ontbreekt".
 
 - id: hoan-kiem
   naam: Hoan Kiem meer
   naamLokaal: Hồ Hoàn Kiếm
   stad: hanoi
   categorie: attractie
+  rang: 1
   coordinaten: { lat: 21.0287, lon: 105.8524 }
   beschrijving: >-
     Het meer in het hart van de stad, met de rode brug naar het tempeltje op het
     eilandje. Rondom loopt iedereen 's ochtends vroeg te sporten. In het weekend
     gaan de straten eromheen dicht voor verkeer.
+  waarom: >-
+    Symbool van de stad en het logische startpunt. Vrijwel alles in de Oude Stad
+    ligt op loopafstand.
+  adres: Dinh Tien Hoang, Hoan Kiem
+  adresLokaal: Hồ Hoàn Kiếm, Đinh Tiên Hoàng, Hà Nội
+  openingstijden:
+    osm: '24/7'
+    tekst: Altijd toegankelijk
   prijs: gratis
+  prijzen:
+    - { omschrijving: Toegang, bedrag: 0 }
+  tips:
+    - Van vrijdagavond tot en met zondagavond is het gebied rond het meer autovrij.
   tijdvakken: [thang-long, frans-koloniaal, modern]
   attractie:
     type: water
     bezoekduurMinuten: 45
     regenbestendig: false
     dagdeel: [ochtend, avond]
+    drukte:
+      besteMoment: Vroeg in de ochtend, als locals tai chi doen, of in de avond
+  bronnen:
+    - naam: vietnamairlines.com
+      url: https://www.vietnamairlines.com/us/en/plan-book/travel/travel-guide/what-to-visit-in-hanoi
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
 
 - id: ngoc-son
   naam: Ngoc Son tempel
   naamLokaal: Đền Ngọc Sơn
   stad: hanoi
   categorie: attractie
+  onderdeelVan: hoan-kiem
   coordinaten: { lat: 21.0308, lon: 105.8525 }
   beschrijving: >-
     Tempel op het eilandje in het meer, bereikbaar over de rode houten brug. Er
     ligt een opgezette reuzenschildpad uit het meer, het dier uit de legende van
     het teruggegeven zwaard.
+  waarom: Het fotogenieke middelpunt van het meer.
+  adres: Dinh Tien Hoang, kaartjesloket bij de ingang van de The Huc brug
+  adresLokaal: Đền Ngọc Sơn, Đinh Tiên Hoàng, Hà Nội
   openingstijden:
     standaard: 08:00-18:00
   prijs: { bedrag: 50000, valuta: VND }
@@ -41,81 +75,165 @@
     bezoekduurMinuten: 30
     regenbestendig: false
     dagdeel: [ochtend, middag]
+    drukte:
+      besteMoment: Ochtend
+  bronnen:
+    - naam: vietnamairlines.com
+      url: https://www.vietnamairlines.com/us/en/plan-book/travel/travel-guide/what-to-visit-in-hanoi
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
 
 - id: oude-wijk
   naam: Oude wijk
   naamLokaal: Phố cổ
   stad: hanoi
   categorie: attractie
+  rang: 2
   coordinaten: { lat: 21.0345, lon: 105.85 }
   beschrijving: >-
     Zesendertig gildestraten die nog steeds naar hun handelswaar heten: een
     straat met alleen mandwerk, een met alleen grafstenen, een met blik. Smalle
     hoge huizen, scooters over de stoep en overal plastic krukjes.
+  waarom: Hier zie en proef je het dagelijks leven en de straatkeuken van Hanoi.
+  adres: Onder andere Hang Dao, Hang Ngang, Hang Buom, Hang Bac, Hang Gai, Hang Bong en Hang Ma
+  adresLokaal: Hàng Đào, Hoàn Kiếm, Hà Nội
+  openingstijden:
+    osm: '24/7'
+    tekst: Altijd toegankelijk
   prijs: gratis
+  prijzen:
+    - { omschrijving: Toegang, bedrag: 0 }
   tijdvakken: [thang-long, frans-koloniaal, modern]
   attractie:
     type: wijk
     bezoekduurMinuten: 120
     regenbestendig: false
     dagdeel: [ochtend, middag, avond]
+    drukte:
+      besteMoment: Late middag en avond
+  bronnen:
+    - naam: vietnamairlines.com
+      url: https://www.vietnamairlines.com/us/en/plan-book/travel/travel-guide/what-to-visit-in-hanoi
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
 
 - id: literatuurtempel
   naam: Literatuurtempel
   naamLokaal: Văn Miếu
   stad: hanoi
   categorie: attractie
+  rang: 3
   coordinaten: { lat: 21.0287, lon: 105.8355 }
   beschrijving: >-
     De eerste universiteit van het land, gesticht in 1070. Vijf binnenhoven
     achter elkaar, met tweeëntachtig stenen schildpadden die de namen dragen van
     wie de keizerlijke examens haalde. De rustigste plek in het centrum.
+  waarom: Het mooiste klassieke complex van de stad.
+  adres: 58 Quoc Tu Giam
+  adresLokaal: 58 Quốc Tử Giám, Hà Nội
+  web: https://vanmieu.gov.vn
   openingstijden:
     standaard: 08:00-17:00
   prijs: { bedrag: 70000, valuta: VND }
+  prijzen:
+    - { omschrijving: Volwassenen, bedrag: 70000 }
+    - { omschrijving: Studenten met pas, bedrag: 35000 }
+    - { omschrijving: Audiogids, bedrag: 50000 }
+  tips:
+    - Neem contant mee; bronnen zijn het oneens over pinnen.
+    - Het Museum voor Schone Kunsten ligt er recht tegenover.
+  letOp:
+    - Geen hemdjes of minirokken en hoed af in het heiligdom.
   tijdvakken: [thang-long]
   attractie:
     type: tempel
     bezoekduurMinuten: 60
     regenbestendig: false
     dagdeel: [ochtend, middag]
+    drukte:
+      besteMoment: Bij opening om 8:00
+      besteTijdslot: bij opening
+  bronnen:
+    - naam: timetravelturtle.com
+      url: https://www.timetravelturtle.com/vietnam/things-to-do-in-hanoi/
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
 
 - id: hoa-lo
   naam: Hoa Lo gevangenis
   naamLokaal: Nhà tù Hỏa Lò
   stad: hanoi
   categorie: attractie
+  rang: 5
   coordinaten: { lat: 21.0257, lon: 105.8465 }
   beschrijving: >-
     Koloniale gevangenis, later gebruikt voor Amerikaanse piloten die hem
     spottend het Hanoi Hilton noemden. De tentoonstelling is nadrukkelijk vanuit
     Vietnamees perspectief verteld; dat is op zichzelf leerzaam.
+  waarom: Aangrijpend museum over zowel de koloniale tijd als de Vietnamoorlog.
+  adres: 1 Hoa Lo
+  adresLokaal: 1 Hỏa Lò, Hà Nội
+  web: https://hoalo.vn
   openingstijden:
     standaard: 08:00-17:00
   prijs: { bedrag: 50000, valuta: VND }
+  prijzen:
+    - { omschrijving: Toegang, bedrag: 50000 }
+  tips:
+    - Reken op ongeveer twee uur.
+    - Er is ook een avondtour.
   tijdvakken: [frans-koloniaal, onafhankelijkheid]
   attractie:
     type: museum
     bezoekduurMinuten: 75
     regenbestendig: true
     dagdeel: [ochtend, middag]
+    drukte:
+      besteMoment: Ochtend of vroege middag
+  bronnen:
+    - naam: vietnamreviews.blog
+      url: https://www.vietnamreviews.blog/en/blog/hoa-lo-prison-hanoi-tickets-hours-what-to-see-2026/
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
 
 - id: ho-chi-minh-mausoleum
   naam: Ho Chi Minh mausoleum
   naamLokaal: Lăng Chủ tịch Hồ Chí Minh
   stad: hanoi
   categorie: attractie
+  rang: 6
   coordinaten: { lat: 21.0367, lon: 105.8347 }
   beschrijving: >-
     Het gebalsemde lichaam ligt in een marmeren zaal waar je in stilte langs
     loopt. Strenge kledingregels, geen tassen, geen handen in de zakken. In
     september en oktober vaak dicht voor onderhoud.
+  waarom: Het belangrijkste politieke monument van Vietnam.
+  adres: Ba Dinh plein, Hung Vuong
+  adresLokaal: Quảng trường Ba Đình, Hùng Vương, Hà Nội
+  web: https://bqllang.gov.vn
   openingstijden:
     standaard: 07:30-10:30
     perDag: { maandag: gesloten, vrijdag: gesloten }
   geslotenOpmerking: >-
     Jaarlijks meerdere weken gesloten voor onderhoud, meestal in het najaar.
+  sluitingen:
+    - van: 2026-09-04
+      tot: 2026-11-02
+      reden: >-
+        Jaarlijks onderhoud, weer open vanaf 3 november 2026. Een andere bron
+        noemt 5 september tot en met 3 november.
   prijs: gratis
+  prijzen:
+    - { omschrijving: Toegang, bedrag: 0 }
+  letOp:
+    - >-
+      Dicht voor onderhoud van 4 september tot en met 2 november 2026. Het plein
+      en de omgeving blijven bezoekbaar.
+    - Knieën en schouders bedekt, geen hemdjes of korte rokken.
   tijdvakken: [onafhankelijkheid]
   attractie:
     type: monument
@@ -124,43 +242,99 @@
     dagdeel: [ochtend]
     drukte:
       besteMoment: Ruim voor 09:00, want de rij loopt snel op en het sluit om 10:30.
+  bronnen:
+    - naam: lanytrip.com
+      url: https://www.lanytrip.com/en/blogs/north-vietnam-attractions/hanoi-ho-chi-minh-mausoleum-guide
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
 
 - id: train-street
   naam: Train Street
   naamLokaal: Phố đường tàu
   stad: hanoi
   categorie: attractie
+  rang: 20
+  status: onzeker
   coordinaten: { lat: 21.0287, lon: 105.8442 }
   beschrijving: >-
     Een spoorlijn die rakelings langs de huizen loopt, met cafés tussen de
     rails. De toegang wordt periodiek afgesloten door de politie en gaat daarna
     weer open; ga ervan uit dat het onzeker is tot je er staat.
+  waarom: Iconisch fotomoment, bewust onderaan gezet vanwege de onzekere toegang.
+  adres: Traject Tran Phu, Phung Hung en Kham Thien tussen station Hanoi en Long Bien
+  adresLokaal: Phố đường tàu, Phùng Hưng, Hà Nội
+  openingstijden:
+    tekst: Toegang wisselt, alleen via een café
   prijs: gratis
+  prijzen:
+    - { omschrijving: Toegang, bedrag: 0 }
+    - omschrijving: Drankje in een café, bijvoorbeeld eierkoffie
+      bedrag: 50000
+      indicatief: true
+  letOp:
+    - Officieel sinds oktober 2019 dicht voor toeristen; cafés draaien nog.
+    - >-
+      In 2026 strenge handhaving met afzettingen bij Tran Phu en plannen om het
+      spoor te verleggen.
+    - >-
+      Vaak wacht je ruim een uur op een passage van tien seconden. Blijf in het
+      café en volg de instructies.
   tijdvakken: [frans-koloniaal, modern]
   attractie:
     type: wijk
     bezoekduurMinuten: 45
     regenbestendig: false
     dagdeel: [middag, avond]
+  bronnen:
+    - naam: haron.com.vn
+      url: https://haron.com.vn/blog/quan-cafe-duong-tau-ha-noi
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
 
 - id: pho-bat-dan
   naam: Pho aan Bat Dan
   naamLokaal: Phở Bát Đàn
   stad: hanoi
   categorie: eten
+  onderscheiding: Michelin Bib Gourmand
   coordinaten: { lat: 21.0338, lon: 105.8475 }
   beschrijving: >-
     Rundvleespho waar je in de rij staat, zelf je kom naar je krukje draagt en
     binnen tien minuten weer buiten staat. Alleen 's ochtends en 's avonds, en
     op is op.
+  waarom: Al jaren Michelin Bib Gourmand en een klassieker van de Oude Stad.
+  adres: 49 Bat Dan
+  adresLokaal: 49 Bát Đàn, Hà Nội
   openingstijden:
     standaard: 06:00-10:00, 18:00-20:30
   prijs: { bedrag: 50000, tot: 70000, valuta: VND }
+  prijzen:
+    - { omschrijving: Per kom, van: 55000, tot: 70000 }
+  alleenContant: true
+  tips:
+    - Eerst betalen, dan zelf je kom ophalen.
+  letOp:
+    - Alleen contant.
+    - Tussen 10:00 en 18:00 dicht.
+  inDeBuurtVan: [oude-wijk, hoan-kiem]
   tijdvakken: [modern]
   eten:
     keuken: pho
+    keukenTekst: Pho
     ontbijt: true
     moeite: waardig-een-omweg
+    bezoekduurMinuten: 30
+    regenbestendig: true
+    drukte:
+      besteMoment: Ontbijt, reken op een rij
+  bronnen:
+    - naam: tablejourney.com
+      url: https://tablejourney.com/vietnam/hanoi/budget-eating/pho-gia-truyen-budget/
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
 
 - id: bun-cha-huong-lien
   naam: Bun cha bij Huong Lien
@@ -172,13 +346,34 @@
     Gegrild varkensvlees in een kom zoetzure bouillon, met noedels en kruiden
     ernaast. Deze zaak werd bekend doordat Obama en Anthony Bourdain er aten;
     het eten is goed en de zaak is er niet duurder van geworden.
+  waarom: Iconisch adres op loopafstand van Hoa Lo en het Women's Museum.
+  adres: 24 Le Van Huu
+  adresLokaal: 24 Lê Văn Hưu, Hà Nội
   openingstijden:
     standaard: 10:00-20:00
   prijs: { bedrag: 60000, tot: 100000, valuta: VND }
+  prijzen:
+    - { omschrijving: Bun cha, bedrag: 60000 }
+    - omschrijving: Obama combo met loempia en biertje (een bron noemt 100.000)
+      bedrag: 130000
+  tips:
+    - De tafel van Obama en Bourdain staat boven achter glas.
+  inDeBuurtVan: [vrouwenmuseum, hoa-lo, opera]
   tijdvakken: [modern]
   eten:
     keuken: bun-cha
+    keukenTekst: Bun cha
     moeite: waardig-een-omweg
+    bezoekduurMinuten: 45
+    regenbestendig: true
+    drukte:
+      besteMoment: Buiten de lunchpiek van 11:30 tot 13:30
+  bronnen:
+    - naam: danielfooddiary.com
+      url: https://danielfooddiary.com/2025/12/11/bunchahuonglien/
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
 
 - id: ca-phe-trung
   naam: Eiwitkoffie bij Giang
@@ -190,14 +385,30 @@
     Koffie met een geklopte dooier erop, bedacht toen er in de jaren veertig
     geen melk te krijgen was. Warm gedronken, en dikker dan je verwacht. De zaak
     zit aan het eind van een steeg die er dichtgetimmerd uitziet.
+  waarom: Het origineel van het bekendste drankje van Hanoi.
+  adres: 39 Nguyen Huu Huan, via een steegje
+  adresLokaal: 39 Nguyễn Hữu Huân, Hà Nội
   openingstijden:
     standaard: 07:00-22:00
   prijs: { bedrag: 30000, tot: 50000, valuta: VND }
+  prijzen:
+    - { omschrijving: 'Warme eierkoffie, circa', bedrag: 35000 }
+    - { omschrijving: 'Eierkoffie met ijs, circa', bedrag: 40000 }
+  inDeBuurtVan: [hoan-kiem, ngoc-son, waterpoppentheater, oude-wijk]
   tijdvakken: [onafhankelijkheid, modern]
   eten:
     keuken: koffie
+    keukenTekst: Koffie (eierkoffie)
     ontbijt: true
     moeite: waardig-een-omweg
+    bezoekduurMinuten: 30
+    regenbestendig: true
+  bronnen:
+    - naam: asiatouradvisor.com
+      url: https://www.asiatouradvisor.com/get-inspired/vietnam/hanoi-egg-coffee-on-cnn-the-secret-of-a-70-year-old-coffee/
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
 
 - id: banh-mi-25
   naam: Banh mi in de oude wijk
@@ -217,3 +428,967 @@
     keuken: banh-mi
     ontbijt: true
     moeite: snelle-bak
+
+# Top 20: de bezienswaardigheden die er nieuw bij kwamen.
+
+- id: weekend-nachtmarkt
+  naam: Weekend nachtmarkt
+  naamLokaal: Chợ đêm phố cổ Hà Nội
+  stad: hanoi
+  categorie: attractie
+  onderdeelVan: oude-wijk
+  beschrijving: >-
+    Markt met kraampjes, straateten en optredens, van Hang Dao tot aan de Dong
+    Xuan markt.
+  waarom: De gezelligste weekendavond in de Oude Stad.
+  adres: Hang Dao tot Dong Xuan
+  adresLokaal: Hàng Đào, Hoàn Kiếm, Hà Nội
+  openingstijden:
+    osm: 'Fr-Su 18:00-24:00'
+    tekst: Vrijdag tot en met zondag van 18:00 tot middernacht (een bron noemt 23:00)
+  prijs: gratis
+  prijzen:
+    - { omschrijving: Toegang, bedrag: 0 }
+  attractie:
+    type: markt
+    bezoekduurMinuten: 60
+    regenbestendig: false
+    drukte:
+      besteMoment: Vrijdag tot en met zondag vanaf 19:00
+      besteTijdslot: vanaf 19:00
+  bronnen:
+    - naam: vietnamairlines.com
+      url: https://www.vietnamairlines.com/en/useful-information/travel-guide/hanoi-night-market
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
+
+- id: keizerlijke-citadel
+  naam: Keizerlijke Citadel van Thang Long
+  naamLokaal: Hoàng thành Thăng Long
+  stad: hanoi
+  categorie: attractie
+  rang: 4
+  beschrijving: >-
+    Werelderfgoed van UNESCO en bijna 1.300 jaar het politieke en culturele hart
+    van Vietnam, met het Kinh Thien paleis en archeologische opgravingen.
+  waarom: De beste plek om de dynastieke geschiedenis van de stad te begrijpen.
+  adres: 19C Hoang Dieu
+  adresLokaal: 19C Hoàng Diệu, Hà Nội
+  web: https://hoangthanhthanglong.vn
+  openingstijden:
+    osm: 'Mo-Su 08:00-17:00'
+    tekst: Dagelijks 8:00 tot 17:00
+  prijs: { bedrag: 100000, valuta: VND }
+  prijzen:
+    - { omschrijving: Toegang, bedrag: 100000 }
+    - { omschrijving: Avondtour, bedrag: 300000 }
+  tips:
+    - >-
+      Veel sites noemen nog een ouder, lager tarief. Het huidige tarief geldt
+      sinds 1 januari 2025.
+  attractie:
+    type: kasteel
+    bezoekduurMinuten: 90
+    regenbestendig: false
+    drukte:
+      besteMoment: Ochtend
+  bronnen:
+    - naam: hoangthanhthanglong.vn
+      url: https://hoangthanhthanglong.vn/en/ticket-price/
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
+
+- id: presidentieel-paleis
+  naam: Presidentieel paleis en paalwoning van Ho Chi Minh
+  naamLokaal: Khu di tích Phủ Chủ tịch (Nhà sàn Bác Hồ)
+  stad: hanoi
+  categorie: attractie
+  rang: 7
+  beschrijving: >-
+    Geel Frans koloniaal paleis, alleen van buiten te zien, met Huis 54, de
+    paalwoning, de visvijver en de tuinen waar Ho Chi Minh van 1954 tot 1969
+    woonde en werkte.
+  waarom: >-
+    Laat de sobere, persoonlijke kant van Ho Chi Minh zien en ligt naast het
+    mausoleum.
+  adres: 2 Hung Vuong
+  adresLokaal: 2 Hùng Vương, Ba Đình, Hà Nội
+  web: https://ditichhochiminhphuchutich.gov.vn
+  openingstijden:
+    osm: 'Tu-Th,Sa,Su 07:30-11:00,13:30-16:00; Mo,Fr 07:30-11:00'
+    tekst: >-
+      Zomertijden 7:30 tot 11:00 en 13:30 tot 16:00. Maandag en vrijdag alleen in
+      de ochtend.
+  prijs: { bedrag: 40000, valuta: VND }
+  prijzen:
+    - { omschrijving: Toegang, bedrag: 40000 }
+  letOp:
+    - Het paleis zelf is niet toegankelijk voor toeristen.
+  attractie:
+    type: monument
+    bezoekduurMinuten: 60
+    regenbestendig: false
+    drukte:
+      besteMoment: Ochtend
+  bronnen:
+    - naam: wanderon.in
+      url: https://wanderon.in/international-trips/vietnam/presidential-palace-in-hanoi
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
+
+- id: eenpilaarpagode
+  naam: Eenpilaarpagode
+  naamLokaal: Chùa Một Cột
+  stad: hanoi
+  categorie: attractie
+  rang: 8
+  beschrijving: >-
+    Houten heiligdom in de vorm van een lotus op één stenen pilaar in een
+    vijver, oorspronkelijk uit 1049.
+  waarom: >-
+    Een van de symbolen van Hanoi, snel gezien en goed te combineren met het
+    mausoleum.
+  adres: Chua Mot Cot, achter het mausoleum
+  adresLokaal: Chùa Một Cột, Ba Đình, Hà Nội
+  openingstijden:
+    osm: 'Mo-Su 08:00-17:00'
+    tekst: Dagelijks circa 8:00 tot 17:00 (bronnen noemen ook 7:00 tot 18:00)
+  prijs: gratis
+  prijzen:
+    - { omschrijving: Toegang, bedrag: 0 }
+    - omschrijving: Volgens één bron voor buitenlanders
+      bedrag: 25000
+      indicatief: true
+  tips:
+    - Het origineel werd verwoest; je ziet een reconstructie.
+  attractie:
+    type: tempel
+    bezoekduurMinuten: 15
+    regenbestendig: false
+  bronnen:
+    - naam: localvietnam.com
+      url: https://localvietnam.com/hanoi/one-pillar-pagoda/
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
+
+- id: museum-etnologie
+  naam: Vietnam Museum of Ethnology
+  naamLokaal: Bảo tàng Dân tộc học Việt Nam
+  stad: hanoi
+  categorie: attractie
+  rang: 9
+  beschrijving: >-
+    Museum over de 54 etnische groepen van Vietnam, met een openluchttuin vol
+    traditionele huizen. Ontworpen door een architect van de Tay minderheid en
+    geopend in 1997.
+  waarom: Door veel reizigers het beste museum van Hanoi genoemd.
+  adres: Nguyen Van Huyen, Nghia Do (circa 8 km van het centrum)
+  adresLokaal: Nguyễn Văn Huyên, Nghĩa Đô, Hà Nội
+  web: https://vme-en.vass.gov.vn
+  telefoon: '+84 24 3756 2193'
+  openingstijden:
+    osm: 'Tu-Su 08:30-17:30'
+    tekst: Dinsdag tot en met zondag 8:30 tot 17:30. Maandag en tijdens Tet dicht.
+  prijs: { bedrag: 40000, valuta: VND }
+  prijzen:
+    - { omschrijving: Volwassenen, bedrag: 40000 }
+    - { omschrijving: Studenten en kinderen, bedrag: 20000 }
+  tips:
+    - In het weekend zijn er vaak waterpoppenshows.
+    - Ga met Grab, het ligt buiten het centrum.
+    - De tuin met traditionele huizen is buiten.
+  attractie:
+    type: museum
+    bezoekduurMinuten: 150
+    regenbestendig: true
+    drukte:
+      besteMoment: Doordeweeks in de ochtend
+  bronnen:
+    - naam: vme-en.vass.gov.vn
+      url: https://vme-en.vass.gov.vn/
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
+
+- id: waterpoppentheater
+  naam: Thang Long waterpoppentheater
+  naamLokaal: Nhà hát Múa rối Thăng Long
+  stad: hanoi
+  categorie: attractie
+  rang: 10
+  beschrijving: >-
+    Houten poppen dansen over het water op live traditionele muziek. Het theater
+    speelt hier sinds 1969 en een voorstelling duurt 50 minuten.
+  waarom: Dé culturele avondactiviteit van Hanoi, kort en voor iedereen leuk.
+  adres: 57B Dinh Tien Hoang, aan het Hoan Kiem meer
+  adresLokaal: 57B Đinh Tiên Hoàng, Hà Nội
+  web: https://nhahatmuaroithanglong.vn
+  telefoon: '+84 24 3824 9494'
+  openingstijden:
+    tekst: Meerdere voorstellingen per dag. De tijden wisselen, controleer ze op de site.
+  voorstellingen: ['16:10', '17:20', '18:30', '20:00']
+  prijs: { bedrag: 100000, valuta: VND }
+  prijzen:
+    - { omschrijving: Achterste rijen, bedrag: 100000 }
+    - { omschrijving: Middelste rijen, bedrag: 150000 }
+    - { omschrijving: Voorste rijen, bedrag: 200000 }
+    - { omschrijving: Fotocamera, bedrag: 20000 }
+  reservering: aanbevolen
+  tips:
+    - Koop een dag vooruit.
+    - Kom 15 minuten voor aanvang.
+  letOp:
+    - De voorste rijen zitten in de spatzone.
+  attractie:
+    type: ervaring
+    bezoekduurMinuten: 50
+    regenbestendig: true
+    drukte:
+      besteMoment: Late middag of avond
+  bronnen:
+    - naam: idctravel.com
+      url: https://www.idctravel.com/attraction/thang-long-water-puppet-theatre.html
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
+
+- id: vrouwenmuseum
+  naam: Vietnamese Women's Museum
+  naamLokaal: Bảo tàng Phụ nữ Việt Nam
+  stad: hanoi
+  categorie: attractie
+  rang: 11
+  beschrijving: Vier verdiepingen over de rol van vrouwen in familie, geschiedenis en oorlog.
+  waarom: Hoog gewaardeerd en een verrassend persoonlijke kijk op Vietnam.
+  adres: 36 Ly Thuong Kiet
+  adresLokaal: 36 Lý Thường Kiệt, Hà Nội
+  web: https://baotangphunu.org.vn
+  openingstijden:
+    osm: 'Mo-Su 08:00-17:00'
+    tekst: Dagelijks 8:00 tot 17:00, ook op feestdagen
+  prijs: { bedrag: 40000, valuta: VND }
+  prijzen:
+    - { omschrijving: Volwassenen, bedrag: 40000 }
+  tips:
+    - Op loopafstand van Hoa Lo en de kathedraal.
+  attractie:
+    type: museum
+    bezoekduurMinuten: 90
+    regenbestendig: true
+  bronnen:
+    - naam: vietnamairlines.com
+      url: https://www.vietnamairlines.com/en/useful-information/travel-guide/bao-tang-phu-nu-viet-nam
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
+
+- id: sint-jozefkathedraal
+  naam: Sint Jozefkathedraal
+  naamLokaal: Nhà thờ Lớn Hà Nội
+  stad: hanoi
+  categorie: attractie
+  rang: 12
+  beschrijving: >-
+    Neogotische kathedraal naar het voorbeeld van de Notre Dame, in 1886 geopend
+    op de plek van de oude Bao Thien pagode.
+  waarom: Het bekendste koloniale gebouw van Hanoi, omringd door cafés.
+  adres: 40 Nha Chung
+  adresLokaal: 40 Nhà Chung, Hà Nội
+  openingstijden:
+    osm: '24/7'
+    tekst: >-
+      Buitenkant altijd. Binnen tijdens de missen (maandag tot en met vrijdag 5:30
+      en 18:15, zaterdag 18:00, zondag meerdere) en daarbuiten vaak via een
+      zijdeur.
+  prijs: gratis
+  prijzen:
+    - { omschrijving: Toegang, bedrag: 0 }
+  letOp:
+    - Rond lunchtijd vaak gesloten.
+  attractie:
+    type: monument
+    bezoekduurMinuten: 20
+    regenbestendig: true
+    drukte:
+      besteMoment: Niet rond lunchtijd
+  bronnen:
+    - naam: questoapp.com
+      url: https://questoapp.com/hanoi/places-to-visit/st-josephs-cathedral-hanoi
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
+
+- id: tran-quoc-pagode
+  naam: Tran Quoc pagode en Westmeer
+  naamLokaal: Chùa Trấn Quốc
+  stad: hanoi
+  categorie: attractie
+  rang: 13
+  beschrijving: >-
+    De oudste pagode van Hanoi, ruim 1.500 jaar oud, met een rode stoepa op een
+    landtong in het Westmeer.
+  waarom: Sfeervolle plek aan het water.
+  adres: Thanh Nien
+  adresLokaal: Chùa Trấn Quốc, Thanh Niên, Hà Nội
+  openingstijden:
+    osm: 'Mo-Su 07:30-11:00,13:30-17:00'
+    tekst: Dagelijks 7:30 tot 11:00 en 13:30 tot 17:00
+  prijs: gratis
+  prijzen:
+    - { omschrijving: Toegang, bedrag: 0 }
+  tips:
+    - Schouders en knieën bedekt.
+    - Combineer met pho cuon in de Ngu Xa straat en de Summit Lounge.
+  attractie:
+    type: tempel
+    bezoekduurMinuten: 30
+    regenbestendig: false
+    drukte:
+      besteMoment: Late middag voor 17:00, daarna de zonsondergang aan het meer
+  bronnen:
+    - naam: ca.trip.com
+      url: https://ca.trip.com/moments/detail/hanoi-181-138366013
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
+
+- id: opera
+  naam: Opera House
+  naamLokaal: Nhà hát Lớn Hà Nội
+  stad: hanoi
+  categorie: attractie
+  rang: 14
+  beschrijving: >-
+    Neoklassiek operagebouw, voltooid in 1911 en ontworpen door de Franse
+    architecten Harlay en Broyer, met de Opéra Garnier in Parijs als inspiratie.
+  waarom: Het architectonische hoogtepunt van de Franse wijk.
+  adres: 1 Trang Tien
+  adresLokaal: 1 Tràng Tiền, Hà Nội
+  web: https://hanoioperahouse.org.vn
+  openingstijden:
+    osm: 'Mo-Th,Sa,Su 10:30-12:00'
+    tekst: >-
+      Rondleidingen dagelijks behalve vrijdag (tijden wisselen). Voorstellingen in
+      de avond.
+  prijs: { bedrag: 120000, valuta: VND }
+  prijzen:
+    - { omschrijving: Rondleiding, bedrag: 120000 }
+    - omschrijving: Rondleiding met voorstelling, maandag en donderdag
+      bedrag: 400000
+    - { omschrijving: Voorstellingen vanaf, bedrag: 300000 }
+  tips:
+    - Kijk of er tijdens je verblijf een avondvoorstelling is.
+  attractie:
+    type: monument
+    bezoekduurMinuten: 60
+    regenbestendig: true
+  bronnen:
+    - naam: baobacninhtv.vn
+      url: https://baobacninhtv.vn/hanoi-opera-house-a-timeless-icon-of-art-and-architecture-postid411877.bbg
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
+
+- id: nationaal-museum-geschiedenis
+  naam: Nationaal Museum voor Geschiedenis
+  naamLokaal: Bảo tàng Lịch sử Quốc gia
+  stad: hanoi
+  categorie: attractie
+  rang: 15
+  beschrijving: >-
+    Koloniaal gebouw uit 1926 tot 1932, oorspronkelijk het Louis Finot museum
+    van het Franse onderzoeksinstituut EFEO, met circa 200.000 objecten van de
+    prehistorie tot nu.
+  waarom: Het mooiste museumgebouw van de stad en het beste historische overzicht.
+  adres: 1 Trang Tien, moderne geschiedenis in het tweede gebouw op 216 Tran Quang Khai
+  adresLokaal: 1 Tràng Tiền, Hà Nội
+  web: https://baotanglichsu.vn
+  openingstijden:
+    osm: 'Mo-Su 08:00-12:00,13:30-17:00; Mo[1] off'
+    tekst: 8:00 tot 12:00 en 13:30 tot 17:00. Dicht op de eerste maandag van de maand.
+  prijs: { bedrag: 40000, valuta: VND }
+  prijzen:
+    - { omschrijving: Toegang, bedrag: 40000 }
+  tips:
+    - Ligt naast de Opera.
+  attractie:
+    type: museum
+    bezoekduurMinuten: 90
+    regenbestendig: true
+  bronnen:
+    - naam: baotanglichsu.vn
+      url: https://baotanglichsu.vn/en/Articles/3196/opening-time
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
+
+- id: long-bien-brug
+  naam: Long Bien brug
+  naamLokaal: Cầu Long Biên
+  stad: hanoi
+  categorie: attractie
+  rang: 16
+  beschrijving: >-
+    Stalen brug over de Rode Rivier uit 1902, gebouwd door het Franse bedrijf
+    Daydé et Pillé en in de oorlog meermaals gebombardeerd. Nu alleen voor
+    trein, scooters en voetgangers.
+  waarom: Authentiek en fotogeniek, met uitzicht over de rivier.
+  adres: Opgang bij station Long Bien, oostkant van de Oude Stad
+  adresLokaal: Cầu Long Biên, Hà Nội
+  openingstijden:
+    osm: '24/7'
+    tekst: Altijd toegankelijk
+  prijs: gratis
+  prijzen:
+    - { omschrijving: Toegang, bedrag: 0 }
+  tips:
+    - Loop over het voetpad aan de zijkant.
+  attractie:
+    type: monument
+    bezoekduurMinuten: 45
+    regenbestendig: false
+    drukte:
+      besteMoment: Zonsopgang of zonsondergang
+  gecheckt: 2026-10-01
+  gecontroleerd: false
+
+- id: dong-xuan-markt
+  naam: Dong Xuan markt
+  naamLokaal: Chợ Đồng Xuân
+  stad: hanoi
+  categorie: attractie
+  rang: 17
+  beschrijving: De grootste en bekendste overdekte markt van Hanoi, vooral groothandel.
+  waarom: Echt marktleven en het eindpunt van de weekend nachtmarkt.
+  adres: Dong Xuan, noordkant van de Oude Stad
+  adresLokaal: Chợ Đồng Xuân, Đồng Xuân, Hà Nội
+  openingstijden:
+    osm: 'Mo-Su 06:00-18:00'
+    tekst: Dagelijks 6:00 tot 18:00
+  prijs: gratis
+  prijzen:
+    - { omschrijving: Toegang, bedrag: 0 }
+  tips:
+    - Afdingen hoort erbij.
+  attractie:
+    type: markt
+    bezoekduurMinuten: 45
+    regenbestendig: true
+    drukte:
+      besteMoment: Ochtend
+  bronnen:
+    - naam: vietnamairlines.com
+      url: https://www.vietnamairlines.com/be/en/useful-information/travel-guide/hanoi-markets
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
+
+- id: militair-historisch-museum
+  naam: Militair Historisch Museum
+  naamLokaal: Bảo tàng Lịch sử Quân sự Việt Nam
+  stad: hanoi
+  categorie: attractie
+  rang: 18
+  beschrijving: >-
+    Nieuw museum, geopend in november 2024, met tanks, MiG straaljagers en 3D
+    projecties.
+  waarom: Het modernste museum van de stad over oorlogsgeschiedenis.
+  adres: Km 6+500 Thang Long Boulevard (circa 30 minuten met de auto)
+  adresLokaal: Km 6+500 Đại lộ Thăng Long, Tây Mỗ, Hà Nội
+  openingstijden:
+    osm: 'Tu-Th,Sa,Su 08:00-11:30,13:00-16:30'
+    tekst: 8:00 tot 11:30 en 13:00 tot 16:30. Maandag en vrijdag dicht.
+  prijs: { bedrag: 40000, valuta: VND }
+  prijzen:
+    - { omschrijving: Toegang, bedrag: 40000 }
+  letOp:
+    - >-
+      Ga niet naar de oude locatie aan Dien Bien Phu; dat terrein hoort nu bij de
+      Keizerlijke Citadel.
+  attractie:
+    type: museum
+    bezoekduurMinuten: 120
+    regenbestendig: true
+    drukte:
+      besteMoment: Ochtend
+  bronnen:
+    - naam: es.laodong.vn
+      url: https://es.laodong.vn/du-lich/tin-tuc/bao-tang-lich-su-quan-su-viet-nam-chinh-thuc-ban-ve-1489760.html
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
+
+- id: museum-schone-kunsten
+  naam: Museum voor Schone Kunsten
+  naamLokaal: Bảo tàng Mỹ thuật Việt Nam
+  stad: hanoi
+  categorie: attractie
+  rang: 19
+  beschrijving: >-
+    Vietnamese kunst van de prehistorie tot nu, zoals lakwerk, zijdeschilderingen
+    en boeddhistische beelden, in een koloniaal gebouw uit 1937.
+  waarom: Rustig, koel en verrassend goed. Ideaal na de Tempel van de Literatuur.
+  adres: 66 Nguyen Thai Hoc, tegenover de Tempel van de Literatuur
+  adresLokaal: 66 Nguyễn Thái Học, Hà Nội
+  web: https://vnfam.vn
+  openingstijden:
+    osm: 'Tu-Su 08:30-17:00'
+    tekst: Dinsdag tot en met zondag 8:30 tot 17:00. Maandag dicht.
+  prijs: { bedrag: 40000, tot: 50000, valuta: VND }
+  prijzen:
+    - { omschrijving: Volwassenen (bronnen verschillen), van: 40000, tot: 50000 }
+    - { omschrijving: Audiogids, bedrag: 50000 }
+  tips:
+    - Er zit een café in het museum.
+  attractie:
+    type: museum
+    bezoekduurMinuten: 90
+    regenbestendig: true
+  bronnen:
+    - naam: localvietnam.com
+      url: https://localvietnam.com/hanoi/vietnam-fine-arts-museum-hanoi/
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
+
+# Eten en drinken bij de hoofdbezienswaardigheden, voor zover nieuw.
+
+- id: cha-ca-thang-long
+  naam: Cha Ca Thang Long
+  naamLokaal: Chả Cá Thăng Long
+  stad: hanoi
+  categorie: eten
+  onderscheiding: Michelin Bib Gourmand (vermeld voor 2024 en 2025)
+  beschrijving: >-
+    Zaak met één gerecht: met kurkuma gemarineerde vis die aan tafel met dille en
+    lente ui wordt afgebakken.
+  waarom: Dé specialiteit van Hanoi, met een Bib Gourmand.
+  adres: 21 Duong Thanh, dezelfde familie heeft meer adressen in de straat
+  adresLokaal: 21 Đường Thành, Hà Nội
+  openingstijden:
+    osm: 'Mo-Su 10:00-21:30'
+    tekst: Dagelijks 10:00 tot 21:30
+  prijs: { bedrag: 250000, valuta: VND }
+  prijzen:
+    - { omschrijving: Vaste prijs per persoon, bedrag: 250000 }
+  inDeBuurtVan: [oude-wijk, hoan-kiem]
+  eten:
+    keuken: restaurant
+    keukenTekst: Cha ca (vis)
+    bezoekduurMinuten: 60
+    regenbestendig: true
+  bronnen:
+    - naam: tablejourney.com
+      url: https://tablejourney.com/vietnam/hanoi/street-food/cha-ca-thang-long-street/
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
+
+- id: polite-and-co
+  naam: Polite & Co
+  naamLokaal: Polite & Co
+  stad: hanoi
+  categorie: eten
+  beschrijving: >-
+    Ooit een expatcafé uit de jaren negentig, nu een knusse cocktailbar met
+    donker hout.
+  waarom: Een van de best beoordeelde cocktailbars, op twee minuten van het meer.
+  adres: 5B Ngo Bao Khanh
+  adresLokaal: 5B Ngõ Bảo Khánh, Hà Nội
+  openingstijden:
+    osm: 'Mo-Th 17:00-24:00; Fr-Su 17:00-02:00'
+    tekst: Maandag tot en met donderdag 17:00 tot 24:00, vrijdag tot en met zondag tot 2:00
+  prijs: { bedrag: 100000, tot: 550000, valuta: VND }
+  prijzen:
+    - { omschrijving: Per drankje, van: 100000, tot: 550000 }
+  inDeBuurtVan: [hoan-kiem, ngoc-son, sint-jozefkathedraal, waterpoppentheater]
+  eten:
+    keuken: bar
+    keukenTekst: Cocktailbar
+    bezoekduurMinuten: 60
+    regenbestendig: true
+    drukte:
+      besteMoment: Avond
+  bronnen:
+    - naam: tubudd.com
+      url: https://www.tubudd.com/blog/cocktail-bar-hanoi
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
+
+- id: beer-corner
+  naam: Beer Corner (Ta Hien)
+  naamLokaal: Phố bia Tạ Hiện
+  stad: hanoi
+  categorie: eten
+  beschrijving: >-
+    Het kruispunt van Ta Hien en Luong Ngoc Quyen, waar je op plastic krukjes
+    vers tapbier drinkt.
+  waarom: Het levendigste uitgaanshart van de Oude Stad.
+  adres: Kruispunt Ta Hien en Luong Ngoc Quyen
+  adresLokaal: Tạ Hiện giao Lương Ngọc Quyến, Hà Nội
+  openingstijden:
+    osm: 'Mo-Su 17:00-23:00'
+    tekst: >-
+      In de avond. Rond 23:00 maakt de politie de stoep leeg. De begintijd is een
+      schatting.
+  prijs: { bedrag: 15000, tot: 30000, valuta: VND }
+  prijzen:
+    - omschrijving: Per glas bia hoi
+      van: 15000
+      tot: 30000
+      indicatief: true
+  letOp:
+    - Druk en toeristisch, let op je spullen.
+  inDeBuurtVan: [oude-wijk, weekend-nachtmarkt]
+  eten:
+    keuken: bar
+    keukenTekst: Bia hoi (vers tapbier)
+    bezoekduurMinuten: 60
+    regenbestendig: false
+    drukte:
+      besteMoment: Avond
+  bronnen:
+    - naam: tablejourney.com
+      url: https://tablejourney.com/vietnam/hanoi/budget-eating/bun-cha-huong-lien-budget/
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
+
+- id: ha-thanh-mansion
+  naam: Ha Thanh Mansion
+  naamLokaal: Hà Thành Mansion
+  stad: hanoi
+  categorie: eten
+  onderscheiding: Michelin Bib Gourmand
+  beschrijving: Traditionele Hanoise feestgerechten in een Frans koloniaal huis.
+  waarom: Rustig zitrestaurant met een Bib Gourmand, handig tussen de musea door.
+  adres: 14 Ngo Van So
+  adresLokaal: 14 Ngô Văn Sở, Hà Nội
+  openingstijden:
+    osm: 'Mo-Su 10:00-22:00'
+    tekst: Dagelijks 10:00 tot 22:00
+  prijs: { bedrag: 200000, tot: 400000, valuta: VND }
+  prijzen:
+    - omschrijving: Per persoon
+      van: 200000
+      tot: 400000
+      indicatief: true
+  tips:
+    - Probeer bun thang, de rijstpapierrolletjes of een setmenu.
+  inDeBuurtVan: [hoa-lo, vrouwenmuseum]
+  eten:
+    keuken: restaurant
+    keukenTekst: Noord Vietnamees
+    bezoekduurMinuten: 75
+    regenbestendig: true
+  bronnen:
+    - naam: tablejourney.com
+      url: https://tablejourney.com/vietnam/hanoi/restaurants/ha-thanh-mansion/
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
+
+- id: tam-vi
+  naam: Tầm Vị
+  naamLokaal: Tầm Vị
+  stad: hanoi
+  categorie: eten
+  onderscheiding: Michelin 1 ster
+  beschrijving: >-
+    Noord Vietnamese huiskeuken in een sfeervolle oude villa. Michelinster sinds
+    2023, met nog altijd dezelfde klassiekers.
+  waarom: Een Michelinster tegen een bistroprijs, vlak bij de Tempel van de Literatuur.
+  adres: 4B Yen The
+  adresLokaal: 4B Yên Thế, Hà Nội
+  openingstijden:
+    osm: 'Mo-Su 11:00-14:00,17:30-21:30'
+    tekst: Dagelijks lunch en diner (bronnen verschillen iets)
+  prijs: { bedrag: 200000, tot: 500000, valuta: VND }
+  prijzen:
+    - { omschrijving: Per persoon, van: 200000, tot: 500000 }
+  reservering: aanbevolen
+  tips:
+    - Reserveer, zeker voor het diner.
+  inDeBuurtVan: [literatuurtempel, museum-schone-kunsten]
+  eten:
+    keuken: restaurant
+    keukenTekst: Noord Vietnamees
+    bezoekduurMinuten: 75
+    regenbestendig: true
+  bronnen:
+    - naam: vinpearl.com
+      url: https://vinpearl.com/en/michelin-star-restaurants-in-hanoi
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
+
+- id: gia
+  naam: Gia
+  naamLokaal: Gia
+  stad: hanoi
+  categorie: eten
+  onderscheiding: Michelin 1 ster
+  beschrijving: >-
+    Proefmenu van chef Sam Tran dat ongeveer elke drie maanden wisselt. De chef
+    kreeg de Young Chef Award van Michelin.
+  waarom: De meest verfijnde Vietnamese keuken van de stad.
+  adres: 61 Van Mieu
+  adresLokaal: 61 Văn Miếu, Hà Nội
+  openingstijden:
+    osm: 'Tu-Th 18:00-21:00; Fr-Su 11:30-13:30,18:00-21:00'
+    tekst: >-
+      Diner dinsdag tot en met zondag 18:00 tot 21:00, lunch vrijdag tot en met
+      zondag 11:30 tot 13:30
+  prijs: { bedrag: 1700000, tot: 2000000, valuta: VND }
+  prijzen:
+    - { omschrijving: Per persoon, van: 1700000, tot: 2000000 }
+  reservering: aanbevolen
+  tips:
+    - Ruim vooruit reserveren.
+  inDeBuurtVan: [literatuurtempel, museum-schone-kunsten]
+  eten:
+    keuken: restaurant
+    keukenTekst: Modern Vietnamees (proefmenu)
+    bezoekduurMinuten: 150
+    regenbestendig: true
+  bronnen:
+    - naam: evivatour.com
+      url: https://evivatour.com/vietnams-four-first-michelin-starred-restaurants/
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
+
+- id: pho-cuon-ngu-xa
+  naam: Pho cuon in de Ngu Xa straat
+  naamLokaal: Phở cuốn Ngũ Xã
+  stad: hanoi
+  categorie: eten
+  onderscheiding: Michelin Selected (Pho Cuon Chinh Thang)
+  beschrijving: >-
+    Gerolde pho: verse rijstvellen met gewokt rundvlees en kruiden. De hele
+    straat serveert dit, onder meer Pho Cuon Huong Mai en Pho Cuon Chinh Thang.
+  waarom: De specialiteit van deze buurt, vlak bij de Tran Quoc pagode.
+  adres: Ngu Xa, Truc Bach
+  adresLokaal: Phố Ngũ Xã, Trúc Bạch, Hà Nội
+  openingstijden:
+    tekst: Lunch en diner, tijden verschillen per zaak
+  prijs: { bedrag: 60000, tot: 100000, valuta: VND }
+  prijzen:
+    - { omschrijving: Per bord, van: 60000, tot: 100000 }
+  tips:
+    - 'Zit Huong Mai vol, ga dan naar de buren: zelfde gerecht, zelfde prijs.'
+  inDeBuurtVan: [tran-quoc-pagode, ho-chi-minh-mausoleum, presidentieel-paleis]
+  eten:
+    keuken: pho
+    keukenTekst: Pho cuon
+    bezoekduurMinuten: 45
+    regenbestendig: true
+  bronnen:
+    - naam: tablejourney.com
+      url: https://tablejourney.com/vietnam/hanoi/budget-eating/pho-gia-truyen-budget/
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
+
+- id: summit-lounge
+  naam: Summit Lounge (Pan Pacific)
+  naamLokaal: Summit Lounge, Pan Pacific Hà Nội
+  stad: hanoi
+  categorie: eten
+  beschrijving: >-
+    Rooftopbar op de 20e verdieping met uitzicht op het Westmeer, het Truc Bach
+    meer en de Nhat Tan brug.
+  waarom: De mooiste zonsondergang van Hanoi.
+  adres: 1 Thanh Nien, 20e verdieping
+  adresLokaal: 1 Thanh Niên, Ba Đình, Hà Nội
+  web: https://www.panpacific.com
+  openingstijden:
+    osm: 'Mo-Su 16:00-24:00'
+    tekst: Vanaf de middag tot circa middernacht (een bron noemt 14:00 tot 23:00)
+  prijs: { bedrag: 250000, tot: 400000, valuta: VND }
+  prijzen:
+    - omschrijving: Per cocktail
+      van: 250000
+      tot: 400000
+      indicatief: true
+  tips:
+    - De Summit Negroni is favoriet.
+  inDeBuurtVan: [tran-quoc-pagode]
+  eten:
+    keuken: bar
+    keukenTekst: Rooftopbar
+    bezoekduurMinuten: 75
+    regenbestendig: false
+    drukte:
+      besteMoment: Zonsondergang
+  bronnen:
+    - naam: flavorsofhanoi.com
+      url: https://flavorsofhanoi.com/?p=3328
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
+
+# Spa en wellness.
+
+- id: le-spa-du-metropole
+  naam: Le Spa du Metropole
+  naamLokaal: Le Spa du Metropole, Sofitel Legend Metropole Hà Nội
+  stad: hanoi
+  categorie: spa
+  onderscheiding: Beste hotelspa van Vietnam, Tatler Best of Vietnam 2026
+  beschrijving: >-
+    Spa in het historische Sofitel Legend Metropole hotel, met acht suites,
+    sauna en hammam.
+  waarom: Het hoogste niveau van de stad.
+  adres: 15 Ngo Quyen
+  adresLokaal: 15 Ngô Quyền, Hà Nội
+  web: https://www.sofitel-legend-metropole-hanoi.com
+  openingstijden:
+    osm: 'Mo-Su 10:00-22:00'
+    tekst: Dagelijks 10:00 tot 22:00
+  prijs: { bedrag: 70, valuta: EUR }
+  prijzen:
+    - { omschrijving: 'Massage van 60 minuten, circa', bedrag: 70, valuta: EUR }
+    - omschrijving: 'Voorbeeld: Vietnamese Journey, 60 minuten voor twee personen'
+      bedrag: 5216000
+  reservering: aanbevolen
+  tips:
+    - Boek een dag vooruit.
+  inDeBuurtVan: [opera, nationaal-museum-geschiedenis]
+  spa:
+    bezoekduurMinuten: 90
+    regenbestendig: true
+  bronnen:
+    - naam: parfumdautomne.fr
+      url: https://parfumdautomne.fr/en/the-best-massages-and-spas-in-hanoi/
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
+
+- id: auriga-spa
+  naam: Auriga Spa (Capella Hanoi)
+  naamLokaal: Auriga Spa, Capella Hà Nội
+  stad: hanoi
+  categorie: spa
+  beschrijving: >-
+    Spa van het vijfsterren Capella hotel met koppelkamers, sauna en
+    stoomruimte, voor massages, gezichts en lichaamsbehandelingen. Het hotel
+    heeft een binnenzwembad.
+  waarom: Rustig luxe alternatief met wellnessfaciliteiten, naast de Opera.
+  adres: 11 Le Phung Hieu
+  adresLokaal: 11 Lê Phụng Hiểu, Hà Nội
+  web: https://capellahotels.com
+  openingstijden:
+    tekst: Dagelijks open, tijden onbekend
+  prijzen: []
+  prijsTekst: Geen actuele prijslijst gevonden, vermoedelijk vergelijkbaar met Le Spa du Metropole
+  tips:
+    - Vraag naar de prijzen en of het zwembad bij een behandeling hoort.
+  inDeBuurtVan: [opera]
+  spa:
+    bezoekduurMinuten: 90
+    regenbestendig: true
+  bronnen:
+    - naam: hotels.com
+      url: https://www.hotels.com/ho2069500736/capella-hanoi-hanoi-vietnam
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
+
+- id: la-spa
+  naam: La Spa (La Siesta)
+  naamLokaal: La Spa, Hàng Bè
+  stad: hanoi
+  categorie: spa
+  beschrijving: >-
+    Spamerk van de La Siesta hotelgroep, met vijf vestigingen in Hanoi. De
+    signature massage combineert Zweedse massage met hete stenen.
+  waarom: De beste verhouding tussen prijs en kwaliteit in het middensegment.
+  adres: 27 Hang Be, ook in La Siesta Classic op 94 Ma May
+  adresLokaal: 27 Hàng Bè, Hà Nội
+  web: https://laspas.vn
+  telefoon: '+84 24 3929 0011'
+  openingstijden:
+    osm: 'Mo-Su 09:00-21:00'
+    tekst: Vestiging Hang Be dagelijks 9:00 tot 21:00
+  prijs: { bedrag: 35, valuta: EUR }
+  prijzen:
+    - { omschrijving: '60 minuten, circa', bedrag: 35, valuta: EUR }
+    - { omschrijving: '90 minuten, circa', bedrag: 45, valuta: EUR }
+    - { omschrijving: 'Halve dag, circa', bedrag: 120, valuta: EUR }
+  inDeBuurtVan: [oude-wijk, hoan-kiem]
+  spa:
+    bezoekduurMinuten: 90
+    regenbestendig: true
+  bronnen:
+    - naam: parfumdautomne.fr
+      url: https://parfumdautomne.fr/en/the-best-massages-and-spas-in-hanoi/
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
+
+- id: serene-spa
+  naam: Serene Spa
+  naamLokaal: Serene Spa, Mã Mây
+  stad: hanoi
+  categorie: spa
+  beschrijving: >-
+    Boutique spa in de Oude Stad met privékamers voor alle behandelingen behalve
+    voetverzorging. Hete stenen en Vietnamese massage zijn favoriet.
+  waarom: Centraal, rustig en goed beoordeeld.
+  adres: 68 Ma May, tweede vestiging op 58 Ma May
+  adresLokaal: 68 Mã Mây, Hà Nội
+  openingstijden:
+    osm: 'Mo-Su 10:00-22:30'
+    tekst: Dagelijks 10:00 tot 22:30
+  prijs: { bedrag: 400000, tot: 2000000, valuta: VND }
+  prijzen:
+    - { omschrijving: Behandelingen, van: 400000, tot: 2000000 }
+  inDeBuurtVan: [oude-wijk, hoan-kiem]
+  spa:
+    bezoekduurMinuten: 90
+    regenbestendig: true
+  bronnen:
+    - naam: pelago.com
+      url: https://www.pelago.com/ko/activity/pc8bmxmo2-serene-spa-hanoi-hanoi
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false
+
+- id: omamori-spa
+  naam: Omamori Spa
+  naamLokaal: Omamori Spa, Ngõ Huyện
+  stad: hanoi
+  categorie: spa
+  beschrijving: >-
+    Gerund door de organisatie Blind Link; de therapeuten zijn blind of
+    slechtziend. Score 4,9 op Tripadvisor uit 680 reviews.
+  waarom: Uitstekende therapeutische massage tegen een lage prijs, met een goed doel.
+  adres: 48 Ngo Huyen, tweede vestiging aan het Westmeer
+  adresLokaal: 48 Ngõ Huyện, Hà Nội
+  telefoon: '+84 24 6668 9666'
+  openingstijden:
+    osm: 'Mo-Su 09:00-22:00'
+    tekst: Dagelijks 9:00 tot 22:00
+  prijs: { bedrag: 350000, valuta: VND }
+  prijzen:
+    - { omschrijving: 60 minuten zonder olie, bedrag: 350000 }
+    - { omschrijving: 'Hete stenen, 75 minuten', bedrag: 450000 }
+    - { omschrijving: 'Signature, 75 minuten', bedrag: 500000 }
+  tips:
+    - Fooi is niet nodig.
+  inDeBuurtVan: [sint-jozefkathedraal, hoan-kiem]
+  spa:
+    bezoekduurMinuten: 75
+    regenbestendig: true
+  bronnen:
+    - naam: parfumdautomne.fr
+      url: https://parfumdautomne.fr/en/the-best-massages-and-spas-in-hanoi/
+      gecontroleerdOp: 2026-10-01
+  gecheckt: 2026-10-01
+  gecontroleerd: false

@@ -17,7 +17,7 @@ import { z } from 'zod';
 import { stedenBestandSchema } from '../src/domein/schema/stad';
 import { tijdlijnenBestandSchema } from '../src/domein/schema/tijdlijn';
 import { reisschemaSchema } from '../src/domein/schema/reis';
-import { plaatsenBestandSchema } from '../src/domein/schema/plaats';
+import { plaatsenBestandSchema, type Plaats } from '../src/domein/schema/plaats';
 import { appsBestandSchema, vervoerBestandSchema } from '../src/domein/schema/praktisch';
 import {
   etiquetteBestandSchema,
@@ -51,6 +51,39 @@ const controleer = <T>(schema: z.ZodType<T>, waarde: unknown, bestand: string): 
     fouten.push(`${bestand}: ${pad}: ${probleem.message}`);
   }
   return null;
+};
+
+/**
+ * De verwijzingen tussen plekken in één stad: onderdeelVan, inDeBuurtVan en de
+ * Top 20. Een id met een tikfout laat anders een lege sectie "Eten en drinken
+ * in de buurt" achter, of een plek die in de Top 20 nergens onder hangt.
+ */
+const controleerKoppelingen = (plaatsen: Plaats[], bestand: string) => {
+  const opId = new Map(plaatsen.map((p) => [p.id, p]));
+  const rangen = new Map<number, string>();
+  for (const plaats of plaatsen) {
+    const waar = `${bestand}: ${plaats.id}`;
+    if (plaats.onderdeelVan !== undefined) {
+      const hoofd = opId.get(plaats.onderdeelVan);
+      if (!hoofd) fouten.push(`${waar}: onderdeelVan "${plaats.onderdeelVan}" bestaat niet`);
+      else if (hoofd.onderdeelVan) {
+        fouten.push(`${waar}: onderdeelVan wijst naar een plek die zelf een onderdeel is`);
+      } else if (hoofd.id === plaats.id) fouten.push(`${waar}: is onderdeel van zichzelf`);
+      if (plaats.rang !== undefined) fouten.push(`${waar}: een onderdeel heeft geen eigen rang`);
+    }
+    for (const id of plaats.inDeBuurtVan ?? []) {
+      const doel = opId.get(id);
+      if (!doel) fouten.push(`${waar}: inDeBuurtVan "${id}" bestaat niet`);
+      else if (doel.categorie !== 'attractie') {
+        fouten.push(`${waar}: inDeBuurtVan "${id}" is geen bezienswaardigheid`);
+      }
+    }
+    if (plaats.rang !== undefined) {
+      const al = rangen.get(plaats.rang);
+      if (al) fouten.push(`${waar}: rang ${plaats.rang} heeft ${al} al`);
+      rangen.set(plaats.rang, plaats.id);
+    }
+  }
 };
 
 const steden = controleer(stedenBestandSchema, lees(join(DATA, 'steden.yaml')), 'steden.yaml');
@@ -231,6 +264,14 @@ if (steden && tijdlijnen && reisschema) {
     );
     if (!plaatsen) continue;
 
+    controleerKoppelingen(plaatsen, `plaatsen/${bestand}`);
+    const zonderPlek = plaatsen.filter((p) => !p.coordinaten).map((p) => p.id);
+    if (zonderPlek.length > 0) {
+      opmerkingen.push(
+        `plaatsen/${bestand}: ${zonderPlek.length} plekken zonder coördinaten, in de app onder "Locatie ontbreekt" (npm run geocodeer): ${zonderPlek.join(', ')}`,
+      );
+    }
+
     for (const plaats of plaatsen) {
       const waar = `plaatsen/${bestand}: ${plaats.id}`;
       if (plaatsIds.has(plaats.id)) fouten.push(`${waar}: dit id bestaat al`);
@@ -253,9 +294,7 @@ if (steden && tijdlijnen && reisschema) {
       if (plaats.categorie === 'spa' && !plaats.spa) {
         fouten.push(`${waar}: categorie spa zonder blok "spa"`);
       }
-      if (!plaats.coordinaten) {
-        opmerkingen.push(`${waar}: heeft nog geen coördinaten en staat onder "Locatie ontbreekt"`);
-      } else if (!binnenGebied(plaats.coordinaten, stad.kaartgebied)) {
+      if (plaats.coordinaten && !binnenGebied(plaats.coordinaten, stad.kaartgebied)) {
         opmerkingen.push(
           `${waar}: ligt buiten het kaartgebied van ${stadId}, dus offline zie je hier geen kaart`,
         );

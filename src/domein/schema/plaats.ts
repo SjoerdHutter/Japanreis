@@ -161,12 +161,18 @@ export const eetlocatieSchema = z.object({
    */
   moeite: z.enum(['waardig-een-omweg', 'snelle-bak']).optional(),
   bezoekduurMinuten: bezoekduurSchema,
+  /**
+   * Eten is meestal binnen, maar niet altijd: bia hoi op krukjes op de stoep
+   * of een rooftopbar. False haalt hem op een regendag uit het voorstel.
+   */
+  regenbestendig: z.boolean().optional(),
   drukte: drukteSchema.optional(),
 });
 
 /** Extra velden van een spa. */
 export const spaSchema = z.object({
   bezoekduurMinuten: bezoekduurSchema,
+  regenbestendig: z.boolean().optional(),
   drukte: drukteSchema.optional(),
 });
 

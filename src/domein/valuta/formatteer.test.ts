@@ -8,6 +8,7 @@ import {
   formatteerPrijsklasse,
   naarEuro,
   prijsklasseVan,
+  regelAlsPrijs,
 } from './formatteer';
 import type { Koersen } from './koers';
 
@@ -15,7 +16,7 @@ import type { Koersen } from './koers';
 const KOERSEN: Koersen = {
   perEuro: { JPY: 172, VND: 28500 },
   datum: '2026-01-01',
-  bron: 'ingebakken',
+  bron: 'opgeslagen',
 };
 
 describe('formatteerLokaal', () => {
@@ -52,8 +53,30 @@ describe('formatteerBedrag', () => {
     );
   });
 
-  it('rekent ook dong om', () => {
-    expect(formatteerBedrag({ bedrag: 50000, valuta: 'VND' }, KOERSEN)).toBe('₫50.000 (EUR 2)');
+  it('rekent ook dong om, onder de tien euro met centen', () => {
+    expect(formatteerBedrag({ bedrag: 50000, valuta: 'VND' }, KOERSEN)).toBe('₫50.000 (EUR 1,75)');
+    expect(formatteerBedrag({ bedrag: 15000, valuta: 'VND' }, KOERSEN)).toBe('₫15.000 (EUR 0,53)');
+    expect(formatteerBedrag({ bedrag: 55000, tot: 70000, valuta: 'VND' }, KOERSEN)).toBe(
+      '₫55.000 tot ₫70.000 (EUR 1,93 tot 2,46)',
+    );
+    expect(formatteerBedrag({ bedrag: 1700000, valuta: 'VND' }, KOERSEN)).toBe(
+      '₫1.700.000 (EUR 60)',
+    );
+  });
+
+  it('zet indicatie bij een bedrag dat met de ingebakken koers is omgerekend', () => {
+    const ingebakken: Koersen = {
+      ...KOERSEN,
+      perEuro: { JPY: 172, VND: 30000 },
+      bron: 'ingebakken',
+    };
+    expect(formatteerBedrag({ bedrag: 70000, valuta: 'VND' }, ingebakken)).toBe(
+      '₫70.000 (EUR 2,33, indicatie)',
+    );
+    expect(formatteerBedrag({ bedrag: 1200, valuta: 'JPY' }, ingebakken)).toBe(
+      '¥1.200 (EUR 7, indicatie)',
+    );
+    expect(formatteerBedrag({ bedrag: 45, valuta: 'EUR' }, ingebakken)).toBe('EUR 45');
   });
 
   it('zet geen haakjes bij een bedrag dat al in euro staat', () => {
@@ -108,5 +131,27 @@ describe('prijsklassen', () => {
     expect(prijsklasseVan({ bedrag: 1500, valuta: 'JPY' })?.id).toBe('jpy-2');
     expect(prijsklasseVan({ bedrag: 25000, valuta: 'JPY' })?.id).toBe('jpy-4');
     expect(prijsklasseVan({ bedrag: 50000, valuta: 'VND' })?.id).toBe('vnd-1');
+  });
+
+  it('rekent een bedrag in euro om naar de valuta van de stad', () => {
+    const omrekenen = { stadValuta: 'VND' as const, koersen: KOERSEN };
+    expect(prijsklasseVan({ bedrag: 35, valuta: 'EUR' }, omrekenen)?.id).toBe('vnd-4');
+    expect(prijsklasseVan({ bedrag: 3, valuta: 'EUR' }, omrekenen)?.id).toBe('vnd-2');
+    expect(prijsklasseVan({ bedrag: 35, valuta: 'EUR' })).toBeNull();
+  });
+});
+
+describe('regelAlsPrijs', () => {
+  it('maakt van een regel een prijs, met de valuta van de stad als hij er geen heeft', () => {
+    expect(regelAlsPrijs({ omschrijving: 'Toegang', bedrag: 0 }, 'VND')).toBe('gratis');
+    expect(regelAlsPrijs({ omschrijving: 'Per kom', van: 55000, tot: 70000 }, 'VND')).toEqual({
+      bedrag: 55000,
+      tot: 70000,
+      valuta: 'VND',
+    });
+    expect(regelAlsPrijs({ omschrijving: 'Massage', bedrag: 70, valuta: 'EUR' }, 'VND')).toEqual({
+      bedrag: 70,
+      valuta: 'EUR',
+    });
   });
 });

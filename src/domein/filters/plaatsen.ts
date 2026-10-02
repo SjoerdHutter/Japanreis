@@ -9,6 +9,7 @@ import type {
 } from '@/domein/schema';
 import { afstandKm } from '@/domein/geo/afstand';
 import { prijsklasseVan } from '@/domein/valuta/formatteer';
+import { INGEBAKKEN_KOERS } from '@/domein/valuta/koers';
 import { nuOpen, tijdenOp, vasteSluitingsdagen, weekdagIn } from '@/domein/openingstijden/status';
 import { datumIn } from '@/domein/tijd/zones';
 
@@ -159,7 +160,10 @@ export const filterPlaatsen = (
           ? stad.valuta === 'VND'
             ? 'vnd-1'
             : 'jpy-1'
-          : prijsklasseVan(plaats.prijs)?.id;
+          : // Een prijs in euro (een hotelspa) valt in een klasse van de stad; de
+            // ingebakken koers is daarvoor nauwkeurig genoeg, de grenzen zijn grof.
+            prijsklasseVan(plaats.prijs, { stadValuta: stad.valuta, koersen: INGEBAKKEN_KOERS })
+              ?.id;
       if (!klasse || !filter.prijsklassen.includes(klasse)) return false;
     }
     if (filter.ontbijt === true && plaats.eten?.ontbijt !== true) return false;
