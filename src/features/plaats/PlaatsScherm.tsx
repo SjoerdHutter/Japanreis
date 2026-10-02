@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { CarTaxiFront, Copy, ExternalLink, MapPinOff, Phone, TriangleAlert } from 'lucide-react';
-import { stadMet } from '@/data/content';
+import { REISSCHEMA, stadMet } from '@/data/content';
 import { useOverschrijvingen, zetOverschrijving } from '@/data/overschrijvingen';
 import { eigenVelden, useAllePlaatsen } from '@/data/usePlaatsen';
 import { telLink, type Plaats, type Stad } from '@/domein/schema';
 import { bezoekduurVan, drukteVan, regenbestendigVan } from '@/domein/filters/plaatsen';
+import { dagenIn } from '@/domein/highlight/verblijf';
 import { mapsLink } from '@/domein/geo/link';
 import {
   minutenIn,
@@ -31,7 +32,7 @@ import {
   SluitingenBewerken,
 } from './Bewerken';
 import { PlaatsLabels } from './PlaatsLabels';
-import { dagTekst } from './tekst';
+import { dagTekst, korteDag } from './tekst';
 
 /**
  * Alles over één plek. De lijst van de stad toont het belangrijkste; hier staat
@@ -120,6 +121,8 @@ export const PlaatsScherm = () => {
   const onderdelen = inStad.filter((p) => p.onderdeelVan === plaats.id);
   const vandaag = datumIn(stad.tijdzone);
   const vandaagTijden = tijdenOp(plaats, vandaag);
+  // Je dagen in deze stad die nog komen, zoals de twee overstappen in Hanoi.
+  const reisdagen = dagenIn(REISSCHEMA, stad.id).filter((d) => d > vandaag);
   const open = nuOpen(plaats, stad);
   const sluitingsdagen = vasteSluitingsdagen(plaats.openingstijden);
   const volgende =
@@ -216,6 +219,14 @@ export const PlaatsScherm = () => {
           <p className="leading-relaxed">
             <strong className="font-medium">Vandaag:</strong> {dagTekst(vandaagTijden)}
           </p>
+          {reisdagen.map((datum) => {
+            const dag = tijdenOp(plaats, datum);
+            return (
+              <Regel key={datum} titel={`Op je dag hier, ${korteDag(datum)}`}>
+                {dag.soort === 'gesloten' && dag.sluiting ? 'tijdelijk gesloten' : dagTekst(dag)}
+              </Regel>
+            );
+          })}
           {plaats.openingstijden?.tekst && (
             <Regel titel="Tijden">{plaats.openingstijden.tekst}</Regel>
           )}

@@ -1,5 +1,6 @@
 import { z } from 'zod';
-import { osmFout } from '../openingstijden/osm';
+// Met extensie, net als in plaats.ts: vite.config.ts laadt dit mee.
+import { osmFout } from '../openingstijden/osm.ts';
 
 /**
  * De bouwstenen die overal terugkomen: een punt op de aarde, een bedrag en een

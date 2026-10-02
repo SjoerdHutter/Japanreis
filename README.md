@@ -39,6 +39,7 @@ npm run dev
 | `npm run lint`      | Lint                                                       |
 | `npm run typecheck` | Types                                                      |
 | `npm run icons`     | Hertekent de PWA-iconen (alleen nodig bij een nieuw icoon) |
+| `npm run geocodeer` | Zoekt coördinaten op voor plekken zonder pin (Nominatim)   |
 
 Een push naar `main` bouwt en publiceert automatisch naar GitHub Pages.
 
@@ -53,7 +54,8 @@ Een push naar `main` bouwt en publiceert automatisch naar GitHub Pages.
 Alle reiscontent staat in `data/` als YAML en is met de hand bij te werken, ook
 rechtstreeks op github.com vanaf je telefoon. `npm run validate` draait in CI en
 laat de build falen bij een tikfout, zodat je onderweg nooit tegen een lege stad
-aanloopt.
+aanloopt. De plekken in `data/plaatsen/` gaan bovendien bij elke build door het
+schema: een openingstijd die de app niet kan lezen laat de build mislukken.
 
 | Bestand                     | Wat erin staat                                     |
 | --------------------------- | -------------------------------------------------- |
@@ -264,13 +266,28 @@ netwerk, zonder paginafouten.
 ### De dagplanner en de overstapplanner
 
 De dagplanner zet je gekozen punten in een looproute (naaste buur vanaf het
-eerste punt) en schuift elke stop op tot hij binnen de openingstijden past. Wat
-die dag gesloten is gaat eruit met de reden erbij, en wat niet meer past komt
-apart te staan in plaats van stilletjes te verdwijnen.
+eerste punt) en schuift elke stop op tot hij binnen de openingstijden van die
+datum past. Een middagpauze telt mee (kom je om 12:00, dan wacht je tot 13:30),
+net als de eerste maandag van de maand en een bar die tot na middernacht open
+is. Wat die dag gesloten is gaat eruit met de reden erbij; bij een
+sluitingsperiode zoals het onderhoud van het mausoleum staat de reden uit de
+data in de notitie. Wat niet meer past komt apart te staan in plaats van
+stilletjes te verdwijnen.
 
-Wat de planner niet doet is doen alsof hij het weet. Openingstijden in de content
-zijn vrije tekst; waar er geen klok uit te halen valt ("Dag en nacht open") komt
-er geen tijdvenster maar de opmerking dat je ze zelf moet nakijken.
+Een plek met voorstellingen, zoals het waterpoppentheater, komt op de
+eerstvolgende voorstelling en gaat achteraan de dag als de eerste pas 's middags
+is. Is er die dag geen voorstelling meer, dan staat hij bij "Niet in je dag".
+
+Rond lunch (11:30 tot 14:00) en diner (18:00 tot 21:00) stelt de planner een
+eetplek voor, als er nog geen maaltijd in je dag staat: eerst een die via
+`inDeBuurtVan` bij de vorige of volgende stop hoort en dan open is, anders de
+dichtstbijzijnde die open is binnen 800 meter. Koffie, thee en bars tellen niet
+als maaltijd. Het is een voorstel tussen de stops in; je dag verandert er niet
+door.
+
+Wat de planner niet doet is doen alsof hij het weet. Waar er geen klok uit de
+openingstijden te halen valt ("Dag en nacht open") komt er geen tijdvenster maar
+de opmerking dat je ze zelf moet nakijken.
 
 De Hanoi overstapplanner rekent met 45 minuten tussen Noi Bai en het centrum,
 elke kant op, een uur op de luchthaven bij aankomst en drie uur incheck voor
@@ -666,3 +683,59 @@ woordenlijst. De tekeningen zijn SVG in `src/features/sumo/tekeningen.tsx`: een
 worstelaar is een pictogram waarvan per houding alleen heup, schouders, hoofd,
 handen en voeten vastliggen; knieën en ellebogen worden uitgerekend. Ze werken
 offline en in de donkere modus.
+
+### Hanoi: Top 20, eten en drinken, spa en wellness
+
+`data/plaatsen/hanoi.yaml` bevat 39 plekken: een Top 20 met twee onderdelen
+(de Ngoc Son tempel bij het meer, de weekend nachtmarkt in de oude wijk), elf
+plekken om te eten en te drinken en vijf spa's. Tien daarvan stonden er al en
+zijn alleen aangevuld waar een veld ontbrak; hun id, je eigen waarden en wat er
+al stond bleven intact. "Banh mi in de oude wijk" stond er ook al en is
+ongewijzigd.
+
+- **/stad/hanoi** opent op de tab Top 20, op volgorde van rang. Daarnaast
+  Attracties, Eten en drinken (met een keukenfilter) en Spa en wellness, met een
+  eigen pin op de kaart.
+- **/plaats/:id** is de pagina per plek: openingstijden van vandaag en van je
+  dagen in de stad, sluitingsperiodes, voorstellingen, prijzen in dong met
+  euro erbij, tips, let op, het adres met "Toon aan chauffeur", "Kopieer adres"
+  en "Route in Google Maps", en eten en drinken in de buurt (gekoppeld eerst,
+  dan binnen 800 meter, op looptijd). Bij een eetplek of spa staat er
+  andersom wat er vlakbij te zien is.
+- Labels: onderscheiding (zoals Michelin Bib Gourmand), "Tijdelijk gesloten"
+  als een sluiting in je Hanoi dagen valt, "Status onzeker", "indicatie" voor
+  een geschatte prijs of een euro uit de ingebakken koers, en "controleren"
+  met de bron en de datum waarop die is gecheckt. Alle uitgezochte feiten staan
+  ook op /controleren, per plek.
+- Alles wat nieuw is, is als eigen waarde aan te passen op de pagina van de
+  plek: openingstijden (in de notatie van OpenStreetMap, met een voorbeeld van
+  de komende week), sluitingen, prijzen, locatie, beste tijd, duur, bij regen,
+  status, telefoon, web, tips en let op. "terugzetten" haalt je eigen waarde weg.
+- Zoeken werkt zonder accenten: "hoan kiem" vindt Hoàn Kiếm, "dong" vindt Đồng.
+
+Openingstijden staan in `openingstijden.osm` in de notatie van OpenStreetMap
+(`Tu-Su 08:30-17:30`, `Mo[1] off`, `Apr-Oct`, `2026 Sep 04-2026 Nov 02 off`).
+De app leest die met een eigen parser in
+`src/domein/openingstijden/osm.ts`; een tijd die hij niet kent laat de build
+falen in plaats van stilletjes "dag en nacht open" te worden. Een
+sluitingsperiode met reden staat in `sluitingen` en gaat voor alles.
+
+#### Coördinaten opzoeken
+
+28 nieuwe plekken hadden nog geen coördinaten en staan in de app onder
+"Locatie ontbreekt". Draai op een computer met internet:
+
+```bash
+npm run geocodeer            # schrijft coördinaten in data/plaatsen/hanoi.yaml
+npm run geocodeer -- --droog # laat alleen zien wat het zou doen
+```
+
+Het script vraagt Nominatim (OpenStreetMap) één plek per seconde, met een eigen
+User-Agent, binnen het kader rond Hanoi (lat 20,90 tot 21,15, lon 105,70 tot
+105,95). Een onderdeel moet binnen 1 km van zijn hoofdplek liggen. Het Opera
+House en het Nationaal Museum worden alleen op naam gezocht, de oude wijk en de
+nachtmarkt op Hàng Đào. Gevonden coördinaten krijgen `coordBron: nominatim`.
+Wil je je e-mailadres meesturen, zoals Nominatim vraagt bij veel verkeer, zet
+dan `NOMINATIM_EMAIL`. Wat niet gevonden wordt blijft onder "Locatie ontbreekt";
+op de pagina van de plek kun je dan coördinaten of een Google Maps link plakken,
+of lang drukken op de kaart.

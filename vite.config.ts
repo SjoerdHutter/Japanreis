@@ -5,6 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 import { VitePWA } from 'vite-plugin-pwa';
 import { parse as parseYaml } from 'yaml';
 import { TEGEL_CACHE } from './src/kaart/constanten.ts';
+import { plaatsenBestandSchema } from './src/domein/schema/plaats.ts';
 
 // De app draait op https://<gebruiker>.github.io/Japanreis/, dus alle assets
 // moeten met dat pad worden opgevraagd. Lokaal draaien werkt met hetzelfde pad.
@@ -31,6 +32,17 @@ const yamlPlugin = (): Plugin => ({
   transform(code, id) {
     if (!id.endsWith('.yaml') && !id.endsWith('.yml')) return null;
     const data = parseYaml(code);
+    // De plekken gaan bij de build ook door het schema. Een openingstijd die de
+    // app niet kan lezen, of een veld met een tikfout, laat dan de build
+    // mislukken en niet de stad onderweg.
+    if (/[\\/]data[\\/]plaatsen[\\/][^\\/]+\.yaml$/.test(id)) {
+      const uitkomst = plaatsenBestandSchema.safeParse(data);
+      if (!uitkomst.success) {
+        this.error(
+          `${id}: ${uitkomst.error.issues.map((i) => `${i.path.join('.')}: ${i.message}`).join('; ')}`,
+        );
+      }
+    }
     return { code: `export default ${JSON.stringify(data)};`, map: null };
   },
 });

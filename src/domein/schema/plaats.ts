@@ -1,4 +1,6 @@
 import { z } from 'zod';
+// Met extensie: vite.config.ts laadt dit schema om de plekken bij de build te
+// controleren, en de lader daarvan vult geen extensies aan.
 import {
   bronSchema,
   coordinaatSchema,
@@ -7,7 +9,7 @@ import {
   prijsSchema,
   sluitingSchema,
   weekdagSchema,
-} from './basis';
+} from './basis.ts';
 
 /**
  * Het centrale model van de app: één punt op de kaart.
