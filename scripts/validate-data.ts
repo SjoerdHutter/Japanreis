@@ -250,7 +250,12 @@ if (steden && tijdlijnen && reisschema) {
       if (plaats.categorie === 'attractie' && !plaats.attractie) {
         fouten.push(`${waar}: categorie attractie zonder blok "attractie" met een type`);
       }
-      if (!binnenGebied(plaats.coordinaten, stad.kaartgebied)) {
+      if (plaats.categorie === 'spa' && !plaats.spa) {
+        fouten.push(`${waar}: categorie spa zonder blok "spa"`);
+      }
+      if (!plaats.coordinaten) {
+        opmerkingen.push(`${waar}: heeft nog geen coördinaten en staat onder "Locatie ontbreekt"`);
+      } else if (!binnenGebied(plaats.coordinaten, stad.kaartgebied)) {
         opmerkingen.push(
           `${waar}: ligt buiten het kaartgebied van ${stadId}, dus offline zie je hier geen kaart`,
         );

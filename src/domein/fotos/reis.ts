@@ -275,6 +275,7 @@ export const plaatsVoorFoto = (foto: Foto, plaatsen: Plaats[]): Plaats | undefin
   if (!foto.coordinaten) return undefined;
   let beste: { plaats: Plaats; km: number } | undefined;
   for (const plaats of plaatsen) {
+    if (!plaats.coordinaten) continue;
     const km = afstandKm(foto.coordinaten, plaats.coordinaten);
     if (km * 1000 <= KOPPEL_METER && (beste === undefined || km < beste.km)) {
       beste = { plaats, km };

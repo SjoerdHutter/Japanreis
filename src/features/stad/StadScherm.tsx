@@ -189,13 +189,19 @@ export const StadScherm = () => {
   // De kaart volgt de tab. Op de tab eigen punten staan de redactionele punten
   // er lichtjes bij, zodat je ziet hoe jouw lijst zich tot de app verhoudt.
   const punten = useMemo<KaartPunt[]>(() => {
-    const redactioneel = (tab === 'eigen' ? alle : zichtbaar).map((p) => ({
-      id: p.id,
-      naam: p.naam,
-      coordinaten: p.coordinaten,
-      laag: laagVan(p),
-      toelichting: p.prijs ? formatteerPrijs(p.prijs, koersen) : undefined,
-    }));
+    const redactioneel = (tab === 'eigen' ? alle : zichtbaar).flatMap((p) =>
+      p.coordinaten
+        ? [
+            {
+              id: p.id,
+              naam: p.naam,
+              coordinaten: p.coordinaten,
+              laag: laagVan(p),
+              toelichting: p.prijs ? formatteerPrijs(p.prijs, koersen) : undefined,
+            },
+          ]
+        : [],
+    );
 
     const persoonlijk = zichtbareEigen
       .filter((p) => p.coordinaten && !p.koppelingPlaatsId)

@@ -3,7 +3,9 @@ import {
   bronSchema,
   coordinaatSchema,
   openingstijdenSchema,
+  prijsRegelSchema,
   prijsSchema,
+  sluitingSchema,
   weekdagSchema,
 } from './basis';
 
@@ -29,6 +31,10 @@ export const categorieSchema = z.enum([
   'vervoer',
   'verblijf',
   'overig',
+  // Een massage of een hotelspa. Geen attractie, want je komt er niet om iets te
+  // bekijken, en geen eten. Op een regendag of na een lange vlucht is het
+  // precies wat je zoekt, dus het verdient een eigen knop.
+  'spa',
 ]);
 export type Categorie = z.infer<typeof categorieSchema>;
 
@@ -94,6 +100,9 @@ export const keukenSchema = z.enum([
   'streetfood',
   'koffie',
   'restaurant',
+  // Waar je komt om te drinken: een cocktailbar, een rooftopbar, bia hoi op een
+  // krukje. Geen van de keukens hierboven dekt dat.
+  'bar',
 ]);
 export type Keuken = z.infer<typeof keukenSchema>;
 
@@ -106,35 +115,44 @@ export type Drukteniveau = z.infer<typeof drukteniveauSchema>;
 export const reserveringSchema = z.enum(['verplicht', 'aanbevolen', 'niet-nodig']);
 export type Reservering = z.infer<typeof reserveringSchema>;
 
+/** Wanneer het rustig en druk is. Bij attracties, en ook bij eten en spa's. */
+export const drukteSchema = z.object({
+  besteMoment: z.string().optional(),
+  drukstMoment: z.string().optional(),
+  /**
+   * Het rustigste moment als tijdvak dat de planner kan lezen: "voor
+   * 08:00", "na 17:00", "07:00 tot 09:00" of "bij opening". Zie
+   * domein/planning/drukte.ts.
+   */
+  besteTijdslot: z.string().optional(),
+  /** Hoe druk het is per dagdeel. */
+  perDagdeel: z.partialRecord(dagdeelSchema, drukteniveauSchema).optional(),
+  druksteDagen: z.array(weekdagSchema).optional(),
+  /** Uit algemene kennis; de app zet er "controleren" bij tot je het aanvinkt. */
+  gecontroleerd: z.boolean().optional(),
+});
+export type Drukte = z.infer<typeof drukteSchema>;
+
+/** Bezoekduur in minuten; voedt zowel het filter als de dagplanner. */
+const bezoekduurSchema = z.number().int().positive().optional();
+
 /** Extra velden die alleen een attractie heeft. */
 export const attractieSchema = z.object({
   type: attractieTypeSchema,
-  /** Bezoekduur in minuten; voedt zowel het filter als de dagplanner. */
-  bezoekduurMinuten: z.number().int().positive().optional(),
+  bezoekduurMinuten: bezoekduurSchema,
   regenbestendig: z.boolean().optional(),
   dagdeel: z.array(dagdeelSchema).optional(),
-  drukte: z
-    .object({
-      besteMoment: z.string().optional(),
-      drukstMoment: z.string().optional(),
-      /**
-       * Het rustigste moment als tijdvak dat de planner kan lezen: "voor
-       * 08:00", "na 17:00", "07:00 tot 09:00" of "bij opening". Zie
-       * domein/planning/drukte.ts.
-       */
-      besteTijdslot: z.string().optional(),
-      /** Hoe druk het is per dagdeel. */
-      perDagdeel: z.partialRecord(dagdeelSchema, drukteniveauSchema).optional(),
-      druksteDagen: z.array(weekdagSchema).optional(),
-      /** Uit algemene kennis; de app zet er "controleren" bij tot je het aanvinkt. */
-      gecontroleerd: z.boolean().optional(),
-    })
-    .optional(),
+  drukte: drukteSchema.optional(),
 });
 
 /** Extra velden die alleen een eetlocatie heeft. */
 export const eetlocatieSchema = z.object({
   keuken: keukenSchema,
+  /**
+   * De keuken zoals hij in de bron staat, zoals "Cha ca (vis)". `keuken` is de
+   * knop in het filter; dit is de precieze omschrijving op de detailpagina.
+   */
+  keukenTekst: z.string().optional(),
   ontbijt: z.boolean().optional(),
   lateNight: z.boolean().optional(),
   /**
@@ -142,6 +160,14 @@ export const eetlocatieSchema = z.object({
    * toevallig langskomt. Zonder dit onderscheid wordt elke lijst een brij.
    */
   moeite: z.enum(['waardig-een-omweg', 'snelle-bak']).optional(),
+  bezoekduurMinuten: bezoekduurSchema,
+  drukte: drukteSchema.optional(),
+});
+
+/** Extra velden van een spa. */
+export const spaSchema = z.object({
+  bezoekduurMinuten: bezoekduurSchema,
+  drukte: drukteSchema.optional(),
 });
 
 /** Een eki stamp: gratis stempel, meestal op een station. */
@@ -178,7 +204,14 @@ export const plaatsSchema = z.object({
   naamLokaal: z.string().optional(),
   stad: z.string().min(1),
   categorie: categorieSchema,
-  coordinaten: coordinaatSchema,
+  /**
+   * Waar de pin staat. Kan ontbreken: een plek waarvoor de geocoder niets
+   * bruikbaars vond, krijgt geen pin op een gok maar komt in de lijst "Locatie
+   * ontbreekt", en dan zet je hem zelf op de kaart.
+   */
+  coordinaten: coordinaatSchema.optional(),
+  /** Waar de coördinaten vandaan komen, als ze niet met de hand zijn gezet. */
+  coordBron: z.enum(['nominatim']).optional(),
   /**
    * Waar of de pin het gebouw aanwijst of alleen het huizenblok.
    *
@@ -208,11 +241,53 @@ export const plaatsSchema = z.object({
 
   attractie: attractieSchema.optional(),
   eten: eetlocatieSchema.optional(),
+  spa: spaSchema.optional(),
   ekiStempel: ekiStempelSchema.optional(),
   goshuin: goshuinStempelSchema.optional(),
 
   bronnen: z.array(bronSchema).optional(),
   tags: z.array(z.string()).optional(),
+
+  // Wat een uitgezochte plek extra kan hebben. Alles optioneel, zodat de
+  // bestaande plekken er niets van merken.
+
+  /** De plaats in de Top 20 van de stad. */
+  rang: z.number().int().min(1).max(20).optional(),
+  /**
+   * De plek waar deze onder valt, zoals de Ngoc Son tempel onder het Hoan Kiem
+   * meer. Hij krijgt een eigen pin, maar staat in de Top 20 onder de hoofdplek.
+   */
+  onderdeelVan: z.string().optional(),
+  /** Het adres in lokaal schrift, voor de taxichauffeur. `adres` is het Latijnse. */
+  adresLokaal: z.string().optional(),
+  /** Waarom deze plek in de lijst staat, in een paar zinnen. */
+  waarom: z.string().optional(),
+  tips: z.array(z.string().min(1)).optional(),
+  /** Wat je echt moet weten voor je gaat; staat opvallend op het scherm. */
+  letOp: z.array(z.string().min(1)).optional(),
+  /** Periodes waarin de plek dicht is. Gaat voor de openingstijden. */
+  sluitingen: z.array(sluitingSchema).optional(),
+  /** Aanvangstijden, voor een plek waar je naar een voorstelling gaat. */
+  voorstellingen: z.array(z.string().regex(/^\d{2}:\d{2}$/, 'een tijd als 16:10')).optional(),
+  /** Alle prijzen; `prijs` is het ene bedrag uit de labels en filters. */
+  prijzen: z.array(prijsRegelSchema).optional(),
+  /** Wat er over de prijs te zeggen valt als er geen bedrag bekend is. */
+  prijsTekst: z.string().optional(),
+  /** Een onderscheiding, zoals "Michelin 1 ster". */
+  onderscheiding: z.string().optional(),
+  /** De bezienswaardigheden waar deze eet, drink of spa plek bij in de buurt ligt. */
+  inDeBuurtVan: z.array(z.string()).optional(),
+  /** Onzeker: de toegang wisselt, zoals bij Train Street. */
+  status: z.enum(['onzeker']).optional(),
+  web: z.url().optional(),
+  telefoon: z.string().optional(),
+  /** Wanneer de feiten zijn verzameld. */
+  gecheckt: z.iso.date().optional(),
+  /**
+   * False zet het label "controleren" bij de plek, tot je hem in de app
+   * aanvinkt. Zie het scherm Controleren.
+   */
+  gecontroleerd: z.boolean().optional(),
 });
 export type Plaats = z.infer<typeof plaatsSchema>;
 

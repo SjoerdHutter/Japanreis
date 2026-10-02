@@ -5,6 +5,7 @@ import { useApp } from '@/state/useApp';
 import { Kaartje, Knop, Label } from '@/ui/basis';
 import { formatteerPrijs } from '@/domein/valuta/formatteer';
 import { looptijdMinuten } from '@/domein/filters/plaatsen';
+import { mapsLink } from '@/domein/geo/link';
 import { nuOpen, sluitingswaarschuwing, waarschuwingstekst } from '@/domein/openingstijden/status';
 import { tijdlijnVan } from '@/data/content';
 import { useOverschrijvingen, zetOverschrijving } from '@/data/overschrijvingen';
@@ -43,7 +44,7 @@ export const PlaatsRegel = ({
 
   const waarschuwing = sluitingswaarschuwing(plaats, stad);
   const openNu = nuOpen(plaats, stad);
-  const lopen = vanaf ? looptijdMinuten(vanaf, plaats.coordinaten) : null;
+  const lopen = vanaf && plaats.coordinaten ? looptijdMinuten(vanaf, plaats.coordinaten) : null;
   const tijdlijn = tijdlijnVan(stad);
   const tijdvakken = (plaats.tijdvakken ?? [])
     .map((id) => tijdlijn?.tijdvakken.find((v) => v.id === id))
@@ -222,13 +223,7 @@ export const PlaatsRegel = ({
             <Knop
               klein
               soort="stil"
-              onClick={() =>
-                window.open(
-                  `https://www.google.com/maps/search/?api=1&query=${plaats.coordinaten.lat},${plaats.coordinaten.lon}`,
-                  '_blank',
-                  'noopener',
-                )
-              }
+              onClick={() => window.open(mapsLink(plaats), '_blank', 'noopener')}
             >
               Route in Google Maps
             </Knop>
@@ -249,7 +244,9 @@ export const PlaatsRegel = ({
 
           <p className="mt-3 text-xs text-inkt-zacht/70 dark:text-papier/40">
             {plaats.adres ? `${plaats.adres} · ` : ''}
-            {plaats.coordinaten.lat.toFixed(4)}, {plaats.coordinaten.lon.toFixed(4)}
+            {plaats.coordinaten
+              ? `${plaats.coordinaten.lat.toFixed(4)}, ${plaats.coordinaten.lon.toFixed(4)}`
+              : 'nog niet op de kaart'}
           </p>
         </div>
       )}

@@ -9,7 +9,8 @@ import type {
 } from '@/domein/schema';
 import { afstandKm } from '@/domein/geo/afstand';
 import { prijsklasseVan } from '@/domein/valuta/formatteer';
-import { nuOpen, vasteSluitingsdagen, weekdagIn } from '@/domein/openingstijden/status';
+import { nuOpen, tijdenOp, vasteSluitingsdagen, weekdagIn } from '@/domein/openingstijden/status';
+import { datumIn } from '@/domein/tijd/zones';
 
 /**
  * De filters uit hoofdstuk 2 en 3, als pure functies.
@@ -121,6 +122,7 @@ export const filterPlaatsen = (
   nu: Date = new Date(),
 ): Plaats[] => {
   const vandaag = weekdagIn(stad.tijdzone, nu);
+  const vandaagDatum = datumIn(stad.tijdzone, nu);
 
   return plaatsen.filter((plaats) => {
     if (filter.zoek && !raaktZoekterm(plaats, filter.zoek)) return false;
@@ -172,7 +174,10 @@ export const filterPlaatsen = (
     if (filter.tijdvak && !plaats.tijdvakken?.includes(filter.tijdvak)) return false;
 
     if (filter.verbergVandaagGesloten === true) {
+      // Een vaste sluitingsdag, maar ook de eerste maandag van de maand of een
+      // periode van onderhoud: alles wat vandaag dicht is.
       if (vasteSluitingsdagen(plaats.openingstijden).includes(vandaag)) return false;
+      if (tijdenOp(plaats, vandaagDatum).soort === 'gesloten') return false;
     }
     if (filter.nuOpen === true) {
       // Alleen wegfilteren wat aantoonbaar dicht is. Een plaats waarvan de
@@ -182,6 +187,8 @@ export const filterPlaatsen = (
     }
 
     if (filter.maxLooptijd !== undefined && filter.vanaf) {
+      // Zonder plek op de kaart is niet te zeggen of het binnen de looptijd ligt.
+      if (!plaats.coordinaten) return false;
       const km = afstandKm(filter.vanaf, plaats.coordinaten);
       if (km > filter.maxLooptijd * LOOPSNELHEID_KM_PER_MINUUT) return false;
     }

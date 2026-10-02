@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { osmFout } from '../openingstijden/osm';
 
 /**
  * De bouwstenen die overal terugkomen: een punt op de aarde, een bedrag en een
@@ -37,6 +38,48 @@ export type Bedrag = z.infer<typeof bedragSchema>;
 /** Gratis is geen bedrag van nul: het hoort anders op het scherm te staan. */
 export const prijsSchema = z.union([z.literal('gratis'), bedragSchema]);
 export type Prijs = z.infer<typeof prijsSchema>;
+
+/**
+ * Eén regel uit een prijslijst: volwassenen, studenten, een audiogids.
+ *
+ * `prijs` hierboven is het ene bedrag dat in de labels en de filters staat;
+ * deze lijst staat op de detailpagina, als een plek meer prijzen heeft. Een
+ * regel heeft een vast bedrag of een reeks van tot. Zonder valuta geldt die van
+ * de stad. `indicatief` zet er het label "indicatie" bij: een schatting, geen
+ * prijs van een kaart.
+ */
+export const prijsRegelSchema = z
+  .object({
+    omschrijving: z.string().min(1),
+    bedrag: z.number().nonnegative().optional(),
+    van: z.number().nonnegative().optional(),
+    tot: z.number().nonnegative().optional(),
+    valuta: valutaSchema.optional(),
+    /** Per wat: per persoon, per kom, per uur. */
+    eenheid: z.string().optional(),
+    indicatief: z.boolean().optional(),
+  })
+  .refine(
+    (r) =>
+      (r.bedrag !== undefined && r.van === undefined && r.tot === undefined) ||
+      (r.bedrag === undefined && r.van !== undefined && r.tot !== undefined && r.van <= r.tot),
+    { message: 'een prijsregel heeft een bedrag, of een van en tot' },
+  );
+export type PrijsRegel = z.infer<typeof prijsRegelSchema>;
+
+/**
+ * Een periode waarin een plek dicht is, zoals het jaarlijkse onderhoud van het
+ * mausoleum. Gaat voor de openingstijden: wat hier valt is dicht, wat de tijden
+ * ook zeggen.
+ */
+export const sluitingSchema = z
+  .object({
+    van: z.iso.date(),
+    tot: z.iso.date(),
+    reden: z.string().min(1),
+  })
+  .refine((s) => s.van <= s.tot, { message: 'een sluiting eindigt niet voor hij begint' });
+export type Sluiting = z.infer<typeof sluitingSchema>;
 
 export const weekdagSchema = z.enum([
   'maandag',
@@ -88,12 +131,26 @@ export const WEEKDAGEN_VANAF_ZONDAG: readonly Weekdag[] = [
  * waarde "gesloten" is een vaste sluitingsdag, en daar hangt de waarschuwing
  * aan die musea op maandag ondervangt. Tijden staan als "09:00-17:00", meerdere
  * blokken gescheiden door een komma voor zaken die tussen de middag dicht gaan.
+ *
+ * `osm` is de notatie van OpenStreetMap, voor tijden die meer kunnen dan dat:
+ * seizoenen, de eerste maandag van de maand, een periode dicht. Staat hij er,
+ * dan gaat hij voor `standaard` en `perDag`. `tekst` is hoe je de tijden leest,
+ * voor op het scherm. Is er alleen een tekst, dan weet de app het niet en zegt
+ * hij dat ook: geen tijden is onbekend, nooit altijd open.
  */
 export const openingstijdenSchema = z.object({
   standaard: z.string().optional(),
   perDag: z.partialRecord(weekdagSchema, z.string()).optional(),
   laatsteToegang: z.string().optional(),
   opmerking: z.string().optional(),
+  osm: z
+    .string()
+    .optional()
+    .superRefine((osm, ctx) => {
+      const melding = osm === undefined ? null : osmFout(osm);
+      if (melding) ctx.addIssue({ code: 'custom', message: melding });
+    }),
+  tekst: z.string().optional(),
 });
 export type Openingstijden = z.infer<typeof openingstijdenSchema>;
 

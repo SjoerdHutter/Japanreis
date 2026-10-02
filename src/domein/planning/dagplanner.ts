@@ -96,7 +96,11 @@ export const looproute = (plaatsen: Plaats[], start?: Plaats): Plaats[] => {
     let besteIndex = 0;
     let besteAfstand = Number.POSITIVE_INFINITY;
     for (const [i, kandidaat] of over.entries()) {
-      const km = afstandKm(huidig.coordinaten, kandidaat.coordinaten);
+      // Een plek zonder pin komt achteraan: er valt niet te zeggen hoe ver hij is.
+      const km =
+        huidig.coordinaten && kandidaat.coordinaten
+          ? afstandKm(huidig.coordinaten, kandidaat.coordinaten)
+          : Number.MAX_SAFE_INTEGER;
       if (km < besteAfstand) {
         besteAfstand = km;
         besteIndex = i;
@@ -165,8 +169,17 @@ export const maakDagplan = (invoer: PlanInvoer): Dagplan => {
   let looptijdTotaal = 0;
 
   for (const plaats of route) {
-    const looptijd = vorige ? looptijdMinuten(vorige.coordinaten, plaats.coordinaten) : 0;
     const stopWaarschuwingen: string[] = [];
+    let looptijd = 0;
+    if (vorige) {
+      if (vorige.coordinaten && plaats.coordinaten) {
+        looptijd = looptijdMinuten(vorige.coordinaten, plaats.coordinaten);
+      } else {
+        stopWaarschuwingen.push(
+          'Deze plek staat nog niet op de kaart, dus de looptijd is onbekend.',
+        );
+      }
+    }
 
     // Vandaag dicht: niet inplannen, wel melden. Anders sta je er.
     if (vasteSluitingsdagen(plaats.openingstijden).includes(dag)) {
