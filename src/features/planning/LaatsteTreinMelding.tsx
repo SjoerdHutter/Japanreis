@@ -53,9 +53,13 @@ export const LaatsteTreinMelding = ({
       )?.waarde as string | undefined)
     : undefined;
 
+  // Zonder plek op de kaart valt er geen afstand naar het station te rekenen.
+  const vanaf = stop.plaats.coordinaten;
+  if (!vanaf) return null;
+
   const uitkomst = laatsteTreinVoor({
     stadId,
-    laatsteStop: { coordinaten: stop.plaats.coordinaten, vertrek: stop.vertrek },
+    laatsteStop: { coordinaten: vanaf, vertrek: stop.vertrek },
     verblijf,
     treinen,
     eigenTijd,
@@ -81,7 +85,7 @@ export const LaatsteTreinMelding = ({
       : (verblijf?.adresLatijn ?? verblijf?.terugstation ?? verblijf?.naam ?? '');
     window.open(
       routeLink({
-        van: `${stop.plaats.coordinaten.lat},${stop.plaats.coordinaten.lon}`,
+        van: `${vanaf.lat},${vanaf.lon}`,
         naar: bestemming,
       }),
       '_blank',

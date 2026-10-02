@@ -4,7 +4,7 @@ import type { Koersen } from '@/domein/valuta/koers';
 
 const KOERSEN: Koersen = {
   datum: '2026-09-06',
-  bron: 'ingebakken',
+  bron: 'opgeslagen',
   perEuro: { JPY: 181.59, VND: 27000 },
 };
 

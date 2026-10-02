@@ -9,7 +9,9 @@ import type {
 } from '@/domein/schema';
 import { afstandKm } from '@/domein/geo/afstand';
 import { prijsklasseVan } from '@/domein/valuta/formatteer';
-import { nuOpen, vasteSluitingsdagen, weekdagIn } from '@/domein/openingstijden/status';
+import { INGEBAKKEN_KOERS } from '@/domein/valuta/koers';
+import { nuOpen, tijdenOp, vasteSluitingsdagen, weekdagIn } from '@/domein/openingstijden/status';
+import { datumIn } from '@/domein/tijd/zones';
 
 /**
  * De filters uit hoofdstuk 2 en 3, als pure functies.
@@ -84,8 +86,14 @@ export const filterActief = (filter: Filter): boolean =>
     return waarde !== false;
   });
 
-const normaliseer = (tekst: string): string =>
-  tekst.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+/**
+ * Tekst vergelijkbaar maken: kleine letters en geen accenten, zodat je "hoan
+ * kiem" typt en "Hoàn Kiếm" vindt. De Vietnamese đ is geen d met een accent
+ * maar een eigen letter, en blijft na het weghalen van accenten staan; die gaat
+ * daarom apart.
+ */
+export const normaliseer = (tekst: string): string =>
+  tekst.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[đĐ]/g, 'd').toLowerCase();
 
 const raaktZoekterm = (plaats: Plaats, term: string): boolean => {
   const naald = normaliseer(term.trim());
@@ -96,8 +104,11 @@ const raaktZoekterm = (plaats: Plaats, term: string): boolean => {
       plaats.naamLokaal,
       plaats.beschrijving,
       plaats.adres,
+      plaats.adresLokaal,
       plaats.attractie?.type,
       plaats.eten?.keuken,
+      plaats.eten?.keukenTekst,
+      plaats.onderscheiding,
       ...(plaats.tags ?? []),
     ]
       .filter(Boolean)
@@ -108,6 +119,20 @@ const raaktZoekterm = (plaats: Plaats, term: string): boolean => {
 };
 
 const prijsIsGratis = (prijs: Prijs | undefined): boolean => prijs === 'gratis';
+
+/** De bezoekduur, waar die ook staat: bij een attractie, een eetplek of een spa. */
+export const bezoekduurVan = (plaats: Plaats): number | undefined =>
+  plaats.attractie?.bezoekduurMinuten ??
+  plaats.eten?.bezoekduurMinuten ??
+  plaats.spa?.bezoekduurMinuten;
+
+/** Of een plek geschikt is bij regen, waar dat ook staat. */
+export const regenbestendigVan = (plaats: Plaats): boolean | undefined =>
+  plaats.attractie?.regenbestendig ?? plaats.eten?.regenbestendig ?? plaats.spa?.regenbestendig;
+
+/** Het blok drukte, waar het ook staat. */
+export const drukteVan = (plaats: Plaats) =>
+  plaats.attractie?.drukte ?? plaats.eten?.drukte ?? plaats.spa?.drukte;
 
 /**
  * Past het filter toe. `stad` is nodig voor alles wat met tijd te maken heeft,
@@ -121,6 +146,7 @@ export const filterPlaatsen = (
   nu: Date = new Date(),
 ): Plaats[] => {
   const vandaag = weekdagIn(stad.tijdzone, nu);
+  const vandaagDatum = datumIn(stad.tijdzone, nu);
 
   return plaatsen.filter((plaats) => {
     if (filter.zoek && !raaktZoekterm(plaats, filter.zoek)) return false;
@@ -130,12 +156,12 @@ export const filterPlaatsen = (
       if (!plaats.attractie || !filter.typen.includes(plaats.attractie.type)) return false;
     }
     if (filter.maxBezoekduur !== undefined) {
-      const duur = plaats.attractie?.bezoekduurMinuten;
+      const duur = bezoekduurVan(plaats);
       // Een punt zonder opgegeven duur valt niet af: dat de content iets niet
       // weet is geen reden om het te verbergen.
       if (duur !== undefined && duur > filter.maxBezoekduur) return false;
     }
-    if (filter.regenbestendig === true && plaats.attractie?.regenbestendig !== true) return false;
+    if (filter.regenbestendig === true && regenbestendigVan(plaats) !== true) return false;
     if (filter.dagdelen?.length) {
       const dagdelen = plaats.attractie?.dagdeel;
       if (!dagdelen || !filter.dagdelen.some((d) => dagdelen.includes(d))) return false;
@@ -157,7 +183,10 @@ export const filterPlaatsen = (
           ? stad.valuta === 'VND'
             ? 'vnd-1'
             : 'jpy-1'
-          : prijsklasseVan(plaats.prijs)?.id;
+          : // Een prijs in euro (een hotelspa) valt in een klasse van de stad; de
+            // ingebakken koers is daarvoor nauwkeurig genoeg, de grenzen zijn grof.
+            prijsklasseVan(plaats.prijs, { stadValuta: stad.valuta, koersen: INGEBAKKEN_KOERS })
+              ?.id;
       if (!klasse || !filter.prijsklassen.includes(klasse)) return false;
     }
     if (filter.ontbijt === true && plaats.eten?.ontbijt !== true) return false;
@@ -172,7 +201,10 @@ export const filterPlaatsen = (
     if (filter.tijdvak && !plaats.tijdvakken?.includes(filter.tijdvak)) return false;
 
     if (filter.verbergVandaagGesloten === true) {
+      // Een vaste sluitingsdag, maar ook de eerste maandag van de maand of een
+      // periode van onderhoud: alles wat vandaag dicht is.
       if (vasteSluitingsdagen(plaats.openingstijden).includes(vandaag)) return false;
+      if (tijdenOp(plaats, vandaagDatum).soort === 'gesloten') return false;
     }
     if (filter.nuOpen === true) {
       // Alleen wegfilteren wat aantoonbaar dicht is. Een plaats waarvan de
@@ -182,6 +214,8 @@ export const filterPlaatsen = (
     }
 
     if (filter.maxLooptijd !== undefined && filter.vanaf) {
+      // Zonder plek op de kaart is niet te zeggen of het binnen de looptijd ligt.
+      if (!plaats.coordinaten) return false;
       const km = afstandKm(filter.vanaf, plaats.coordinaten);
       if (km > filter.maxLooptijd * LOOPSNELHEID_KM_PER_MINUUT) return false;
     }
@@ -230,8 +264,8 @@ export const keuzesUit = (plaatsen: Plaats[]): Keuzes => {
     if (plaats.attractie) {
       typen.add(plaats.attractie.type);
       for (const d of plaats.attractie.dagdeel ?? []) dagdelen.add(d);
-      if (plaats.attractie.regenbestendig) heeftRegenbestendig = true;
     }
+    if (regenbestendigVan(plaats)) heeftRegenbestendig = true;
     if (plaats.eten) {
       keukens.add(plaats.eten.keuken);
       if (plaats.eten.ontbijt) heeftOntbijt = true;

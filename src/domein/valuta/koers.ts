@@ -28,10 +28,11 @@ export interface Koersen {
  *
  * Deze staat er voor de eerste start zonder bereik. Hij is met opzet grof: het
  * gaat erom dat je in een winkel weet of iets vijf of vijftig euro is, niet om
- * de derde decimaal. Werk hem bij als hij er te ver naast gaat zitten.
+ * de derde decimaal. Werk hem bij als hij er te ver naast gaat zitten. Een
+ * bedrag dat hiermee is omgerekend krijgt "indicatie" op het scherm.
  */
 export const INGEBAKKEN_KOERS: Koersen = {
-  perEuro: { JPY: 172, VND: 28500 },
+  perEuro: { JPY: 172, VND: 30000 },
   datum: '2026-01-01',
   bron: 'ingebakken',
 };

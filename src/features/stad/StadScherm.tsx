@@ -16,6 +16,7 @@ import { PlaatsRegel } from './PlaatsRegel';
 import { leesEigenPunten } from '@/data/db/idb';
 import { filterPlaatsen, keuzesUit, type Filter } from '@/domein/filters/plaatsen';
 import { formatteerPrijs } from '@/domein/valuta/formatteer';
+import { LocatieOntbreekt, Top20 } from './Top20';
 
 /**
  * Het scherm van één stad.
@@ -29,11 +30,17 @@ import { formatteerPrijs } from '@/domein/valuta/formatteer';
  * lijst is maar ook meteen laat zien welke kant je op moet.
  */
 
-type Tab = 'attracties' | 'eten' | 'winkels' | 'stempels' | 'eigen';
+type Tab = 'top' | 'attracties' | 'eten' | 'spa' | 'winkels' | 'stempels' | 'eigen';
 
+/**
+ * De tabs. "Top 20" en "Spa en wellness" staan er alleen in een stad die zulke
+ * plekken heeft; een lege tab leert je alleen dat je er niet op moet tikken.
+ */
 const TABS: { id: Tab; naam: string }[] = [
+  { id: 'top', naam: 'Top 20' },
   { id: 'attracties', naam: 'Attracties' },
-  { id: 'eten', naam: 'Eten' },
+  { id: 'eten', naam: 'Eten en drinken' },
+  { id: 'spa', naam: 'Spa en wellness' },
   { id: 'winkels', naam: 'Winkels en overig' },
   { id: 'stempels', naam: 'Stempels' },
   { id: 'eigen', naam: 'Eigen punten' },
@@ -72,10 +79,14 @@ const alsDatum = (isoDatum: string): string => {
 
 const hoortBij = (plaats: Plaats, tab: Tab): boolean => {
   switch (tab) {
+    case 'top':
+      return plaats.rang !== undefined || plaats.onderdeelVan !== undefined;
     case 'attracties':
       return plaats.categorie === 'attractie';
     case 'eten':
       return plaats.categorie === 'eten';
+    case 'spa':
+      return plaats.categorie === 'spa';
     case 'winkels':
       return (
         plaats.categorie === 'winkel' ||
@@ -95,7 +106,8 @@ export const StadScherm = () => {
   const stad = stadMet(stadId);
   const { koersen, positie, onthoudBezoek } = useApp();
   const [eigen, setEigen] = useState<EigenPunt[]>([]);
-  const [tab, setTab] = useState<Tab>('attracties');
+  // Zolang je zelf niets kiest, opent een stad met een Top 20 op die lijst.
+  const [gekozenTab, setTab] = useState<Tab | null>(null);
   /**
    * Elk tabblad houdt zijn eigen filter bij.
    *
@@ -105,14 +117,14 @@ export const StadScherm = () => {
    * selectie ook staan als je even bij het eten kijkt en terugkomt.
    */
   const [filterPerTab, setFilterPerTab] = useState<Record<Tab, Filter>>({
+    top: {},
     attracties: {},
     eten: {},
+    spa: {},
     winkels: {},
     stempels: {},
     eigen: {},
   });
-  const filter = filterPerTab[tab];
-  const setFilter = (nieuw: Filter) => setFilterPerTab((oud) => ({ ...oud, [tab]: nieuw }));
   const [zoekparams, setZoekparams] = useSearchParams();
 
   // Een tijdvak in de link betekent dat je hier vanaf de tijdlijn komt. Dan
@@ -126,6 +138,11 @@ export const StadScherm = () => {
 
   // De plaatsen met je eigen waarden eroverheen, zoals "alleen contant".
   const plaatsen = usePlaatsen(stad?.id);
+  const heeftTop = plaatsen?.some((p) => p.rang !== undefined) ?? false;
+  const heeftSpa = plaatsen?.some((p) => p.categorie === 'spa') ?? false;
+  const tab: Tab = gekozenTab ?? (heeftTop ? 'top' : 'attracties');
+  const filter = filterPerTab[tab];
+  const setFilter = (nieuw: Filter) => setFilterPerTab((oud) => ({ ...oud, [tab]: nieuw }));
 
   // Geldautomaten, kluisjes en toiletten, als lagen om aan te zetten.
   const [lagen, setLagen] = useState<{ stadId: string; lagen: KaartOverlay[] } | null>(null);
@@ -189,13 +206,19 @@ export const StadScherm = () => {
   // De kaart volgt de tab. Op de tab eigen punten staan de redactionele punten
   // er lichtjes bij, zodat je ziet hoe jouw lijst zich tot de app verhoudt.
   const punten = useMemo<KaartPunt[]>(() => {
-    const redactioneel = (tab === 'eigen' ? alle : zichtbaar).map((p) => ({
-      id: p.id,
-      naam: p.naam,
-      coordinaten: p.coordinaten,
-      laag: laagVan(p),
-      toelichting: p.prijs ? formatteerPrijs(p.prijs, koersen) : undefined,
-    }));
+    const redactioneel = (tab === 'eigen' ? alle : zichtbaar).flatMap((p) =>
+      p.coordinaten
+        ? [
+            {
+              id: p.id,
+              naam: p.naam,
+              coordinaten: p.coordinaten,
+              laag: laagVan(p),
+              toelichting: p.prijs ? formatteerPrijs(p.prijs, koersen) : undefined,
+            },
+          ]
+        : [],
+    );
 
     const persoonlijk = zichtbareEigen
       .filter((p) => p.coordinaten && !p.koppelingPlaatsId)
@@ -229,7 +252,11 @@ export const StadScherm = () => {
   const stations = STATIONS.filter((s) => s.stad === stad.id);
 
   const telling = (id: Tab): number =>
-    id === 'eigen' ? eigen.length : alle.filter((p) => hoortBij(p, id)).length;
+    id === 'eigen'
+      ? eigen.length
+      : id === 'top'
+        ? alle.filter((p) => p.rang !== undefined).length
+        : alle.filter((p) => hoortBij(p, id)).length;
 
   return (
     <div className="mx-auto w-full max-w-2xl px-4 pt-4 pb-16">
@@ -325,22 +352,26 @@ export const StadScherm = () => {
         <OfflineKnop stad={stad} />
       </div>
 
+      <LocatieOntbreekt plaatsen={alle} />
+
       <div className="mb-4 flex flex-wrap gap-1.5" role="tablist">
-        {TABS.map(({ id, naam }) => (
-          <button
-            key={id}
-            role="tab"
-            aria-selected={tab === id}
-            onClick={() => setTab(id)}
-            className={`rounded-full px-3.5 py-1.5 text-sm font-medium transition ${
-              tab === id
-                ? 'bg-inkt text-papier dark:bg-papier dark:text-inkt'
-                : 'bg-papier-diep text-inkt-zacht hover:text-inkt dark:bg-nacht-diep dark:text-papier/70'
-            }`}
-          >
-            {naam} <span className="opacity-60">{telling(id)}</span>
-          </button>
-        ))}
+        {TABS.filter(({ id }) => (id !== 'top' || heeftTop) && (id !== 'spa' || heeftSpa)).map(
+          ({ id, naam }) => (
+            <button
+              key={id}
+              role="tab"
+              aria-selected={tab === id}
+              onClick={() => setTab(id)}
+              className={`rounded-full px-3.5 py-1.5 text-sm font-medium transition ${
+                tab === id
+                  ? 'bg-inkt text-papier dark:bg-papier dark:text-inkt'
+                  : 'bg-papier-diep text-inkt-zacht hover:text-inkt dark:bg-nacht-diep dark:text-papier/70'
+              }`}
+            >
+              {naam} <span className="opacity-60">{telling(id)}</span>
+            </button>
+          ),
+        )}
       </div>
 
       {tijdvakNaam && (
@@ -365,6 +396,8 @@ export const StadScherm = () => {
         <p className="text-sm text-inkt-zacht">Bezig met laden.</p>
       ) : tab === 'eigen' ? (
         <EigenLijst punten={zichtbareEigen} />
+      ) : tab === 'top' ? (
+        <Top20 plaatsen={alle} stad={stad} />
       ) : (
         <>
           <Filterbalk

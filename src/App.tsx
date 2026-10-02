@@ -27,6 +27,7 @@ import { ControlerenScherm } from '@/features/controleren/ControlerenScherm';
 import { AgendaScherm } from '@/features/agenda/AgendaScherm';
 import { MenuScherm } from '@/features/menu/MenuScherm';
 import { SumoScherm } from '@/features/sumo/SumoScherm';
+import { PlaatsScherm } from '@/features/plaats/PlaatsScherm';
 
 /**
  * Een nieuw scherm begint bovenaan. Zonder dit bleef de scrollpositie van het
@@ -76,6 +77,7 @@ const App = () => (
         <Route path="/agenda" element={<AgendaScherm />} />
         <Route path="/menu" element={<MenuScherm />} />
         <Route path="/sumo" element={<SumoScherm />} />
+        <Route path="/plaats/:plaatsId" element={<PlaatsScherm />} />
         <Route path="/tijdlijn/:tijdlijnId" element={<TijdlijnScherm />} />
         <Route path="/geschiedenis/:stadId" element={<StadGeschiedenisScherm />} />
         {/* Onbekend pad hoort niet op een lege pagina uit te komen; terug naar

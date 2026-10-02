@@ -17,11 +17,13 @@ import { TEGEL_BRONVERMELDING, TEGEL_URL } from '@/kaart/constanten';
  * content, zodat altijd zichtbaar blijft wat van jou is en wat van de app.
  */
 
-export type Laag = 'attractie' | 'eten' | 'stempel' | 'eigen' | 'foto' | 'uitgang' | 'overig';
+export type Laag =
+  'attractie' | 'eten' | 'spa' | 'stempel' | 'eigen' | 'foto' | 'uitgang' | 'overig';
 
 const KLEUR: Record<Laag, string> = {
   attractie: '#8c2f39',
   eten: '#b45309',
+  spa: '#a21caf',
   stempel: '#2f4858',
   eigen: '#4338ca',
   foto: '#0f766e',
@@ -30,20 +32,38 @@ const KLEUR: Record<Laag, string> = {
   overig: '#5c554c',
 };
 
+/**
+ * Een teken in de speld, voor de lagen die je anders niet uit elkaar houdt. Een
+ * spa krijgt het teken voor warme bronnen, dat je in heel Azië op badhuizen
+ * en spa's ziet.
+ */
+const TEKEN: Partial<Record<Laag, string>> = { spa: '♨' };
+
 export const laagVan = (plaats: Plaats): Laag => {
   if (plaats.ekiStempel || plaats.goshuin) return 'stempel';
   if (plaats.categorie === 'eten') return 'eten';
   if (plaats.categorie === 'attractie') return 'attractie';
+  if (plaats.categorie === 'spa') return 'spa';
   return 'overig';
 };
 
-const speld = (laag: Laag): L.DivIcon =>
-  L.divIcon({
+const speld = (laag: Laag): L.DivIcon => {
+  const teken = TEKEN[laag];
+  if (teken) {
+    return L.divIcon({
+      className: '',
+      html: `<span style="display:flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:9999px;background:${KLEUR[laag]};border:2px solid #fff;box-shadow:0 1px 4px rgb(0 0 0 / .4);color:#fff;font-size:12px;line-height:1">${teken}</span>`,
+      iconSize: [20, 20],
+      iconAnchor: [10, 10],
+    });
+  }
+  return L.divIcon({
     className: '',
     html: `<span style="display:block;width:16px;height:16px;border-radius:9999px;background:${KLEUR[laag]};border:2.5px solid #fff;box-shadow:0 1px 4px rgb(0 0 0 / .4)"></span>`,
     iconSize: [16, 16],
     iconAnchor: [8, 8],
   });
+};
 
 /**
  * Een laag die je in de lagenknop aan en uit zet: geldautomaten, kluisjes,
@@ -125,6 +145,7 @@ export const Kaart = ({
   lijn,
   onKies,
   onTikOpKaart,
+  onLangDrukken,
   clusteren = true,
   lagen,
   sporen,
@@ -152,6 +173,12 @@ export const Kaart = ({
    */
   onTikOpKaart?: (plek: Coordinaat) => void;
   /**
+   * Lang drukken op de kaart, om een plek zonder locatie neer te zetten. Lang en
+   * niet kort: dan zet je niet per ongeluk een pin als je de kaart wilt schuiven.
+   * Leaflet maakt van lang drukken op een telefoon hetzelfde als een rechtsklik.
+   */
+  onLangDrukken?: (plek: Coordinaat) => void;
+  /**
    * Punten die dicht bij elkaar liggen samenvoegen tot een bolletje met een
    * getal. Op een stadskaart onmisbaar, op de kaart van een station juist niet:
    * daar gaat het erom dat je de twee uitgangen naast elkaar ziet liggen.
@@ -176,6 +203,10 @@ export const Kaart = ({
   useEffect(() => {
     tikRef.current = onTikOpKaart;
   }, [onTikOpKaart]);
+  const langRef = useRef(onLangDrukken);
+  useEffect(() => {
+    langRef.current = onLangDrukken;
+  }, [onLangDrukken]);
 
   useEffect(() => {
     if (!houder.current || kaart.current) return;
@@ -201,6 +232,9 @@ export const Kaart = ({
     m.addLayer(groep.current);
     m.on('click', (gebeurtenis) => {
       tikRef.current?.({ lat: gebeurtenis.latlng.lat, lon: gebeurtenis.latlng.lng });
+    });
+    m.on('contextmenu', (gebeurtenis) => {
+      langRef.current?.({ lat: gebeurtenis.latlng.lat, lon: gebeurtenis.latlng.lng });
     });
     kaart.current = m;
 

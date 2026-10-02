@@ -1,6 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import type { Plaats, Stad } from '@/domein/schema';
-import { LEEG_FILTER, filterActief, filterPlaatsen, keuzesUit, looptijdMinuten } from './plaatsen';
+import {
+  LEEG_FILTER,
+  filterActief,
+  filterPlaatsen,
+  keuzesUit,
+  looptijdMinuten,
+  normaliseer,
+} from './plaatsen';
 
 const KYOTO: Stad = {
   id: 'kyoto',
@@ -258,6 +265,19 @@ describe('zoeken en tijdvakken', () => {
   it('trekt zich niets aan van accenten of hoofdletters', () => {
     const senso: Plaats = { ...tempel, id: 'senso', naam: 'Sensō-ji' };
     expect(ids(filterPlaatsen([senso], { zoek: 'SENSO' }, KYOTO, NU))).toEqual(['senso']);
+  });
+
+  it('vindt een Vietnamese naam zonder dat je diakritische tekens typt, ook de đ', () => {
+    const meer: Plaats = {
+      ...tempel,
+      id: 'meer',
+      naam: 'Lake',
+      naamLokaal: 'Hồ Hoàn Kiếm',
+      adresLokaal: 'Đinh Tiên Hoàng, Hà Nội',
+    };
+    expect(ids(filterPlaatsen([meer], { zoek: 'hoan kiem' }, KYOTO, NU))).toEqual(['meer']);
+    expect(ids(filterPlaatsen([meer], { zoek: 'dinh tien hoang' }, KYOTO, NU))).toEqual(['meer']);
+    expect(normaliseer('Đền Ngọc Sơn')).toBe('den ngoc son');
   });
 
   it('eist dat elk woord voorkomt, zodat twee woorden verfijnen en niet verbreden', () => {

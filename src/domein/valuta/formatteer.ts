@@ -1,4 +1,4 @@
-import type { Bedrag, Prijs, Valuta } from '@/domein/schema';
+import type { Bedrag, Prijs, PrijsRegel, Valuta } from '@/domein/schema';
 import type { Koersen } from './koers';
 
 /**
@@ -31,50 +31,85 @@ export const naarEuro = (bedrag: number, valuta: Valuta, koersen: Koersen): numb
   return bedrag / perEuro;
 };
 
+const NL_CENTEN = new Intl.NumberFormat('nl-NL', {
+  minimumFractionDigits: 2,
+  maximumFractionDigits: 2,
+});
+
 /**
  * Euro's als hele euro's. Op reis wil je weten of iets zeven of zeventig euro
  * is; centen zijn ruis, zeker bij een koers die vandaag anders is dan morgen.
  * Onder de halve euro zou "EUR 0" komen te staan, en dat leest als gratis
  * terwijl het dat niet is.
+ *
+ * Met `centen` komen er twee decimalen bij. Dat is voor dong: in Hanoi kost
+ * bijna alles minder dan tien euro, en dan zegt "EUR 2" te weinig en
+ * "minder dan EUR 1" niets over een glas bia hoi van een halve euro.
  */
-export const formatteerEuro = (euro: number): string => {
+export const formatteerEuro = (euro: number, centen = false): string => {
+  if (centen) return `EUR ${NL_CENTEN.format(euro)}`;
   const afgerond = Math.round(euro);
   if (afgerond === 0) return 'minder dan EUR 1';
   return `EUR ${NL.format(afgerond)}`;
 };
 
+/** Dong onder de tien euro krijgt centen; zie `formatteerEuro`. */
+const metCenten = (valuta: Valuta, euro: number): boolean => valuta === 'VND' && euro < 10;
+
 /**
  * Het volledige bedrag zoals het op het scherm hoort: lokaal met euro ertussen
  * haakjes, en bij een reeks aan beide kanten een bedrag maar één keer haakjes.
  * Dus ¥300 tot ¥500 (EUR 2 tot 3).
+ *
+ * Komt de koers niet van het net of uit de opslag maar is hij in de app
+ * ingebakken, dan staat er "indicatie" bij het eurobedrag: dan is het een
+ * schatting met een koers die maanden oud kan zijn.
  */
 export const formatteerBedrag = (bedrag: Bedrag, koersen: Koersen): string => {
   const lokaal =
     bedrag.tot === undefined
       ? formatteerLokaal(bedrag.bedrag, bedrag.valuta)
       : `${formatteerLokaal(bedrag.bedrag, bedrag.valuta)} tot ${formatteerLokaal(bedrag.tot, bedrag.valuta)}`;
+  const indicatie = koersen.bron === 'ingebakken' ? ', indicatie' : '';
 
   const van = naarEuro(bedrag.bedrag, bedrag.valuta, koersen);
   if (van === null) return lokaal;
+  const centen = metCenten(bedrag.valuta, van);
 
-  if (bedrag.tot === undefined) return `${lokaal} (${formatteerEuro(van)})`;
+  if (bedrag.tot === undefined) return `${lokaal} (${formatteerEuro(van, centen)}${indicatie})`;
 
   const tot = naarEuro(bedrag.tot, bedrag.valuta, koersen);
-  if (tot === null) return `${lokaal} (${formatteerEuro(van)})`;
+  if (tot === null) return `${lokaal} (${formatteerEuro(van, centen)}${indicatie})`;
+
+  if (centen) {
+    return `${lokaal} (${formatteerEuro(van, true)} tot ${NL_CENTEN.format(tot)}${indicatie})`;
+  }
 
   // Vallen beide kanten op hetzelfde hele bedrag, dan is "EUR 2 tot 2" alleen
   // maar verwarrend; dan is één getal eerlijker.
   const vanAf = Math.round(van);
   const totAan = Math.round(tot);
-  if (vanAf === totAan) return `${lokaal} (${formatteerEuro(van)})`;
+  if (vanAf === totAan) return `${lokaal} (${formatteerEuro(van)}${indicatie})`;
 
   const totTekst = totAan === 0 ? formatteerEuro(tot) : NL.format(totAan);
-  return `${lokaal} (${formatteerEuro(van)} tot ${totTekst})`;
+  return `${lokaal} (${formatteerEuro(van)} tot ${totTekst}${indicatie})`;
 };
 
 /** Hetzelfde, maar dan voor een prijs die ook "gratis" kan zijn. */
 export const formatteerPrijs = (prijs: Prijs, koersen: Koersen): string =>
   prijs === 'gratis' ? 'gratis' : formatteerBedrag(prijs, koersen);
+
+/**
+ * Een regel uit een prijslijst als prijs. Zonder valuta in de regel geldt die
+ * van de stad; een bedrag van nul is gratis.
+ */
+export const regelAlsPrijs = (regel: PrijsRegel, stadValuta: Valuta): Prijs => {
+  const valuta = regel.valuta ?? stadValuta;
+  if (regel.bedrag !== undefined) {
+    return regel.bedrag === 0 ? 'gratis' : { bedrag: regel.bedrag, valuta };
+  }
+  return { bedrag: regel.van ?? 0, tot: regel.tot, valuta };
+};
 
 /**
  * De prijsklassen uit hoofdstuk 3 van de specificatie, per valuta. Ze staan
@@ -124,13 +159,26 @@ const euroTekst = (bedrag: number, valuta: Exclude<Valuta, 'EUR'>, koersen: Koer
   return euro === null ? '' : formatteerEuro(euro);
 };
 
-/** In welke prijsklasse valt een bedrag? Null als het niet in deze valuta is. */
-export const prijsklasseVan = (bedrag: Bedrag): Prijsklasse | null => {
-  if (bedrag.valuta === 'EUR') return null;
-  const klassen = PRIJSKLASSEN[bedrag.valuta];
-  return (
-    klassen.find(
-      (k) => bedrag.bedrag >= k.vanaf && (k.tot === undefined || bedrag.bedrag < k.tot),
-    ) ?? null
-  );
+/**
+ * In welke prijsklasse valt een bedrag? Null als het niet in deze valuta is.
+ *
+ * Een bedrag in euro, zoals een massage in een hotelspa, rekent eerst om naar
+ * de valuta van de stad (`stadValuta`) met de koers die meegegeven wordt.
+ * Zonder koers of stad valt het buiten de klassen.
+ */
+export const prijsklasseVan = (
+  bedrag: Bedrag,
+  omrekenen?: { stadValuta: Valuta; koersen: Koersen },
+): Prijsklasse | null => {
+  let valuta: Exclude<Valuta, 'EUR'>;
+  let hoogte = bedrag.bedrag;
+  if (bedrag.valuta === 'EUR') {
+    if (!omrekenen || omrekenen.stadValuta === 'EUR') return null;
+    valuta = omrekenen.stadValuta;
+    hoogte = bedrag.bedrag * omrekenen.koersen.perEuro[valuta];
+  } else {
+    valuta = bedrag.valuta;
+  }
+  const klassen = PRIJSKLASSEN[valuta];
+  return klassen.find((k) => hoogte >= k.vanaf && (k.tot === undefined || hoogte < k.tot)) ?? null;
 };

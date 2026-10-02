@@ -49,7 +49,9 @@ export const PuntBewerken = ({
     const inStad = stadId ? plaatsen.filter((p) => p.stad === stadId) : plaatsen;
     if (coordinaten) {
       return inStad
-        .map((p) => ({ plaats: p, km: afstandKm(coordinaten, p.coordinaten) }))
+        .flatMap((p) =>
+          p.coordinaten ? [{ plaats: p, km: afstandKm(coordinaten, p.coordinaten) }] : [],
+        )
         .filter((k) => k.km < 1)
         .sort((a, b) => a.km - b.km)
         .slice(0, 6)

@@ -42,6 +42,27 @@ export const alsKorteDatum = (datum: string): string => {
   return `${dag} ${MAANDEN_KORT[maand - 1]}`;
 };
 
+const MAANDEN_LANG = [
+  'januari',
+  'februari',
+  'maart',
+  'april',
+  'mei',
+  'juni',
+  'juli',
+  'augustus',
+  'september',
+  'oktober',
+  'november',
+  'december',
+];
+
+/** 2026-10-01 wordt "1 oktober 2026". */
+export const alsLangeDatum = (datum: string): string => {
+  const [jaar, maand, dag] = datum.split('-').map(Number);
+  return `${dag} ${MAANDEN_LANG[maand - 1]} ${jaar}`;
+};
+
 /** "8 okt", "8 en 9 okt", "8 t/m 12 okt" of "30 sep t/m 2 okt". */
 export const alsPeriode = (van: string, tot: string): string => {
   if (van === tot) return alsKorteDatum(van);

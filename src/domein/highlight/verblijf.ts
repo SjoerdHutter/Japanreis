@@ -1,4 +1,5 @@
 import type { Reissegment, Reisschema, Verblijf } from '@/domein/schema';
+import { datumsVanTot } from '@/domein/tijd/datums';
 
 /**
  * Wanneer ben je in deze stad, en waar slaap je dan.
@@ -33,6 +34,14 @@ export const verblijfIn = (reisschema: Reisschema, stadId: string): StadInSchema
       opmerking: s.opmerking,
       verblijf: s.verblijf,
     }));
+
+/**
+ * Alle dagen die je volgens het reisschema in deze stad bent, als YYYY-MM-DD.
+ * Voor het label "Tijdelijk gesloten": een sluiting die over een van deze
+ * dagen valt, raakt jou.
+ */
+export const dagenIn = (reisschema: Reisschema, stadId: string): string[] =>
+  verblijfIn(reisschema, stadId).flatMap(({ van, tot }) => datumsVanTot(van, tot));
 
 export const VERBLIJF_NAAM: Record<Verblijf['via'], string> = {
   booking: 'Booking.com',

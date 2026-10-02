@@ -163,11 +163,17 @@ export const stelVoor = (ruwe: RuwPunt[], steden: Stad[], plaatsen: Plaats[]): V
     }
 
     const kandidaten = plaatsen
-      .map((p) => ({
-        plaats: p,
-        km: afstandKm(ruw.coordinaten!, p.coordinaten),
-        score: naamGelijkenis(ruw.naam, p.naam),
-      }))
+      .flatMap((p) =>
+        p.coordinaten
+          ? [
+              {
+                plaats: p,
+                km: afstandKm(ruw.coordinaten!, p.coordinaten),
+                score: naamGelijkenis(ruw.naam, p.naam),
+              },
+            ]
+          : [],
+      )
       .filter((k) => k.km <= TWIJFEL_KM)
       .sort((a, b) => b.score - a.score || a.km - b.km);
 
