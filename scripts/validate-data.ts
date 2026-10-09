@@ -214,6 +214,11 @@ if (steden && tijdlijnen && reisschema) {
   );
 
   for (const stad of steden) {
+    for (const id of stad.dagtrips ?? []) {
+      if (!stadIds.has(id) || id === stad.id) {
+        fouten.push(`steden.yaml: ${stad.id} noemt dagtrip "${id}", maar die stad bestaat niet`);
+      }
+    }
     const tijdvakken = tijdvakkenPerTijdlijn.get(stad.tijdlijn);
     if (!tijdvakken) {
       fouten.push(`steden.yaml: ${stad.id} verwijst naar onbekende tijdlijn "${stad.tijdlijn}"`);

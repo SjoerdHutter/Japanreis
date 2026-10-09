@@ -48,6 +48,13 @@ export const stadSchema = z.object({
   geschiedenis: z.string().optional(),
   /** Volgorde in het hoofdmenu; los van het reisschema, dat kan schuiven. */
   volgorde: z.number().int(),
+  /**
+   * Steden die je als dagtrip vanuit hier doet, zoals Nara vanuit Kyoto. Op het
+   * scherm van deze stad staan ze als filter boven de kaart, zodat je de
+   * plekken daar ziet zonder van stad te wisselen. De plekken zelf blijven bij
+   * hun eigen stad horen.
+   */
+  dagtrips: z.array(z.string().min(1)).optional(),
 });
 export type Stad = z.infer<typeof stadSchema>;
 

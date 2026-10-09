@@ -78,6 +78,16 @@ De datums staan bewust leeg tot de reis geboekt is. Vul per segment `van` en
 `tot` in als `YYYY-MM-DD`, allebei of geen van beide. Zolang ze leeg zijn valt
 de highlight terug op GPS en op de laatst bekeken stad, precies zoals bedoeld.
 
+### Dagtrips
+
+Een stad kan in `data/steden.yaml` een lijst `dagtrips` hebben, zoals Kyoto met
+`dagtrips: [nara]`. Op het scherm van Kyoto staat dan boven de kaart een keuze
+voor het gebied: kies je Nara, dan tonen kaart en lijst de plekken uit
+`data/plaatsen/nara.yaml`, met dezelfde tabs en filters, zonder dat je van stad
+wisselt. De plekken blijven bij hun eigen stad horen, dus ze staan ook op de
+pagina van Nara. "Kaart offline opslaan" bewaart in die stand het kaartgebied
+van Nara.
+
 ### Het kaartgebied van een stad
 
 `kaartgebied` is het rechthoekje dat offline wordt opgeslagen. Houd het klein:

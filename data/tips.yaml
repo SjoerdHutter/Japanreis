@@ -1,6 +1,6 @@
 # Reisadvies uit de opgeslagen Instagram collectie.
 #
-# 77 posts, thematisch geordend. Bij het merendeel van de reels staat de
+# 78 posts, thematisch geordend. Bij het merendeel van de reels staat de
 # inhoudelijke informatie in beeld of wordt die gesproken en niet in het
 # bijschrift; wat hier staat is wat er wel uit te halen was.
 #
@@ -12,7 +12,7 @@
 # Waar posts elkaar tegenspreken staat dat er expliciet bij. Doen alsof er
 # consensus is die er niet is, is erger dan de tegenspraak laten staan.
 
-herkomst: Opgeslagen Instagram collectie Japan, 77 posts
+herkomst: Opgeslagen Instagram collectie Japan, 78 posts
 verzameldOp: 2026-09-06
 
 groepen:
@@ -426,6 +426,42 @@ groepen:
           ramen, Soba-dokoro Kitahara voor soba, Hosekibako voor kakigori en
           Rokumei Coffee.
         stad: nara
+      - tekst: >-
+          Probeer bij Nakatanidou de yomogi mochi: zacht, niet te zoet en vers.
+          Vraag het personeel hoe laat de volgende demonstratie is, dan zie je het
+          deeg in hoog tempo slaan.
+        stad: nara
+        bron: '@itsgracechin'
+      - tekst: >-
+          Salon Naramachi is de favoriete theesalon van de maker van de post. De
+          matcha affogato moet je er proberen.
+        stad: nara
+        bron: '@itsgracechin'
+      - tekst: >-
+          Yoshidaen is een theewinkel met sencha, matcha en snacks. Ze verkopen
+          ook matcha van Marukyu Koyamaen, maar die is snel uitverkocht: ga vroeg.
+        stad: nara
+        bron: '@itsgracechin'
+      - tekst: Hertenkoekjes koop je in het park voor {0}.
+        bedragen: [{ bedrag: 200, valuta: JPY }]
+        stad: nara
+        bron: '@itsgracechin'
+      - tekst: >-
+          Wakakusayama kost een kleine toegangsprijs, maar het uitzicht is
+          spectaculair en je hebt er meer herten om je heen met minder mensen.
+        stad: nara
+        bron: '@itsgracechin'
+      - tekst: In Todai-ji staat een van de grootste bronzen Boeddhabeelden van Japan.
+        stad: nara
+        bron: '@itsgracechin'
+      - tekst: Bij Maguro Koya eet je een kom toro sashimi die op de tong smelt.
+        stad: nara
+        bron: '@itsgracechin'
+      - tekst: >-
+          De Higashimuki winkelstraat en Sanjo-dori hebben veel Japans streetfood,
+          en winkels met keramiek, keukenspullen en spullen voor in huis.
+        stad: nara
+        bron: '@itsgracechin'
 
   - id: fuji
     titel: Mount Fuji
