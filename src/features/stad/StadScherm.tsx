@@ -9,7 +9,7 @@ import { Kaartje, Label, Sectiekop, Terug } from '@/ui/basis';
 import { Kaart, laagVan, type KaartOverlay, type KaartPunt } from '@/features/kaart/Kaart';
 import { OfflineKnop } from '@/features/kaart/OfflineKnop';
 import { VastzetKnop } from '@/features/steden/Hoofdmenu';
-import { Filterbalk } from './Filterbalk';
+import { Chip, Filterbalk } from './Filterbalk';
 import { verblijfIn, VERBLIJF_NAAM } from '@/domein/highlight/verblijf';
 import { REISSCHEMA, STATIONS } from '@/data/content';
 import { PlaatsRegel } from './PlaatsRegel';
@@ -28,6 +28,11 @@ import { LocatieOntbreekt, Top20 } from './Top20';
  * De vier tabs delen één kaart en één filter. De kaart toont wat het filter
  * overlaat, zodat "ramen onder EUR 9 binnen tien minuten lopen" niet alleen een
  * lijst is maar ook meteen laat zien welke kant je op moet.
+ *
+ * Een stad met dagtrips, zoals Kyoto met Nara, krijgt boven de kaart een keuze
+ * voor het gebied. Kies je Nara, dan tonen kaart en lijst de plekken daar, met
+ * dezelfde tabs en filters, zonder dat je van stad wisselt. De keuze staat in
+ * de link, zodat je er na een plek weer op terugkomt.
  */
 
 type Tab = 'top' | 'attracties' | 'eten' | 'spa' | 'winkels' | 'stempels' | 'eigen';
@@ -136,8 +141,31 @@ export const StadScherm = () => {
   // zodra je terugnavigeert. Hij wordt er hieronder bij gemengd.
   const tijdvakUitLink = zoekparams.get('tijdvak') ?? undefined;
 
+  // Een dagtrip zoals Nara vanuit Kyoto: dan horen kaart en lijst bij die stad.
+  const gebiedUitLink = zoekparams.get('gebied');
+  const gebied =
+    (gebiedUitLink && stad?.dagtrips?.includes(gebiedUitLink)
+      ? stadMet(gebiedUitLink)
+      : undefined) ?? stad;
+  const kiesGebied = (id: string) => {
+    if (!stad || id === gebied?.id) return;
+    if (id === stad.id) zoekparams.delete('gebied');
+    else zoekparams.set('gebied', id);
+    setZoekparams(zoekparams, { replace: true });
+    setTab(null);
+    setFilterPerTab({
+      top: {},
+      attracties: {},
+      eten: {},
+      spa: {},
+      winkels: {},
+      stempels: {},
+      eigen: {},
+    });
+  };
+
   // De plaatsen met je eigen waarden eroverheen, zoals "alleen contant".
-  const plaatsen = usePlaatsen(stad?.id);
+  const plaatsen = usePlaatsen(gebied?.id);
   const heeftTop = plaatsen?.some((p) => p.rang !== undefined) ?? false;
   const heeftSpa = plaatsen?.some((p) => p.categorie === 'spa') ?? false;
   const tab: Tab = gekozenTab ?? (heeftTop ? 'top' : 'attracties');
@@ -148,29 +176,32 @@ export const StadScherm = () => {
   const [lagen, setLagen] = useState<{ stadId: string; lagen: KaartOverlay[] } | null>(null);
   const [lagenBron, setLagenBron] = useState<string | null>(null);
   useEffect(() => {
-    if (!stad) return;
+    if (!gebied) return;
     let levend = true;
-    void laadKaartlagen(stad.id).then((bestand) => {
+    void laadKaartlagen(gebied.id).then((bestand) => {
       if (!levend) return;
-      setLagen(bestand ? { stadId: stad.id, lagen: alsOverlays(bestand, stad) } : null);
+      setLagen(bestand ? { stadId: gebied.id, lagen: alsOverlays(bestand, gebied) } : null);
       setLagenBron(bestand ? bestand.opgehaaldOp : null);
     });
     return () => {
       levend = false;
     };
-  }, [stad]);
+  }, [gebied]);
 
   useEffect(() => {
-    if (!stad) return;
-    onthoudBezoek(stad.id);
+    if (stad) onthoudBezoek(stad.id);
+  }, [stad, onthoudBezoek]);
+
+  useEffect(() => {
+    if (!gebied) return;
     let levend = true;
-    void leesEigenPunten(stad.id).then((p) => {
+    void leesEigenPunten(gebied.id).then((p) => {
       if (levend) setEigen(p);
     });
     return () => {
       levend = false;
     };
-  }, [stad, onthoudBezoek]);
+  }, [gebied]);
 
   const werkendFilter = useMemo<Filter>(
     () => ({ ...filter, tijdvak: tijdvakUitLink }),
@@ -191,8 +222,8 @@ export const StadScherm = () => {
   const keuzes = useMemo(() => keuzesUit(vanTab), [vanTab]);
 
   const zichtbaar = useMemo(
-    () => (stad ? filterPlaatsen(vanTab, werkendFilter, stad) : []),
-    [vanTab, werkendFilter, stad],
+    () => (gebied ? filterPlaatsen(vanTab, werkendFilter, gebied) : []),
+    [vanTab, werkendFilter, gebied],
   );
 
   const zichtbareEigen = useMemo(() => {
@@ -234,7 +265,7 @@ export const StadScherm = () => {
     return [...redactioneel, ...persoonlijk];
   }, [tab, alle, zichtbaar, zichtbareEigen, koersen]);
 
-  if (!stad) {
+  if (!stad || !gebied) {
     return (
       <div className="mx-auto max-w-2xl px-4 py-10">
         <p className="mb-4">Deze stad staat niet in de app.</p>
@@ -328,12 +359,44 @@ export const StadScherm = () => {
         )}
       </header>
 
+      {stad.dagtrips && stad.dagtrips.length > 0 && (
+        <div className="mb-3">
+          <div className="flex flex-wrap items-center gap-1.5" role="group" aria-label="Gebied">
+            <span className="mr-1 text-xs font-medium tracking-wide text-inkt-zacht uppercase dark:text-papier/55">
+              Gebied
+            </span>
+            {[stad.id, ...stad.dagtrips].map((id) => {
+              const s = stadMet(id);
+              if (!s) return null;
+              return (
+                <Chip key={id} aan={gebied.id === id} onClick={() => kiesGebied(id)}>
+                  {s.naam}
+                  {id !== stad.id && <span className="opacity-70"> (dagtrip)</span>}
+                </Chip>
+              );
+            })}
+          </div>
+          {gebied.id !== stad.id && (
+            <p className="mt-2 text-sm leading-relaxed text-inkt-zacht dark:text-papier/70">
+              Je ziet de plekken in {gebied.naam}, een dagtrip vanuit {stad.naam}.{' '}
+              <Link
+                to={`/stad/${gebied.id}`}
+                className="text-zegel underline underline-offset-2 dark:text-zegel-licht"
+              >
+                Naar de pagina van {gebied.naam}
+              </Link>
+            </p>
+          )}
+        </div>
+      )}
+
       <div className="mb-3">
         <Kaart
+          key={gebied.id}
           punten={punten}
-          gebied={stad.kaartgebied}
+          gebied={gebied.kaartgebied}
           positie={positie}
-          lagen={lagen?.stadId === stad.id ? lagen.lagen : undefined}
+          lagen={lagen?.stadId === gebied.id ? lagen.lagen : undefined}
         />
         {lagenBron && (
           <p className="mt-1 text-xs text-inkt-zacht dark:text-papier/50">
@@ -349,7 +412,7 @@ export const StadScherm = () => {
         )}
       </div>
       <div className="mb-6">
-        <OfflineKnop stad={stad} />
+        <OfflineKnop stad={gebied} />
       </div>
 
       <LocatieOntbreekt plaatsen={alle} />
@@ -397,14 +460,14 @@ export const StadScherm = () => {
       ) : tab === 'eigen' ? (
         <EigenLijst punten={zichtbareEigen} />
       ) : tab === 'top' ? (
-        <Top20 plaatsen={alle} stad={stad} />
+        <Top20 plaatsen={alle} stad={gebied} />
       ) : (
         <>
           <Filterbalk
             tab={tab}
             filter={werkendFilter}
             keuzes={keuzes}
-            stad={stad}
+            stad={gebied}
             onWijzig={setFilter}
             onWisAlles={wisAlles}
             aantal={zichtbaar.length}
@@ -414,7 +477,7 @@ export const StadScherm = () => {
           {vanTab.length === 0 ? (
             <p className="text-sm text-inkt-zacht dark:text-papier/60">
               Voor deze stad staan er nog geen punten in deze categorie. Voeg ze toe in{' '}
-              <code>data/plaatsen/{stad.id}.yaml</code>.
+              <code>data/plaatsen/{gebied.id}.yaml</code>.
             </p>
           ) : zichtbaar.length === 0 ? (
             <p className="text-sm text-inkt-zacht dark:text-papier/60">
@@ -423,7 +486,7 @@ export const StadScherm = () => {
           ) : (
             <div className="grid gap-2">
               {zichtbaar.map((p) => (
-                <PlaatsRegel key={p.id} plaats={p} stad={stad} vanaf={filter.vanaf ?? positie} />
+                <PlaatsRegel key={p.id} plaats={p} stad={gebied} vanaf={filter.vanaf ?? positie} />
               ))}
             </div>
           )}

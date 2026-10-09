@@ -69,6 +69,7 @@
     noordoost: { lat: 35.08, lon: 135.83 }
   tijdlijn: japan
   tijdvakken: [heian, kamakura, muromachi, edo, meiji]
+  dagtrips: [nara]
   volgorde: 4
   korteBeschrijving: >-
     Duizend jaar hoofdstad en het enige grote Japanse stadscentrum dat de oorlog

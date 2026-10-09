@@ -62,6 +62,13 @@
     wilde dieren: ze duwen, bijten in tassen en trekken aan kleding zodra ze
     papier ruiken. Koop de koekjes pas als je ze meteen kwijt wilt.
   prijs: gratis
+  prijzen:
+    - { omschrijving: Toegang, bedrag: 0 }
+    - { omschrijving: Hertenkoekjes (shika senbei), bedrag: 200 }
+  tips:
+    - >-
+      Koop de hertenkoekjes bij een van de kraampjes in het park, en houd ze uit
+      het zicht tot je ze wilt geven.
   tijdvakken: [nara]
   attractie:
     type: park
@@ -128,6 +135,10 @@
   openingstijden:
     standaard: 10:00-19:00
   prijs: { bedrag: 200, valuta: JPY }
+  tips:
+    - >-
+      Vraag het personeel hoe laat de volgende demonstratie is: het deeg wordt op
+      vaste momenten in hoog tempo geslagen, en dan staat er snel een menigte.
   tijdvakken: [naoorlogs]
   eten:
     keuken: streetfood
@@ -147,3 +158,193 @@
   ekiStempel:
     waar: Bij het informatiekantoor naast de poortjes, op de begane grond.
     openingstijden: { standaard: 09:00-19:00 }
+
+# Uit een Instagrampost van @itsgracechin, aangevuld met wat er online over te
+# vinden was. Nog niet nagekeken, vandaar gecontroleerd: false. Waar een pin
+# geschat is staat coordinaatGeschat: true; Yoshidaen heeft nog geen pin, omdat
+# het adres niet te vinden was.
+
+- id: wakakusayama
+  naam: Wakakusayama
+  naamLokaal: 若草山
+  stad: nara
+  categorie: attractie
+  coordinaten: { lat: 34.691, lon: 135.8542 }
+  beschrijving: >-
+    Grasheuvel aan de oostkant van Nara park, met vanaf de top uitzicht over de
+    hele stad. Er grazen herten, maar er lopen veel minder mensen dan beneden in
+    het park. De ingangen liggen aan de voet van de heuvel; reken op een stevige
+    klim van een half uur naar de top.
+  waarom: >-
+    Het uitzicht is spectaculair en je hebt de herten bijna voor jezelf, zegt de
+    Instagrampost.
+  openingstijden:
+    osm: 'Mar-Dec 09:00-17:00'
+    tekst: >-
+      Ongeveer van half maart tot half december, 9:00 tot 17:00. In de winter
+      dicht, behalve tijdens het grasbranden op de vierde zaterdag van januari.
+  prijs: { bedrag: 150, valuta: JPY }
+  prijzen:
+    - { omschrijving: Volwassenen, bedrag: 150 }
+    - { omschrijving: Kinderen op de basisschool, bedrag: 80 }
+  tips:
+    - Voor de zonsondergang moet je voor sluitingstijd binnen zijn, niet ervoor arriveren.
+  tijdvakken: [nara]
+  attractie:
+    type: uitzichtpunt
+    bezoekduurMinuten: 90
+    regenbestendig: false
+    dagdeel: [middag]
+  bronnen:
+    - naam: '@itsgracechin op Instagram'
+    - naam: narashikanko.or.jp
+      url: https://narashikanko.or.jp/en/?p=778
+      gecontroleerdOp: 2026-10-09
+  tags: [instagram]
+  gecheckt: 2026-10-09
+  gecontroleerd: false
+
+- id: salon-naramachi
+  naam: Salon Naramachi
+  naamLokaal: 茶論 奈良町店
+  stad: nara
+  categorie: eten
+  coordinaten: { lat: 34.6812, lon: 135.8288 }
+  coordinaatGeschat: true
+  adres: 31-1 Ganrin-in-cho, Nara
+  adresLokaal: 奈良市元林院町31-1
+  telefoon: '+81 742 93 8833'
+  web: https://salon-tea.jp
+  beschrijving: >-
+    Theehuis van het oude Naraanse handelshuis Nakagawa Masashichi, in een
+    traditioneel pand aan de rand van Naramachi. Matcha en seizoensgebakjes, met
+    een winkeltje voor theegerei ernaast.
+  waarom: In de Instagrampost de favoriete theesalon van Nara.
+  openingstijden:
+    standaard: 10:00-19:00
+    opmerking: Laatste bestelling 18:30.
+  prijzen:
+    - { omschrijving: Seizoensgebakje met lichte matcha, bedrag: 1650 }
+  tips:
+    - >-
+      Volgens de post moet je de matcha affogato proberen. Die stond niet op de
+      menukaart die online te vinden was, dus vraag ernaar.
+  tijdvakken: [edo]
+  eten:
+    keuken: thee
+    keukenTekst: Theehuis
+  bronnen:
+    - naam: '@itsgracechin op Instagram'
+    - naam: discovery-pass.osaka-info.jp
+      url: https://discovery-pass.osaka-info.jp/en/spot/salon-naramachi-store
+      gecontroleerdOp: 2026-10-09
+  tags: [instagram]
+  gecheckt: 2026-10-09
+  gecontroleerd: false
+
+- id: yoshidaen
+  naam: Yoshidaen
+  stad: nara
+  categorie: winkel
+  status: onzeker
+  beschrijving: >-
+    Theewinkel met sencha, matcha en snacks. Volgens de Instagrampost verkopen ze
+    ook matcha van Marukyu Koyamaen uit Uji, maar die is snel uitverkocht.
+  tips:
+    - Ga vroeg op de dag als je de matcha van Marukyu Koyamaen wilt.
+  letOp:
+    - >-
+      Het adres van deze winkel is niet gevonden; de naam komt alleen uit de
+      Instagrampost. Zet de plek zelf op de kaart als je hem vindt.
+  bronnen:
+    - naam: '@itsgracechin op Instagram'
+  tags: [instagram]
+  gecheckt: 2026-10-09
+  gecontroleerd: false
+
+- id: maguro-koya
+  naam: Maguro Koya
+  naamLokaal: まぐろ小屋
+  stad: nara
+  categorie: eten
+  coordinaten: { lat: 34.6838, lon: 135.8282 }
+  coordinaatGeschat: true
+  status: onzeker
+  adres: In een zijstraat bij de Higashimuki winkelstraat, vlak bij station Kintetsu Nara
+  beschrijving: >-
+    Klein restaurant waar vrijwel alles om tonijn draait. De Instagrampost
+    raadt de kom met toro sashimi aan: vette tonijn die op de tong smelt.
+  openingstijden:
+    tekst: >-
+      Onbekend. Eén vermelding noemt 11:00 tot 20:00, een artikel uit 2017
+      noemt zondag als vaste sluitingsdag.
+  prijs: { bedrag: 800, tot: 3000, valuta: JPY }
+  prijzen:
+    - { omschrijving: Gerechten, van: 800, tot: 3000, indicatief: true }
+    - { omschrijving: Ootoro negitoro don met een dubbele laag, bedrag: 3000 }
+  tips:
+    - Klein en snel vol; kom voor de lunchdrukte.
+  letOp:
+    - >-
+      Volgens een reisartikel is de zaak na 2024 een paar straten verhuisd,
+      dichter naar station Kintetsu Nara. De pin is geschat; kijk het adres na
+      voor je gaat.
+  tijdvakken: [naoorlogs]
+  eten:
+    keuken: sushi
+    keukenTekst: Tonijn, sashimi en donburi
+  bronnen:
+    - naam: '@itsgracechin op Instagram'
+    - naam: marcotogni.it
+      url: https://www.marcotogni.it/maguro-koya/
+      gecontroleerdOp: 2026-10-09
+  tags: [instagram]
+  gecheckt: 2026-10-09
+  gecontroleerd: false
+
+- id: higashimuki
+  naam: Higashimuki winkelstraat
+  naamLokaal: 東向商店街
+  stad: nara
+  categorie: winkel
+  coordinaten: { lat: 34.6828, lon: 135.8284 }
+  coordinaatGeschat: true
+  beschrijving: >-
+    Overdekte winkelstraat van zo'n 250 meter vanaf de oostuitgang van station
+    Kintetsu Nara, met rond de tachtig winkels: Japans streetfood, keramiek,
+    keukenspullen en spullen voor in huis, en souvenirs als Nara-zuke en
+    kakinoha-zushi. De naam betekent "naar het oosten": de huizen keken uit op
+    Kōfuku-ji.
+  prijs: gratis
+  tijdvakken: [naoorlogs]
+  bronnen:
+    - naam: '@itsgracechin op Instagram'
+    - naam: gltjp.com
+      url: https://www.gltjp.com/en/directory/item/11692/
+      gecontroleerdOp: 2026-10-09
+  tags: [instagram]
+  gecheckt: 2026-10-09
+  gecontroleerd: false
+
+- id: sanjo-dori
+  naam: Sanjo-dori winkelstraat
+  naamLokaal: 三条通り
+  stad: nara
+  categorie: winkel
+  coordinaten: { lat: 34.6812, lon: 135.8255 }
+  coordinaatGeschat: true
+  beschrijving: >-
+    De hoofdstraat van Nara, van station JR Nara omhoog naar de Sarusawa vijver
+    en het park. Restaurants, souvenirwinkels en streetfood, en halverwege
+    kruist hij de Higashimuki winkelstraat.
+  letOp:
+    - >-
+      In de Instagrampost staat Sanyo-dori; dat is vrijwel zeker deze straat,
+      Sanjo-dori.
+  prijs: gratis
+  tijdvakken: [naoorlogs]
+  bronnen:
+    - naam: '@itsgracechin op Instagram'
+  tags: [instagram]
+  gecheckt: 2026-10-09
+  gecontroleerd: false
